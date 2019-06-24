@@ -13,3 +13,4 @@ yarn-error.log
 /logs
 /docker
 /docker-compose.yml
+/.idea
