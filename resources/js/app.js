@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+require('./utils');
+
 window.Vue = require('vue');
 
 /**
@@ -29,3 +31,5 @@ Vue.component('tooltip', require('./components/Tooltip.vue').default)
 const app = new Vue({
     el: '#app',
 });
+
+

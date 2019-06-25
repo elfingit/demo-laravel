@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserRole extends Model
+class Brand extends Model
 {
-    const ROLE_ADMINISTRATOR = 'admin';
+    //
 }

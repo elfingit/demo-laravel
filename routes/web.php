@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'role_acl'], function () {
+	Route::get('/', [
+		'uses'  => 'DashboardController@index',
+		'as'    => 'index'
+	]);
+
+	Route::resource('brands', 'BrandController');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
