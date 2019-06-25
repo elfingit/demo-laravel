@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandStoreRequest;
-use App\Model\Brand;
+use App\Model\Brand as BrandModel;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -36,7 +36,7 @@ class BrandController extends Controller
      */
     public function store(BrandStoreRequest $request)
     {
-
+		\Brand::store($request);
     }
 
     /**
@@ -45,7 +45,7 @@ class BrandController extends Controller
      * @param  \App\Model\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show(BrandModel $brand)
     {
         //
     }
@@ -56,7 +56,7 @@ class BrandController extends Controller
      * @param  \App\Model\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit(BrandModel $brand)
     {
         //
     }
@@ -68,7 +68,7 @@ class BrandController extends Controller
      * @param  \App\Model\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, BrandModel $brand)
     {
         //
     }
@@ -79,7 +79,7 @@ class BrandController extends Controller
      * @param  \App\Model\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy(BrandModel $brand)
     {
         //
     }

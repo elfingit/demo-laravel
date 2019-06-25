@@ -40,6 +40,13 @@ class CreateBrandsTable extends Migration
 
 	        $table->bigInteger('owner_id')->index();
 
+	        $table->enum('status', [
+	        	'in_sync',
+		        'synced',
+		        'err_sync',
+		        'disabled'
+	        ]);
+
             $table->timestamps();
 
             $table->foreign('owner_id')
