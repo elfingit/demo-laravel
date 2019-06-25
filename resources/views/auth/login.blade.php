@@ -18,7 +18,7 @@
                                 <span class="mdl-textfield__error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="mdl-textfield mdl-js-textfield">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input @error('password') is-invalid @enderror" type="password" id="password">
                                 <label class="mdl-textfield__label" for="password">{{ __('Password') }}</label>
                                 @error('password')
@@ -34,12 +34,12 @@
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <div class="mdl-grid">
-                            <div class="mdl-cell">
+                            <div class="mdl-cell-3">
                                 <button type="submit" class="mdl-button mdl-js-button">{{ __('Login') }}</button>
                             </div>
                             @if (Route::has('password.request'))
                                 <div class="mdl-layout-spacer"></div>
-                                <div class="mdl-cell">
+                                <div class="mdl-cell-5">
                                     <a class="mdl-button mdl-js-button" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
