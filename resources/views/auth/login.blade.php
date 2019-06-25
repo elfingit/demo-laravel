@@ -11,15 +11,15 @@
                     <form method="post" action="{{ route('login') }}">
                         @csrf
                     <div class="mdl-card__supporting-text">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input @error('email') is-invalid @enderror" name="email" type="email" id="email">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('email') is-invalid @enderror">
+                                <input class="mdl-textfield__input" name="email" type="email" id="email" value="{{ old('email') }}">
                                 <label class="mdl-textfield__label" for="email">{{ __('E-Mail Address') }}</label>
                                 @error('email')
                                 <span class="mdl-textfield__error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input @error('password') is-invalid @enderror" name="password" type="password" id="password">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('password') is-invalid @enderror">
+                                <input class="mdl-textfield__input" name="password" type="password" id="password">
                                 <label class="mdl-textfield__label" for="password">{{ __('Password') }}</label>
                                 @error('password')
                                 <span class="mdl-textfield__error">{{ $message }}</span>
@@ -35,7 +35,7 @@
                     <div class="mdl-card__actions mdl-card--border">
                         <div class="mdl-grid">
                             <div class="mdl-cell-3">
-                                <button type="submit" class="mdl-button mdl-js-button">{{ __('Login') }}</button>
+                                <button type="submit" class="mdl-button mdl-js-button mdl-button--colored">{{ __('Login') }}</button>
                             </div>
                             @if (Route::has('password.request'))
                                 <div class="mdl-layout-spacer"></div>

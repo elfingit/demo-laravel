@@ -1,5 +1,13 @@
+.login-page {
+  margin-top: 2rem;
+}
+
 .login-page .login-container {
   margin: 0 auto;
+}
+
+.login-page .mdl-card__title {
+  background-color: #c4c4c4;
 }
 
 .login-page .mdl-textfield {
