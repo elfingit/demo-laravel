@@ -38,7 +38,7 @@
                 <div class="mdl-tooltip" data-mdl-for="autorenew">
                     Refresh draw master data
                 </div>
-                <a href="" id="visibility"><i class="material-icons" role="presentation">visibility</i></a>
+                <a href="{{ route('dashboard.brands.show', ['brand' => $brand->id]) }}" id="visibility"><i class="material-icons" role="presentation">visibility</i></a>
                 <div class="mdl-tooltip" data-mdl-for="visibility">
                     View brand data
                 </div>

@@ -52,4 +52,13 @@
   .brand-logo {
     width: 95%;
   }
+
+  .mdl-card {
+    width: 100%;
+
+    .mdl-card__title {
+      background-color: #1d78c4;
+      color: #ffffff;
+    }
+  }
 }

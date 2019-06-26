@@ -46,3 +46,12 @@
   width: 95%;
 }
 
+.crm .mdl-card {
+  width: 100%;
+}
+
+.crm .mdl-card .mdl-card__title {
+  background-color: #1d78c4;
+  color: #ffffff;
+}
+
