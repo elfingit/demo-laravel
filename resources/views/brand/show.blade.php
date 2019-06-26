@@ -4,10 +4,10 @@
         <div class="mdl-cell mdl-cell--12-col">
             <img src="{{ asset('images/logos/' . $brand->logo) }}">
         </div>
-        <div class="mdl-cell mdl-cell--5-col">
+        <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">{{ $brand->name }}</h2>
+                    <h2 class="mdl-card__title-text">{{ __('Game data') }} : {{ $brand->name }}</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
                     <div class="mdl-list">
@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <div class="md-cell md-cell--5-col">
+        <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">{{ __('Prices') }}</h2>
