@@ -8,6 +8,5 @@
 
 namespace App\Lib\Mangayo\Api;
 
-use Mockery\Exception;
 
-class RequestException extends Exception {}
+class RequestException extends \Exception {}
