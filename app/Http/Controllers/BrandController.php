@@ -15,7 +15,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('brand.index');
+        $brands = \Brand::list(25);
+    	return view('brand.index', compact('brands'));
     }
 
     /**

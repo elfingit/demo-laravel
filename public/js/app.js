@@ -12862,9 +12862,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById("uploadBtn").onchange = function () {
-    document.getElementById("uploadFile").value = this.files[0].name;
-  };
+  var uploadBtn = document.getElementById("uploadBtn");
+
+  if (uploadBtn) {
+    uploadBtn.onchange = function () {
+      document.getElementById("uploadFile").value = this.files[0].name;
+    };
+  }
 });
 
 /***/ }),

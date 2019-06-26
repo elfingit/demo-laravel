@@ -34,3 +34,15 @@
   right: 0;
 }
 
+.crm .mdl-data-table {
+  margin: 1rem;
+}
+
+.crm .mdl-data-table td {
+  font-size: 0.8rem;
+}
+
+.crm .brand-logo {
+  width: 95%;
+}
+

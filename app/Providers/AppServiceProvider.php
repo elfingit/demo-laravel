@@ -27,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+    	//Blade extensions
+	    \Blade::directive('brand_status', function ($status) {
+	    	return '<?php echo \App\Lib\ViewHelpers::brandStatusHuman('.$status.') ?>';
+	    });
+
+		//Contracts mapping
     	$this->app->bind(BrandServiceContract::class, BrandService::class);
     }
 }

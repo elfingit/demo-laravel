@@ -13,4 +13,5 @@ use Illuminate\Foundation\Http\FormRequest;
 interface BrandServiceContract
 {
 	public function store(FormRequest $request);
+	public function list($per_page);
 }

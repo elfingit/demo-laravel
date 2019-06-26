@@ -39,4 +39,13 @@ class BrandService implements BrandServiceContract
 
 		return $brand;
 	}
+
+	public function list( $per_page )
+	{
+		return Brand::query()
+			->orderBy('name')
+			->get();
+	}
+
+
 }
