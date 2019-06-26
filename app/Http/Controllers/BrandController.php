@@ -37,6 +37,9 @@ class BrandController extends Controller
     public function store(BrandStoreRequest $request)
     {
 		\Brand::store($request);
+
+		return redirect()->route('dashboard.brands.index')
+		                 ->with('system_message', __('Brand successfully added. Please wait while we are get additional data from API.'));
     }
 
     /**

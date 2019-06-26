@@ -15,7 +15,8 @@ class BrandStoreRequest extends AbstractRequest
         return [
             'name'  => 'required|string|min:3|max:255',
 	        'code'  => 'required|string|regex:/^[a-zA-z_]+$/i|unique:brands,api_code',
-	        'logo'  => 'required|file|image|mimes:jpeg,png,svg|max:'.(1024 * 1024 * 5)
+	        'logo'  => 'required|file|image|mimes:jpeg,png,svg|max:'.(1024 * 1024 * 5),
+	        'refresh_time' => ['required','string', 'regex:/([0-9]+)\s*((d|h|m|s)+)/i']
         ];
     }
 }

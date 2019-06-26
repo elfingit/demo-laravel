@@ -22,6 +22,13 @@
                         <span class="mdl-textfield__error">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('refresh_time') is-invalid @enderror">
+                        <input class="mdl-textfield__input" name="refresh_time" placeholder="{{ __('You can use format: 1d 10h 12m 3s') }}" type="text" id="refresh_time" value="{{ old('refresh_time') }}">
+                        <label class="mdl-textfield__label" for="refresh_time">{{ __('Refresh API time') }}</label>
+                        @error('refresh_time')
+                        <span class="mdl-textfield__error">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--file @error('logo') is-invalid @enderror">
                         <input class="mdl-textfield__input" placeholder="{{ __('Logo') }}" type="text" id="uploadFile" readonly/>
                         <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">

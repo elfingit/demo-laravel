@@ -18,23 +18,23 @@ class CreateBrandsTable extends Migration
             $table->string('name');
             $table->string('api_code')->unique();
             $table->string('logo');
-            $table->unsignedInteger('refresh_data_time');
+            $table->unsignedInteger('refresh_data_time')->default(0);
 
             $table->string('country')->nullable();
             $table->string('state')->nullable();
 
-            $table->unsignedMediumInteger('main_min');
-            $table->unsignedMediumInteger('main_max');
-            $table->unsignedMediumInteger('main_drawn');
+            $table->unsignedMediumInteger('main_min')->default(0);
+            $table->unsignedMediumInteger('main_max')->default(0);
+            $table->unsignedMediumInteger('main_drawn')->default(0);
 
-            $table->unsignedMediumInteger('bonus_min');
-            $table->unsignedMediumInteger('bonus_max');
-            $table->unsignedMediumInteger('bonus_drawn');
+            $table->unsignedMediumInteger('bonus_min')->default(0);
+            $table->unsignedMediumInteger('bonus_max')->default(0);
+            $table->unsignedMediumInteger('bonus_drawn')->default(0);
 
-			$table->enum('same_balls', ['Y', 'N']);
+			$table->enum('same_balls', ['Y', 'N'])->default('N');
 
-	        $table->unsignedMediumInteger('digits');
-	        $table->unsignedMediumInteger('drawn');
+	        $table->unsignedMediumInteger('digits')->default(0);
+	        $table->unsignedMediumInteger('drawn')->default(0);
 
 	        $table->string('option_desc')->nullable();
 
@@ -62,6 +62,6 @@ class CreateBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+    	Schema::dropIfExists('brands');
     }
 }
