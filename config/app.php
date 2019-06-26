@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+	    \App\Lib\Mangayo\MangayoServiceProvider::class,
+
     ],
 
     /*
@@ -226,6 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 	    'Brand' => \App\Facades\BrandFacade::class,
+
+	    'LotteryRemoteApi' => \App\Lib\Mangayo\Facade\MangayoApiFacade::class,
 
     ],
 
