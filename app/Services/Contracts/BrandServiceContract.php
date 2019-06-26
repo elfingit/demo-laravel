@@ -8,10 +8,13 @@
 
 namespace App\Services\Contracts;
 
+use App\Model\Brand;
 use Illuminate\Foundation\Http\FormRequest;
 
 interface BrandServiceContract
 {
 	public function store(FormRequest $request);
 	public function list($per_page);
+
+	public function fillGameData(Brand $brand);
 }

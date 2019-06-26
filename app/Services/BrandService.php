@@ -8,6 +8,7 @@
 namespace App\Services;
 
 use App\Jobs\CaptureBrandDataJob;
+use App\Lib\Mangayo\Contracts\GameDataContract;
 use App\Lib\Utils;
 use App\Model\Brand;
 use App\Services\Contracts\BrandServiceContract;
@@ -47,5 +48,47 @@ class BrandService implements BrandServiceContract
 			->get();
 	}
 
+	public function fillGameData( Brand $brand )
+	{
+		try {
+			/** @var GameDataContract $gameData */
+			$gameData = \LotteryRemoteApi::getGameInfo($brand->api_code);
 
+			if ($gameData->hasError()) {
+				$this->errSync($brand, $gameData->getErrorDescription());
+				return;
+			}
+
+			$brand->country = $gameData->getCountry();
+			$brand->state = $gameData->getState();
+			$brand->main_min = $gameData->getMainMin();
+			$brand->main_max = $gameData->getMainMax();
+			$brand->main_drawn = $gameData->getMainDrawn();
+
+			$brand->bonus_min = $gameData->getBonusMin();
+			$brand->bonus_max = $gameData->getBonusMax();
+			$brand->bonus_drawn = $gameData->getBonusDrawn();
+
+			$brand->same_balls = $gameData->getSameBalls();
+			$brand->digits = $gameData->getDigits();
+			$brand->drawn = $gameData->getDrawn();
+
+			if ($gameData->isOption()) {
+				$brand->option_desc = $gameData->getOptionDescription();
+			}
+
+			$brand->status = Brand::STATUS_SYNCED;
+			$brand->save();
+
+		} catch (\Exception $e) {
+			$this->errSync($brand, $e->getMessage());
+		}
+	}
+
+	protected function errSync($brand, $message)
+	{
+		//TODO need log this
+		$brand->status = Brand::STATUS_ERR_SYNC;
+		$brand->save();
+	}
 }
