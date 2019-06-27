@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandPriceStoreRequest;
+use App\Http\Resources\BrandPriceCollection;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandPrice;
 use Illuminate\Http\Request;
@@ -15,9 +16,9 @@ class BrandPriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BrandModel $brand)
     {
-        //
+        return new BrandPriceCollection(\BrandPrice::list($brand));
     }
 
     /**
@@ -72,9 +73,11 @@ class BrandPriceController extends Controller
      * @param  \App\Model\BrandPrice  $brandPrice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BrandPrice $brandPrice)
+    public function update(BrandPriceStoreRequest $request, BrandModel $brand, BrandPrice $brandPrice)
     {
-        //
+	    $price = \BrandPrice::update($brandPrice, $request);
+
+	    return new BrandPriceResource($price);
     }
 
     /**
@@ -83,8 +86,9 @@ class BrandPriceController extends Controller
      * @param  \App\Model\BrandPrice  $brandPrice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BrandPrice $brandPrice)
+    public function destroy(BrandModel $brand, BrandPrice $brandPrice)
     {
-        //
+	    \BrandPrice::delete($brand, $brandPrice);
+    	return response('', 204);
     }
 }

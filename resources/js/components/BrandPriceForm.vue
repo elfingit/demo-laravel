@@ -67,7 +67,8 @@
                     currency: 'EUR',
                     combination_price: 0.0,
                     number_shield_price: 0.0
-                }
+                },
+                price_id: 0
             }
         },
 
@@ -109,24 +110,57 @@
 
                 clear_form_errors(this.$el.querySelector('form'));
 
-                let url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices');
+                let url = '';
 
-                axios.post(url, this.form)
-                    .then(this.postSuccess)
-                    .catch(this.postError)
+                if (this.price_id === 0) {
+                    url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices');
+                    axios.post(url, this.form)
+                        .then(this.postSuccess)
+                        .catch(this.postError)
+                } else if (this.price_id > 0) {
+                    url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices/' + this.price_id);
+                    axios.put(url, this.form)
+                        .then(this.postSuccess)
+                        .catch(this.postError)
+                }
 
             },
 
+            edit(price) {
+                this.form.number_shield_price = price.number_shield_price;
+                this.form.combination_price = price.combination_price;
+                this.form.currency = price.currency;
+
+                this.price_id = price.id;
+
+                this.showForm();
+            },
+
             postSuccess(data) {
-                console.dir(data)
+
+                let eventName = this.price_id > 0 ? 'priceUpdated' : 'priceCreated';
+                this.$emit(eventName, data.data.data)
+
+                this.clearFormData()
+
+                this.hideForm()
             },
 
             postError(data) {
 
+                this.clearFormData()
+
                 if (data.response && data.response.status === 422) {
-                    console.dir(data.response);
                     show_form_errors(this.$el.querySelector('form'), data.response.data.errors);
                 }
+            },
+
+            clearFormData() {
+                this.form.number_shield_price = 0;
+                this.form.combination_price = 0;
+                this.form.currency = 'EUR';
+
+                this.price_id = 0;
             }
         }
     }
@@ -137,7 +171,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        min-height: 300px;
+        min-height: 100px;
     }
 
     .container .mdl-button--fab {
