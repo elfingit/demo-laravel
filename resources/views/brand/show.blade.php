@@ -119,7 +119,7 @@
                     <h2 class="mdl-card__title-text">{{ __('Prices') }}</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-                    <brand-prices url_prefix="/dashboard/crm_api/brands/" brand_id="{{ $brand->id }}"></brand-prices>
+                    <brand-prices brand_id="{{ $brand->id }}"></brand-prices>
                 </div>
             </div>
         </div>

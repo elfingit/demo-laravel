@@ -1,7 +1,7 @@
 <template>
     <div class="mdl-grid">
         <div class="mdl-grid-cell--12-col"></div>
-        <BrandPriceForm></BrandPriceForm>
+        <BrandPriceForm :brand_id="brand_id"></BrandPriceForm>
     </div>
 </template>
 
@@ -9,10 +9,12 @@
     import axios from 'axios';
     import BrandPriceForm from './BrandPriceForm';
 
+    import { url_builder, BRAND_PRICE_URL_PREFIX } from '../utils';
+
     export default {
         name: "BrandPrices",
 
-        props: ['brand_id', 'url_prefix'],
+        props: ['brand_id'],
 
         components: { BrandPriceForm },
 
@@ -22,9 +24,11 @@
             }
         },
 
+        //computed
+
         created() {
-            let brandId = this.$props.brand_id;
-            const url = this.buildUrl(brandId + '/brand_prices');
+
+            let url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices');
 
             axios.get(url)
                 .then((data) => {
@@ -37,9 +41,7 @@
         },
 
         methods: {
-            buildUrl(path, params = []) {
-                return this.$props.url_prefix + path + params
-            }
+
         }
     }
 </script>
