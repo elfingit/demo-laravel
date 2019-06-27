@@ -8,7 +8,10 @@
 
 namespace App\Services\Contracts;
 
+use App\Model\Brand as BrandModel;
+use Illuminate\Foundation\Http\FormRequest;
+
 interface BrandPriceServiceContract
 {
-
+	public function store(BrandModel $brand, FormRequest $request);
 }

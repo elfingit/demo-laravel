@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BrandPriceStoreRequest;
+use App\Model\Brand as BrandModel;
 use App\Model\BrandPrice;
 use Illuminate\Http\Request;
+use \App\Http\Resources\BrandPrice as BrandPriceResource;
 
 class BrandPriceController extends Controller
 {
@@ -29,13 +32,15 @@ class BrandPriceController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  BrandModel  $brand
+     * @param  BrandPriceStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandModel $brand, BrandPriceStoreRequest $request)
     {
-        //
+        $price = \BrandPrice::store($brand, $request);
+
+        return new BrandPriceResource($price);
     }
 
     /**

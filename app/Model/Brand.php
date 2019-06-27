@@ -12,4 +12,9 @@ class Brand extends Model
 	const STATUS_DISABLED = 'disabled';
 
 	protected $guarded = ['id'];
+
+	public function prices()
+	{
+		return $this->hasMany(BrandPrice::class, 'brand_id', 'id');
+	}
 }

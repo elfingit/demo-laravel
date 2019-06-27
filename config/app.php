@@ -231,6 +231,8 @@ return [
 
 	    'LotteryRemoteApi' => \App\Lib\Mangayo\Facade\MangayoApiFacade::class,
 
+	    'BrandPrice'    => \App\Facades\BrandPriceFacade::class,
+
     ],
 
 ];

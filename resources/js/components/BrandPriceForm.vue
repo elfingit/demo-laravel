@@ -53,7 +53,7 @@
 </template>
 
 <script>
-    import { url_builder, BRAND_PRICE_URL_PREFIX } from '../utils';
+    import { url_builder, BRAND_PRICE_URL_PREFIX, show_form_errors, clear_form_errors } from '../utils';
     import axios from 'axios';
 
     export default {
@@ -67,7 +67,6 @@
                     currency: 'EUR',
                     combination_price: 0.0,
                     number_shield_price: 0.0
-
                 }
             }
         },
@@ -108,6 +107,8 @@
 
             async submitForm() {
 
+                clear_form_errors(this.$el.querySelector('form'));
+
                 let url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices');
 
                 axios.post(url, this.form)
@@ -121,7 +122,11 @@
             },
 
             postError(data) {
-                console.dir(data)
+
+                if (data.response && data.response.status === 422) {
+                    console.dir(data.response);
+                    show_form_errors(this.$el.querySelector('form'), data.response.data.errors);
+                }
             }
         }
     }
