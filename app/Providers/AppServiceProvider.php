@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\BrandDrawService;
 use App\Services\BrandPriceService;
 use App\Services\BrandService;
+use App\Services\Contracts\BrandDrawServiceContract;
 use App\Services\Contracts\BrandPriceServiceContract;
 use App\Services\Contracts\BrandServiceContract;
 use Illuminate\Support\ServiceProvider;
@@ -37,5 +39,6 @@ class AppServiceProvider extends ServiceProvider
 		//Contracts mapping
     	$this->app->bind(BrandServiceContract::class, BrandService::class);
     	$this->app->bind(BrandPriceServiceContract::class, BrandPriceService::class);
+    	$this->app->bind(BrandDrawServiceContract::class, BrandDrawService::class);
     }
 }

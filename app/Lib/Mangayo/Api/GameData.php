@@ -11,10 +11,8 @@ namespace App\Lib\Mangayo\Api;
 use App\Lib\Mangayo\Contracts\GameDataContract;
 use Psr\Http\Message\ResponseInterface;
 
-class GameData implements GameDataContract
+class GameData extends Response implements GameDataContract
 {
-	private $data;
-
 	public static function instanceFromResponse(ResponseInterface $response)
 	{
 		$data = \GuzzleHttp\json_decode($response->getBody());
@@ -25,17 +23,6 @@ class GameData implements GameDataContract
 	public function __construct($data)
 	{
 		$this->data = $data;
-	}
-
-
-	public function hasError()
-	{
-		return $this->data->error > 0;
-	}
-
-	public function getErrorCode()
-	{
-		return $this->data->error;
 	}
 
 	public function getName()

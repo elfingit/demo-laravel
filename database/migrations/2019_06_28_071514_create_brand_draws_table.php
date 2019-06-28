@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrandPricesTable extends Migration
+class CreateBrandDrawsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateBrandPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('brand_prices', function (Blueprint $table) {
+        Schema::create('brand_draws', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->decimal('combination_price');
-            $table->decimal('number_shield_price');
-            $table->string('currency', 4);
+            $table->date('draw_date');
             $table->unsignedBigInteger('brand_id');
+
+            $table->enum('status', ['new', 'checked', 'expired', 'error_check'])
+                ->default('new');
+
             $table->timestamps();
 
             $table->foreign('brand_id')
-	            ->references('id')
-	            ->on('brands')
-                ->onDelete('cascade');
+	                ->references('id')
+	                ->on('brands')
+                    ->onDelete('cascade');
         });
     }
 
@@ -35,6 +37,6 @@ class CreateBrandPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brand_prices');
+        Schema::dropIfExists('brand_draws');
     }
 }

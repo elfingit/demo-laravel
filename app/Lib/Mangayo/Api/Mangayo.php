@@ -43,6 +43,21 @@ class Mangayo implements MangayoApiContract
 		}
 	}
 
+	public function getNextDrawDate( $game_code )
+	{
+		$url = $this->buildUrl('next_draw.php', ['game' => $game_code]);
+
+		try {
+			$response = $this->httpClient->get( $url );
+			return NextDrawData::instanceFromResponse($response);
+
+		} catch (\GuzzleHttp\Exception\RequestException $exception) {
+			throw new RequestException($exception->getCode() . ':' . $exception->getMessage());
+		} catch (\InvalidArgumentException $e) {
+			throw new RequestException($e->getMessage());
+		}
+	}
+
 	public function getErrorDescription( $error_code )
 	{
 		$errorsDescription = [

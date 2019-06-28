@@ -34,7 +34,7 @@
                 <div class="mdl-tooltip" data-mdl-for="edit">
                     Edit brand data
                 </div>
-                <a href="" id="autorenew"><i class="material-icons" role="presentation">autorenew</i></a>
+                <a href="{{ route('dashboard.brands.renew', ['brand' => $brand->id]) }}" id="autorenew"><i class="material-icons" role="presentation">autorenew</i></a>
                 <div class="mdl-tooltip" data-mdl-for="autorenew">
                     Refresh draw master data
                 </div>

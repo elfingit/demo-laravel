@@ -25,6 +25,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 
 	Route::resource('brands', 'BrandController');
 
+	Route::get('/brands/{brand}/renew', [
+		'uses'  => 'BrandController@renew',
+		'as'    => 'brands.renew'
+	]);
+
 	Route::group(['prefix' => 'crm_api', 'as' => 'crm_api.'], function () {
 		Route::resource('brands.brand_prices', 'BrandPriceController')
 			->except(['create', 'show', 'edit']);

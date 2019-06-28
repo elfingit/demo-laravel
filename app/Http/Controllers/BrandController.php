@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandStoreRequest;
+use App\Jobs\CaptureBrandDrawJob;
 use App\Model\Brand as BrandModel;
 use Illuminate\Http\Request;
 
@@ -86,5 +87,13 @@ class BrandController extends Controller
     public function destroy(BrandModel $brand)
     {
         //
+    }
+
+    public function renew(BrandModel $brand)
+    {
+    	CaptureBrandDrawJob::dispatch($brand);
+
+	    return redirect()->route('dashboard.brands.index')
+		        ->with('system_message', __('Backgrounds tasks were started, please wait while are will finished'));
     }
 }

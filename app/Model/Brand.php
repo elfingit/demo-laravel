@@ -17,4 +17,9 @@ class Brand extends Model
 	{
 		return $this->hasMany(BrandPrice::class, 'brand_id', 'id');
 	}
+
+	public function draws()
+	{
+		return $this->hasMany(BrandDraw::class, 'brand_id', 'id');
+	}
 }

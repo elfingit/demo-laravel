@@ -20,5 +20,18 @@ interface MangayoApiContract
 	 */
 	public function getGameInfo($game_code);
 
+	/**
+	 * @param $error_code
+	 *
+	 * @return string
+	 */
 	public function getErrorDescription($error_code);
+
+	/**
+	 * @param string $game_code
+	 *
+	 * @return GameNextDrawContract
+	 * @throws RequestException
+	 */
+	public function getNextDrawDate($game_code);
 }

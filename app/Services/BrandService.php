@@ -8,6 +8,7 @@
 namespace App\Services;
 
 use App\Jobs\CaptureBrandDataJob;
+use App\Jobs\CaptureBrandDrawJob;
 use App\Lib\Mangayo\Contracts\GameDataContract;
 use App\Lib\Utils;
 use App\Model\Brand;
@@ -33,8 +34,6 @@ class BrandService implements BrandServiceContract
 			'refresh_data_time' => $refresh_time,
 			'owner_id' => $request->user()->id
 		]);
-
-
 
 		CaptureBrandDataJob::dispatch($brand);
 
@@ -79,6 +78,10 @@ class BrandService implements BrandServiceContract
 
 			$brand->status = Brand::STATUS_SYNCED;
 			$brand->save();
+
+			if ($brand->draw->count() == 0) {
+				CaptureBrandDrawJob::dispatch($brand);
+			}
 
 		} catch (\Exception $e) {
 			$this->errSync($brand, $e->getMessage());
