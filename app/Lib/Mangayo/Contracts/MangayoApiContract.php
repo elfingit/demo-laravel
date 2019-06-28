@@ -19,4 +19,6 @@ interface MangayoApiContract
 	 * @throws RequestException
 	 */
 	public function getGameInfo($game_code);
+
+	public function getErrorDescription($error_code);
 }

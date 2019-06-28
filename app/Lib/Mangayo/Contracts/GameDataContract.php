@@ -11,7 +11,7 @@ namespace App\Lib\Mangayo\Contracts;
 interface GameDataContract
 {
 	public function hasError();
-	public function getErrorDescription();
+	public function getErrorCode();
 
 	public function getName();
 

@@ -43,6 +43,21 @@ class Mangayo implements MangayoApiContract
 		}
 	}
 
+	public function getErrorDescription( $error_code )
+	{
+		$errorsDescription = [
+			100 => 'API key not provided',
+			101 => 'Invalid API key',
+			102 => 'API key not found',
+			200 => 'Game not provided',
+			201 => 'Invalid game',
+			202 => 'Game not found',
+			300 => 'Account suspended',
+			303 => 'API limit reached'
+		];
+
+		return isset($errorsDescription[$error_code]) ? $errorsDescription[$error_code] : 'Unknown error code: ' . $error_code;
+	}
 
 	protected function buildUrl($path, array $params)
 	{

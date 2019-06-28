@@ -55,7 +55,7 @@ class BrandService implements BrandServiceContract
 			$gameData = \LotteryRemoteApi::getGameInfo($brand->api_code);
 
 			if ($gameData->hasError()) {
-				$this->errSync($brand, $gameData->getErrorDescription());
+				$this->errSync($brand, \LotteryRemoteApi::getErrorDescription($gameData->getErrorCode()));
 				return;
 			}
 

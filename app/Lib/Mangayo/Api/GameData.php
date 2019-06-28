@@ -15,17 +15,6 @@ class GameData implements GameDataContract
 {
 	private $data;
 
-	private $errorsDescription = [
-		100 => 'API key not provided',
-		101 => 'Invalid API key',
-		102 => 'API key not found',
-		200 => 'Game not provided',
-		201 => 'Invalid game',
-		202 => 'Game not found',
-		300 => 'Account suspended',
-		303 => 'API limit reached'
-	];
-
 	public static function instanceFromResponse(ResponseInterface $response)
 	{
 		$data = \GuzzleHttp\json_decode($response->getBody());
@@ -44,15 +33,9 @@ class GameData implements GameDataContract
 		return $this->data->error > 0;
 	}
 
-	public function getErrorDescription()
+	public function getErrorCode()
 	{
-		$errorCode = $this->data->error;
-		if (isset($this->errorsDescription[$errorCode])) {
-			return $this->errorsDescription[$errorCode];
-		}
-
-		return 'Unknown error';
-
+		return $this->data->error;
 	}
 
 	public function getName()
