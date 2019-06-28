@@ -14,6 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+Route::middleware('auth:api')->post('oauth/token/refresh', '\Laravel\Passport\Http\Controllers\TransientTokenController@refresh');
+
+//\Laravel\Passport\Passport::routes();
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
