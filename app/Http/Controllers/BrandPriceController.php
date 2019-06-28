@@ -6,7 +6,6 @@ use App\Http\Requests\BrandPriceStoreRequest;
 use App\Http\Resources\BrandPriceCollection;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandPrice;
-use Illuminate\Http\Request;
 use \App\Http\Resources\BrandPrice as BrandPriceResource;
 
 class BrandPriceController extends Controller
@@ -22,16 +21,6 @@ class BrandPriceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      * @param  BrandModel  $brand
      * @param  BrandPriceStoreRequest  $request
@@ -42,28 +31,6 @@ class BrandPriceController extends Controller
         $price = \BrandPrice::store($brand, $request);
 
         return new BrandPriceResource($price);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\BrandPrice  $brandPrice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BrandPrice $brandPrice)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\BrandPrice  $brandPrice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BrandPrice $brandPrice)
-    {
-        //
     }
 
     /**

@@ -26,7 +26,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 	Route::resource('brands', 'BrandController');
 
 	Route::group(['prefix' => 'crm_api', 'as' => 'crm_api.'], function () {
-		Route::resource('brands.brand_prices', 'BrandPriceController');
+		Route::resource('brands.brand_prices', 'BrandPriceController')
+			->except(['create', 'show', 'edit']);
 	});
 });
 
