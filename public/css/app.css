@@ -55,3 +55,29 @@
   color: #ffffff;
 }
 
+.crm .table-container table {
+  width: 100%;
+}
+
+.crm .table-container .mdl-data-table td:first-of-type {
+  padding: 0;
+}
+
+.crm .table-container .mdl-data-table td:first-of-type,
+.crm .table-container .mdl-data-table th:first-of-type {
+  padding-left: 0.1rem;
+}
+
+.crm .table-container .mdl-data-table td {
+  padding-left: 0.1rem;
+}
+
+.crm .table-container .mdl-card__supporting-text {
+  padding: 0;
+  width: 100%;
+}
+
+.crm .table-container .mdl-data-table {
+  margin: 0;
+}
+

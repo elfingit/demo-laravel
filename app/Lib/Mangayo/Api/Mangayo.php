@@ -8,7 +8,6 @@
 
 namespace App\Lib\Mangayo\Api;
 
-use App\Lib\Mangayo\Contracts\GameJackpotContract;
 use App\Lib\Mangayo\Contracts\MangayoApiContract;
 use GuzzleHttp\Client;
 
@@ -67,6 +66,28 @@ class Mangayo implements MangayoApiContract
 
 			$response = $this->httpClient->get( $url );
 			return JackpotData::instanceFromResponse($response);
+
+		} catch (\GuzzleHttp\Exception\RequestException $exception) {
+			throw new RequestException($exception->getCode() . ':' . $exception->getMessage());
+		} catch (\InvalidArgumentException $e) {
+			throw new RequestException($e->getMessage());
+		}
+	}
+
+	public function getGameResults( $game_code, $date = null )
+	{
+		$params = ['game' => $game_code];
+
+		if (!is_null($date)) {
+			$params['draw'] = $date;
+		}
+
+		$url = $this->buildUrl('jackpot.php', $params);
+
+		try {
+
+			$response = $this->httpClient->get( $url );
+			return GameResultData::instanceFromResponse($response);
 
 		} catch (\GuzzleHttp\Exception\RequestException $exception) {
 			throw new RequestException($exception->getCode() . ':' . $exception->getMessage());
