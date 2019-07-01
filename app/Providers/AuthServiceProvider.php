@@ -26,5 +26,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::loadKeysFrom(storage_path());
+
+        Passport::tokensCan([
+        	'add_user'  => 'Adding users (registration)',
+	        'reset_password_link' => 'Forgot password',
+	        'set_new_password'    => 'Set new password for user'
+        ]);
     }
 }

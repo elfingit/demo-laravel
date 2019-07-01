@@ -14,13 +14,19 @@ use Illuminate\Http\Request;
 */
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
-Route::post('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
 
 Route::namespace('Api')->group(function () {
 
 	Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
+
+		Route::post('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail')
+		     ->middleware('scopes:reset_password_link');
+
+		Route::post('password/reset', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail')
+			->middleware('scopes:reset_password');
+
 		Route::post('user', [
-			'middleware'    => 'guest',
+			'middleware'    => 'scopes:add_user',
 			'uses'  => 'UserController@create',
 			'as'    => 'user.register'
 		]);
