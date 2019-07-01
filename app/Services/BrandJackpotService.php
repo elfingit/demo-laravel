@@ -38,7 +38,7 @@ class BrandJackpotService implements BrandJackpotServiceContract
 			$jackpot = new BrandJackpotModel([
 				'next_draw' => $date,
 				'currency'  => $jackpotData->getCurrency(),
-				'jackpot'   => $jackpotData->getCurrency()
+				'jackpot'   => $jackpotData->getJackpot()
 			]);
 
 			$brand->jackpots()->save($jackpot);

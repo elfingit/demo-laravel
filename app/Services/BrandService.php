@@ -9,6 +9,7 @@ namespace App\Services;
 
 use App\Jobs\CaptureBrandDataJob;
 use App\Jobs\CaptureBrandDrawJob;
+use App\Jobs\CaptureBrandJackpotJob;
 use App\Lib\Mangayo\Contracts\GameDataContract;
 use App\Lib\Utils;
 use App\Model\Brand;
@@ -36,6 +37,7 @@ class BrandService implements BrandServiceContract
 		]);
 
 		CaptureBrandDataJob::dispatch($brand);
+		CaptureBrandJackpotJob::dispatch($brand);
 
 		return $brand;
 	}

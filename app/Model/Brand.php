@@ -25,6 +25,6 @@ class Brand extends Model
 
 	public function jackpots()
 	{
-		return $this->hasMany(BrandJackpot::class, 'brand_is', 'id');
+		return $this->hasMany(BrandJackpot::class, 'brand_id', 'id');
 	}
 }
