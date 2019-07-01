@@ -8,6 +8,7 @@
 
 namespace App\Lib\Mangayo\Api;
 
+use App\Lib\Mangayo\Contracts\GameJackpotContract;
 use App\Lib\Mangayo\Contracts\MangayoApiContract;
 use GuzzleHttp\Client;
 
@@ -58,6 +59,22 @@ class Mangayo implements MangayoApiContract
 		}
 	}
 
+	public function getJackpotData( $game_code )
+	{
+		$url = $this->buildUrl('jackpot.php', ['game' => $game_code]);
+
+		try {
+
+			$response = $this->httpClient->get( $url );
+			return JackpotData::instanceFromResponse($response);
+
+		} catch (\GuzzleHttp\Exception\RequestException $exception) {
+			throw new RequestException($exception->getCode() . ':' . $exception->getMessage());
+		} catch (\InvalidArgumentException $e) {
+			throw new RequestException($e->getMessage());
+		}
+	}
+
 	public function getErrorDescription( $error_code )
 	{
 		$errorsDescription = [
@@ -68,7 +85,9 @@ class Mangayo implements MangayoApiContract
 			201 => 'Invalid game',
 			202 => 'Game not found',
 			300 => 'Account suspended',
-			303 => 'API limit reached'
+			303 => 'API limit reached',
+			400 => 'Invalid draw date',
+			401 => 'No draw results'
 		];
 
 		return isset($errorsDescription[$error_code]) ? $errorsDescription[$error_code] : 'Unknown error code: ' . $error_code;

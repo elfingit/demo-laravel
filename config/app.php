@@ -235,6 +235,7 @@ return [
 
 	    'BrandPrice'    => \App\Facades\BrandPriceFacade::class,
 	    'BrandDraw'     => \App\Facades\BrandDrawFacade::class,
+	    'BrandJackpot'     => \App\Facades\BrandJackpotFacade::class,
 
 	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
 

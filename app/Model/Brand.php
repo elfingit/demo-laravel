@@ -22,4 +22,9 @@ class Brand extends Model
 	{
 		return $this->hasMany(BrandDraw::class, 'brand_id', 'id');
 	}
+
+	public function jackpots()
+	{
+		return $this->hasMany(BrandJackpot::class, 'brand_is', 'id');
+	}
 }

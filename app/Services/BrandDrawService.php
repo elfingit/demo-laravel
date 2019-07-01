@@ -33,7 +33,7 @@ class BrandDrawService implements BrandDrawServiceContract
 
 			if ($bDraw) {
 				//Already have record for this date
-				$this->errSync('Already exists');
+				$this->errSync('Draw already exists');
 				return;
 			}
 

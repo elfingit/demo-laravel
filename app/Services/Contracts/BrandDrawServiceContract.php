@@ -14,5 +14,4 @@ use App\Model\Brand as BrandModel;
 interface BrandDrawServiceContract
 {
 	public function fetchDraw(BrandModel $brand);
-	//public function store(GameNextDrawContract $nextDraw, BrandModel $brand);
 }

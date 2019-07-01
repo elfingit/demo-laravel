@@ -34,4 +34,12 @@ interface MangayoApiContract
 	 * @throws RequestException
 	 */
 	public function getNextDrawDate($game_code);
+
+	/**
+	 * @param string $game_code
+	 *
+	 * @return GameJackpotContract
+	 * @throws RequestException
+	 */
+	public function getJackpotData($game_code);
 }
