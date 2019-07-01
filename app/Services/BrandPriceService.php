@@ -17,7 +17,7 @@ class BrandPriceService implements BrandPriceServiceContract
 {
 	public function store( BrandModel $brand, FormRequest $request )
 	{
-		$price = new BrandPrice([
+		$price = new BrandPriceModel([
 			'combination_price' => $request->get('combination_price'),
 			'number_shield_price' => $request->get('number_shield_price'),
 			'currency'  => $request->get('currency')
