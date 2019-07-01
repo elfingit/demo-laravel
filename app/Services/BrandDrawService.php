@@ -28,7 +28,7 @@ class BrandDrawService implements BrandDrawServiceContract
 			}
 
 			$date = $drawData->getDate();
-
+			
 			$bDraw = BrandDrawModel::isExists($date)->first();
 
 			if ($bDraw) {

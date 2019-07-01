@@ -27,6 +27,6 @@ class NextDrawData extends Response implements GameNextDrawContract
 
 	public function getDate()
 	{
-		// TODO: Implement getDate() method.
+		return $this->data->next_draw;
 	}
 }
