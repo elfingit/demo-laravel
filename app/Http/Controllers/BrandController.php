@@ -92,7 +92,7 @@ class BrandController extends Controller
 
     public function renew(BrandModel $brand)
     {
-    	//CaptureBrandDrawJob::dispatch($brand);
+    	CaptureBrandDrawJob::dispatch($brand);
     	CaptureBrandJackpotJob::dispatch($brand);
 
 	    return redirect()->route('dashboard.brands.index')

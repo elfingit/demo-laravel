@@ -20,11 +20,13 @@ class Brand extends Model
 
 	public function draws()
 	{
-		return $this->hasMany(BrandDraw::class, 'brand_id', 'id');
+		return $this->hasMany(BrandDraw::class, 'brand_id', 'id')
+				->orderBy('draw_date', 'desc');
 	}
 
 	public function jackpots()
 	{
-		return $this->hasMany(BrandJackpot::class, 'brand_id', 'id');
+		return $this->hasMany(BrandJackpot::class, 'brand_id', 'id')
+				->orderBy('next_draw', 'desc');;
 	}
 }

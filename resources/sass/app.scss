@@ -61,4 +61,32 @@
       color: #ffffff;
     }
   }
+
+  .table-container {
+
+    table {
+      width: 100%;
+    }
+
+    .mdl-data-table td:first-of-type {
+      padding: 0;
+    }
+
+    .mdl-data-table td:first-of-type, .mdl-data-table th:first-of-type {
+      padding-left: 0.1rem;
+    }
+
+    .mdl-data-table td {
+      padding-left: 0.1rem;
+    }
+
+    .mdl-card__supporting-text {
+      padding: 0;
+      width: 100%;
+    }
+
+    .mdl-data-table {
+      margin: 0;
+    }
+  }
 }
