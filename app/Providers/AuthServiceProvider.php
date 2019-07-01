@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Passport::loadKeysFrom(storage_path());
+
+        Passport::tokensCan([
+        	'add_user'  => 'Adding users (registration)',
+	        'reset_password_link' => 'Forgot password',
+	        'set_new_password'    => 'Set new password for user'
+        ]);
     }
 }

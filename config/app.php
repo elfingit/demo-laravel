@@ -177,6 +177,8 @@ return [
 
 	    \App\Lib\Mangayo\MangayoServiceProvider::class,
 
+	    \App\Providers\ApiServiceProvider::class,
+
     ],
 
     /*
@@ -233,6 +235,8 @@ return [
 
 	    'BrandPrice'    => \App\Facades\BrandPriceFacade::class,
 	    'BrandDraw'     => \App\Facades\BrandDrawFacade::class,
+
+	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
 
     ],
 

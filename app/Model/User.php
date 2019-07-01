@@ -5,10 +5,11 @@ namespace App\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+	use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,5 +41,10 @@ class User extends Authenticatable
 	public function role()
 	{
 		return $this->belongsTo(UserRole::class, 'user_role_id', 'id');
+	}
+
+	public function profile()
+	{
+		return $this->hasOne(UserProfile::class, 'user_id', 'id');
 	}
 }

@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm');
 
+//TODO disable registration
 Auth::routes();
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'role_acl'], function () {
@@ -36,4 +35,3 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 	});
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
