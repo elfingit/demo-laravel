@@ -30,7 +30,7 @@
             <td>{{ $brand->created_at }}</td>
             <td>{{ $brand->updated_at }}</td>
             <td>
-                <a href="" id="edit"><i class="material-icons" role="presentation">edit</i></a>
+                <a href="{{ route('dashboard.brands.edit', ['brand' => $brand->id]) }}" id="edit"><i class="material-icons" role="presentation">edit</i></a>
                 <div class="mdl-tooltip" data-mdl-for="edit">
                     Edit brand data
                 </div>

@@ -82,7 +82,7 @@ class Mangayo implements MangayoApiContract
 			$params['draw'] = $date;
 		}
 
-		$url = $this->buildUrl('jackpot.php', $params);
+		$url = $this->buildUrl('results.php', $params);
 
 		try {
 

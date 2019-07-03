@@ -18,12 +18,30 @@ class CreateBrandsTable extends Migration
             $table->string('name');
             $table->string('api_code')->unique();
             $table->string('logo');
-            $table->unsignedInteger('refresh_data_time')->default(0);
 
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
+            $table->boolean('jackpot_multiplier');
+            $table->boolean('number_shield');
 
-            $table->unsignedMediumInteger('main_min')->default(0);
+            $table->json('default_quick_pick');
+
+            $table->unsignedMediumInteger('primary_pool');
+            $table->unsignedMediumInteger('primary_pool_combination');
+            $table->unsignedMediumInteger('special_pool')->nullable();
+            $table->unsignedMediumInteger('special_pool_combination')->nullable();
+            $table->string('name_of_special_pool')->nullable();
+
+            $table->boolean('duration');
+            $table->boolean('subscription');
+            $table->boolean('jackpot_hut');
+            $table->boolean('participation');
+            $table->boolean('extra_game');
+
+            //$table->unsignedInteger('refresh_data_time')->default(0);
+
+            //$table->string('country')->nullable();
+            //$table->string('state')->nullable();
+
+            /*$table->unsignedMediumInteger('main_min')->default(0);
             $table->unsignedMediumInteger('main_max')->default(0);
             $table->unsignedMediumInteger('main_drawn')->default(0);
 
@@ -36,7 +54,7 @@ class CreateBrandsTable extends Migration
 	        $table->unsignedMediumInteger('digits')->default(0);
 	        $table->unsignedMediumInteger('drawn')->default(0);
 
-	        $table->string('option_desc')->nullable();
+	        $table->string('option_desc')->nullable();*/
 
 	        $table->bigInteger('owner_id')->index();
 
