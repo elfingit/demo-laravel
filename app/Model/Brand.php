@@ -24,9 +24,8 @@ class Brand extends Model
 				->orderBy('draw_date', 'desc');
 	}
 
-	public function jackpots()
+	public function checkDates()
 	{
-		return $this->hasMany(BrandJackpot::class, 'brand_id', 'id')
-				->orderBy('next_draw', 'desc');;
+		return $this->hasMany(BrandCheckDate::class, 'brand_id', 'id');
 	}
 }

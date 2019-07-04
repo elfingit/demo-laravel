@@ -15,6 +15,4 @@ interface BrandServiceContract
 {
 	public function store(FormRequest $request);
 	public function list($per_page);
-
-	public function fillGameData(Brand $brand);
 }

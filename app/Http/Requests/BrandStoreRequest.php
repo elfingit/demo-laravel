@@ -12,6 +12,7 @@ class BrandStoreRequest extends AbstractRequest
      */
     public function rules()
     {
+		//dd($this->request);
     	return [
             'name'  => 'required|string|min:3|max:255',
 	        'code'  => 'required|string|regex:/^[a-zA-z_]+$/i|unique:brands,api_code',

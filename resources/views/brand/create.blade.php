@@ -55,6 +55,7 @@
                             $componentErrors[] = $message;
                         @endphp
                     @enderror
+
                     <game-date-draw-picker :errors="{{ json_encode($componentErrors) }}"></game-date-draw-picker>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('default_quick_pick') is-invalid @enderror">
                         <input class="mdl-textfield__input" name="default_quick_pick" type="text" id="default_quick_pick" value="{{ old('default_quick_pick') }}">
@@ -100,43 +101,43 @@
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="duration">
-                            <input type="checkbox" class="mdl-checkbox__input" name="duration" id="duration" {{ old('duration') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="duration" id="duration" {{ old('duration') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Duration') }}</span>
                         </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="subscription">
-                            <input type="checkbox" class="mdl-checkbox__input" name="subscription" id="subscription" {{ old('subscription') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="subscription" id="subscription" {{ old('subscription') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Subscription') }}</span>
                         </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="jackpot_hut">
-                            <input type="checkbox" class="mdl-checkbox__input" name="jackpot_hut" id="jackpot_hut" {{ old('jackpot_hut') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="jackpot_hut" id="jackpot_hut" {{ old('jackpot_hut') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Jackpot hut') }}</span>
                         </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="participation">
-                            <input type="checkbox" class="mdl-checkbox__input" name="participation" id="participation" {{ old('participation') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="participation" id="participation" {{ old('participation') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Participation') }}</span>
                         </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="extra_game">
-                            <input type="checkbox" class="mdl-checkbox__input" name="extra_game" id="extra_game" {{ old('extra_game') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="extra_game" id="extra_game" {{ old('extra_game') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Extra game') }}</span>
                         </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="jackpot_multiplier">
-                            <input type="checkbox" class="mdl-checkbox__input" name="jackpot_multiplier" id="jackpot_multiplier" {{ old('jackpot_multiplier') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="jackpot_multiplier" id="jackpot_multiplier" {{ old('jackpot_multiplier') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Jackpot multiplier') }}</span>
                         </label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="number_shield">
-                            <input type="checkbox" class="mdl-checkbox__input" name="number_shield" id="number_shield" {{ old('number_shield') ? 'checked' : '' }}>
+                            <input type="checkbox" value="1" class="mdl-checkbox__input" name="number_shield" id="number_shield" {{ old('number_shield') ? 'checked' : '' }}>
                             <span class="mdl-checkbox__label">{{ __('Number shield') }}</span>
                         </label>
                     </div>

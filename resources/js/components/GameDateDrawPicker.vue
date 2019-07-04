@@ -84,7 +84,7 @@
             let date = new Date();
             date.setDate(this.day);
 
-            return dateFormat(date, 'mm-dd-yyyy');
+            return dateFormat(date, 'dd-mm-yyyy');
         }
     }
 

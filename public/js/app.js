@@ -2110,7 +2110,7 @@ function () {
     value: function toString() {
       var date = new Date();
       date.setDate(this.day);
-      return dateFormat(date, 'mm-dd-yyyy');
+      return dateFormat(date, 'dd-mm-yyyy');
     }
   }, {
     key: "isSelected",
