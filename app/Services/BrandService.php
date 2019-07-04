@@ -20,7 +20,9 @@ class BrandService implements BrandServiceContract
 {
 	public function store( FormRequest $request )
 	{
-		$refresh_time = Utils::parseToTime($request->get('refresh_time'));
+
+		dd($request->request);
+		/*$refresh_time = Utils::parseToTime($request->get('refresh_time'));
 
 		$code = \Str::lower($request->get('code'));
 		$logo = $code .'-logo.'.$request->logo->getClientOriginalExtension();
@@ -39,7 +41,7 @@ class BrandService implements BrandServiceContract
 		CaptureBrandDataJob::dispatch($brand);
 		CaptureBrandJackpotJob::dispatch($brand);
 
-		return $brand;
+		return $brand;*/
 	}
 
 	public function list( $per_page )

@@ -19,10 +19,30 @@
                 </template>
             </template>
         </div>
+        <div class="time-select">
+            <h3 v-if="selectedDays.length > 0">Select day time:</h3>
+            <TimeSelector :day="day" v-bind:key="day.day" v-for="day in selectedDays"/>
+            <h3 v-if="selectedDays.length > 0">Period:</h3>
+            <div class="period-selector" v-if="selectedDays.length > 0">
+                <label class="mdl-radio mdl-js-radio" for="option1">
+                    <input type="radio" id="option1" name="period"
+                           class="mdl-radio__button" checked value="1">
+                    <span class="mdl-radio__label">Every day</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio" for="option2">
+                    <input type="radio" id="option2" name="period"
+                           class="mdl-radio__button" value="2">
+                    <span class="mdl-radio__label">Every weeks</span>
+                </label>
+            </div>
+        </div>
+        <input type="hidden" name="result_date[]" v-bind:value="day.toString()" v-bind:key="day.day" v-for="day in selectedDays">
     </div>
 </template>
 
 <script>
+
+    import TimeSelector from './TimeSelector';
 
     let dateFormat = require('dateformat');
 
@@ -55,6 +75,13 @@
 
         get isSelected() {
             return this._isSelected;
+        }
+
+        toString() {
+            let date = new Date();
+            date.setDate(this.day);
+
+            return dateFormat(date, 'mm-dd-yyyy');
         }
     }
 
@@ -125,11 +152,14 @@
     export default {
         name: "GameDateDrawPicker",
 
+        components: { TimeSelector },
+
         data() {
             return {
                 selectedDate: new Date(),
                 today: null,
-                days: []
+                days: [],
+                selectedDays: []
             }
         },
 
@@ -143,10 +173,22 @@
 
         methods: {
             selectDay(day) {
+                let _self = this;
                 this.days.map((item) => {
                     item.map((d) => {
                         if (d.day == day) {
                             d.isSelected = d.isSelected === true ? false : true;
+                            if (d.isSelected) {
+                                _self.selectedDays.push(d)
+                            } else {
+                                let index = _self.selectedDays.findIndex((dItem) => {
+                                    return dItem.day == day;
+                                });
+
+                                if (index > -1) {
+                                    _self.selectedDays.splice(index, 1);
+                                }
+                            }
                         }
                     });
                 });
@@ -179,6 +221,8 @@
         background: -o-linear-gradient(#749d9e, #b3a68b)!important;
         background: -moz-linear-gradient(#749d9e, #b3a68b)!important;
         background: linear-gradient(#749d9e, #b3a68b)!important;
+        display: inline;
+        float: left;
     }
 
     .jzdcalt {
@@ -234,5 +278,21 @@
         z-index:9999;
         min-width:150px;
         max-width:150px;
+    }
+
+    .time-select {
+        width: 35%;
+        display: inline;
+        padding: 2rem;
+        float: left;
+    }
+    h3 {
+        font-size: 22px;
+        margin: 0;
+    }
+    .period-selector, h3 {
+        clear: both;
+        display: block;
+        width: 100%;
     }
 </style>
