@@ -2087,6 +2087,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
 
 
 var dateFormat = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
@@ -2213,6 +2216,7 @@ function () {
   components: {
     TimeSelector: _TimeSelector__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: ['errors'],
   data: function data() {
     return {
       selectedDate: new Date(),
@@ -2470,7 +2474,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.body[data-v-21c3a27d] {\n    background-color: #fffdfe;\n}\n.jzdbox1[data-v-21c3a27d] {\n    width:315px;\n    background:#332f2e;\n    border-radius:5px;\n    overflow:hidden;\n    display:block;\n    margin-bottom:20px;\n    box-shadow:0 0 10px #201d1c;\n    margin-top:20px;\n}\n.jzdcal[data-v-21c3a27d] {\n    padding:0 10px 10px 10px;\n    box-sizing:border-box!important;\n    background:#749d9e;\n    background: -webkit-gradient(linear, left top, left bottom, from(#749d9e), to(#b3a68b))!important;\n    background: linear-gradient(#749d9e, #b3a68b)!important;\n    display: inline;\n    float: left;\n}\n.jzdcalt[data-v-21c3a27d] {\n    font:18px 'Roboto';\n    font-weight:700;\n    color:#f7f3eb;\n    display:block;\n    margin:18px 0 0 0;\n    text-transform:uppercase;\n    text-align:center;\n    letter-spacing:1px;\n}\n.jzdcal span[data-v-21c3a27d] {\n    font-size:11px;\n    font-weight:400;\n    color:#f7f3eb;\n    text-align:center;\n    width:42px;\n    height:42px;\n    display:inline-block;\n    float:left;\n    overflow:hidden;\n    line-height:40px;\n}\n.jzdcal span[data-v-21c3a27d]:not([class=\"jzdb\"]) {\n    cursor: pointer;\n}\n.jzdcal .jzdb[data-v-21c3a27d]:before {\n    opacity:0.3;\n    content:'o';\n}\n.selected[data-v-21c3a27d] {\n    border:1px solid #f7f3eb;\n    box-sizing:border-box!important;\n    border-radius:200px!important;\n}\nspan[data-title][data-v-21c3a27d]:hover:after,\ndiv[data-title][data-v-21c3a27d]:hover:after {\n    font:11px 'Roboto';\n    font-weight:400;\n    content:attr(data-title);\n    position:absolute;\n    margin:0 0 100px;\n    background:#282423;\n    border:1px solid #f7f3eb;\n    color:#f7f3eb;\n    padding:5px;\n    z-index:9999;\n    min-width:150px;\n    max-width:150px;\n}\n.time-select[data-v-21c3a27d] {\n    width: 35%;\n    display: inline;\n    padding: 2rem;\n    float: left;\n}\nh3[data-v-21c3a27d] {\n    font-size: 22px;\n    margin: 0;\n}\n.period-selector[data-v-21c3a27d], h3[data-v-21c3a27d] {\n    clear: both;\n    display: block;\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.body[data-v-21c3a27d] {\n    background-color: #fffdfe;\n}\n.jzdbox1[data-v-21c3a27d] {\n    width:315px;\n    background:#332f2e;\n    border-radius:5px;\n    overflow:hidden;\n    display:block;\n    margin-bottom:20px;\n    box-shadow:0 0 10px #201d1c;\n    margin-top:20px;\n}\n.jzdcal[data-v-21c3a27d] {\n    padding:0 10px 10px 10px;\n    box-sizing:border-box!important;\n    background:#749d9e;\n    background: -webkit-gradient(linear, left top, left bottom, from(#749d9e), to(#b3a68b))!important;\n    background: linear-gradient(#749d9e, #b3a68b)!important;\n    display: inline;\n    float: left;\n}\n.jzdcalt[data-v-21c3a27d] {\n    font:18px 'Roboto';\n    font-weight:700;\n    color:#f7f3eb;\n    display:block;\n    margin:18px 0 0 0;\n    text-transform:uppercase;\n    text-align:center;\n    letter-spacing:1px;\n}\n.jzdcal span[data-v-21c3a27d] {\n    font-size:11px;\n    font-weight:400;\n    color:#f7f3eb;\n    text-align:center;\n    width:42px;\n    height:42px;\n    display:inline-block;\n    float:left;\n    overflow:hidden;\n    line-height:40px;\n}\n.jzdcal span[data-v-21c3a27d]:not([class=\"jzdb\"]) {\n    cursor: pointer;\n}\n.jzdcal .jzdb[data-v-21c3a27d]:before {\n    opacity:0.3;\n    content:'o';\n}\n.selected[data-v-21c3a27d] {\n    border:1px solid #f7f3eb;\n    box-sizing:border-box!important;\n    border-radius:200px!important;\n}\nspan[data-title][data-v-21c3a27d]:hover:after,\ndiv[data-title][data-v-21c3a27d]:hover:after {\n    font:11px 'Roboto';\n    font-weight:400;\n    content:attr(data-title);\n    position:absolute;\n    margin:0 0 100px;\n    background:#282423;\n    border:1px solid #f7f3eb;\n    color:#f7f3eb;\n    padding:5px;\n    z-index:9999;\n    min-width:150px;\n    max-width:150px;\n}\n.time-select[data-v-21c3a27d] {\n    width: 35%;\n    display: inline;\n    padding: 2rem;\n    float: left;\n}\nh3[data-v-21c3a27d] {\n    font-size: 22px;\n    margin: 0;\n}\n.period-selector[data-v-21c3a27d], h3[data-v-21c3a27d] {\n    clear: both;\n    display: block;\n    width: 100%;\n}\n.errors[data-v-21c3a27d] {\n    clear: both;\n    width: 100%;\n    display: block;\n}\n.errors span.message[data-v-21c3a27d] {\n    color: #d50000;\n    width: 100%;\n    font-size: 0.9rem;\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -22375,7 +22379,16 @@ var render = function() {
           attrs: { type: "hidden", name: "result_date[]" },
           domProps: { value: day.toString() }
         })
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "errors" },
+        _vm._l(_vm.errors, function(error) {
+          return _c("span", { staticClass: "message" }, [_vm._v(_vm._s(error))])
+        }),
+        0
+      )
     ],
     2
   )

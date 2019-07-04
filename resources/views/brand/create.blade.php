@@ -22,13 +22,7 @@
                         <span class="mdl-textfield__error">{{ $message }}</span>
                         @enderror
                     </div>
-                    {{--<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('refresh_time') is-invalid @enderror">
-                        <input class="mdl-textfield__input" name="refresh_time" placeholder="{{ __('You can use format: 1d 10h 12m 3s') }}" type="text" id="refresh_time" value="{{ old('refresh_time') }}">
-                        <label class="mdl-textfield__label" for="refresh_time">{{ __('Refresh API time') }}</label>
-                        @error('refresh_time')
-                        <span class="mdl-textfield__error">{{ $message }}</span>
-                        @enderror
-                    </div>--}}
+
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--file @error('logo') is-invalid @enderror">
                         <input class="mdl-textfield__input" placeholder="{{ __('Logo') }}" type="text" id="uploadFile" readonly/>
                         <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
@@ -38,7 +32,30 @@
                         <span class="mdl-textfield__error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <game-date-draw-picker></game-date-draw-picker>
+                    @php
+                        $componentErrors = [];
+                    @endphp
+                    @error('result_date')
+                        @php
+                            $componentErrors[] = $message;
+                        @endphp
+                    @enderror
+                    @error('hours')
+                        @php
+                            $componentErrors[] = $message;
+                        @endphp
+                    @enderror
+                    @error('minutes')
+                        @php
+                            $componentErrors[] = $message;
+                        @endphp
+                    @enderror
+                    @error('period')
+                        @php
+                            $componentErrors[] = $message;
+                        @endphp
+                    @enderror
+                    <game-date-draw-picker :errors="{{ json_encode($componentErrors) }}"></game-date-draw-picker>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('default_quick_pick') is-invalid @enderror">
                         <input class="mdl-textfield__input" name="default_quick_pick" type="text" id="default_quick_pick" value="{{ old('default_quick_pick') }}">
                         <label class="mdl-textfield__label" for="default_quick_pick">{{ __('Default quick pick') }}</label>

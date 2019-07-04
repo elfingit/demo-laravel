@@ -37,6 +37,9 @@
             </div>
         </div>
         <input type="hidden" name="result_date[]" v-bind:value="day.toString()" v-bind:key="day.day" v-for="day in selectedDays">
+        <div class="errors">
+            <span class="message" v-for="error in errors">{{ error }}</span>
+        </div>
     </div>
 </template>
 
@@ -153,6 +156,8 @@
         name: "GameDateDrawPicker",
 
         components: { TimeSelector },
+
+        props: ['errors'],
 
         data() {
             return {
@@ -294,5 +299,17 @@
         clear: both;
         display: block;
         width: 100%;
+    }
+    .errors {
+        clear: both;
+        width: 100%;
+        display: block;
+    }
+
+    .errors span.message {
+        color: #d50000;
+        width: 100%;
+        font-size: 0.9rem;
+        display: block;
     }
 </style>
