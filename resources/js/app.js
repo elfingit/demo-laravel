@@ -22,6 +22,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('tooltip', require('./components/Tooltip.vue').default);
 Vue.component('brand-prices', require('./components/BrandPrices.vue').default);
+Vue.component('game-date-draw-picker', require('./components/GameDateDrawPicker').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
