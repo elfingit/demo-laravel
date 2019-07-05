@@ -65,7 +65,7 @@ class BrandController extends Controller
      */
     public function edit(BrandModel $brand)
     {
-        return view('brand.edit', compact('brand'));
+    	return view('brand.edit', compact('brand'));
     }
 
     /**

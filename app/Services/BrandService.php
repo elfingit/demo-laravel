@@ -19,7 +19,8 @@ class BrandService implements BrandServiceContract
 		'name', 'jackpot_multiplier', 'number_shield',
 		'primary_pool', 'primary_pool_combination', 'special_pool',
 		'special_pool_combination', 'name_of_special_pool', 'duration',
-		'subscription', 'jackpot_hut', 'participation', 'extra_game'
+		'subscription', 'jackpot_hut', 'participation', 'extra_game',
+		'tickets_count'
 	];
 
 	public function store( FormRequest $request )
@@ -87,7 +88,9 @@ class BrandService implements BrandServiceContract
 
 	protected function prepareDefaultQuickPick($data)
 	{
-		return json_encode(explode(',', $data));
+		//$preparedData = explode(',', $data);
+
+		return explode(',', $data);
 	}
 
 	protected function clearCheckDates(BrandModel $brand)

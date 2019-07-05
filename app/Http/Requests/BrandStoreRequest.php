@@ -12,11 +12,11 @@ class BrandStoreRequest extends AbstractRequest
      */
     public function rules()
     {
-		//dd($this->request);
     	return [
             'name'  => 'required|string|min:3|max:255',
 	        'code'  => 'required|string|regex:/^[a-zA-z_]+$/i|unique:brands,api_code',
 	        'logo'  => 'required|file|image|mimes:jpeg,png,svg|max:'.(1024 * 1024 * 5),
+		    'tickets_count' => 'required|numeric',
 		    'default_quick_pick' => 'required|string',
 		    'primary_pool'  => 'required|numeric',
 		    'primary_pool_combination'  => 'required|numeric',

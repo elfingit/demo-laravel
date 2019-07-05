@@ -59,6 +59,14 @@
 
                     <game-date-draw-picker :income-days="{{ json_encode($brand->checkDates) }}"  :errors="{{ json_encode($componentErrors) }}"></game-date-draw-picker>
 
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('tickets_count') is-invalid @enderror">
+                        <input class="mdl-textfield__input" name="tickets_count" type="text" id="tickets_count" value="{{ $brand->tickets_count }}">
+                        <label class="mdl-textfield__label" for="tickets_count">{{ __('Tickets count') }}</label>
+                        @error('tickets_count')
+                        <span class="mdl-textfield__error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('default_quick_pick') is-invalid @enderror">
                         <input class="mdl-textfield__input" name="default_quick_pick" type="text" id="default_quick_pick" value="{{ implode(',', $brand->default_quick_pick) }}">
                         <label class="mdl-textfield__label" for="default_quick_pick">{{ __('Default quick pick') }}</label>

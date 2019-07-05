@@ -154,38 +154,5 @@
             </div>
         </div>
         @endif
-        @if($brand->jackpots->count() > 0)
-            <div class="mdl-cell mdl-cell--6-col">
-                <div class="mdl-card mdl-shadow--2dp table-container">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">{{ __('Jackpots data') }}</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                            <thead>
-                            <tr>
-                                <th>Draw date</th>
-                                <th>Jackpot</th>
-                                <th>Currency</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($brand->jackpots as $jackpot)
-                            <tr>
-                                <td>{{ $jackpot->next_draw }}</td>
-                                <td>{{ $jackpot->jackpot }}</td>
-                                <td>{{ $jackpot->currency }}</td>
-                                <td>{{ $jackpot->created_at }}</td>
-                                <td>{{ $jackpot->updated_at }}</td>
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        @endif
     </div>
 @endsection
