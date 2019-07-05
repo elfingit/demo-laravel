@@ -9,8 +9,6 @@
         <tr>
             <th># ID</th>
             <th>Logo</th>
-            <th>Name</th>
-            <th>Country</th>
             <th>State</th>
             <th>Status</th>
             <th>Created At</th>
@@ -24,8 +22,6 @@
             <td>{{ $brand->id }}</td>
             <td><img class="brand-logo" src="{{ asset('/images/logos/'.$brand->logo) }}" /></td>
             <td>{{ $brand->name }}</td>
-            <td>{{ $brand->country }}</td>
-            <td>{{ $brand->state }}</td>
             <td>@brand_status($brand->status)</td>
             <td>{{ $brand->created_at }}</td>
             <td>{{ $brand->updated_at }}</td>

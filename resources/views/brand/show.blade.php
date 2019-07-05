@@ -13,102 +13,117 @@
                     <div class="mdl-list">
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Country') }}:</b></span>
+                                <span><b>{{ __('Jackpot multiplier') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->country }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->jackpot_multiplier ? 'Yes' : 'No' }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('State') }}:</b></span>
+                                <span><b>{{ __('Number shield') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->state }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->number_shield ? 'Yes' : 'No' }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Main mix') }}:</b></span>
+                                <span><b>{{ __('Tickets count') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->main_min }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->tickets_count }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Main max') }}:</b></span>
+                                <span><b>{{ __('Default quick pick') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->main_max }}</span>
+                                <span class="mdl-list__item-text-body">{{ implode(',', $brand->default_quick_pick) }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Main drawn') }}:</b></span>
+                                <span><b>{{ __('Primary pool') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->main_drawn }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->primary_pool }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Bonus min') }}:</b></span>
+                                <span><b>{{ __('Combination of primary pool') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->bonus_min }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->primary_pool_combination }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Bonus max') }}:</b></span>
+                                <span><b>{{ __('Special pool') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->bonus_max }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->special_pool }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Bonus drawn') }}:</b></span>
+                                <span><b>{{ __('Combination of special pool') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->bonus_drawn }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->special_pool_combination }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Same balls') }}:</b></span>
+                                <span><b>{{ __('Name of special pool') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->same_balls }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->name_of_special_pool }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Digits') }}:</b></span>
+                                <span><b>{{ __('Duration') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->digits }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->duration ? 'Yes' : 'No' }}</span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Drawn') }}:</b></span>
+                                <span><b>{{ __('Subscription') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->drawn }}</span>
+                                <span class="mdl-list__item-text-body">{{ $brand->subscription  ? 'Yes' : 'No'}}</span>
                             </span>
                         </div>
-                        @if ($brand->option_desc)
                         <div class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Option description') }}:</b></span>
+                                <span><b>{{ __('Jackpot hut') }}:</b></span>
                             </span>
-                                <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->option_desc }}</span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $brand->jackpot_hut  ? 'Yes' : 'No'}}</span>
                             </span>
                         </div>
-                        @endif
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Participation') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $brand->participation  ? 'Yes' : 'No'}}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Extra game') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $brand->extra_game  ? 'Yes' : 'No'}}</span>
+                            </span>
+                        </div>
+
                     </div>
                 </div>
             </div>

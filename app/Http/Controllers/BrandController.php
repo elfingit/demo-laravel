@@ -43,7 +43,7 @@ class BrandController extends Controller
 		\Brand::store($request);
 
 		return redirect()->route('dashboard.brands.index')
-		                 ->with('system_message', __('Brand successfully added. Please wait while we are get additional data from API.'));
+		                 ->with('system_message', __('Brand successfully added.'));
     }
 
     /**
@@ -78,6 +78,9 @@ class BrandController extends Controller
     public function update(BrandUpdateRequest $request, BrandModel $brand)
     {
         \Brand::update($request, $brand);
+
+	    return redirect()->route('dashboard.brands.index')
+	                     ->with('system_message', __('Brand successfully updated.'));
     }
 
     /**
@@ -93,8 +96,6 @@ class BrandController extends Controller
 
     public function renew(BrandModel $brand)
     {
-    	CaptureBrandDrawJob::dispatch($brand);
-    	CaptureBrandJackpotJob::dispatch($brand);
 
 	    return redirect()->route('dashboard.brands.index')
 		        ->with('system_message', __('Backgrounds tasks were started, please wait while are will finished'));
