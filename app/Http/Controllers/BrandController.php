@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BrandStoreRequest;
+use App\Http\Requests\BrandUpdateRequest;
 use App\Jobs\CaptureBrandDrawJob;
 use App\Jobs\CaptureBrandJackpotJob;
 use App\Model\Brand as BrandModel;
@@ -74,9 +75,9 @@ class BrandController extends Controller
      * @param  \App\Model\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BrandModel $brand)
+    public function update(BrandUpdateRequest $request, BrandModel $brand)
     {
-        //
+        \Brand::update($request, $brand);
     }
 
     /**

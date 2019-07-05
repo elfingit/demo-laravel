@@ -26,12 +26,12 @@
             <div class="period-selector" v-if="selectedDays.length > 0">
                 <label class="mdl-radio mdl-js-radio" for="option1">
                     <input type="radio" id="option1" name="period"
-                           class="mdl-radio__button" checked value="1">
+                           class="mdl-radio__button" checked value="1" v-model="selectedPeriod">
                     <span class="mdl-radio__label">Every day</span>
                 </label>
                 <label class="mdl-radio mdl-js-radio" for="option2">
                     <input type="radio" id="option2" name="period"
-                           class="mdl-radio__button" value="2">
+                           class="mdl-radio__button" value="2" v-model="selectedPeriod">
                     <span class="mdl-radio__label">Every weeks</span>
                 </label>
             </div>
@@ -46,6 +46,7 @@
 <script>
 
     import TimeSelector from './TimeSelector';
+    import _ from 'lodash';
 
     let dateFormat = require('dateformat');
 
@@ -54,6 +55,8 @@
             this.isEmpty = isEmpty;
             this.day = dayNum;
             this.isSelected = false;
+            this.minutes = null;
+            this.hours = null;
         }
 
         set isSelected(value) {
@@ -68,6 +71,14 @@
             this._isEmpty = value;
         }
 
+        set minutes(value) {
+            this._minutes = value;
+        }
+
+        set hours(value) {
+            this._hours = value;
+        }
+
         get day() {
             return this._day
         }
@@ -78,6 +89,14 @@
 
         get isSelected() {
             return this._isSelected;
+        }
+
+        get minutes() {
+            return this._minutes;
+        }
+
+        get hours() {
+            return this._hours;
         }
 
         toString() {
@@ -157,14 +176,15 @@
 
         components: { TimeSelector },
 
-        props: ['errors'],
+        props: ['errors', 'incomeDays'],
 
         data() {
             return {
                 selectedDate: new Date(),
                 today: null,
                 days: [],
-                selectedDays: []
+                selectedDays: [],
+                selectedPeriod: null
             }
         },
 
@@ -173,7 +193,41 @@
             let today = new Date();
             this.today = dateFormat(today, 'mmm dd yyyy');
 
-            this.days = (new Calendar()).days
+            this.days = (new Calendar()).days;
+
+            let _self = this;
+
+            if (this.incomeDays && this.incomeDays.length > 0) {
+
+                this.selectedPeriod = this.incomeDays[0].period;
+
+                let existsDays = _.flattenDeep(this.days);
+
+                _self.incomeDays.forEach((incomeDay) => {
+
+                    let checkDate = new Date(Date.parse(incomeDay.check_date));
+                    let today = new Date();
+
+                    existsDays.every((day) => {
+
+                        if (day.isEmpty) return false;
+
+                        today.setDate(day.day);
+
+                        if (today.getDay() == checkDate.getDay()) {
+                            day.isSelected = true;
+                            day.minutes = checkDate.getMinutes();
+                            day.hours = checkDate.getHours();
+                            _self.selectedDays.push(day);
+                            return false;
+                        } else {
+                            return  true;
+                        }
+
+                    });
+
+                });
+            }
         },
 
         methods: {

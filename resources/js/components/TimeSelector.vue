@@ -29,6 +29,18 @@
             }
         },
 
+        mounted() {
+
+            if (this.day.hours) {
+                this.hours = this.day.hours
+            }
+
+            if (this.day.minutes) {
+                this.minutes = this.day.minutes;
+            }
+
+        },
+
         methods: {
             validateHours() {
 

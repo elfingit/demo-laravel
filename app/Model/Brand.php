@@ -13,6 +13,10 @@ class Brand extends Model
 
 	protected $guarded = ['id'];
 
+	protected $casts = [
+		'default_quick_pick'    => 'array'
+	];
+
 	public function prices()
 	{
 		return $this->hasMany(BrandPrice::class, 'brand_id', 'id');

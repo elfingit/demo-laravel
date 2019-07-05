@@ -2039,6 +2039,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TimeSelector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimeSelector */ "./resources/js/components/TimeSelector.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2092,6 +2094,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 
 
+
 var dateFormat = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
 
 var CalendarDay =
@@ -2103,6 +2106,8 @@ function () {
     this.isEmpty = isEmpty;
     this.day = dayNum;
     this.isSelected = false;
+    this.minutes = null;
+    this.hours = null;
   }
 
   _createClass(CalendarDay, [{
@@ -2135,6 +2140,22 @@ function () {
     },
     get: function get() {
       return this._isEmpty;
+    }
+  }, {
+    key: "minutes",
+    set: function set(value) {
+      this._minutes = value;
+    },
+    get: function get() {
+      return this._minutes;
+    }
+  }, {
+    key: "hours",
+    set: function set(value) {
+      this._hours = value;
+    },
+    get: function get() {
+      return this._hours;
     }
   }]);
 
@@ -2216,19 +2237,49 @@ function () {
   components: {
     TimeSelector: _TimeSelector__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['errors'],
+  props: ['errors', 'incomeDays'],
   data: function data() {
     return {
       selectedDate: new Date(),
       today: null,
       days: [],
-      selectedDays: []
+      selectedDays: [],
+      selectedPeriod: null
     };
   },
   mounted: function mounted() {
     var today = new Date();
     this.today = dateFormat(today, 'mmm dd yyyy');
     this.days = new Calendar().days;
+
+    var _self = this;
+
+    if (this.incomeDays && this.incomeDays.length > 0) {
+      this.selectedPeriod = this.incomeDays[0].period;
+
+      var existsDays = lodash__WEBPACK_IMPORTED_MODULE_1___default.a.flattenDeep(this.days);
+
+      _self.incomeDays.forEach(function (incomeDay) {
+        var checkDate = new Date(Date.parse(incomeDay.check_date));
+        var today = new Date();
+        existsDays.every(function (day) {
+          if (day.isEmpty) return false;
+          today.setDate(day.day);
+
+          if (today.getDay() == checkDate.getDay()) {
+            day.isSelected = true;
+            day.minutes = checkDate.getMinutes();
+            day.hours = checkDate.getHours();
+
+            _self.selectedDays.push(day);
+
+            return false;
+          } else {
+            return true;
+          }
+        });
+      });
+    }
   },
   methods: {
     selectDay: function selectDay(day) {
@@ -2359,6 +2410,15 @@ __webpack_require__.r(__webpack_exports__);
       minutes: new Date().getMinutes(),
       minutesIsInvalid: false
     };
+  },
+  mounted: function mounted() {
+    if (this.day.hours) {
+      this.hours = this.day.hours;
+    }
+
+    if (this.day.minutes) {
+      this.minutes = this.day.minutes;
+    }
   },
   methods: {
     validateHours: function validateHours() {
@@ -22364,9 +22424,80 @@ var render = function() {
           _vm._v(" "),
           _vm.selectedDays.length > 0
             ? _c("div", { staticClass: "period-selector" }, [
-                _vm._m(0),
+                _c(
+                  "label",
+                  {
+                    staticClass: "mdl-radio mdl-js-radio",
+                    attrs: { for: "option1" }
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedPeriod,
+                          expression: "selectedPeriod"
+                        }
+                      ],
+                      staticClass: "mdl-radio__button",
+                      attrs: {
+                        type: "radio",
+                        id: "option1",
+                        name: "period",
+                        checked: "",
+                        value: "1"
+                      },
+                      domProps: { checked: _vm._q(_vm.selectedPeriod, "1") },
+                      on: {
+                        change: function($event) {
+                          _vm.selectedPeriod = "1"
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "mdl-radio__label" }, [
+                      _vm._v("Every day")
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
-                _vm._m(1)
+                _c(
+                  "label",
+                  {
+                    staticClass: "mdl-radio mdl-js-radio",
+                    attrs: { for: "option2" }
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selectedPeriod,
+                          expression: "selectedPeriod"
+                        }
+                      ],
+                      staticClass: "mdl-radio__button",
+                      attrs: {
+                        type: "radio",
+                        id: "option2",
+                        name: "period",
+                        value: "2"
+                      },
+                      domProps: { checked: _vm._q(_vm.selectedPeriod, "2") },
+                      on: {
+                        change: function($event) {
+                          _vm.selectedPeriod = "2"
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "mdl-radio__label" }, [
+                      _vm._v("Every weeks")
+                    ])
+                  ]
+                )
               ])
             : _vm._e()
         ],
@@ -22393,48 +22524,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "mdl-radio mdl-js-radio", attrs: { for: "option1" } },
-      [
-        _c("input", {
-          staticClass: "mdl-radio__button",
-          attrs: {
-            type: "radio",
-            id: "option1",
-            name: "period",
-            checked: "",
-            value: "1"
-          }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "mdl-radio__label" }, [_vm._v("Every day")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "mdl-radio mdl-js-radio", attrs: { for: "option2" } },
-      [
-        _c("input", {
-          staticClass: "mdl-radio__button",
-          attrs: { type: "radio", id: "option2", name: "period", value: "2" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "mdl-radio__label" }, [_vm._v("Every weeks")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
