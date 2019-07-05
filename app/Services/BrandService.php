@@ -10,6 +10,7 @@ namespace App\Services;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandCheckDate as BrandCheckDateModel;
 use App\Services\Contracts\BrandServiceContract;
+use App\Services\Exceptions\BrandResultExistsException;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Psr\Http\Message\ResponseInterface;
@@ -80,13 +81,19 @@ class BrandService implements BrandServiceContract
 			$result = \RemoteApi::fetchResult( $check_date->brand->api_code );
 			$data = json_decode( $result->getBody() );
 
+			$result = \BrandResult::store($data, $check_date->brand);
 
+			\BrandCheckDate::moveResultDates($check_date);
 
+		} catch (BrandResultExistsException $e) {
+
+			//Already exists hmmm. Move to the next date of check
+			\BrandCheckDate::moveResultDates($check_date);
+
+			$this->logErr($e->getMessage());
 		} catch (\Exception $exception) {
-			$this->logErr($exception->getMessage());
+			$this->logErr($exception->getMessage() . $exception->getTraceAsString());
 		}
-
-		dd($data);
 	}
 
 	protected function prepareCode($code)
@@ -151,5 +158,6 @@ class BrandService implements BrandServiceContract
 	protected function logErr($message)
 	{
 		//TODO log this
+		logger($message);
 	}
 }

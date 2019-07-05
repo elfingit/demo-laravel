@@ -22,10 +22,9 @@ class Brand extends Model
 		return $this->hasMany(BrandPrice::class, 'brand_id', 'id');
 	}
 
-	public function draws()
+	public function results()
 	{
-		return $this->hasMany(BrandDraw::class, 'brand_id', 'id')
-				->orderBy('draw_date', 'desc');
+		return $this->hasMany(BrandResult::class, 'brand_id', 'id');
 	}
 
 	public function checkDates()

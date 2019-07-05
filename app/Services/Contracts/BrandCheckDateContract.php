@@ -8,7 +8,11 @@
 
 namespace App\Services\Contracts;
 
+use App\Model\BrandCheckDate as BrandCheckDateModel;
+
 interface BrandCheckDateContract
 {
 	public function getDates($date);
+
+	public function moveResultDates(BrandCheckDateModel $brand_check_date);
 }

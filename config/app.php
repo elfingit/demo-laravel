@@ -233,6 +233,7 @@ return [
 
 	    'BrandPrice'        => \App\Facades\BrandPriceFacade::class,
 	    'BrandCheckDate'    => \App\Facades\BrandCheckDateFacade::class,
+		'BrandResult'       => \App\Facades\BrandResultFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 

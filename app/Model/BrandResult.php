@@ -9,6 +9,13 @@ class BrandResult extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-    	'results' => 'array'
+    	'results' => 'object'
     ];
+
+    public function scopeIsExists($query, $date, $brand)
+    {
+    	return $query->where('draw_date', $date)
+		            ->where('brand_id', $brand->id)
+		            ->first();
+    }
 }
