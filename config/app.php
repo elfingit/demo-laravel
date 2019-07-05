@@ -175,8 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-	    \App\Lib\Mangayo\MangayoServiceProvider::class,
-
 	    \App\Providers\ApiServiceProvider::class,
 
     ],
