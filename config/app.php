@@ -177,6 +177,8 @@ return [
 
 	    \App\Providers\ApiServiceProvider::class,
 
+	    \App\Lib\Remote\Api\ApiServiceProvider::class,
+
     ],
 
     /*
@@ -229,11 +231,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 	    'Brand' => \App\Facades\BrandFacade::class,
 
-	    'LotteryRemoteApi' => \App\Lib\Mangayo\Facade\MangayoApiFacade::class,
+	    'BrandPrice'        => \App\Facades\BrandPriceFacade::class,
+	    'BrandCheckDate'    => \App\Facades\BrandCheckDateFacade::class,
 
-	    'BrandPrice'    => \App\Facades\BrandPriceFacade::class,
-	    'BrandDraw'     => \App\Facades\BrandDrawFacade::class,
-	    'BrandJackpot'     => \App\Facades\BrandJackpotFacade::class,
+	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 
 	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
 

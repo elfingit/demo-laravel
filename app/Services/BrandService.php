@@ -8,10 +8,11 @@
 namespace App\Services;
 
 use App\Model\Brand as BrandModel;
-use App\Model\BrandCheckDate;
+use App\Model\BrandCheckDate as BrandCheckDateModel;
 use App\Services\Contracts\BrandServiceContract;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Psr\Http\Message\ResponseInterface;
 
 class BrandService implements BrandServiceContract
 {
@@ -72,6 +73,22 @@ class BrandService implements BrandServiceContract
 			->get();
 	}
 
+	public function fetchResult( BrandCheckDateModel $check_date )
+	{
+		try {
+			/** @var ResponseInterface $result */
+			$result = \RemoteApi::fetchResult( $check_date->brand->api_code );
+			$data = json_decode( $result->getBody() );
+
+
+
+		} catch (\Exception $exception) {
+			$this->logErr($exception->getMessage());
+		}
+
+		dd($data);
+	}
+
 	protected function prepareCode($code)
 	{
 		return \Str::lower($code);
@@ -88,8 +105,6 @@ class BrandService implements BrandServiceContract
 
 	protected function prepareDefaultQuickPick($data)
 	{
-		//$preparedData = explode(',', $data);
-
 		return explode(',', $data);
 	}
 
@@ -115,15 +130,15 @@ class BrandService implements BrandServiceContract
 			$nextDay->minute = $minutes[$key];
 			$nextDay->second = 0;
 
-			if ($request->get('period') == BrandCheckDate::PERIOD_DAY) {
+			if ($request->get('period') == BrandCheckDateModel::PERIOD_DAY) {
 				$nextDay->addDay();
-			} elseif ($request->get('period') == BrandCheckDate::PERIOD_WEEK) {
+			} elseif ($request->get('period') == BrandCheckDateModel::PERIOD_WEEK) {
 				$days = $carbon->dayOfWeek - $nextDay->dayOfWeek;
 				$nextDay->addDays($days);
 				$nextDay->addWeek();
 			}
 
-			$brandCheckDate = new BrandCheckDate([
+			$brandCheckDate = new BrandCheckDateModel([
 				'check_date' => $carbon,
 				'next_check_date' => $nextDay,
 				'period'    => $request->get('period')
@@ -131,5 +146,10 @@ class BrandService implements BrandServiceContract
 
 			$brand->checkDates()->save($brandCheckDate);
 		}
+	}
+
+	protected function logErr($message)
+	{
+		//TODO log this
 	}
 }

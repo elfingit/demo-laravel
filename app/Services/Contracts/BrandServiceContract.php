@@ -9,6 +9,7 @@
 namespace App\Services\Contracts;
 
 use App\Model\Brand as BrandModel;
+use App\Model\BrandCheckDate as BrandCheckDateModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 interface BrandServiceContract
@@ -16,4 +17,6 @@ interface BrandServiceContract
 	public function store(FormRequest $request);
 	public function list($per_page);
 	public function update(FormRequest $request, BrandModel $brand);
+
+	public function fetchResult(BrandCheckDateModel $check_date);
 }
