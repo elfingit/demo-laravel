@@ -37,6 +37,12 @@ Route::namespace('Api')->group(function () {
 			'as'    => 'brands.index'
 		]);
 
+		Route::get('brands/{brand}/results', [
+			'middleware'    => 'client:brand_results',
+			'uses'  => 'BrandController@results',
+			'as'    => 'brands.results'
+		]);
+
 		Route::get('brands/{brand}', [
 			'middleware'    => 'client:brand_show',
 			'uses'  => 'BrandController@show',

@@ -33,7 +33,8 @@ class AuthServiceProvider extends ServiceProvider
 	        'reset_password_link' => 'Forgot password',
 	        'set_new_password'    => 'Set new password for user',
 	        'brands_list'       => 'Get list of brands',
-	        'brand_show'        => 'Get data of brand'
+	        'brand_show'        => 'Get data of brand',
+	        'brand_results'     => 'Get brand results'
         ]);
     }
 }

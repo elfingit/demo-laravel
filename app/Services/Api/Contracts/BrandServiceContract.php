@@ -12,4 +12,5 @@ interface BrandServiceContract
 {
 	public function list();
 	public function getBrand($api_code);
+	public function getResults($api_code);
 }

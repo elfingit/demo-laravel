@@ -24,4 +24,19 @@ class BrandService implements BrandServiceContract
 		                 ->where('status', BrandModel::STATUS_SYNCED)
 		                 ->first();
 	}
+
+	public function getResults( $api_code )
+	{
+		$brand = BrandModel::where('api_code', $api_code)
+		                   ->where('status', BrandModel::STATUS_SYNCED)
+		                   ->first();
+
+		if (!$brand) {
+			return false;
+		}
+
+		return $brand->results()
+			->orderBy('draw_date', 'desc')
+			->get();
+	}
 }
