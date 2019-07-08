@@ -88,5 +88,32 @@
     .mdl-data-table {
       margin: 0;
     }
+
+    ul {
+      li {
+        list-style: none;
+        border-radius: 6rem;
+        border: 1px solid #00ffe4;
+        background-color: #00ffe4;
+        padding: 0;
+        text-align: center;
+        line-height: 3rem;
+        margin: 1rem -4rem 1rem 6rem;
+        width: 3rem;
+      }
+    }
+
+    .extra_ball {
+      border-radius: 6rem;
+      border: 1px solid #ff431a;
+      background-color: #ff431a;
+      padding: 0.5rem;
+    }
+
+    .additional_game {
+      height: 40px;
+      padding-top: 2rem;
+      font-size: 1rem;
+    }
   }
 }

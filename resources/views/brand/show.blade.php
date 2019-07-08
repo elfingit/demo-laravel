@@ -138,8 +138,8 @@
                 </div>
             </div>
         </div>
-        @if($brand->draws->count() > 0)
-        <div class="mdl-cell mdl-cell--6-col">
+        @if($brand->results->count() > 0)
+        <div class="mdl-cell mdl-cell--8-col">
             <div class="mdl-card mdl-shadow--2dp table-container">
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">{{ __('Draw data') }}</h2>
@@ -149,18 +149,18 @@
                         <thead>
                         <tr>
                             <th>Draw date</th>
-                            <th>Status</th>
+                            <th>Result</th>
                             <th>Created at</th>
                             <th>Updated at</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($brand->draws as $draw)
+                        @foreach ($brand->results as $result)
                         <tr>
-                            <td>{{ $draw->draw_date }}</td>
-                            <td>{{ $draw->status }}</td>
-                            <td>{{ $draw->created_at }}</td>
-                            <td>{{ $draw->updated_at }}</td>
+                            <td>{{ $result->draw_date }}</td>
+                            <td>@include('brand._result', ['result' => $result])</td>
+                            <td>{{ $result->created_at }}</td>
+                            <td>{{ $result->updated_at }}</td>
                         </tr>
                         @endforeach
                         </tbody>

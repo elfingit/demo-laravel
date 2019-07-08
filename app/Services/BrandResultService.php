@@ -25,11 +25,11 @@ class BrandResultService implements BrandResultContract
 
 		$brandResult = new BrandResultModel([
 			'draw_date' => $data->date,
-			'results' => json_encode([
+			'results' => [
 				'main_result' => $data->main_result,
-				'extra_ball' => $data->main_result,
+				'extra_ball' => $data->extra_ball,
 				'additional_games' => $data->additional_games
-			])
+			]
 		]);
 
 		$brand->results()->save($brandResult);
