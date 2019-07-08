@@ -15,7 +15,7 @@ class BrandService implements BrandServiceContract
 {
 	public function list()
 	{
-		return BrandModel::where('status', BrandModel::STATUS_SYNCED);
+		return BrandModel::where('status', BrandModel::STATUS_SYNCED)->get();
 	}
 
 	public function getBrand( $api_code )
