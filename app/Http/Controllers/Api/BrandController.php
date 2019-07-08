@@ -9,6 +9,14 @@ use App\Http\Controllers\Controller;
 
 class BrandController extends Controller
 {
+	/**
+	 * @api {get} /api/v1/brands/:brand Get list of brands
+	 * @apiVersion 1.0.0
+	 * @apiName ListOfBrands
+	 * @apiGroup Brands
+	 *
+	 * @apiParam {String} brand code of brand
+	 */
 	public function index()
 	{
 		return new BrandsCollection(\ApiBrand::list());
