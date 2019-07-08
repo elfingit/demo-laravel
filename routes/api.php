@@ -36,6 +36,12 @@ Route::namespace('Api')->group(function () {
 			'uses'  => 'BrandController@index',
 			'as'    => 'brands.index'
 		]);
+
+		Route::get('brands/{brand}', [
+			'middleware'    => 'client:brand_show',
+			'uses'  => 'BrandController@show',
+			'as'    => 'brands.show'
+		]);
 	});
 });
 

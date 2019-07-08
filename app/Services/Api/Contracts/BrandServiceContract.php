@@ -11,4 +11,5 @@ namespace App\Services\Api\Contracts;
 interface BrandServiceContract
 {
 	public function list();
+	public function getBrand($api_code);
 }
