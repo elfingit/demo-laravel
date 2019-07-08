@@ -128,6 +128,7 @@ Success-Response:
 ### Success 200
 | Name     | Type       | Description                           |
 |:---------|:-----------|:--------------------------------------|
+| draw_date | `String` |  |
 | results | `Object` |  |
 | extra_ball | `String` |  |
 | additional_games | `Object` |  |

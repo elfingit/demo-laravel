@@ -14,6 +14,7 @@ class BrandController extends Controller
 	 * @apiVersion 1.0.0
 	 * @apiName ListOfBrands
 	 * @apiGroup Brands
+	 * @apiPermission brands_list
 	 *
 	 * @apiSuccess {String} id code of brand
 	 * @apiSuccess {String} name name of brand
@@ -42,6 +43,7 @@ class BrandController extends Controller
 	 * @apiVersion 1.0.0
 	 * @apiName BrandData
 	 * @apiGroup Brands
+	 * @apiPermission brand_show
 	 *
 	 * @apiParam {String} brand code of brand
 	 *
@@ -112,15 +114,16 @@ class BrandController extends Controller
 	 * @apiVersion 1.0.0
 	 * @apiName BrandResults
 	 * @apiGroup Brands
+	 * @apiPermission brand_results
 	 *
 	 * @apiParam {String} brand code of brand
 	 *
-	 * @qpiSuccess {String} draw_date
+	 * @apiSuccess {String} draw_date
 	 * @apiSuccess {Object} results
 	 * @apiSuccess {String} extra_ball
 	 * @apiSuccess {Object} additional_games
 	 *
-	 * * @apiSuccessExample {json} Success-Response:
+	 * @apiSuccessExample {json} Success-Response:
 	 *  HTTP/1.1 200 OK
 	 *  {
 	 *      "data":[
