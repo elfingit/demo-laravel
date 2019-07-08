@@ -29,8 +29,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::tokensCan([
         	'add_user'  => 'Adding users (registration)',
+	        'auth_user' => 'Authenticate user',
 	        'reset_password_link' => 'Forgot password',
-	        'set_new_password'    => 'Set new password for user'
+	        'set_new_password'    => 'Set new password for user',
+	        'brands_list'       => 'Get list of brands'
         ]);
     }
 }

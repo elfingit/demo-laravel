@@ -30,6 +30,12 @@ Route::namespace('Api')->group(function () {
 			'uses'  => 'UserController@create',
 			'as'    => 'user.register'
 		]);
+
+		Route::get('brands', [
+			'middleware'    => 'client:brands_list',
+			'uses'  => 'BrandController@index',
+			'as'    => 'brands.index'
+		]);
 	});
 });
 

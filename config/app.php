@@ -239,6 +239,8 @@ return [
 
 	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
 
+	    'ApiBrand'      => \App\Facades\Api\BrandFacade::class,
+
     ],
 
 ];
