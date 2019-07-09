@@ -8,6 +8,10 @@ Api docs
 	- [Get brand results](#Get-brand-results)
 	- [Get list of brands](#Get-list-of-brands)
 	
+- [Leads](#Leads)
+	- [Create lead](#Create-lead)
+	- [update lead](#update-lead)
+	
 
 # <a name='Brands'></a> Brands
 
@@ -174,3 +178,114 @@ Success-Response:
 | id | `String` | <p>code of brand</p> |
 | name | `String` | <p>name of brand</p> |
 | logo | `String` | <p>url of brand logo</p> |
+# <a name='Leads'></a> Leads
+
+## <a name='Create-lead'></a> Create lead
+[Back to top](#top)
+
+
+
+```
+POST /api/v1/leads
+```
+
+### Parameter Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| host | `String` | <p>Name of host</p> |
+| g_user_id | `String` | <p>Google Analytics User ID</p> |
+| cart_items | `Object[]` | **optional** |
+
+### Success Response
+Success-Response:
+
+```
+ HTTP/1.1 200 OK
+ {
+     "data": {
+				"id": 3,
+				"cart_items": [{
+					"brand_id": "us_powerball",
+					"tickets": [3,4,5,6,23]
+				}]
+			}
+	}
+```
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| id | `Number` | <p>ID of lead</p> |
+| cart_items | `Object[]` |  |
+
+### Error Response
+Error-Response:
+
+```
+ HTTP/1.1 422 Unprocessable Entity
+ {
+     "message": "The given data was invalid.",
+		"errors": {
+			"host": [
+				"The host field is required."
+			],
+			"g_user_id": [
+				"The g user id field is required."
+			]
+		}
+ }
+```
+## <a name='update-lead'></a> update lead
+[Back to top](#top)
+
+
+
+```
+PUT /api/v1/leads/:lead
+```
+
+### Parameter Parameters
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| host | `String` | <p>Name of host</p> |
+| cart_items | `Object[]` |  |
+
+### Success Response
+Success-Response:
+
+```
+ HTTP/1.1 200 OK
+ {
+     "data": {
+				"id": 3,
+				"cart_items": [{
+					"brand_id": "us_powerball",
+					"tickets": [3,4,5,6,23]
+				}]
+			}
+	}
+```
+
+### Success 200
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+| id | `Number` | <p>ID of lead</p> |
+| cart_items | `Object[]` |  |
+
+### Error Response
+Error-Response:
+
+```
+ HTTP/1.1 422 Unprocessable Entity
+ {
+     "message": "The given data was invalid.",
+		"errors": {
+			"host": [
+				"The host field is required."
+			],
+			"cart_items": [
+				"The cart items field is required."
+			]
+		}
+ }
+```
