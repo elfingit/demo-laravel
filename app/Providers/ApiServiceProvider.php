@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Services\Api\BrandService;
 use App\Services\Api\Contracts\BrandServiceContract;
+use App\Services\Api\Contracts\LeadServiceContract;
 use App\Services\Api\Contracts\UserServiceContract;
+use App\Services\Api\LeadService;
 use App\Services\Api\UserService;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +33,6 @@ class ApiServiceProvider extends ServiceProvider
 
 	    $this->app->bind(UserServiceContract::class, UserService::class);
 	    $this->app->bind(BrandServiceContract::class, BrandService::class);
+	    $this->app->bind(LeadServiceContract::class, LeadService::class);
     }
 }

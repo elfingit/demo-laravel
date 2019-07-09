@@ -48,6 +48,12 @@ Route::namespace('Api')->group(function () {
 			'uses'  => 'BrandController@show',
 			'as'    => 'brands.show'
 		]);
+
+		Route::post('leads', [
+			'middleware'    => 'client:lead_create',
+			'uses'  => 'LeadController@create',
+			'as'    => 'leads.create'
+		]);
 	});
 });
 

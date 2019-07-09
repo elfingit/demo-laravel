@@ -34,7 +34,8 @@ class AuthServiceProvider extends ServiceProvider
 	        'set_new_password'    => 'Set new password for user',
 	        'brands_list'       => 'Get list of brands',
 	        'brand_show'        => 'Get data of brand',
-	        'brand_results'     => 'Get brand results'
+	        'brand_results'     => 'Get brand results',
+	        'lead_create'       => 'Create lead'
         ]);
     }
 }
