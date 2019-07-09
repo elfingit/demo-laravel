@@ -33,5 +33,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 		Route::resource('brands.brand_prices', 'BrandPriceController')
 			->except(['create', 'show', 'edit']);
 	});
+
+	Route::get('/leads', [
+		'uses'  => 'LeadController@index',
+		'as'    => 'leads.index'
+	]);
 });
 

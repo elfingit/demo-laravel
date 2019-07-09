@@ -5,6 +5,7 @@
             <span class="mdl-layout-title">{{ __('BLV CRM') }}</span>
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="{{ route('dashboard.brands.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">pages</i>{{ __('Brands') }}</a>
+                <a class="mdl-navigation__link" href="{{ route('dashboard.leads.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">pages</i>{{ __('Leads') }}</a>
             </nav>
         </div>
         <main class="mdl-layout__content" id="app">
