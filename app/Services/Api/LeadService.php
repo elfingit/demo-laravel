@@ -24,4 +24,12 @@ class LeadService implements LeadServiceContract
 
 		return LeadModel::create($data);
 	}
+
+	public function update( FormRequest $request, LeadModel $lead )
+	{
+		$lead->cart_items = $request->get('cart_items');
+		$lead->save();
+
+		return $lead;
+	}
 }

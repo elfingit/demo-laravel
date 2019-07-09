@@ -8,9 +8,11 @@
 
 namespace App\Services\Api\Contracts;
 
+use App\Model\Lead as LeadModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 interface LeadServiceContract
 {
 	public function create(FormRequest $request);
+	public function update(FormRequest $request, LeadModel $lead);
 }

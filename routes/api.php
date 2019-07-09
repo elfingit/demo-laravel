@@ -54,6 +54,12 @@ Route::namespace('Api')->group(function () {
 			'uses'  => 'LeadController@create',
 			'as'    => 'leads.create'
 		]);
+
+		Route::put('leads/{lead}', [
+			'middleware'    => 'client:lead_update',
+			'uses'  => 'LeadController@update',
+			'as'    => 'leads.update'
+		]);
 	});
 });
 
