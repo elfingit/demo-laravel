@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CorrectAuthHeader;
 use App\Http\Middleware\RoleAcl;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Passport\Http\Middleware\CheckClientCredentials;
@@ -16,6 +17,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+    	CorrectAuthHeader::class,
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
