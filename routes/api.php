@@ -20,13 +20,13 @@ Route::namespace('Api')->group(function () {
 	Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
 
 		Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
-		     ->middleware('scopes:reset_password_link');
+		     ->middleware('client:reset_password_link');
 
 		Route::post('password/reset', 'Auth\ForgotPasswordController@sendResetLinkEmail')
-			->middleware('scopes:reset_password');
+			->middleware('client:reset_password');
 
 		Route::post('user', [
-			'middleware'    => 'scopes:add_user',
+			'middleware'    => 'client:add_user',
 			'uses'  => 'UserController@create',
 			'as'    => 'user.register'
 		]);
