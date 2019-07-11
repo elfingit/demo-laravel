@@ -100,9 +100,9 @@ class ForgotPasswordController extends \App\Http\Controllers\Auth\ForgotPassword
 
 	protected function resetPassword($user, $password)
 	{
-		$user->password = Hash::make($password);
+		$user->password = \Hash::make($password);
 
-		$user->setRememberToken(Str::random(60));
+		$user->setRememberToken(\Str::random(60));
 
 		$user->save();
 
