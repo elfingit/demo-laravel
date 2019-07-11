@@ -22,7 +22,7 @@ Route::namespace('Api')->group(function () {
 		Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
 		     ->middleware('client:reset_password_link');
 
-		Route::post('password/reset', 'Auth\ForgotPasswordController@sendResetLinkEmail')
+		Route::post('password/reset', 'Auth\ForgotPasswordController@reset')
 			->middleware('client:reset_password');
 
 		Route::post('user', [
