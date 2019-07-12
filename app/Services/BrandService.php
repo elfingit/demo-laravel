@@ -7,6 +7,7 @@
  */
 namespace App\Services;
 
+use App\Lib\Utils;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandCheckDate as BrandCheckDateModel;
 use App\Services\Contracts\BrandServiceContract;
@@ -137,17 +138,12 @@ class BrandService implements BrandServiceContract
 			$nextDay->minute = $minutes[$key];
 			$nextDay->second = 0;
 
-			if ($request->get('period') == BrandCheckDateModel::PERIOD_DAY) {
-				$nextDay->addDay();
-			} elseif ($request->get('period') == BrandCheckDateModel::PERIOD_WEEK) {
-				$days = $carbon->dayOfWeek - $nextDay->dayOfWeek;
-				$nextDay->addDays($days);
-				$nextDay->addWeek();
-			}
+			$checkDate = Utils::getNextDate($carbon, $nextDay, $request->get('period'));
+
 
 			$brandCheckDate = new BrandCheckDateModel([
 				'check_date' => $carbon,
-				'next_check_date' => $nextDay,
+				'next_check_date' => $checkDate,
 				'period'    => $request->get('period')
 			]);
 

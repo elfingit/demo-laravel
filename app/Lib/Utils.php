@@ -8,6 +8,9 @@
 
 namespace App\Lib;
 
+use App\Model\BrandCheckDate as BrandCheckDateModel;
+use Carbon\Carbon;
+
 class Utils
 {
 	public static function parseToTime($string)
@@ -56,5 +59,32 @@ class Utils
 		});
 
 		return $time;
+	}
+
+	/**
+	 * @param Carbon $date
+	 * @param Carbon $today
+	 * @param int $period
+	 */
+	public static function getNextDate($date, $today, $period)
+	{
+		if ($period == BrandCheckDateModel::PERIOD_DAY) {
+			$today->addDay();
+			return $today;
+		}
+
+
+		if ($period == BrandCheckDateModel::PERIOD_WEEK) {
+			$days = $date->dayOfWeek - $today->dayOfWeek;
+
+			$today->addDays($days);
+
+			if ($days < 0) {
+				$today->addWeek();
+			}
+
+			return $today;
+		}
+
 	}
 }
