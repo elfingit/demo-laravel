@@ -16,7 +16,7 @@ class BrandUpdateRequest extends BrandStoreRequest
 
 	    $brand = $this->route('brand');
 
-        $rulez['logo'] = 'file|image|mimes:jpeg,png,svg|max:\'.(1024 * 1024 * 5)';
+        $rulez['logo'] = 'file|image|mimes:jpeg,png,svg|max:'.(1024 * 1024 * 5);
         $rulez['code'] = 'required|string|regex:/^[a-zA-z_]+$/i|unique:brands,api_code,' . $brand->id;
 
         return $rulez;
