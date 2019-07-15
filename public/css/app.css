@@ -34,6 +34,10 @@
   right: 0;
 }
 
+.form-panel .mdl-cell .mdl-card__supporting-text {
+  overflow: visible;
+}
+
 .crm .mdl-data-table {
   margin: 1rem;
 }

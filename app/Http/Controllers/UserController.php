@@ -67,9 +67,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UserModel $user)
     {
-        //
+        $roles = \UserRole::list();
+    	return view('user.edit', compact('user', 'roles'));
     }
 
     /**

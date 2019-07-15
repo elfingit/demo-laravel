@@ -229,13 +229,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-	    'Brand' => \App\Facades\BrandFacade::class,
 
+        'Brand' => \App\Facades\BrandFacade::class,
 	    'BrandPrice'        => \App\Facades\BrandPriceFacade::class,
 	    'BrandCheckDate'    => \App\Facades\BrandCheckDateFacade::class,
 		'BrandResult'       => \App\Facades\BrandResultFacade::class,
 	    'Lead'              => \App\Facades\LeadFacade::class,
 	    'User'              => \App\Facades\UserFacade::class,
+	    'UserRole'          => \App\Facades\UserRoleFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 
