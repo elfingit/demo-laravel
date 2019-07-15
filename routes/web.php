@@ -38,5 +38,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 		'uses'  => 'LeadController@index',
 		'as'    => 'leads.index'
 	]);
+
+	Route::resource('users', 'UserController');
 });
 

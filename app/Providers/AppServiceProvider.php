@@ -15,7 +15,9 @@ use App\Services\Contracts\BrandPriceServiceContract;
 use App\Services\Contracts\BrandResultContract;
 use App\Services\Contracts\BrandServiceContract;
 use App\Services\Contracts\LeadServiceContract;
+use App\Services\Contracts\UserServiceContract;
 use App\Services\LeadService;
+use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -50,5 +52,6 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->bind(BrandResultContract::class, BrandResultService::class);
     	$this->app->bind(BrandCheckDateContract::class, BrandCheckDateService::class);
     	$this->app->bind(LeadServiceContract::class, LeadService::class);
+    	$this->app->bind(UserServiceContract::class, UserService::class);
     }
 }

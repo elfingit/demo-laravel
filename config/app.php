@@ -235,6 +235,7 @@ return [
 	    'BrandCheckDate'    => \App\Facades\BrandCheckDateFacade::class,
 		'BrandResult'       => \App\Facades\BrandResultFacade::class,
 	    'Lead'              => \App\Facades\LeadFacade::class,
+	    'User'              => \App\Facades\UserFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 
