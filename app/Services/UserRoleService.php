@@ -18,4 +18,16 @@ class UserRoleService implements UserRoleServiceContract
 		return UserRoleModel::all();
 	}
 
+	public function getRolesIds()
+	{
+		$roles = UserRoleModel::all('id')->toArray();
+
+		$result = [];
+
+		foreach ($roles as $role) {
+			$result[] = $role['id'];
+		}
+
+		return $result;
+	}
 }

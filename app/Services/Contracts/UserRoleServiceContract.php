@@ -10,4 +10,5 @@ namespace App\Services\Contracts;
 interface UserRoleServiceContract
 {
 	public function list();
+	public function getRolesIds();
 }

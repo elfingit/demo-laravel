@@ -13,7 +13,7 @@
     export default {
         name: "SelectBox",
 
-        props: ['title', 'items', 'selected', 'send_name'],
+        props: ['title', 'items', 'selected', 'send', 'send_name'],
 
         data() {
             return {
@@ -24,6 +24,7 @@
 
         mounted() {
             this.selectedValue = this.selected;
+            this.sendValue = this.send;
         },
 
         methods: {

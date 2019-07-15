@@ -28,7 +28,7 @@
                         <label class="mdl-textfield__label" for="password_confirmation">{{ __('Password confirmation') }}</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @error('user_role') is-invalid @enderror">
-                        <select-box v-bind:items="{{ json_encode($roles) }}" v-bind:selected="'{{ $user->role->name }}'" v-bind:send_name="'user_role'" v-bind:title="'User role'"/>
+                        <select-box v-bind:send="'{{ $user->role->id }}'" v-bind:items="{{ json_encode($roles) }}" v-bind:selected="'{{ $user->role->name }}'" v-bind:send_name="'user_role'" v-bind:title="'User role'"/>
                         @error('user_role')
                         <span class="mdl-textfield__error">{{ $message }}</span>
                         @enderror

@@ -2427,7 +2427,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SelectBox",
-  props: ['title', 'items', 'selected', 'send_name'],
+  props: ['title', 'items', 'selected', 'send', 'send_name'],
   data: function data() {
     return {
       selectedValue: null,
@@ -2436,6 +2436,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.selectedValue = this.selected;
+    this.sendValue = this.send;
   },
   methods: {
     select: function select(id, name) {

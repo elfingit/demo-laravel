@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
 use Illuminate\Http\Request;
@@ -80,9 +81,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, UserModel $user)
     {
-        //
+		\User::update($request, $user);
+
+	    return redirect()->route('dashboard.users.index')
+	                     ->with('system_message', __('User successfully updated.'));
     }
 
     /**
