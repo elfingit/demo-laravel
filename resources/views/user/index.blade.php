@@ -38,12 +38,13 @@
             <th>Role</th>
             <th>Created At</th>
             <th>Updated At</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($users as $user)
         <tr>
-            <td>{{ $user->id }}</td>
+            <td><a href="{{ route('dashboard.users.show', ['user' => $user->id]) }}">{{ $user->id }}</a></td>
             @if($user->profile)
             <td>{{ $user->profile->favicon }}</td>
             <td>{{ $user->profile->host }}</td>
@@ -55,8 +56,19 @@
             <td>{{ $user->role->name }}</td>
             <td>{{ $user->created_at }}</td>
             <td>{{ $user->updated_at }}</td>
+            <td>
+                <a href="{{ route('dashboard.users.show', ['user' => $user->id]) }}" id="show"><i class="material-icons" role="presentation">visibility</i></a>
+                <div class="mdl-tooltip" data-mdl-for="show">
+                    Show user data
+                </div>
+                <a href="{{ route('dashboard.users.edit', ['user' => $user->id]) }}" id="edit"><i class="material-icons" role="presentation">edit</i></a>
+                <div class="mdl-tooltip" data-mdl-for="edit">
+                    Edit user data
+                </div>
+            </td>
         </tr>
         @endforeach
         </tbody>
     </table>
+    {{ $users->links() }}
 @endsection

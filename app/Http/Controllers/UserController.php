@@ -22,6 +22,7 @@ class UserController extends Controller
 
         $criteria->where('id', 'id');
         $criteria->where('email', 'email');
+        $criteria->relationWhere('profile', 'host', 'host');
 
         $users = \User::list($criteria);
 

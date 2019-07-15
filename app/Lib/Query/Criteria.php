@@ -43,6 +43,16 @@ class Criteria
 
 	}
 
+	public function relationWhere($relation, $filter, $field)
+	{
+		if (!is_null($this->request->get($filter))) {
+
+			$this->builder = $this->builder->whereHas($relation, function (Builder $query) use ($field, $filter) {
+				$query->where($field, $this->request->get($filter));
+			});
+		}
+	}
+
 	public function paginate($perPage = 25)
 	{
 		return $this->builder->paginate($perPage);
