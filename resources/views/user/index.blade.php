@@ -46,7 +46,7 @@
         <tr>
             <td><a href="{{ route('dashboard.users.show', ['user' => $user->id]) }}">{{ $user->id }}</a></td>
             @if($user->profile)
-            <td>{{ $user->profile->favicon }}</td>
+            <td><img src="{{ $user->profile->favicon }}" height="25px"></td>
             <td>{{ $user->profile->host }}</td>
             @else
             <td>none</td>
