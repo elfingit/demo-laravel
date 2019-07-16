@@ -10,4 +10,8 @@ class UserProfile extends Model
 
     protected $primaryKey = 'user_id';
 
+    protected $casts = [
+    	'date_of_birth'  => 'date'
+    ];
+
 }

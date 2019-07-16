@@ -9,7 +9,7 @@
         <tr>
             <th># ID</th>
             <th>Logo</th>
-            <th>State</th>
+            <th>Name</th>
             <th>Status</th>
             <th>Created At</th>
             <th>Updated At</th>

@@ -12,6 +12,7 @@ use App\Model\User;
 use App\Model\UserProfile;
 use App\Model\UserRole;
 use App\Services\Api\Contracts\UserServiceContract;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserService implements UserServiceContract
@@ -20,9 +21,20 @@ class UserService implements UserServiceContract
 	{
 		$role = UserRole::byName('user')->first();
 
+		$dateOfBirth = Carbon::parse(
+			$request->get('day_of_birth').'-'
+			.$request->get('month_of_birth').'-'
+			.$request->get('year_of_birth')
+		);
+
 		$profile = new UserProfile([
-			'host'  => $request->get('host'),
-			'favicon'  => $request->get('favicon_url'),
+			'host'          => $request->get('host'),
+			'favicon'       => $request->get('favicon_url'),
+			'honorific'     => $request->get('honorific'),
+			'first_name'     => $request->get('first_name'),
+			'last_name'     => $request->get('last_name'),
+			'date_of_birth' => $dateOfBirth,
+			'country'     => $request->get('country')
 		]);
 
 		$user = User::create([
