@@ -12,19 +12,9 @@ use App\Model\User as UserModel;
 use App\Model\UserAvailableBalance as UserAvailableBalanceModel;
 use App\Model\UserAvailableBalanceTransaction as UserAvailableBalanceTransactionModel;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
-use Illuminate\Http\Request;
 
 class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 {
-	public function list( Request $request, UserModel $user )
-	{
-		if ($user->available_balance) {
-			//TODO return transactions
-		}
-
-		return null;
-	}
-
 	public function add( $amount, $reason, UserModel $user )
 	{
 		if (is_null($user->available_balance)) {

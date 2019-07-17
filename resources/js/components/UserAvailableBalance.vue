@@ -10,6 +10,28 @@
                     </button>
                 </span>
             </div>
+            <div class="mdl-card__supporting-text">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Notes</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="transaction in user.balance.transactions" v-bind:key="transaction.id">
+                        <td>{{ transaction.transaction_id }}</td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.notes }}</td>
+                        <td>{{ transaction.created_at }}</td>
+                        <td>{{ transaction.updated_at }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <UserAvailableBalanceForm ref="form" :url-add-balance="urlStoreBalance"/>
     </div>
@@ -32,10 +54,10 @@
                     id: null,
                     email: null,
                     balance: {
-                        amount: 0
+                        amount: 0,
+                        transactions: []
                     }
                 },
-                transactions: [],
                 urlStoreBalance: ''
             }
         },
@@ -71,5 +93,9 @@
         min-width: 34px;
         height: 34px;
         width: 34px;
+    }
+
+    table {
+        width: 100%;
     }
 </style>

@@ -2586,6 +2586,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2600,10 +2622,10 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         email: null,
         balance: {
-          amount: 0
+          amount: 0,
+          transactions: []
         }
       },
-      transactions: [],
       urlStoreBalance: ''
     };
   },
@@ -2837,7 +2859,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.btn-container[data-v-709c13a9] {\n    margin-left: 2rem;\n}\n.btn-container .mdl-button--fab[data-v-709c13a9] {\n    min-width: 34px;\n    height: 34px;\n    width: 34px;\n}\n", ""]);
+exports.push([module.i, "\n.btn-container[data-v-709c13a9] {\n    margin-left: 2rem;\n}\n.btn-container .mdl-button--fab[data-v-709c13a9] {\n    min-width: 34px;\n    height: 34px;\n    width: 34px;\n}\ntable[data-v-709c13a9] {\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -23292,6 +23314,34 @@ var render = function() {
               [_c("i", { staticClass: "material-icons" }, [_vm._v("add")])]
             )
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mdl-card__supporting-text" }, [
+          _c(
+            "table",
+            { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.user.balance.transactions, function(transaction) {
+                  return _c("tr", { key: transaction.id }, [
+                    _c("td", [_vm._v(_vm._s(transaction.transaction_id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.amount))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.notes))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.created_at))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(transaction.updated_at))])
+                  ])
+                }),
+                0
+              )
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -23303,7 +23353,26 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Notes")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Created at")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated at")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
