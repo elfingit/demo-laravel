@@ -22,8 +22,29 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 		if (is_null($user->available_balance)) {
 			$transaction = $this->createBalance($amount, $reason, $user);
 		} else {
-			$this->updateBalance($amount, $reason, $user);
+			$transaction = $this->updateBalance($amount, $reason, $user);
 		}
+
+		return $transaction;
+
+	}
+
+	protected function updateBalance($amount, $reason, UserModel $user)
+	{
+		\DB::beginTransaction();
+		$user->available_balance->lockForUpdate();
+		$user->available_balance->amount = $user->available_balance->amount + $amount;
+		$user->available_balance->save();
+
+		$transaction = new UserAvailableBalanceTransactionModel([
+			'amount'    => $amount,
+			'transaction_id' => \Str::random(4).'-'.\Str::random(),
+			'notes' => $reason
+		]);
+
+
+		$user->available_balance->transactions()->save($transaction);
+		\DB::commit();
 
 		return $transaction;
 
