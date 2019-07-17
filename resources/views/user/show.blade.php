@@ -24,6 +24,40 @@
                                 <span class="mdl-list__item-text-body">{{ $user->role->name }}</span>
                             </span>
                         </div>
+                        @if($user->profile)
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Honorific') }}:</b></span>
+                            </span>
+                                <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $user->profile->honorific }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('User name') }}:</b></span>
+                            </span>
+                                <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $user->profile->first_name }} {{ $user->profile->last_name }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Birthday') }}:</b></span>
+                            </span>
+                                <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $user->profile->date_of_birth->format('m-d-Y') }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Country') }}:</b></span>
+                            </span>
+                                <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $user->profile->country }}</span>
+                            </span>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
