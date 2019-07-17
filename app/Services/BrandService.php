@@ -34,6 +34,28 @@ class BrandService implements BrandServiceContract
 
 		$createData = $request->only($this->fields);
 
+		$createData['jackpot_multiplier'] = isset($createData['jackpot_multiplier'])
+			? $createData['jackpot_multiplier'] : false;
+
+		$createData['number_shield'] = isset($createData['number_shield'])
+			? $createData['number_shield'] : false;
+
+		$createData['duration'] = isset($createData['duration'])
+			? $createData['duration'] : false;
+
+		$createData['subscription'] = isset($createData['subscription'])
+			? $createData['subscription'] : false;
+
+		$createData['jackpot_hut'] = isset($createData['jackpot_hut'])
+			? $createData['jackpot_hut'] : false;
+
+		$createData['participation'] = isset($createData['participation'])
+			? $createData['participation'] : false;
+
+		$createData['extra_game'] = isset($createData['extra_game'])
+			? $createData['extra_game'] : false;
+
+
 		$createData['api_code'] = $code;
 		$createData['logo'] = $logo;
 		$createData['status'] = BrandModel::STATUS_SYNCED;
@@ -56,6 +78,27 @@ class BrandService implements BrandServiceContract
 			$logo = $this->uploadLogo($code, $request);
 			$updateData['logo'] = $logo;
 		}
+
+		$updateData['jackpot_multiplier'] = isset($updateData['jackpot_multiplier'])
+			? $updateData['jackpot_multiplier'] : false;
+
+		$updateData['number_shield'] = isset($updateData['number_shield'])
+			? $updateData['number_shield'] : false;
+
+		$updateData['duration'] = isset($updateData['duration'])
+			? $updateData['duration'] : false;
+
+		$updateData['subscription'] = isset($updateData['subscription'])
+			? $updateData['subscription'] : false;
+
+		$updateData['jackpot_hut'] = isset($updateData['jackpot_hut'])
+			? $updateData['jackpot_hut'] : false;
+
+		$updateData['participation'] = isset($updateData['participation'])
+			? $updateData['participation'] : false;
+
+		$updateData['extra_game'] = isset($updateData['extra_game'])
+			? $updateData['extra_game'] : false;
 
 		$updateData['api_code'] = $code;
 		$updateData['status'] = BrandModel::STATUS_SYNCED;
