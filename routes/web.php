@@ -37,6 +37,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 			'uses'  => 'UserAvailableBalanceController@index',
 			'as'    => 'users.available_balance.index'
 		]);
+
+		Route::post('/users/{user}/available_balance', [
+			'uses'  => 'UserAvailableBalanceController@store',
+			'as'    => 'users.available_balance.store'
+		]);
 	});
 
 	Route::get('/leads', [

@@ -15,7 +15,7 @@ class CreateUserAvailableBalanceTransactionsTable extends Migration
     {
         Schema::create('user_available_balance_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-			$table->string('transaction_id', 32);
+			$table->string('transaction_id', 32)->unique();
             $table->decimal('amount', 12, 2);
             $table->text('notes');
 

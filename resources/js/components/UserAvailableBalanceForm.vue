@@ -11,12 +11,12 @@
                         <form method="post" @submit.prevent="submitForm">
                             <div class="mdl-card__supporting-text">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input type="number" step="0.01" id="amount" class="mdl-textfield__input" v-model="form.amount" >
+                                    <input type="number" step="0.01" id="amount" name="amount" class="mdl-textfield__input" v-model="form.amount" >
                                     <label class="mdl-textfield__label" for="amount">Amount</label>
                                     <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <textarea class="mdl-textfield__input" id="reason" v-model="form.reason"></textarea>
+                                    <textarea class="mdl-textfield__input" name="reason" id="reason" v-model="form.reason"></textarea>
                                     <label class="mdl-textfield__label" for="reason">Reason</label>
                                     <span class="mdl-textfield__error"></span>
                                 </div>
@@ -41,8 +41,14 @@
 </template>
 
 <script>
+
+    import axios from 'axios';
+    import { show_form_errors, clear_form_errors } from '../utils';
+
     export default {
         name: "UserAvailableBalanceForm",
+
+        props:['url-add-balance'],
 
         data() {
             return {
@@ -76,7 +82,16 @@
             },
 
             submitForm() {
+                let url = this.urlAddBalance;
 
+                axios.post(url, this.form)
+                    .then((response) => {
+                        console.log(response);
+                    }).catch((error) => {
+                    if (error.response && error.response.status === 422) {
+                        show_form_errors(this.$el.querySelector('form'), error.response.data.errors);
+                    }
+                });
             }
         }
     }

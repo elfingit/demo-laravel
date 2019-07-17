@@ -11,7 +11,7 @@
                 </span>
             </div>
         </div>
-        <UserAvailableBalanceForm ref="form"/>
+        <UserAvailableBalanceForm ref="form" :url-add-balance="urlStoreBalance"/>
     </div>
 </template>
 
@@ -24,7 +24,7 @@
 
         components: { UserAvailableBalanceForm },
 
-        props: ['url-data'],
+        props: ['url-data', 'url-add-balance'],
 
         data() {
             return {
@@ -35,11 +35,14 @@
                         amount: 0
                     }
                 },
-                transactions: []
+                transactions: [],
+                urlStoreBalance: ''
             }
         },
 
         mounted() {
+
+            this.urlStoreBalance = this.urlAddBalance;
 
             let _self = this;
 

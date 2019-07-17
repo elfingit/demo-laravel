@@ -2593,7 +2593,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     UserAvailableBalanceForm: _UserAvailableBalanceForm__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['url-data'],
+  props: ['url-data', 'url-add-balance'],
   data: function data() {
     return {
       user: {
@@ -2603,10 +2603,13 @@ __webpack_require__.r(__webpack_exports__);
           amount: 0
         }
       },
-      transactions: []
+      transactions: [],
+      urlStoreBalance: ''
     };
   },
   mounted: function mounted() {
+    this.urlStoreBalance = this.urlAddBalance;
+
     var _self = this;
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.urlData).then(function (response) {
@@ -2633,6 +2636,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2675,8 +2682,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserAvailableBalanceForm",
+  props: ['url-add-balance'],
   data: function data() {
     return {
       form: {
@@ -2703,7 +2713,18 @@ __webpack_require__.r(__webpack_exports__);
       coverEl.style.display = 'none';
       coverEl.querySelector('.form-slot-container').style.left = '-150%';
     },
-    submitForm: function submitForm() {}
+    submitForm: function submitForm() {
+      var _this = this;
+
+      var url = this.urlAddBalance;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, this.form).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        if (error.response && error.response.status === 422) {
+          Object(_utils__WEBPACK_IMPORTED_MODULE_1__["show_form_errors"])(_this.$el.querySelector('form'), error.response.data.errors);
+        }
+      });
+    }
   }
 });
 
@@ -23274,7 +23295,10 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("UserAvailableBalanceForm", { ref: "form" })
+      _c("UserAvailableBalanceForm", {
+        ref: "form",
+        attrs: { "url-add-balance": _vm.urlStoreBalance }
+      })
     ],
     1
   )
@@ -23338,7 +23362,12 @@ var render = function() {
                           }
                         ],
                         staticClass: "mdl-textfield__input",
-                        attrs: { type: "number", step: "0.01", id: "amount" },
+                        attrs: {
+                          type: "number",
+                          step: "0.01",
+                          id: "amount",
+                          name: "amount"
+                        },
                         domProps: { value: _vm.form.amount },
                         on: {
                           input: function($event) {
@@ -23380,7 +23409,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "mdl-textfield__input",
-                        attrs: { id: "reason" },
+                        attrs: { name: "reason", id: "reason" },
                         domProps: { value: _vm.form.reason },
                         on: {
                           input: function($event) {
@@ -36564,6 +36593,11 @@ var show_form_errors = function show_form_errors(form, errors) {
   _.map(errors, function (message, field) {
     var msg = message[0];
     var inputEl = form.querySelector('input[name="' + field + '"]');
+
+    if (!inputEl) {
+      inputEl = form.querySelector('textarea[name="' + field + '"]');
+    }
+
     var fieldContainer = inputEl.parentElement;
     fieldContainer.classList.add('is-invalid');
     fieldContainer.querySelector('span.mdl-textfield__error').textContent = msg;

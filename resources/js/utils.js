@@ -26,6 +26,10 @@ const show_form_errors = (form, errors) => {
 
         let inputEl = form.querySelector('input[name="' + field + '"]');
 
+        if (!inputEl) {
+            inputEl = form.querySelector('textarea[name="' + field + '"]');
+        }
+
         let fieldContainer = inputEl.parentElement;
         fieldContainer.classList.add('is-invalid');
 
