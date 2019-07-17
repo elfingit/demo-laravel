@@ -26,12 +26,19 @@ class UserAvailableBalanceController extends Controller
 
     public function store(UserAvailableBalanceStoreRequest $request, UserModel $user)
     {
-		$user = \UserAvailableBalance::add(
+	    $transaction = \UserAvailableBalance::add(
 			$request->get('amount'),
 			$request->get('reason') . ' | Added by ' . \Auth::user()->id .'<'.\Auth::user()->email.'>',
 			$user
 			);
 
-		return new UserResource($user);
+	    $user->refresh();
+
+		return response()->json([
+			'data' => [
+				'amount'    => $user->available_balance->amount,
+				'transaction' => $transaction
+			]
+		]);
     }
 }

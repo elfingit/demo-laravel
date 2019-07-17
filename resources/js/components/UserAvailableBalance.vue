@@ -11,6 +11,7 @@
                 </span>
             </div>
             <div class="mdl-card__supporting-text">
+                <template v-if="user.balance.transactions.length > 0">
                 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                     <thead>
                     <tr>
@@ -31,20 +32,25 @@
                     </tr>
                     </tbody>
                 </table>
+                </template>
+                <template v-else>
+                    <Loader/>
+                </template>
             </div>
         </div>
-        <UserAvailableBalanceForm ref="form" :url-add-balance="urlStoreBalance"/>
+        <UserAvailableBalanceForm ref="form" @balanceAdded="newBalance" :url-add-balance="urlStoreBalance"/>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
     import UserAvailableBalanceForm from './UserAvailableBalanceForm';
+    import Loader from './Loader';
 
     export default {
         name: "UserAvailableBalance",
 
-        components: { UserAvailableBalanceForm },
+        components: { UserAvailableBalanceForm, Loader },
 
         props: ['url-data', 'url-add-balance'],
 
@@ -79,6 +85,11 @@
         methods: {
             showForm() {
                 this.$refs.form.showForm();
+            },
+
+            newBalance(data) {
+                this.user.balance.amount = data.amount;
+                this.user.balance.transactions.push(data.transaction);
             }
         }
     }

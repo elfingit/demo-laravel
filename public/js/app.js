@@ -2569,6 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _UserAvailableBalanceForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserAvailableBalanceForm */ "./resources/js/components/UserAvailableBalanceForm.vue");
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
 //
 //
 //
@@ -2608,12 +2609,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserAvailableBalance",
   components: {
-    UserAvailableBalanceForm: _UserAvailableBalanceForm__WEBPACK_IMPORTED_MODULE_1__["default"]
+    UserAvailableBalanceForm: _UserAvailableBalanceForm__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Loader: _Loader__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ['url-data', 'url-add-balance'],
   data: function data() {
@@ -2643,6 +2651,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showForm: function showForm() {
       this.$refs.form.showForm();
+    },
+    newBalance: function newBalance(data) {
+      this.user.balance.amount = data.amount;
+      this.user.balance.transactions.push(data.transaction);
     }
   }
 });
@@ -2739,8 +2751,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var url = this.urlAddBalance;
+
+      var _self = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, this.form).then(function (response) {
-        console.log(response);
+        _self.$emit('balanceAdded', response.data.data);
+
+        _self.hideForm();
       })["catch"](function (error) {
         if (error.response && error.response.status === 422) {
           Object(_utils__WEBPACK_IMPORTED_MODULE_1__["show_form_errors"])(_this.$el.querySelector('form'), error.response.data.errors);
@@ -23316,38 +23333,55 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "mdl-card__supporting-text" }, [
-          _c(
-            "table",
-            { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.user.balance.transactions, function(transaction) {
-                  return _c("tr", { key: transaction.id }, [
-                    _c("td", [_vm._v(_vm._s(transaction.transaction_id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(transaction.amount))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(transaction.notes))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(transaction.created_at))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(transaction.updated_at))])
-                  ])
-                }),
-                0
-              )
-            ]
-          )
-        ])
+        _c(
+          "div",
+          { staticClass: "mdl-card__supporting-text" },
+          [
+            _vm.user.balance.transactions.length > 0
+              ? [
+                  _c(
+                    "table",
+                    {
+                      staticClass:
+                        "mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+                    },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.user.balance.transactions, function(
+                          transaction
+                        ) {
+                          return _c("tr", { key: transaction.id }, [
+                            _c("td", [
+                              _vm._v(_vm._s(transaction.transaction_id))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(transaction.amount))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(transaction.notes))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(transaction.created_at))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(transaction.updated_at))])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]
+              : [_c("Loader")]
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("UserAvailableBalanceForm", {
         ref: "form",
-        attrs: { "url-add-balance": _vm.urlStoreBalance }
+        attrs: { "url-add-balance": _vm.urlStoreBalance },
+        on: { balanceAdded: _vm.newBalance }
       })
     ],
     1

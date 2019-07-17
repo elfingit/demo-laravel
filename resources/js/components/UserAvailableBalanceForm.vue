@@ -83,10 +83,12 @@
 
             submitForm() {
                 let url = this.urlAddBalance;
+                let _self = this;
 
                 axios.post(url, this.form)
                     .then((response) => {
-                        console.log(response);
+                        _self.$emit('balanceAdded', response.data.data);
+                        _self.hideForm();
                     }).catch((error) => {
                     if (error.response && error.response.status === 422) {
                         show_form_errors(this.$el.querySelector('form'), error.response.data.errors);

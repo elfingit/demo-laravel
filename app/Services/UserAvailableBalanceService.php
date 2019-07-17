@@ -17,13 +17,15 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 {
 	public function add( $amount, $reason, UserModel $user )
 	{
+		$transaction = null;
+
 		if (is_null($user->available_balance)) {
-			$this->createBalance($amount, $reason, $user);
+			$transaction = $this->createBalance($amount, $reason, $user);
 		} else {
 			$this->updateBalance($amount, $reason, $user);
 		}
 
-		return $user;
+		return $transaction;
 
 	}
 
@@ -49,5 +51,7 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 		$model->transactions()->save($transaction);
 
 		\DB::commit();
+
+		return $transaction;
 	}
 }
