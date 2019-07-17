@@ -32,6 +32,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 	Route::group(['prefix' => 'crm_api', 'as' => 'crm_api.'], function () {
 		Route::resource('brands.brand_prices', 'BrandPriceController')
 			->except(['create', 'show', 'edit']);
+
+		Route::get('/users/{user}/available_balance', [
+			'uses'  => 'UserAvailableBalanceController@index',
+			'as'    => 'users.available_balance.index'
+		]);
 	});
 
 	Route::get('/leads', [
@@ -40,5 +45,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 	]);
 
 	Route::resource('users', 'UserController');
+
+	Route::get('/users/{user}/available_balance/show', [
+		'uses'  => 'UserAvailableBalanceController@show',
+		'as'    => 'users.available_balance.show'
+	]);
 });
 

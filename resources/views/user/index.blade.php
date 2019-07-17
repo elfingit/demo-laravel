@@ -65,6 +65,10 @@
                 <div class="mdl-tooltip" data-mdl-for="edit">
                     Edit user data
                 </div>
+                <a href="{{ route('dashboard.users.available_balance.show', ['user' => $user->id]) }}" id="balance"><i class="material-icons" role="presentation">payment</i></a>
+                <div class="mdl-tooltip" data-mdl-for="balance">
+                    User balance
+                </div>
             </td>
         </tr>
         @endforeach

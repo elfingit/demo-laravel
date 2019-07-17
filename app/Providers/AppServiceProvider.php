@@ -15,9 +15,11 @@ use App\Services\Contracts\BrandPriceServiceContract;
 use App\Services\Contracts\BrandResultContract;
 use App\Services\Contracts\BrandServiceContract;
 use App\Services\Contracts\LeadServiceContract;
+use App\Services\Contracts\UserAvailableBalanceServiceContract;
 use App\Services\Contracts\UserRoleServiceContract;
 use App\Services\Contracts\UserServiceContract;
 use App\Services\LeadService;
+use App\Services\UserAvailableBalanceService;
 use App\Services\UserRoleService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
@@ -56,5 +58,6 @@ class AppServiceProvider extends ServiceProvider
     	$this->app->bind(LeadServiceContract::class, LeadService::class);
     	$this->app->bind(UserServiceContract::class, UserService::class);
     	$this->app->bind(UserRoleServiceContract::class, UserRoleService::class);
+    	$this->app->bind(UserAvailableBalanceServiceContract::class, UserAvailableBalanceService::class);
     }
 }
