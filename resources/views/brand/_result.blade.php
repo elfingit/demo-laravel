@@ -5,5 +5,7 @@
 </ul>
 <span class="extra_ball">{{ $result->results->extra_ball }}</span>
 <div class="additional_game">
+    @if($result->results->additional_games->megaplier)
     <span class="label">{{ __('Megaplier') }}:<i>{{ $result->results->additional_games->megaplier }}</i></span>
+    @endif
 </div>
