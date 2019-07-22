@@ -29,6 +29,7 @@ class Brand extends Model
 
 	public function checkDates()
 	{
-		return $this->hasMany(BrandCheckDate::class, 'brand_id', 'id');
+		return $this->hasMany(BrandCheckDate::class, 'brand_id', 'id')
+            ->orderBy('next_check_date', 'ASC');
 	}
 }
