@@ -32,7 +32,7 @@ class BrandResource extends JsonResource
 	        'participation' => $this->participation,
 	        'extra_game' => $this->extra_game,
 	        'tickets_count' => $this->tickets_count,
-	        'check_dates'   => $this->checkDates
+	        'check_dates'   => BrandCheckDateResource::collection($this->checkDates)
         ];
     }
 }
