@@ -14,13 +14,13 @@ class BrandResource extends JsonResource
      */
     public function toArray($request)
     {
-        $prices = [[
+        $price = [[
             'combination_price' => 0,
             'number_shield_price' => 0
         ]];
 
         if ($this->prices) {
-            $price = BrandPriceResource::collection($this->prices)
+            $price = BrandPriceResource::collection($this->prices);
         }
 
         return [
@@ -42,7 +42,7 @@ class BrandResource extends JsonResource
 	        'extra_game' => $this->extra_game,
 	        'tickets_count' => $this->tickets_count,
 	        'check_dates'   => BrandCheckDateResource::collection($this->checkDates),
-            'price'         => $prices
+            'price'         => $price
         ];
     }
 }
