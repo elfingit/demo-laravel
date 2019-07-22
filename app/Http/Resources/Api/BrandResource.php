@@ -31,7 +31,8 @@ class BrandResource extends JsonResource
 			'jackpot_hut' => $this->jackpot_hut,
 	        'participation' => $this->participation,
 	        'extra_game' => $this->extra_game,
-	        'tickets_count' => $this->tickets_count
+	        'tickets_count' => $this->tickets_count,
+	        'check_dates'   => $this->checkDates
         ];
     }
 }
