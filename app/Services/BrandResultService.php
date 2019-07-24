@@ -23,6 +23,10 @@ class BrandResultService implements BrandResultContract
 			throw new BrandResultExistsException('Result already exists ' . $brand->id . '|' . $data->date );
 		}
 
+		if (!isset($data->additional_games)) {
+			$data->additional_games = 'unknown';
+		}
+
 		$brandResult = new BrandResultModel([
 			'draw_date' => $data->date,
 			'results' => [
