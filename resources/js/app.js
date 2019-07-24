@@ -26,6 +26,7 @@ Vue.component('game-date-draw-picker', require('./components/GameDateDrawPicker'
 Vue.component('filters-reset-button', require('./components/FiltersResetButton').default);
 Vue.component('select-box', require('./components/SelectBox').default);
 Vue.component('user-available-balance', require('./components/UserAvailableBalance').default);
+Vue.component('brand-extra-games', require('./components/BrandExtraGames').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
