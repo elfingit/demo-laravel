@@ -24,7 +24,7 @@ class BrandResultService implements BrandResultContract
 		}
 
 		if (!isset($data->additional_games)) {
-			$data->additional_games = 'unknown';
+			$data->additional_games = [];
 		}
 
 		$brandResult = new BrandResultModel([
