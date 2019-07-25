@@ -28,4 +28,11 @@ class BrandExtraGameController extends Controller
 
 	    return new BrandExtraGameResource($extraGame);
     }
+
+    public function destroy(BrandModel $brand, BrandExtraGameModel $extra_game)
+    {
+	    \BrandExtraGame::delete($extra_game);
+
+
+    }
 }

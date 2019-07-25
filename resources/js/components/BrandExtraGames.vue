@@ -1,7 +1,7 @@
 <template>
     <div>
         <BrandExtraGameItem @editGame="editGame" @deleteGame="deleteGame" :games="games" />
-        <BrandExtraGameForm :brand_id="brand_id" ref="gameForm"/>
+        <BrandExtraGameForm :brand_id="brand_id" ref="gameForm" @gameCreated="gameCreated" @gameUpdated="gameUpdated"/>
     </div>
 </template>
 
@@ -44,27 +44,28 @@
                 this.$refs.gameForm.edit(game)
             },
 
-            priceCreated(price) {
-                this.prices.push(price)
+            gameCreated(game) {
+                this.games.push(game);
             },
 
-            priceUpdated(price) {
-                let key = _.findIndex(this.prices, { id: price.id });
+            gameUpdated(game) {
+
+                let key = _.findIndex(this.games, { id: game.id });
 
                 if (key > -1) {
-                    this.prices.splice(key, 1, price);
+                    this.games.splice(key, 1, game);
                 }
             },
 
-            deletePrice(price) {
-                let url = url_builder(BRAND_PRICE_URL_PREFIX, this.brand_id, ('/brand_prices/' + price.id));
+            deleteGame(game) {
+                let url = url_builder(BRAND_URL_PREFIX, this.brand_id, ('/extra_games/' + game.id));
 
                 axios.delete(url)
                     .then(() => {
-                        let key = _.findIndex(this.prices, { id: price.id });
+                        let key = _.findIndex(this.games, { id: game.id });
 
                         if (key > -1) {
-                            this.prices.splice(key, 1);
+                            this.games.splice(key, 1);
                         }
                     })
                     .catch((e) => {

@@ -1860,7 +1860,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.showForm();
     },
     postSuccess: function postSuccess(data) {
-      var eventName = this.price_id > 0 ? 'gameUpdated' : 'gameCreated';
+      var eventName = this.game_id > 0 ? 'gameUpdated' : 'gameCreated';
       this.$emit(eventName, data.data.data);
       this.clearFormData();
       this.hideForm();
@@ -1876,6 +1876,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.form.game_name = '';
       this.form.game_price = 0;
       this.form.currency = 'EUR';
+      this.game_id = 0;
     }
   }
 });
@@ -1992,29 +1993,29 @@ __webpack_require__.r(__webpack_exports__);
     editGame: function editGame(game) {
       this.$refs.gameForm.edit(game);
     },
-    priceCreated: function priceCreated(price) {
-      this.prices.push(price);
+    gameCreated: function gameCreated(game) {
+      this.games.push(game);
     },
-    priceUpdated: function priceUpdated(price) {
-      var key = _.findIndex(this.prices, {
-        id: price.id
+    gameUpdated: function gameUpdated(game) {
+      var key = _.findIndex(this.games, {
+        id: game.id
       });
 
       if (key > -1) {
-        this.prices.splice(key, 1, price);
+        this.games.splice(key, 1, game);
       }
     },
-    deletePrice: function deletePrice(price) {
+    deleteGame: function deleteGame(game) {
       var _this2 = this;
 
-      var url = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["url_builder"])(BRAND_PRICE_URL_PREFIX, this.brand_id, '/brand_prices/' + price.id);
+      var url = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_2__["BRAND_URL_PREFIX"], this.brand_id, '/extra_games/' + game.id);
       axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"](url).then(function () {
-        var key = _.findIndex(_this2.prices, {
-          id: price.id
+        var key = _.findIndex(_this2.games, {
+          id: game.id
         });
 
         if (key > -1) {
-          _this2.prices.splice(key, 1);
+          _this2.games.splice(key, 1);
         }
       })["catch"](function (e) {
         alert('Something went wrong: ' + e.message);
@@ -23084,7 +23085,8 @@ var render = function() {
       _vm._v(" "),
       _c("BrandExtraGameForm", {
         ref: "gameForm",
-        attrs: { brand_id: _vm.brand_id }
+        attrs: { brand_id: _vm.brand_id },
+        on: { gameCreated: _vm.gameCreated, gameUpdated: _vm.gameUpdated }
       })
     ],
     1

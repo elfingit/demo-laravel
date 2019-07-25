@@ -139,7 +139,7 @@
 
             postSuccess(data) {
 
-                let eventName = this.price_id > 0 ? 'gameUpdated' : 'gameCreated';
+                let eventName = this.game_id > 0 ? 'gameUpdated' : 'gameCreated';
                 this.$emit(eventName, data.data.data)
 
                 this.clearFormData()
@@ -160,6 +160,7 @@
                 this.form.game_name = '';
                 this.form.game_price = 0;
                 this.form.currency = 'EUR';
+                this.game_id = 0;
             }
         }
 

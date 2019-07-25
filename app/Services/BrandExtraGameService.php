@@ -39,4 +39,11 @@ class BrandExtraGameService implements BrandExtraGameServiceContract
 
 		return $extra_game;
 	}
+
+	public function delete( BrandExtraGameModel $extra_game )
+	{
+		$extra_game->delete();
+
+		return response('', 204);
+	}
 }
