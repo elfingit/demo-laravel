@@ -40,6 +40,7 @@ class BrandResource extends JsonResource
 			'jackpot_hut' => $this->jackpot_hut,
 	        'participation' => $this->participation,
 	        'extra_game' => $this->extra_game,
+	        'extra_game_type' => $this->extra_game_type,
 	        'tickets_count' => $this->tickets_count,
 	        'check_dates'   => BrandCheckDateResource::collection($this->checkDates),
             'price'         => $price,

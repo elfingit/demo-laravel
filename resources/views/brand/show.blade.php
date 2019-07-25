@@ -123,12 +123,20 @@
                             </span>
                             </div>
                             <div class="mdl-list__item">
-                            <span class="mdl-list__item-primary-content">
-                                <span><b>{{ __('Extra game') }}:</b></span>
-                            </span>
+                                <span class="mdl-list__item-primary-content">
+                                    <span><b>{{ __('Extra game') }}:</b></span>
+                                </span>
                                 <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $brand->extra_game  ? 'Yes' : 'No'}}</span>
-                            </span>
+                                    <span class="mdl-list__item-text-body">{{ $brand->extra_game  ? 'Yes' : 'No'}}</span>
+                                </span>
+                            </div>
+                            <div class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <span><b>{{ __('Extra game type') }}:</b></span>
+                                </span>
+                                <span class="mdl-list__item-secondary-content">
+                                    <span class="mdl-list__item-text-body">{{ $brand->extra_game_type }}</span>
+                                </span>
                             </div>
                         </div>
                     </div>

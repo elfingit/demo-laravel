@@ -36,7 +36,8 @@ class BrandStoreRequest extends AbstractRequest
 		    'hours.*'   => 'required|numeric|min:0|max:23',
             'minutes' => 'required|array',
 		    'minutes.*'   => 'required|numeric|min:0|max:59',
-		    'period'    => 'required|in:1,2'
+		    'period'    => 'required|in:1,2',
+		    'extra_game_type' => 'required|in:base,per_ticket'
         ];
     }
 }

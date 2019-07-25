@@ -139,6 +139,16 @@
                             <span class="mdl-checkbox__label">{{ __('Extra game') }}</span>
                         </label>
                     </div>
+                    <div class="mdl-textfield mdl-js-textfield @error('extra_game_type') is-invalid @enderror">
+                        <select name="extra_game_type" id="extra_game_type">
+                            <option value="base" @if($brand->extra_game_type == 'base') selected @endif>Base</option>
+                            <option value="per_ticket" @if($brand->extra_game_type == 'per_ticket') selected @endif>Per ticket</option>
+                        </select>
+                        <label for="extra_game_type">{{ __('Extra game type') }}</label>
+                        @error('extra_game_type')
+                        <span class="mdl-textfield__error">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="jackpot_multiplier">
                             <input type="checkbox" value="1" class="mdl-checkbox__input" name="jackpot_multiplier" id="jackpot_multiplier" {{ $brand->jackpot_multiplier ? 'checked' : '' }}>

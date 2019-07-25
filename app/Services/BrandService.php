@@ -23,7 +23,7 @@ class BrandService implements BrandServiceContract
 		'primary_pool', 'primary_pool_combination', 'special_pool',
 		'special_pool_combination', 'name_of_special_pool', 'duration',
 		'subscription', 'jackpot_hut', 'participation', 'extra_game',
-		'tickets_count'
+		'tickets_count', 'extra_game_type'
 	];
 
 	public function store( FormRequest $request )
