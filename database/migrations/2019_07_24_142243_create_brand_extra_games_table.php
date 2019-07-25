@@ -15,7 +15,20 @@ class CreateBrandExtraGamesTable extends Migration
     {
         Schema::create('brand_extra_games', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->string('game_name');
+            $table->string('system_name');
+
+            $table->decimal('game_price');
+
+	        $table->unsignedBigInteger('brand_id');
+
             $table->timestamps();
+
+	        $table->foreign('brand_id')
+	              ->references('id')
+	              ->on('brands')
+	              ->onDelete('cascade');
         });
     }
 

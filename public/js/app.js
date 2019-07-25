@@ -1867,7 +1867,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     clearFormData: function clearFormData() {
-      this.form.game_name = 0;
+      this.form.game_name = '';
       this.form.game_price = 0;
       this.form.currency = 'EUR';
     }
@@ -22589,8 +22589,7 @@ var render = function() {
                         staticClass: "mdl-textfield__input",
                         attrs: {
                           name: "game_name",
-                          type: "number",
-                          step: "0.01",
+                          type: "text",
                           id: "game_name"
                         },
                         domProps: { value: _vm.form.game_name },

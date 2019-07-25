@@ -11,7 +11,7 @@
                         <form method="post" @submit.prevent="submitForm">
                             <div class="mdl-card__supporting-text">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" name="game_name" v-model="form.game_name" type="number" step="0.01" id="game_name">
+                                    <input class="mdl-textfield__input" name="game_name" v-model="form.game_name" type="text" id="game_name">
                                     <label class="mdl-textfield__label" for="game_name">Game name</label>
                                     <span class="mdl-textfield__error"></span>
                                 </div>
@@ -149,7 +149,7 @@
             },
 
             clearFormData() {
-                this.form.game_name = 0;
+                this.form.game_name = '';
                 this.form.game_price = 0;
                 this.form.currency = 'EUR';
             }

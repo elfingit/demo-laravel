@@ -232,6 +232,7 @@ return [
 
         'Brand' => \App\Facades\BrandFacade::class,
 	    'BrandPrice'        => \App\Facades\BrandPriceFacade::class,
+	    'BrandExtraGame'    => \App\Facades\BrandExtraGameFacade::class,
 	    'BrandCheckDate'    => \App\Facades\BrandCheckDateFacade::class,
 		'BrandResult'       => \App\Facades\BrandResultFacade::class,
 	    'Lead'              => \App\Facades\LeadFacade::class,
