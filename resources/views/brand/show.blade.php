@@ -152,7 +152,7 @@
                         <h2 class="mdl-card__title-text">{{ __('Extra games') }}</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        <brand-extra-games />
+                        <brand-extra-games brand_id="{{ $brand->id }}" />
                     </div>
                 </div>
             </div>

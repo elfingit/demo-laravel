@@ -53,7 +53,7 @@
 </template>
 
 <script>
-    import { url_builder, BRAND_PRICE_URL_PREFIX, show_form_errors, clear_form_errors } from '../utils';
+    import { url_builder, BRAND_URL_PREFIX, show_form_errors, clear_form_errors } from '../utils';
     import axios from 'axios';
 
     export default {
@@ -113,12 +113,12 @@
                 let url = '';
 
                 if (this.price_id === 0) {
-                    url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices');
+                    url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/brand_prices');
                     axios.post(url, this.form)
                         .then(this.postSuccess)
                         .catch(this.postError)
                 } else if (this.price_id > 0) {
-                    url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices/' + this.price_id);
+                    url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/brand_prices/' + this.price_id);
                     axios.put(url, this.form)
                         .then(this.postSuccess)
                         .catch(this.postError)

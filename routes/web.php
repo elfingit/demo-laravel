@@ -33,6 +33,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 		Route::resource('brands.brand_prices', 'BrandPriceController')
 			->except(['create', 'show', 'edit']);
 
+		Route::resource('brands.extra_games', 'BrandExtraGameController')
+		     ->except(['create', 'show', 'edit']);
+
 		Route::get('/users/{user}/available_balance', [
 			'uses'  => 'UserAvailableBalanceController@index',
 			'as'    => 'users.available_balance.index'

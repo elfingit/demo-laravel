@@ -1,6 +1,6 @@
 <template>
     <div>
-    <BrandExtraGameForm/>
+    <BrandExtraGameForm :brand_id="brand_id"/>
     </div>
 </template>
 
@@ -11,7 +11,9 @@
     export default {
         name: "BrandExtraGames",
 
-        components: {BrandExtraGameForm}
+        components: {BrandExtraGameForm},
+
+        props: ['brand_id'],
     }
 </script>
 

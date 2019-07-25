@@ -6,7 +6,7 @@
                 <div class="form-slot-container">
                     <div class="mdl-card">
                         <div class="mdl-card__title">
-                            <h3 class="mdl-card__title--text">Add price</h3>
+                            <h3 class="mdl-card__title--text">Add extra game</h3>
                         </div>
                         <form method="post" @submit.prevent="submitForm">
                             <div class="mdl-card__supporting-text">
@@ -53,8 +53,14 @@
 </template>
 
 <script>
+
+    import { url_builder, BRAND_URL_PREFIX, show_form_errors, clear_form_errors } from '../utils';
+    import axios from "axios";
+
     export default {
         name: "BrandExtraGameForm",
+
+        props: ['brand_id'],
 
         data() {
             return {
@@ -62,8 +68,8 @@
                     game_name: '',
                     game_price: 0.0,
                     currency: 'EUR'
-
-                }
+                },
+                game_id: 0
             }
         },
 
@@ -99,6 +105,53 @@
                 let value = el.getAttribute('data-val');
 
                 this.form.currency = value;
+            },
+
+            async submitForm() {
+
+                console.log('hi');
+
+                clear_form_errors(this.$el.querySelector('form'));
+
+                let url = '';
+
+                if (this.game_id === 0) {
+                    url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/extra_games');
+                    axios.post(url, this.form)
+                        .then(this.postSuccess)
+                        .catch(this.postError)
+                } else if (this.game_id > 0) {
+                    url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/extra_games/' + this.price_id);
+                    axios.put(url, this.form)
+                        .then(this.postSuccess)
+                        .catch(this.postError)
+                }
+
+            },
+
+            postSuccess(data) {
+
+                let eventName = this.price_id > 0 ? 'gameUpdated' : 'gameCreated';
+                this.$emit(eventName, data.data.data)
+
+                this.clearFormData()
+
+                this.hideForm()
+            },
+
+            postError(data) {
+
+                this.clearFormData();
+
+                if (data.response && data.response.status === 422) {
+                    show_form_errors(this.$el.querySelector('form'), data.response.data.errors);
+                }
+            },
+
+            clearFormData() {
+                this.form.game_name = 0;
+                this.form.game_price = 0;
+                this.form.currency = 'EUR';
             }
         }
 

@@ -10,7 +10,7 @@
     import BrandPriceForm from './BrandPriceForm';
     import BrandPriceItem from './BrandPriceItem';
 
-    import { url_builder, BRAND_PRICE_URL_PREFIX } from '../utils';
+    import { url_builder, BRAND_URL_PREFIX } from '../utils';
 
     import _ from 'lodash';
 
@@ -29,7 +29,7 @@
 
         created() {
 
-            let url = url_builder(BRAND_PRICE_URL_PREFIX, this.$props.brand_id, '/brand_prices');
+            let url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/brand_prices');
 
             axios.get(url)
                 .then((response) => {
