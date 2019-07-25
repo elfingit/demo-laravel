@@ -15,9 +15,11 @@ class BrandExtraGameResource extends JsonResource
     public function toArray($request)
     {
         return [
+        	'id'        => $this->id,
         	'game_name' => $this->game_name,
 	        'game_price' => $this->game_price,
-	        'system_name'=> $this->system_name
+	        'system_name'=> $this->system_name,
+	        'currency'   => $this->currency
         ];
     }
 }

@@ -109,8 +109,6 @@
 
             async submitForm() {
 
-                console.log('hi');
-
                 clear_form_errors(this.$el.querySelector('form'));
 
                 let url = '';
@@ -121,12 +119,22 @@
                         .then(this.postSuccess)
                         .catch(this.postError)
                 } else if (this.game_id > 0) {
-                    url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/extra_games/' + this.price_id);
+                    url = url_builder(BRAND_URL_PREFIX, this.$props.brand_id, '/extra_games/' + this.game_id);
                     axios.put(url, this.form)
                         .then(this.postSuccess)
                         .catch(this.postError)
                 }
 
+            },
+
+            edit(game) {
+                this.form.game_name = game.game_name;
+                this.form.game_price = game.game_price;
+                this.form.currency = game.currency;
+
+                this.game_id = game.id;
+
+                this.showForm();
             },
 
             postSuccess(data) {

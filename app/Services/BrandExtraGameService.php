@@ -26,4 +26,17 @@ class BrandExtraGameService implements BrandExtraGameServiceContract
 
 		return $extraGame;
 	}
+
+	public function update( BrandExtraGameModel $extra_game, FormRequest $request )
+	{
+		$extra_game->game_name = $request->get('game_name');
+		$extra_game->game_price = $request->get('game_price');
+		$extra_game->currency = $request->get('currency');
+
+		$extra_game->system_name = \Str::slug($request->get('game_name'));
+
+		$extra_game->save();
+
+		return $extra_game;
+	}
 }

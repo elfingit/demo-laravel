@@ -1827,7 +1827,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('hi');
                 Object(_utils__WEBPACK_IMPORTED_MODULE_1__["clear_form_errors"])(this.$el.querySelector('form'));
                 url = '';
 
@@ -1835,11 +1834,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   url = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_1__["BRAND_URL_PREFIX"], this.$props.brand_id, '/extra_games');
                   axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(url, this.form).then(this.postSuccess)["catch"](this.postError);
                 } else if (this.game_id > 0) {
-                  url = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_1__["BRAND_URL_PREFIX"], this.$props.brand_id, '/extra_games/' + this.price_id);
+                  url = Object(_utils__WEBPACK_IMPORTED_MODULE_1__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_1__["BRAND_URL_PREFIX"], this.$props.brand_id, '/extra_games/' + this.game_id);
                   axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(url, this.form).then(this.postSuccess)["catch"](this.postError);
                 }
 
-              case 4:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -1853,6 +1852,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return submitForm;
     }(),
+    edit: function edit(game) {
+      this.form.game_name = game.game_name;
+      this.form.game_price = game.game_price;
+      this.form.currency = game.currency;
+      this.game_id = game.id;
+      this.showForm();
+    },
     postSuccess: function postSuccess(data) {
       var eventName = this.price_id > 0 ? 'gameUpdated' : 'gameCreated';
       this.$emit(eventName, data.data.data);
@@ -1876,6 +1882,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BrandExtraGameItem.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BrandExtraGameItem.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "BrandExtraGameItem",
+  props: ['games'],
+  components: {
+    Loader: _Loader__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    edit: function edit(game) {
+      this.$emit('editGame', game);
+    },
+    del: function del(game) {
+      this.$emit('deleteGame', game);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BrandExtraGames.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BrandExtraGames.vue?vue&type=script&lang=js& ***!
@@ -1886,6 +1950,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BrandExtraGameForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BrandExtraGameForm */ "./resources/js/components/BrandExtraGameForm.vue");
+/* harmony import */ var _BrandExtraGameItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BrandExtraGameItem */ "./resources/js/components/BrandExtraGameItem.vue");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+//
 //
 //
 //
@@ -1893,12 +1963,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BrandExtraGames",
   components: {
+    BrandExtraGameItem: _BrandExtraGameItem__WEBPACK_IMPORTED_MODULE_1__["default"],
     BrandExtraGameForm: _BrandExtraGameForm__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['brand_id']
+  props: ['brand_id'],
+  data: function data() {
+    return {
+      games: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var url = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_2__["BRAND_URL_PREFIX"], this.$props.brand_id, '/extra_games');
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(url).then(function (response) {
+      _this.games = response.data.data;
+    })["catch"](function (err) {
+      alert('Can\'t get brand extra games: ' + err.message);
+    });
+  },
+  methods: {
+    editGame: function editGame(game) {
+      this.$refs.gameForm.edit(game);
+    },
+    priceCreated: function priceCreated(price) {
+      this.prices.push(price);
+    },
+    priceUpdated: function priceUpdated(price) {
+      var key = _.findIndex(this.prices, {
+        id: price.id
+      });
+
+      if (key > -1) {
+        this.prices.splice(key, 1, price);
+      }
+    },
+    deletePrice: function deletePrice(price) {
+      var _this2 = this;
+
+      var url = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["url_builder"])(BRAND_PRICE_URL_PREFIX, this.brand_id, '/brand_prices/' + price.id);
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a["delete"](url).then(function () {
+        var key = _.findIndex(_this2.prices, {
+          id: price.id
+        });
+
+        if (key > -1) {
+          _this2.prices.splice(key, 1);
+        }
+      })["catch"](function (e) {
+        alert('Something went wrong: ' + e.message);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -22824,6 +22946,119 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "mdl-grid-cell mdl-grid-cell--12-col" },
+    [
+      _vm.games.length == 0
+        ? _c("Loader")
+        : _c(
+            "table",
+            { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v("# ID")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Price")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Currency")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Actions")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.games, function(game) {
+                  return _c("tr", { key: game.id }, [
+                    _c("td", [_vm._v(_vm._s(game.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(game.game_name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(game.game_price))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(game.currency))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.edit(game)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "i",
+                            {
+                              staticClass: "material-icons",
+                              attrs: { role: "presentation" }
+                            },
+                            [_vm._v("edit")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.del(game)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "i",
+                            {
+                              staticClass: "material-icons",
+                              attrs: { role: "presentation" }
+                            },
+                            [_vm._v("delete")]
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]
+          )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BrandExtraGames.vue?vue&type=template&id=46eaf3dd&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BrandExtraGames.vue?vue&type=template&id=46eaf3dd&scoped=true& ***!
@@ -22841,7 +23076,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("BrandExtraGameForm", { attrs: { brand_id: _vm.brand_id } })],
+    [
+      _c("BrandExtraGameItem", {
+        attrs: { games: _vm.games },
+        on: { editGame: _vm.editGame, deleteGame: _vm.deleteGame }
+      }),
+      _vm._v(" "),
+      _c("BrandExtraGameForm", {
+        ref: "gameForm",
+        attrs: { brand_id: _vm.brand_id }
+      })
+    ],
     1
   )
 }
@@ -36434,6 +36679,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameForm_vue_vue_type_template_id_2795142c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameForm_vue_vue_type_template_id_2795142c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BrandExtraGameItem.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/BrandExtraGameItem.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BrandExtraGameItem_vue_vue_type_template_id_162924b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true& */ "./resources/js/components/BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true&");
+/* harmony import */ var _BrandExtraGameItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BrandExtraGameItem.vue?vue&type=script&lang=js& */ "./resources/js/components/BrandExtraGameItem.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BrandExtraGameItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BrandExtraGameItem_vue_vue_type_template_id_162924b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BrandExtraGameItem_vue_vue_type_template_id_162924b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "162924b9",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BrandExtraGameItem.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/BrandExtraGameItem.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/BrandExtraGameItem.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BrandExtraGameItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BrandExtraGameItem.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameItem_vue_vue_type_template_id_162924b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BrandExtraGameItem.vue?vue&type=template&id=162924b9&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameItem_vue_vue_type_template_id_162924b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandExtraGameItem_vue_vue_type_template_id_162924b9_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
