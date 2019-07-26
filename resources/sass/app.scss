@@ -110,6 +110,16 @@
       }
     }
 
+      ul.result {
+          li {
+              float: left;
+              display: inline;
+              margin: 2px;
+              line-height: 2rem;
+              width: 2rem;
+          }
+      }
+
     .extra_ball {
       border-radius: 6rem;
       border: 1px solid #ff431a;
@@ -118,9 +128,8 @@
     }
 
     .additional_game {
-      height: 40px;
-      padding-top: 2rem;
       font-size: 1rem;
+        width: 50%;
     }
   }
 }

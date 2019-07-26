@@ -166,7 +166,7 @@
             </div>
             @endif
         @if($brand->results->count() > 0)
-        <div class="mdl-cell mdl-cell--8-col">
+        <div class="mdl-cell mdl-cell--12-col">
             <div class="mdl-card mdl-shadow--2dp table-container">
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">{{ __('Draw data') }}</h2>
@@ -185,7 +185,7 @@
                         @foreach ($brand->results as $result)
                         <tr>
                             <td>{{ $result->draw_date }}</td>
-                            <td>@include('brand._result', ['result' => $result])</td>
+                            <td>@include('brand._result_'.$brand->api_code, ['result' => $result])</td>
                             <td>{{ $result->created_at }}</td>
                             <td>{{ $result->updated_at }}</td>
                         </tr>

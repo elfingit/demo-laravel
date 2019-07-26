@@ -98,6 +98,14 @@
   width: 3rem;
 }
 
+.crm .table-container ul.result li {
+  float: left;
+  display: inline;
+  margin: 2px;
+  line-height: 2rem;
+  width: 2rem;
+}
+
 .crm .table-container .extra_ball {
   border-radius: 6rem;
   border: 1px solid #ff431a;
@@ -106,8 +114,7 @@
 }
 
 .crm .table-container .additional_game {
-  height: 40px;
-  padding-top: 2rem;
   font-size: 1rem;
+  width: 50%;
 }
 
