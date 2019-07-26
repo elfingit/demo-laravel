@@ -27,8 +27,13 @@ class BrandResultService implements BrandResultContract
 			$data->additional_games = [];
 		}
 
+        if (!isset($data->jack_pot)) {
+            $data->jack_pot = 0;
+        }
+
 		$brandResult = new BrandResultModel([
 			'draw_date' => $data->date,
+			'jack_pot'  => $data->jack_pot,
 			'results' => [
 				'main_result' => $data->main_result,
 				'extra_ball' => $data->extra_ball,
