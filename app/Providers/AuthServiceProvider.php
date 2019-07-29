@@ -36,7 +36,8 @@ class AuthServiceProvider extends ServiceProvider
 	        'brand_show'        => 'Get data of brand',
 	        'brand_results'     => 'Get brand results',
 	        'lead_create'       => 'Create lead',
-	        'lead_update'       => 'Update lead'
+	        'lead_update'       => 'Update lead',
+            'create_order'      => 'Create order'
         ]);
     }
 }

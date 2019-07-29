@@ -60,6 +60,12 @@ Route::namespace('Api')->group(function () {
 			'uses'  => 'LeadController@update',
 			'as'    => 'leads.update'
 		]);
+
+		Route::post('orders', [
+            'middleware'    => ['auth:api', 'client:create_order'],
+            'uses'  => 'OrderController@store',
+            'as'    => 'orders.create'
+        ]);
 	});
 });
 

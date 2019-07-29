@@ -246,6 +246,7 @@ return [
 	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
 	    'ApiBrand'      => \App\Facades\Api\BrandFacade::class,
 	    'ApiLead'       => \App\Facades\Api\LeadFacade::class,
+	    'ApiOrder'       => \App\Facades\Api\OrderFacade::class,
 
 
     ],
