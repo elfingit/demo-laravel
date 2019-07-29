@@ -239,6 +239,7 @@ return [
 	    'User'              => \App\Facades\UserFacade::class,
 	    'UserRole'          => \App\Facades\UserRoleFacade::class,
 	    'UserAvailableBalance'  => \App\Facades\UserAvailableBalanceFacade::class,
+        'Order'             => \App\Facades\OrderServiceFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 

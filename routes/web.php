@@ -58,5 +58,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 		'uses'  => 'UserAvailableBalanceController@show',
 		'as'    => 'users.available_balance.show'
 	]);
+
+	Route::resource('orders', 'OrderController')
+                ->except(['create', 'store']);
 });
 
