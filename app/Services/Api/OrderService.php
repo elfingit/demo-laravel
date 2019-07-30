@@ -9,6 +9,7 @@ namespace App\Services\Api;
 
 use App\Lib\Utils;
 use App\Model\Order as OrderModel;
+use App\Model\OrderTransaction;
 use App\Model\User as UserModel;
 use App\Model\Bet as BetModel;
 use App\Model\Brand as BrandModel;
@@ -23,18 +24,26 @@ class OrderService implements OrderServiceContract
 
         $orderPrice = $this->calculateOrderPrice($request->get('cart_items'));
 
-        $transaction = \UserAvailableBalance::charge($orderPrice, $user);
-
         $orderData['price'] = $orderPrice;
         $orderData['status'] = OrderModel::STATUS_NEW;
         $orderData['user_id'] = $user->id;
 
         \DB::beginTransaction();
         try {
-            $order = OrderModel::create($orderData);
 
+            $transaction = \UserAvailableBalance::charge($orderPrice, $user);
+
+            /** @var OrderModel $order */
+            $order = OrderModel::create($orderData);
             $transaction->notes = 'ORDER: ' . $order->id;
             $transaction->save();
+
+            (new OrderTransaction([
+                'order_id' => $order->id,
+                'transaction_id' => $transaction->id,
+                'balance_type' => 'available'
+            ]))->save();
+
 
             $this->makeBets($order, $request->get('cart_items'), $user);
 

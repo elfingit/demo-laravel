@@ -59,7 +59,7 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
             return $transaction;
         } else {
             \DB::rollBack();
-            \ApiLogger::warn('Insufficient user balance. ' . $user->id, 'UserAvailableBalanceService');
+            \ApiLogger::warn('Insufficient user balance. ' . $user->id, ['UserAvailableBalanceService']);
             throw new InsufficientAvailableBalanceException('Insufficient user balance.');
         }
     }
