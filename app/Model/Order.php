@@ -14,4 +14,9 @@ class Order extends Model
     const STATUS_CLOSED = 'closed';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function bets()
+    {
+        return $this->hasMany(Bet::class, 'order_id', 'id');
+    }
 }

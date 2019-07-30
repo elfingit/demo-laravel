@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
@@ -35,6 +36,6 @@ class Brand extends Model
 	public function checkDates()
 	{
 		return $this->hasMany(BrandCheckDate::class, 'brand_id', 'id')
-            ->orderBy('next_check_date', 'ASC');
+            ->orderBy('check_date', 'ASC');
 	}
 }

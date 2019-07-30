@@ -243,6 +243,8 @@ return [
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 
+        'ApiLogger'     => \App\Facades\Api\LoggerFacade::class,
+
 	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
 	    'ApiBrand'      => \App\Facades\Api\BrandFacade::class,
 	    'ApiLead'       => \App\Facades\Api\LeadFacade::class,

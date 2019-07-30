@@ -40,6 +40,7 @@ class CreateBetsTable extends Migration
 
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('order_id');
 
             $table->timestamps();
 
@@ -50,6 +51,11 @@ class CreateBetsTable extends Migration
             $table->foreign('user_id')
                     ->on('users')
                     ->references('id');
+
+            $table->foreign('order_id')
+                  ->on('orders')
+                  ->references('id');
+
         });
     }
 

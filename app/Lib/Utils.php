@@ -8,6 +8,7 @@
 
 namespace App\Lib;
 
+use App\Model\Brand as BrandModel;
 use App\Model\BrandCheckDate as BrandCheckDateModel;
 use Carbon\Carbon;
 
@@ -87,4 +88,36 @@ class Utils
 		}
 
 	}
+
+	public static function getDrawDate($checkDate, $period)
+    {
+        $today = Carbon::now();
+
+        if ($today->isAfter($checkDate)) {
+            return Utils::getNextDate($checkDate, $today, $period);
+        }
+
+        return $checkDate;
+    }
+
+	public static function calculateLine(BrandModel $brand, $line)
+    {
+        return $brand->prices[0]->combination_price;
+    }
+
+    public static function calculateNumberShield(BrandModel $brand)
+    {
+        return $brand->prices[0]->number_shield_price;
+    }
+
+    public static function calculateExtraGame(BrandModel $brand, $extra_game_name)
+    {
+        $game = $brand->extra_games()->scopeBySystemName($extra_game_name);
+
+        if (!$game) {
+            return 0.0;
+        }
+
+        return $game->game_price;
+    }
 }
