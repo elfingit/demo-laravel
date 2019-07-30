@@ -15,4 +15,11 @@ class Bet extends Model
     const STATUS_AUTH_PENDING = 'auth_pending';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'draw_date' => 'date',
+        'line'  => 'array',
+        'extra_balls'  => 'array',
+        'extra_games'  => 'array',
+    ];
 }

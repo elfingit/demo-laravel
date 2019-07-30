@@ -25,9 +25,19 @@ class OrderService implements OrderServiceContract
         $orderData['status'] = OrderModel::STATUS_NEW;
         $orderData['user_id'] = $user->id;
 
-        $order = OrderModel::create($orderData);
+        \DB::beginTransaction();
+        try {
+            $order = OrderModel::create($orderData);
 
-        $this->makeBets($order, $request->get('cart_items'));
+            $this->makeBets($order, $request->get('cart_items'), $user);
+
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            \ApiLogger::error($e->getMessage(), ['ApiOrderService']);
+
+            throw $e;
+        }
     }
 
     protected function makeBets(OrderModel $order, array $items, UserModel $user)
@@ -52,7 +62,7 @@ class OrderService implements OrderServiceContract
                 $betData = [
                     'line'  => $ticket['line'],
                     'extra_balls' => $ticket['special_pool'],
-                    'extra_games' => $item['extra_games'],
+                    'extra_games' => isset($item['extra_games']) ? $item['extra_games'] : [],
                     'ticket_number' => $ticket['number'],
                     'number_shield' => $ticket['is_protected'] == 1 ? true : false,
                     'price' => $price,
