@@ -14,4 +14,5 @@ use Illuminate\Http\Request;
 interface UserAvailableBalanceServiceContract
 {
 	public function add($amount, $reason, UserModel $user);
+	public function charge($amount, UserModel $user);
 }

@@ -12,6 +12,7 @@ use App\Model\User as UserModel;
 use App\Model\UserAvailableBalance as UserAvailableBalanceModel;
 use App\Model\UserAvailableBalanceTransaction as UserAvailableBalanceTransactionModel;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
+use App\Services\Exceptions\InsufficientAvailableBalanceException;
 
 class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 {
@@ -29,7 +30,41 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 
 	}
 
-	protected function updateBalance($amount, $reason, UserModel $user)
+    public function charge( $amount, UserModel $user )
+    {
+        if (is_null($user->available_balance)) {
+            \ApiLogger::warn('Insufficient user balance. ' . $user->id . '; Balance not exists',
+                'UserAvailableBalanceService');
+            throw new InsufficientAvailableBalanceException('Insufficient user balance.');
+        }
+
+        \DB::beginTransaction();
+        $user->available_balance->lockForUpdate();
+
+        if ($user->available_balance->amount >= $amount) {
+
+            $user->available_balance->amount = $user->available_balance->amount - $amount;
+            $user->available_balance->save();
+
+            $transaction = new UserAvailableBalanceTransactionModel([
+                'amount'    => -$amount,
+                'transaction_id' => \Str::random(4).'-'.\Str::random(),
+                'notes' => 'Order'
+            ]);
+
+
+            $user->available_balance->transactions()->save($transaction);
+
+            \DB::commit();
+            return $transaction;
+        } else {
+            \DB::rollBack();
+            \ApiLogger::warn('Insufficient user balance. ' . $user->id, 'UserAvailableBalanceService');
+            throw new InsufficientAvailableBalanceException('Insufficient user balance.');
+        }
+    }
+
+    protected function updateBalance($amount, $reason, UserModel $user)
 	{
 		\DB::beginTransaction();
 		$user->available_balance->lockForUpdate();
