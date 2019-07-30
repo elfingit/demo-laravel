@@ -20,6 +20,11 @@ class Order extends Model
         return $this->hasMany(Bet::class, 'order_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
     public function transaction()
     {
         return $this->hasOneThrough(

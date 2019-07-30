@@ -9,5 +9,5 @@ namespace App\Services\Contracts;
 
 interface OrderServiceContract
 {
-
+    public function list();
 }

@@ -14,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = \Order::list();
+        return view('order.index', compact('orders'));
     }
 
     /**
@@ -25,7 +26,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('order.show', compact('order'));
     }
 
     /**

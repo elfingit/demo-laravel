@@ -61,5 +61,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 
 	Route::resource('orders', 'OrderController')
                 ->except(['create', 'store']);
+
 });
 

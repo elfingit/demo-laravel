@@ -22,4 +22,9 @@ class Bet extends Model
         'extra_balls'  => 'array',
         'extra_games'  => 'array',
     ];
+
+    public function brand()
+    {
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
 }

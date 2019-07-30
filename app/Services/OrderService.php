@@ -7,9 +7,15 @@
  */
 namespace App\Services;
 
+use App\Model\Order as OrderModel;
 use App\Services\Contracts\OrderServiceContract;
 
 class OrderService implements OrderServiceContract
 {
-
+    public function list()
+    {
+        return OrderModel::query()
+                         ->orderBy('created_at', 'DESC')
+                         ->paginate(25);
+    }
 }

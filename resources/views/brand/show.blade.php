@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-            <div class="mdl-cell @if($brand->extra_game) mdl-cell--6-col @else mdl-cell--6-col @endif">
+            <div class="mdl-cell @if($brand->extra_game) mdl-cell--6-col @else mdl-cell--12-col @endif">
                 <div class="mdl-card mdl-shadow--2dp">
                     <div class="mdl-card__title">
                         <h2 class="mdl-card__title-text">{{ __('Prices') }}</h2>
