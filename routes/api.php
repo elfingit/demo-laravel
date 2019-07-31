@@ -33,8 +33,8 @@ Route::namespace('Api')->group(function () {
 
         Route::get('user/balance', [
             'middleware'    => ['auth:api', 'client:get_user_balance'],
-            'uses'  => 'OrderController@store',
-            'as'    => 'orders.create'
+            'uses'  => 'UserController@balance',
+            'as'    => 'user.balance'
         ]);
 
 		Route::get('brands', [
