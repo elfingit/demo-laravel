@@ -31,6 +31,12 @@ Route::namespace('Api')->group(function () {
 			'as'    => 'user.register'
 		]);
 
+        Route::get('user/balance', [
+            'middleware'    => ['auth:api', 'client:get_user_balance'],
+            'uses'  => 'OrderController@store',
+            'as'    => 'orders.create'
+        ]);
+
 		Route::get('brands', [
 			'middleware'    => 'client:brands_list',
 			'uses'  => 'BrandController@index',

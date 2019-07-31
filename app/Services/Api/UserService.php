@@ -8,9 +8,9 @@
 
 namespace App\Services\Api;
 
-use App\Model\User;
-use App\Model\UserProfile;
-use App\Model\UserRole;
+use App\Model\User as UserModel;
+use App\Model\UserProfile as UserProfileModel;
+use App\Model\UserRole as UserRoleModel;
 use App\Services\Api\Contracts\UserServiceContract;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,7 +19,7 @@ class UserService implements UserServiceContract
 {
 	public function create( FormRequest $request )
 	{
-		$role = UserRole::byName('user')->first();
+		$role = UserRoleModel::byName('user')->first();
 
 		$dateOfBirth = Carbon::parse(
 			$request->get('day_of_birth').'-'
@@ -27,7 +27,7 @@ class UserService implements UserServiceContract
 			.$request->get('year_of_birth')
 		);
 
-		$profile = new UserProfile([
+		$profile = new UserProfileModel([
 			'host'          => $request->get('host'),
 			'favicon'       => $request->get('favicon_url'),
 			'honorific'     => $request->get('honorific'),
@@ -37,7 +37,7 @@ class UserService implements UserServiceContract
 			'country'     => $request->get('country')
 		]);
 
-		$user = User::create([
+		$user = UserModel::create([
 			'email'         => $request->get('email'),
 			'password'      => \Hash::make($request->get('password')),
 			'user_role_id'  => $role->id
@@ -47,4 +47,13 @@ class UserService implements UserServiceContract
 
 		return $user;
 	}
+
+    public function getUserBalance( UserModel $user )
+    {
+        if ($user->available_balance) {
+            return $user->available_balance->amount;
+        }
+
+        return 0;
+    }
 }

@@ -8,9 +8,11 @@
 
 namespace App\Services\Api\Contracts;
 
+use App\Model\User as UserModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 interface UserServiceContract
 {
 	public function create(FormRequest $request);
+	public function getUserBalance(UserModel $user);
 }

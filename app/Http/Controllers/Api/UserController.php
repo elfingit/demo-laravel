@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateUserRequest;
 use App\Http\Resources\Api\UserResource;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -20,4 +21,13 @@ class UserController extends Controller
 
 		return UserResource::make($user);
 	}
+
+	public function balance(Request $request)
+    {
+        $balance = \ApiUser::getUserBalance($request->user());
+
+        return response()->json([
+            'balance' => $balance
+        ]);
+    }
 }
