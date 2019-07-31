@@ -7,7 +7,7 @@
                     <h2 class="mdl-card__title-text">{{ __('Order data') }} : {{ $order->id }}</h2>
                 </div>
                 <div class="mdl-card__supporting-text mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col">
+                    <div class="mdl-cell mdl-cell--6-col" style="position: relative;">
                         <div class="mdl-list">
                             <div class="mdl-list__item">
                                 <span class="mdl-list__item-primary-content">
@@ -27,19 +27,17 @@
                             </div>
                             <div class="mdl-list__item">
                                 <span class="mdl-list__item-primary-content">
-                                    <span><b>{{ __('Status') }}:</b></span>
-                                </span>
-                                    <span class="mdl-list__item-secondary-content">
-                                    <span class="mdl-list__item-text-body">{{ $order->status }}</span>
-                                </span>
-                            </div>
-                            <div class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
                                     <span><b>{{ __('Transaction') }}:</b></span>
                                 </span>
                                 <span class="mdl-list__item-secondary-content">
                                     <span class="mdl-list__item-text-body">{{ $order->transaction->transaction_id }}</span>
                                 </span>
+                            </div>
+                            <div class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <span><b>{{ __('Status') }}:</b></span>
+                                </span>
+                                <order-status status="{{ $order->status }}" />
                             </div>
                         </div>
                     </div>
