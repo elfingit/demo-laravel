@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\BetService;
 use App\Services\BrandCheckDateService;
 use App\Services\BrandDrawService;
 use App\Services\BrandExtraGameService;
@@ -9,6 +10,7 @@ use App\Services\BrandJackpotService;
 use App\Services\BrandPriceService;
 use App\Services\BrandResultService;
 use App\Services\BrandService;
+use App\Services\Contracts\BetServiceContract;
 use App\Services\Contracts\BrandCheckDateContract;
 use App\Services\Contracts\BrandDrawServiceContract;
 use App\Services\Contracts\BrandExtraGameServiceContract;
@@ -70,5 +72,8 @@ class AppServiceProvider extends ServiceProvider
 
     	//Order
         $this->app->bind(OrderServiceContract::class, OrderService::class);
+
+        //Bet
+        $this->app->bind(BetServiceContract::class, BetService::class);
     }
 }

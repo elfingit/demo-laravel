@@ -240,6 +240,7 @@ return [
 	    'UserRole'          => \App\Facades\UserRoleFacade::class,
 	    'UserAvailableBalance'  => \App\Facades\UserAvailableBalanceFacade::class,
         'Order'             => \App\Facades\OrderServiceFacade::class,
+        'Bet'             => \App\Facades\BetServiceFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 

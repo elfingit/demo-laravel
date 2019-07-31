@@ -7,6 +7,7 @@
  */
 namespace App\Services;
 
+use App\Events\OrderChangeStatusEvent;
 use App\Model\Order as OrderModel;
 use App\Services\Contracts\OrderServiceContract;
 
@@ -23,6 +24,8 @@ class OrderService implements OrderServiceContract
     {
         $order->status = $status;
         $order->save();
+
+        event(new OrderChangeStatusEvent($order));
 
         return $order;
     }
