@@ -77,7 +77,7 @@ class OrderService implements OrderServiceContract
 
                 $betData = [
                     'line'  => $ticket['line'],
-                    'extra_balls' => $ticket['special_pool'],
+                    'extra_balls' => isset($ticket['special_pool']) ? $ticket['special_pool'] : [],
                     'extra_games' => isset($item['extra_games']) ? $item['extra_games'] : [],
                     'ticket_number' => $ticket['number'],
                     'number_shield' => $ticket['is_protected'] == 1 ? true : false,
