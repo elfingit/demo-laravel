@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const BRAND_URL_PREFIX = '/dashboard/crm_api/brands/';
+const ORDER_URL_PREFIX = '/dashboard/crm_api/orders/';
 
 const url_builder = (prefix, path, params) => {
     return prefix + path + params
@@ -56,4 +57,4 @@ const clear_form_errors = (form) => {
     });
 }
 
-module.exports = { url_builder, BRAND_URL_PREFIX, show_form_errors, clear_form_errors };
+module.exports = { url_builder, BRAND_URL_PREFIX, ORDER_URL_PREFIX, show_form_errors, clear_form_errors };

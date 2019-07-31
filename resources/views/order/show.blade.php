@@ -37,7 +37,7 @@
                                 <span class="mdl-list__item-primary-content">
                                     <span><b>{{ __('Status') }}:</b></span>
                                 </span>
-                                <order-status status="{{ $order->status }}" />
+                                <order-status status="{{ $order->status }}" order-id="{{ $order->id }}" />
                             </div>
                         </div>
                     </div>

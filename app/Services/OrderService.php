@@ -18,4 +18,12 @@ class OrderService implements OrderServiceContract
                          ->orderBy('created_at', 'DESC')
                          ->paginate(25);
     }
+
+    public function changeStatus( $status, OrderModel $order )
+    {
+        $order->status = $status;
+        $order->save();
+
+        return $order;
+    }
 }

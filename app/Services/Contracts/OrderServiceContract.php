@@ -7,7 +7,10 @@
  */
 namespace App\Services\Contracts;
 
+use App\Model\Order as OrderModel;
+
 interface OrderServiceContract
 {
     public function list();
+    public function changeStatus($status, OrderModel $order);
 }
