@@ -21,11 +21,9 @@ class CreateOrdersTable extends Migration
 
             $table->decimal('price');
             $table->enum('status', [
-                \App\Model\Order::STATUS_NEW,
-                \App\Model\Order::STATUS_IN_PROGRESS,
-                \App\Model\Order::STATUS_CANCELLED,
                 \App\Model\Order::STATUS_PAID,
-                \App\Model\Order::STATUS_REFUND,
+                \App\Model\Order::STATUS_IN_PROGRESS,
+                \App\Model\Order::STATUS_PAYOUTS,
                 \App\Model\Order::STATUS_CLOSED
             ]);
 

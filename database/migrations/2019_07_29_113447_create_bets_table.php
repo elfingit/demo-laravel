@@ -14,28 +14,23 @@ class CreateBetsTable extends Migration
     public function up()
     {
         Schema::create('bets', function (Blueprint $table) {
+
             $table->bigIncrements('id');
-
-            $table->json('line');
-            $table->json('extra_balls')->nullable();
-            $table->json('extra_games')->nullable();
-
-            $table->unsignedSmallInteger('ticket_number');
-
-            $table->boolean('number_shield')->default(false);
-
             $table->date('draw_date');
 
             $table->decimal('price')->default(0.0);
 
             $table->enum('status', [
-                \App\Model\Bet::STATUS_PENDING,
                 \App\Model\Bet::STATUS_PAID,
+                \App\Model\Bet::STATUS_WAITING_DRAW,
                 \App\Model\Bet::STATUS_PLAYED,
+                \App\Model\Bet::STATUS_WIN,
                 \App\Model\Bet::STATUS_REFUND,
-                \App\Model\Bet::STATUS_CHARGE_BACK,
-                \App\Model\Bet::STATUS_CANCELLED,
                 \App\Model\Bet::STATUS_AUTH_PENDING,
+                \App\Model\Bet::STATUS_NOT_AUTH,
+                \App\Model\Bet::STATUS_PAYOUT_PENDING,
+                \App\Model\Bet::STATUS_PAYOUT,
+                \App\Model\Bet::STATUS_CLOSED
             ]);
 
             $table->unsignedBigInteger('brand_id');
