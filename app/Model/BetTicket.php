@@ -15,4 +15,6 @@ class BetTicket extends Model
         'extra_balls'  => 'array',
         'extra_games'  => 'array',
     ];
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

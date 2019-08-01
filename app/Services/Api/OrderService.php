@@ -8,6 +8,7 @@
 namespace App\Services\Api;
 
 use App\Lib\Utils;
+use App\Model\BetTicket as BetTicketModel;
 use App\Model\Order as OrderModel;
 use App\Model\OrderTransaction;
 use App\Model\User as UserModel;
@@ -25,7 +26,7 @@ class OrderService implements OrderServiceContract
         $orderPrice = $this->calculateOrderPrice($request->get('cart_items'));
 
         $orderData['price'] = $orderPrice;
-        $orderData['status'] = OrderModel::STATUS_NEW;
+        $orderData['status'] = OrderModel::STATUS_PAID;
         $orderData['user_id'] = $user->id;
 
         \DB::beginTransaction();
@@ -58,15 +59,43 @@ class OrderService implements OrderServiceContract
 
     protected function makeBets(OrderModel $order, array $items, UserModel $user)
     {
-        $bets = [];
-
         foreach ($items as $item) {
+
             $brand = \ApiBrand::getBrand( $item['brand_id'] );
 
             if ( ! $brand ) {
                 \ApiLogger::error( 'Brand not found ' . $item['brand_id'], ['ApiOrderService'] );
                 continue;
             }
+
+            $drawDate = $this->calculateDrawDates($item, $brand);
+            $betData = [
+                'price'     => 0.0,
+                'status'    => BetModel::STATUS_PAID,
+                'brand_id' => $brand->id,
+                'user_id'  => $user->id,
+                'order_id'  => $order->id
+            ];
+
+
+            if (is_array($drawDate)) {
+
+                foreach ($drawDate as $dDate) {
+                    $betData['draw_date'] = $dDate;
+                    $bet = BetModel::create($betData);
+
+                    $this->makeTickets($bet, $item, $brand, $user);
+                }
+
+            } else {
+                $betData['draw_date'] = $drawDate;
+                $bet = BetModel::create($betData);
+                $this->makeTickets($bet, $item, $brand, $user);
+            }
+
+            /*$bet = BetModel::create();
+
+            $betPrice = 0;
 
             foreach ($item['tickets'] as $ticket) {
                 $price = Utils::calculateLine($brand, $ticket);
@@ -87,7 +116,7 @@ class OrderService implements OrderServiceContract
                     'user_id'  => $user->id
                 ];
 
-                $drawDate = $this->calculateDrawDates($item, $brand);
+                //$drawDate = $this->calculateDrawDates($item, $brand);
 
                 if (is_array($drawDate)) {
 
@@ -100,27 +129,49 @@ class OrderService implements OrderServiceContract
                     $betData['draw_date'] = $drawDate;
                     $bets[] = new BetModel($betData);
                 }
-            }
+            }*/
         }
 
-        $order->bets()->saveMany($bets);
+        //$order->bets()->saveMany($bets);
+    }
+
+    protected function makeTickets($bet, $item, $brand, $user) {
+
+        $betPrice = 0;
+
+        foreach ($item['tickets'] as $ticket) {
+            $price = Utils::calculateLine($brand, $ticket);
+
+            if ($ticket['is_protected'] == 1) {
+                $price += Utils::calculateNumberShield($brand);
+            }
+
+            $ticketData = [
+                'line'  => $ticket['line'],
+                'extra_balls' => isset($ticket['special_pool']) ? $ticket['special_pool'] : [],
+                'extra_games' => isset($item['extra_games']) ? $item['extra_games'] : [],
+                'ticket_number' => $ticket['number'],
+                'number_shield' => $ticket['is_protected'] == 1 ? true : false,
+                'price' => $price,
+                'status' => BetTicketModel::STATUS_WAIT,
+                'brand_id' => $brand->id,
+                'user_id'  => $user->id,
+                'bet_id'    => $bet->id
+            ];
+
+            BetTicketModel::create($ticketData);
+
+            $betPrice += $price;
+
+        }
+
+        $bet->price = $betPrice;
+        $bet->save();
     }
 
     protected function calculateDrawDates($item, BrandModel $brand)
     {
         $check_dates = $brand->checkDates;
-
-        if ($item['draw_date'] == 0) {
-            $checkDate = $check_dates[0]->next_check_date;
-            $period = $check_dates[0]->period;
-            return Utils::getDrawDate($checkDate, $period);
-        }
-
-        if ($item['draw_date'] == 1) {
-            $checkDate = $check_dates[1]->next_check_date;
-            $period = $check_dates[1]->period;
-            return Utils::getDrawDate($checkDate, $period);
-        }
 
         if ($item['draw_date'] == 'both') {
             $dates = [];
@@ -134,6 +185,18 @@ class OrderService implements OrderServiceContract
             $dates[] = Utils::getDrawDate($checkDate, $period);
 
             return $dates;
+        }
+
+        if ($item['draw_date'] == 0) {
+            $checkDate = $check_dates[0]->next_check_date;
+            $period = $check_dates[0]->period;
+            return Utils::getDrawDate($checkDate, $period);
+        }
+
+        if ($item['draw_date'] == 1) {
+            $checkDate = $check_dates[1]->next_check_date;
+            $period = $check_dates[1]->period;
+            return Utils::getDrawDate($checkDate, $period);
         }
     }
 
