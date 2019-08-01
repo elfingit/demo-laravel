@@ -33,4 +33,14 @@ class Bet extends Model
     {
         return $this->hasMany(BetTicket::class, 'bet_id', 'id');
     }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'id', 'order_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

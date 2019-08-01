@@ -23,6 +23,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 	]);
 
 	Route::resource('brands', 'BrandController');
+    Route::resource('bets', 'BetController');
 
 	Route::get('/brands/{brand}/renew', [
 		'uses'  => 'BrandController@renew',
