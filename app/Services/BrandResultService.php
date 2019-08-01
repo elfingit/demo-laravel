@@ -8,6 +8,7 @@
 
 namespace App\Services;
 
+use App\Jobs\CalculateWinsJob;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandResult as BrandResultModel;
 use App\Services\Contracts\BrandResultContract;
@@ -42,6 +43,8 @@ class BrandResultService implements BrandResultContract
 		]);
 
 		$brand->results()->save($brandResult);
+
+        CalculateWinsJob::dispatch($brandResult);
 
 		return $brandResult;
 	}

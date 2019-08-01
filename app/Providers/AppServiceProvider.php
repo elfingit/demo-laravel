@@ -23,11 +23,13 @@ use App\Services\Contracts\OrderServiceContract;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
 use App\Services\Contracts\UserRoleServiceContract;
 use App\Services\Contracts\UserServiceContract;
+use App\Services\Contracts\WinningsServiceContract;
 use App\Services\LeadService;
 use App\Services\OrderService;
 use App\Services\UserAvailableBalanceService;
 use App\Services\UserRoleService;
 use App\Services\UserService;
+use App\Services\WinningsService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -75,5 +77,8 @@ class AppServiceProvider extends ServiceProvider
 
         //Bet
         $this->app->bind(BetServiceContract::class, BetService::class);
+
+        //Winnings
+        $this->app->bind(WinningsServiceContract::class, WinningsService::class);
     }
 }
