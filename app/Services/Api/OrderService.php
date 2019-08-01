@@ -92,47 +92,7 @@ class OrderService implements OrderServiceContract
                 $bet = BetModel::create($betData);
                 $this->makeTickets($bet, $item, $brand, $user);
             }
-
-            /*$bet = BetModel::create();
-
-            $betPrice = 0;
-
-            foreach ($item['tickets'] as $ticket) {
-                $price = Utils::calculateLine($brand, $ticket);
-
-                if ($ticket['is_protected'] == 1) {
-                    $price += Utils::calculateNumberShield($brand);
-                }
-
-                $betData = [
-                    'line'  => $ticket['line'],
-                    'extra_balls' => isset($ticket['special_pool']) ? $ticket['special_pool'] : [],
-                    'extra_games' => isset($item['extra_games']) ? $item['extra_games'] : [],
-                    'ticket_number' => $ticket['number'],
-                    'number_shield' => $ticket['is_protected'] == 1 ? true : false,
-                    'price' => $price,
-                    'status' => BetModel::STATUS_PENDING,
-                    'brand_id' => $brand->id,
-                    'user_id'  => $user->id
-                ];
-
-                //$drawDate = $this->calculateDrawDates($item, $brand);
-
-                if (is_array($drawDate)) {
-
-                    foreach ($drawDate as $dDate) {
-                        $betData['draw_date'] = $dDate;
-                        $bets[] = new BetModel($betData);
-                    }
-
-                } else {
-                    $betData['draw_date'] = $drawDate;
-                    $bets[] = new BetModel($betData);
-                }
-            }*/
         }
-
-        //$order->bets()->saveMany($bets);
     }
 
     protected function makeTickets($bet, $item, $brand, $user) {

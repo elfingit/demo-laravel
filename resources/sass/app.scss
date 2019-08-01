@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
+
 .login-page {
 
   margin-top: 2rem;
@@ -132,4 +134,75 @@
         width: 50%;
     }
   }
+    .pagination-container{
+        .pagination{
+
+            a {
+                text-decoration: none;
+            }
+
+            span{
+                height: 30px;
+                width: 30px;
+                color: rgba(0,0,0,.5);
+                transition: color 2s;
+                cursor: pointer;
+                display: inline-block;
+                line-height: 30px;
+            }
+            span.active{
+                background: #2196F3;
+                border-radius: 50%;
+                color: white;
+
+                a {
+                    color: #ffffff;
+                }
+            }
+            span.active:hover{
+                color: white;
+            }
+            span:hover{
+                color: rgba(0,0,0,1);
+                transition: color 2s;
+            }
+            span:first-child{
+                margin-left: 10px;
+            }
+            span:last-child{
+                margin-right: 10px;
+            }
+            font-size: 20px;
+            text-align: center;
+        }
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        bottom: 30px;
+        position: absolute;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #bet_search {
+        .mdl-textfield {
+            width: 17%;
+        }
+    }
+
+    .show-header {
+        -webkit-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.33);
+        -moz-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.33);
+        box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.33);
+        padding: 1rem;
+        font-size: 22px;
+
+        .item {
+            display: inline;
+            float: left;
+            margin: 1rem;
+        }
+    }
+
 }

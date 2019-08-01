@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\Bet as BetModel;
 use Illuminate\Http\Request;
 
 class BetController extends Controller
@@ -13,8 +14,10 @@ class BetController extends Controller
     public function index(Request $request)
     {
         $bets = \Bet::list($request);
+        $brands = \Brand::list(null);
+        $statuses = \Bet::getStatuses();
 
-        return view('bet.index', compact('bets'));
+        return view('bet.index', compact('bets', 'brands', 'statuses'));
     }
 
     /**
@@ -44,9 +47,9 @@ class BetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BetModel $bet)
     {
-        //
+        return view('bet.show', compact('bet'));
     }
 
     /**

@@ -2378,6 +2378,10 @@ __webpack_require__.r(__webpack_exports__);
       inputs.forEach(function (input) {
         input.value = '';
       });
+      var selects = form.querySelectorAll('select');
+      selects.forEach(function (select) {
+        select.value = '';
+      });
       form.submit();
     }
   }

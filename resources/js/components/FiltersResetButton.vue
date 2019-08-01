@@ -18,6 +18,12 @@
                     input.value = '';
                 });
 
+                let selects = form.querySelectorAll('select');
+
+                selects.forEach((select) => {
+                    select.value = '';
+                });
+
                 form.submit();
             }
 

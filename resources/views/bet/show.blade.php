@@ -1,35 +1,124 @@
-<div class="mdl-cell mdl-cell--12-col">
-    <h1>Bets</h1>
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-        <thead>
-        <tr>
-            <th># ID</th>
-            <th>Line</th>
-            <th>Extra balls</th>
-            <th>Extra games</th>
-            <th>Ticket number</th>
-            <th>Number shield</th>
-            <th>Draw date</th>
-            <th>Price</th>
-            <th>Status</th>
-            <th>Brand</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($order->bets as $bet)
-            <tr>
-                <td>{{ $bet->id }}</td>
-                <td>{{ implode(',', $bet->line) }}</td>
-                <td>{{ implode(',', $bet->extra_balls) }}</td>
-                <td>{{ implode(',', $bet->extra_games) }}</td>
-                <td>{{ $bet->ticket_number }}</td>
-                <td>{{ $bet->number_shield == true ? 'Yes' : 'No' }}</td>
-                <td>{{ $bet->draw_date->format('d-m-Y') }}</td>
-                <td>{{ $bet->price }}</td>
-                <td>{{ $bet->status }}</td>
-                <td>{{ $bet->brand->name }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>
+@extends('layouts.crm.dashboard')
+@section('crm_content')
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col show-header">
+            <div class="item">Draw bet: {{ $bet->id }}</div>
+            <div class="item">Status: {{ $bet->status }}</div>
+            <div class="item">Countdown</div>
+            <div class="item">Order
+                <a href="{{ route('dashboard.orders.show', ['order' => $bet->order_id]) }}">{{ $bet->order_id }}</a>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__supporting-text">
+                    <h3>Client</h3>
+                    <div class="mdl-list">
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('ID') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $bet->user_id }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Name') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $bet->user->profile->first_name }} {{ $bet->user->profile->last_name }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Email') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $bet->user->email }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Site') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $bet->user->profile->host }}</span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Current Deposit') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">{{ $bet->user->available_balance->amount }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__supporting-text">
+                    <h3>Bet Info</h3>
+                    <div class="mdl-list">
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Brand') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">
+                                    <a href="{{ route('dashboard.brands.show', ['brand' => $bet->brand_id]) }}">
+                                        {{ $bet->brand->name }}
+                                    </a>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Draw date') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">
+                                    {{ $bet->draw_date->format('d-m-Y') }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <h1>Tickets</h1>
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <thead>
+                <tr>
+                    <th># ID</th>
+                    <th>Line</th>
+                    <th>Extra balls</th>
+                    <th>Extra games</th>
+                    <th>Ticket number</th>
+                    <th>Number shield</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($bet->tickets as $ticket)
+                    <tr>
+                        <td>{{ $ticket->id }}</td>
+                        <td>{{ implode(',', $ticket->line) }}</td>
+                        <td>{{ implode(',', $ticket->extra_balls) }}</td>
+                        <td>{{ implode(',', $ticket->extra_games) }}</td>
+                        <td>{{ $ticket->ticket_number }}</td>
+                        <td>{{ $ticket->number_shield == true ? 'Yes' : 'No' }}</td>
+                        <td>{{ $ticket->price }}</td>
+                        <td>{{ $ticket->status }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection

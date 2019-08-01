@@ -14,4 +14,6 @@ interface BetServiceContract
     public function changeBetsStatus(Collection $bets, $status);
 
     public function list(Request $request);
+
+    public function getStatuses();
 }
