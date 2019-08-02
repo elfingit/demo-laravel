@@ -1714,6 +1714,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 //
 //
 //
@@ -1728,10 +1730,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 
 
 
@@ -1740,19 +1739,34 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Loader: _Loader__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['status', 'betId'],
+  props: ['status', 'betId', 'statuses'],
   data: function data() {
     return {
       currentStatus: null,
+      statuses_list: [],
       loading: false,
       disabled: false
     };
   },
   mounted: function mounted() {
     this.currentStatus = this.$props.status;
+    console.log(this.currentStatus);
+
+    var _self = this;
+
+    lodash__WEBPACK_IMPORTED_MODULE_3___default.a.forIn(this.$props.statuses, function (key, value) {
+      _self.statuses_list.push({
+        name: key,
+        value: value
+      });
+    });
   },
   methods: {
     onChange: function onChange() {
+      if (!this.currentStatus) {
+        return;
+      }
+
       this.disabled = true;
       this.loading = true;
       var url = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_2__["BET_URL_PREFIX"], '', this.$props.betId);
@@ -40448,7 +40462,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "status-selector" }, [
     _c("div", { staticClass: "dev-input" }, [
       _c("div", { staticClass: "select" }, [
         _vm.loading
@@ -40487,22 +40501,23 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { value: "new" } }, [_vm._v("New")]),
+            _c("option", [_vm._v("Select status")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "paid" } }, [_vm._v("Paid")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "cancelled" } }, [
-              _vm._v("Cancelled")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "in_progress" } }, [
-              _vm._v("In Progress")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "refund" } }, [_vm._v("Refund")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "closed" } }, [_vm._v("Closed")])
-          ]
+            _vm._l(_vm.statuses_list, function(status) {
+              return _c(
+                "option",
+                {
+                  key: status.value,
+                  domProps: {
+                    selected: status.value == _vm.currentStatus,
+                    value: status.value
+                  }
+                },
+                [_vm._v(_vm._s(status.name))]
+              )
+            })
+          ],
+          2
         )
       ])
     ])
@@ -55833,7 +55848,7 @@ var pad = function pad(num, size) {
 module.exports = {
   url_builder: url_builder,
   BRAND_URL_PREFIX: BRAND_URL_PREFIX,
-  ORDER_URL_PREFIX: ORDER_URL_PREFIX,
+  BET_URL_PREFIX: BET_URL_PREFIX,
   show_form_errors: show_form_errors,
   clear_form_errors: clear_form_errors,
   difference_date_string: difference_date_string

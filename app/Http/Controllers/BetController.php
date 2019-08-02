@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\UpdateBetRequest;
+use App\Http\Resources\BetResource;
 use App\Model\Bet as BetModel;
 use Illuminate\Http\Request;
 
@@ -67,12 +69,14 @@ class BetController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  BetModel  $bet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBetRequest $request, BetModel $bet)
     {
-        //
+        $bet = \Bet::changeBetStatus($bet, $request->get('status'));
+
+        return new BetResource($bet);
     }
 
     /**

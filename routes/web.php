@@ -46,6 +46,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 			'uses'  => 'UserAvailableBalanceController@store',
 			'as'    => 'users.available_balance.store'
 		]);
+
+		Route::put('/bets/{bet}', [
+		    'uses'  => 'BetController@update',
+		    'as'  => 'bet.update',
+        ]);
 	});
 
 	Route::get('/leads', [

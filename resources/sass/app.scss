@@ -202,7 +202,22 @@
             display: inline;
             float: left;
             margin: 1rem;
+            width: (100% / 5);
+        }
+
+        div.status {
+            .status-selector {
+                float: right;
+            }
+            span {
+                width: 20%;
+                font-size: 18px;
+                float: left;
+            }
+
+            select {
+                width: 130px;
+            }
         }
     }
-
 }

@@ -1,15 +1,11 @@
 <template>
-    <div>
+    <div class="status-selector">
         <div class="dev-input">
             <div class="select">
                 <div class="loader" v-if="loading"><Loader /></div>
                 <select v-model="currentStatus" :disabled="disabled" v-on:change="onChange">
-                    <option value="new">New</option>
-                    <option value="paid">Paid</option>
-                    <option value="cancelled">Cancelled</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="refund">Refund</option>
-                    <option value="closed">Closed</option>
+                    <option>Select status</option>
+                    <option v-for="status in statuses_list" :selected="status.value==currentStatus" :value="status.value" :key="status.value">{{ status.name }}</option>
                 </select>
             </div>
         </div>
@@ -20,15 +16,17 @@
     import Loader from "./Loader";
     import axios from "axios";
     import { BET_URL_PREFIX, url_builder } from "../utils";
+    import _ from "lodash";
 
     export default {
         name: "BetStatus",
         components: {Loader},
-        props: ['status', 'betId'],
+        props: ['status', 'betId', 'statuses'],
 
         data() {
             return {
                 currentStatus: null,
+                statuses_list: [],
                 loading: false,
                 disabled: false
             }
@@ -36,10 +34,25 @@
 
         mounted() {
             this.currentStatus = this.$props.status;
+            console.log(this.currentStatus);
+
+            let _self = this;
+
+            _.forIn(this.$props.statuses, (key, value) => {
+                _self.statuses_list.push({
+                    name: key,
+                    value: value
+                })
+            });
         },
 
         methods: {
             onChange() {
+
+                if (!this.currentStatus) {
+                    return;
+                }
+
                 this.disabled = true;
                 this.loading = true;
 

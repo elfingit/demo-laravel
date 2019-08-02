@@ -88,7 +88,7 @@ const pad = (num, size) => {
 module.exports = {
     url_builder,
     BRAND_URL_PREFIX,
-    ORDER_URL_PREFIX,
+    BET_URL_PREFIX,
     show_form_errors,
     clear_form_errors,
     difference_date_string

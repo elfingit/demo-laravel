@@ -6,12 +6,12 @@
  * Time: 17:47
  */
 namespace App\Services\Contracts;
+use App\Model\Bet as BetModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 interface BetServiceContract
 {
-    public function changeBetsStatus(Collection $bets, $status);
+    public function changeBetStatus(BetModel $bet, $status);
 
     public function list(Request $request);
 
