@@ -7,9 +7,10 @@
  */
 namespace App\Lib\Calculators;
 
+use App\Model\BrandResult as BrandResultModel;
 use Illuminate\Support\Collection;
 
 interface CalculatorContract
 {
-    public function check(Collection $bets);
+    public function check(Collection $bets, BrandResultModel $result);
 }

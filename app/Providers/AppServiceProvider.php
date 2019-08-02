@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Lib\Calculators\PowerBallCalculator;
 use App\Services\BetService;
 use App\Services\BrandCheckDateService;
 use App\Services\BrandDrawService;
@@ -80,5 +81,8 @@ class AppServiceProvider extends ServiceProvider
 
         //Winnings
         $this->app->bind(WinningsServiceContract::class, WinningsService::class);
+
+        //Win calculators
+        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_powerball', PowerBallCalculator::class);
     }
 }

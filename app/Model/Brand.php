@@ -39,9 +39,10 @@ class Brand extends Model
             ->orderBy('check_date', 'ASC');
 	}
 
-	public function betsForPlay()
+	public function betsForPlay($date)
     {
         return $this->hasMany(Bet::class, 'brand_id', 'id')
-                ->where('bet.status', Bet::STATUS_PAID);
+                ->where('bets.status', Bet::STATUS_WAITING_DRAW)
+                ->whereDate('bets.draw_date', '<=', $date);
     }
 }
