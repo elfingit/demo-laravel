@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\OrderChangeStatusEvent;
-use App\Listeners\OrderChangeStatusListener;
+use App\Events\BetChangeStatusEvent;
+use App\Listeners\BetChangeStatusListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -17,11 +17,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
+        Registered::class           => [
             SendEmailVerificationNotification::class,
         ],
-        OrderChangeStatusEvent::class => [
-            OrderChangeStatusListener::class
+        BetChangeStatusEvent::class => [
+            BetChangeStatusListener::class
         ]
     ];
 

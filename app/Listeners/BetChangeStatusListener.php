@@ -2,13 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\OrderChangeStatusEvent;
+use App\Events\BetChangeStatusEvent;
 use App\Model\Bet as BetModel;
 use App\Model\Order as OrderModel;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderChangeStatusListener
+class BetChangeStatusListener
 {
     /**
      * Create the event listener.
@@ -23,13 +23,11 @@ class OrderChangeStatusListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  BetChangeStatusEvent  $event
      * @return void
      */
-    public function handle(OrderChangeStatusEvent $event)
+    public function handle(BetChangeStatusEvent $event)
     {
-        if ($event->order->status == OrderModel::STATUS_PAID) {
-            \Bet::changeBetsStatus($event->order->bets, BetModel::STATUS_PAID);
-        }
+        \Order::betStatusChanged($event->bet->order, $event->bet->status);
     }
 }

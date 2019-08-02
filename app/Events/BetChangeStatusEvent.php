@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Model\Order as OrderModel;
+use App\Model\Bet as BetModel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,20 +11,20 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class OrderChangeStatusEvent
+class BetChangeStatusEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $order;
+    public $bet;
 
     /**
      * Create a new event instance.
      * @param OrderModel $order
      * @return void
      */
-    public function __construct(OrderModel $order)
+    public function __construct(BetModel $bet)
     {
-        $this->order = $order;
+        $this->bet = $bet;
     }
 
     /**

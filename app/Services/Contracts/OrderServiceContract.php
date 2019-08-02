@@ -13,4 +13,5 @@ interface OrderServiceContract
 {
     public function list();
     public function changeStatus($status, OrderModel $order);
+    public function betStatusChanged(OrderModel $order, $status);
 }

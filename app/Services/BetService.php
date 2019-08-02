@@ -7,6 +7,7 @@
  */
 namespace App\Services;
 
+use App\Events\BetChangeStatusEvent;
 use App\Lib\Query\Criteria;
 use App\Model\Bet as BetModel;
 use App\Services\Contracts\BetServiceContract;
@@ -18,6 +19,8 @@ class BetService implements BetServiceContract
     {
         $bet->status = $status;
         $bet->save();
+
+        event(new BetChangeStatusEvent($bet));
 
         return $bet;
     }
@@ -46,7 +49,8 @@ class BetService implements BetServiceContract
             BetModel::STATUS_NOT_AUTH => 'Not authorized',
             BetModel::STATUS_PAYOUT_PENDING => 'Payout pending',
             BetModel::STATUS_PAYOUT => 'Payout',
-            BetModel::STATUS_CLOSED => 'Closed'
+            BetModel::STATUS_CLOSED => 'Closed',
+            BetModel::STATUS_CANCELLED => 'Cancelled'
         ];
     }
 }

@@ -15,6 +15,7 @@ class Bet extends Model
     const STATUS_NOT_AUTH = 'not_auth';
     const STATUS_PAYOUT_PENDING = 'payout_pending';
     const STATUS_PAYOUT = 'payout';
+    const STATUS_CANCELLED = 'cancelled';
     const STATUS_CLOSED = 'closed';
 
 
