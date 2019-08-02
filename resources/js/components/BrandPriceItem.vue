@@ -1,6 +1,6 @@
 <template>
     <div class="mdl-grid-cell mdl-grid-cell--12-col">
-        <Loader v-if="prices.length == 0"></Loader>
+        <div style="width: 40px; height: 40px" v-if="prices.length == 0"><Loader /></div>
         <table v-else class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
             <thead>
             <tr>

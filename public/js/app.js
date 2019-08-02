@@ -40834,98 +40834,105 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "mdl-grid-cell mdl-grid-cell--12-col" },
-    [
-      _vm.games.length == 0
-        ? _c("Loader")
-        : _c(
-            "table",
-            { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [_vm._v("# ID")]),
+  return _c("div", { staticClass: "mdl-grid-cell mdl-grid-cell--12-col" }, [
+    _vm.games.length == 0
+      ? _c(
+          "div",
+          { staticStyle: { width: "40px", height: "40px" } },
+          [_c("Loader")],
+          1
+        )
+      : _c(
+          "table",
+          { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.games, function(game) {
+                return _c("tr", { key: game.id }, [
+                  _c("td", [_vm._v(_vm._s(game.id))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Name")]),
+                  _c("td", [_vm._v(_vm._s(game.game_name))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Price")]),
+                  _c("td", [_vm._v(_vm._s(game.game_price))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Currency")]),
+                  _c("td", [_vm._v(_vm._s(game.currency))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Actions")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.games, function(game) {
-                  return _c("tr", { key: game.id }, [
-                    _c("td", [_vm._v(_vm._s(game.id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(game.game_name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(game.game_price))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(game.currency))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.edit(game)
-                            }
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.edit(game)
                           }
-                        },
-                        [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "material-icons",
-                              attrs: { role: "presentation" }
-                            },
-                            [_vm._v("edit")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.del(game)
-                            }
+                        }
+                      },
+                      [
+                        _c(
+                          "i",
+                          {
+                            staticClass: "material-icons",
+                            attrs: { role: "presentation" }
+                          },
+                          [_vm._v("edit")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.del(game)
                           }
-                        },
-                        [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "material-icons",
-                              attrs: { role: "presentation" }
-                            },
-                            [_vm._v("delete")]
-                          )
-                        ]
-                      )
-                    ])
+                        }
+                      },
+                      [
+                        _c(
+                          "i",
+                          {
+                            staticClass: "material-icons",
+                            attrs: { role: "presentation" }
+                          },
+                          [_vm._v("delete")]
+                        )
+                      ]
+                    )
                   ])
-                }),
-                0
-              )
-            ]
-          )
-    ],
-    1
-  )
+                ])
+              }),
+              0
+            )
+          ]
+        )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("# ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Currency")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -41274,98 +41281,105 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "mdl-grid-cell mdl-grid-cell--12-col" },
-    [
-      _vm.prices.length == 0
-        ? _c("Loader")
-        : _c(
-            "table",
-            { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
-            [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [_vm._v("# ID")]),
+  return _c("div", { staticClass: "mdl-grid-cell mdl-grid-cell--12-col" }, [
+    _vm.prices.length == 0
+      ? _c(
+          "div",
+          { staticStyle: { width: "40px", height: "40px" } },
+          [_c("Loader")],
+          1
+        )
+      : _c(
+          "table",
+          { staticClass: "mdl-data-table mdl-js-data-table mdl-shadow--2dp" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.prices, function(price) {
+                return _c("tr", { key: price.id }, [
+                  _c("td", [_vm._v(_vm._s(price.id))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Combination price")]),
+                  _c("td", [_vm._v(_vm._s(price.combination_price))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Number shield price")]),
+                  _c("td", [_vm._v(_vm._s(price.number_shield_price))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Currency")]),
+                  _c("td", [_vm._v(_vm._s(price.currency))]),
                   _vm._v(" "),
-                  _c("th", [_vm._v("Actions")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.prices, function(price) {
-                  return _c("tr", { key: price.id }, [
-                    _c("td", [_vm._v(_vm._s(price.id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(price.combination_price))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(price.number_shield_price))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(price.currency))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.edit(price)
-                            }
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.edit(price)
                           }
-                        },
-                        [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "material-icons",
-                              attrs: { role: "presentation" }
-                            },
-                            [_vm._v("edit")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.del(price)
-                            }
+                        }
+                      },
+                      [
+                        _c(
+                          "i",
+                          {
+                            staticClass: "material-icons",
+                            attrs: { role: "presentation" }
+                          },
+                          [_vm._v("edit")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.del(price)
                           }
-                        },
-                        [
-                          _c(
-                            "i",
-                            {
-                              staticClass: "material-icons",
-                              attrs: { role: "presentation" }
-                            },
-                            [_vm._v("delete")]
-                          )
-                        ]
-                      )
-                    ])
+                        }
+                      },
+                      [
+                        _c(
+                          "i",
+                          {
+                            staticClass: "material-icons",
+                            attrs: { role: "presentation" }
+                          },
+                          [_vm._v("delete")]
+                        )
+                      ]
+                    )
                   ])
-                }),
-                0
-              )
-            ]
-          )
-    ],
-    1
-  )
+                ])
+              }),
+              0
+            )
+          ]
+        )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("# ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Combination price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Number shield price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Currency")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -42086,7 +42100,14 @@ var render = function() {
                     ]
                   )
                 ]
-              : [_c("Loader")]
+              : [
+                  _c(
+                    "div",
+                    { staticStyle: { width: "40px", height: "40px" } },
+                    [_c("Loader")],
+                    1
+                  )
+                ]
           ],
           2
         )

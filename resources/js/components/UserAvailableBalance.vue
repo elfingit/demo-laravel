@@ -34,7 +34,7 @@
                 </table>
                 </template>
                 <template v-else>
-                    <Loader/>
+                    <div style="width: 40px; height: 40px"><Loader/></div>
                 </template>
             </div>
         </div>
