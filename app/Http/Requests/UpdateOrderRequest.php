@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Model\Order as OrderModel;
-
+/**
+ * Class UpdateOrderRequest
+ * @package App\Http\Requests
+ * @deprecated not using
+ */
 class UpdateOrderRequest extends AbstractRequest
 {
     /**
@@ -14,14 +17,7 @@ class UpdateOrderRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'status'    => 'required|in:'.implode(',', [
-                    OrderModel::STATUS_NEW,
-                    OrderModel::STATUS_PAID,
-                    OrderModel::STATUS_CANCELLED,
-                    OrderModel::STATUS_IN_PROGRESS,
-                    OrderModel::STATUS_REFUND,
-                    OrderModel::STATUS_CLOSED
-                ])
+
         ];
     }
 }

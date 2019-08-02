@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const BRAND_URL_PREFIX = '/dashboard/crm_api/brands/';
-const ORDER_URL_PREFIX = '/dashboard/crm_api/orders/';
+const BET_URL_PREFIX = '/dashboard/crm_api/bets/';
 
 const url_builder = (prefix, path, params) => {
     return prefix + path + params

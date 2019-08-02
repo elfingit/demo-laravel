@@ -19,12 +19,12 @@
 <script>
     import Loader from "./Loader";
     import axios from "axios";
-    import { ORDER_URL_PREFIX, url_builder } from "../utils";
+    import { BET_URL_PREFIX, url_builder } from "../utils";
 
     export default {
-        name: "OrderStatus",
+        name: "BetStatus",
         components: {Loader},
-        props: ['status', 'orderId'],
+        props: ['status', 'betId'],
 
         data() {
             return {
@@ -43,7 +43,7 @@
                 this.disabled = true;
                 this.loading = true;
 
-                const url = url_builder(ORDER_URL_PREFIX, '', this.$props.orderId);
+                const url = url_builder(BET_URL_PREFIX, '', this.$props.betId);
 
                 let _self = this;
 

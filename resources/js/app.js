@@ -27,7 +27,7 @@ Vue.component('filters-reset-button', require('./components/FiltersResetButton')
 Vue.component('select-box', require('./components/SelectBox').default);
 Vue.component('user-available-balance', require('./components/UserAvailableBalance').default);
 Vue.component('brand-extra-games', require('./components/BrandExtraGames').default);
-Vue.component('order-status', require('./components/OrderStatus').default);
+Vue.component('bet-status', require('./components/BetStatus').default);
 Vue.component('count-down-timer', require('./components/CountDownTimer').default);
 
 /**

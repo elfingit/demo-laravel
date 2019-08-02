@@ -49,11 +49,8 @@ class OrderController extends Controller
      * @param  \App\Model\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Order $order)
     {
-        $order = \Order::changeStatus($request->get('status'), $order);
-
-        return new OrderResource($order);
     }
 
     /**

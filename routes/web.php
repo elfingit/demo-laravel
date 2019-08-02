@@ -46,11 +46,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 			'uses'  => 'UserAvailableBalanceController@store',
 			'as'    => 'users.available_balance.store'
 		]);
-
-		Route::put('/orders/{order}', [
-		    'uses'  => 'OrderController@update',
-            'as'    => 'orders.update'
-        ]);
 	});
 
 	Route::get('/leads', [
