@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const moment = require('moment');
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -55,6 +56,40 @@ const clear_form_errors = (form) => {
         }
 
     });
-}
+};
 
-module.exports = { url_builder, BRAND_URL_PREFIX, ORDER_URL_PREFIX, show_form_errors, clear_form_errors };
+const difference_date_string = (date1, date2) => {
+
+    let d1 = moment(date1);
+    let d2 = moment(date2);
+
+    let tDays = d1.diff(d2, 'days');
+    let tHours = d1.diff(d2, 'hours');
+    let tMinutes = d1.diff(d2, 'minutes');
+    let tSeconds = d1.diff(d2, 'seconds');
+
+
+    return {
+        'days': pad(tDays, 2),
+        'hours': pad(tHours - tDays * 24, 2),
+        'minutes': pad(tMinutes - tHours * 60, 2),
+        'seconds': pad(tSeconds - tMinutes * 60, 2)
+    }
+};
+
+const pad = (num, size) => {
+    let s = num + '';
+
+    while (s.length < size) s = "0" + s;
+
+    return s;
+};
+
+module.exports = {
+    url_builder,
+    BRAND_URL_PREFIX,
+    ORDER_URL_PREFIX,
+    show_form_errors,
+    clear_form_errors,
+    difference_date_string
+};

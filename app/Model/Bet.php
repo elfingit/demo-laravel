@@ -21,7 +21,7 @@ class Bet extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'draw_date' => 'date'
+        'draw_date' => 'datetime'
     ];
 
     public function brand()

@@ -4,7 +4,7 @@
         <div class="mdl-cell mdl-cell--12-col show-header">
             <div class="item">Draw bet: {{ $bet->id }}</div>
             <div class="item">Status: {{ $bet->status }}</div>
-            <div class="item">Countdown</div>
+            <div class="item"><count-down-timer date="'{{ $bet->draw_date->toRfc850String() }}'" /> </div>
             <div class="item">Order
                 <a href="{{ route('dashboard.orders.show', ['order' => $bet->order_id]) }}">{{ $bet->order_id }}</a>
             </div>
@@ -51,7 +51,7 @@
                                 <span><b>{{ __('Current Deposit') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $bet->user->available_balance->amount }}</span>
+                                <span class="mdl-list__item-text-body">&euro; {{ $bet->user->available_balance->amount }}</span>
                             </span>
                         </div>
                     </div>
@@ -81,7 +81,17 @@
                             </span>
                             <span class="mdl-list__item-secondary-content">
                                 <span class="mdl-list__item-text-body">
-                                    {{ $bet->draw_date->format('d-m-Y') }}
+                                    {{ $bet->draw_date->format('d-m-Y H:i:s') }}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Price') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">
+                                    &euro;{{ number_format($bet->price, 2) }}
                                 </span>
                             </span>
                         </div>

@@ -77,7 +77,6 @@ class OrderService implements OrderServiceContract
                 'order_id'  => $order->id
             ];
 
-
             if (is_array($drawDate)) {
 
                 foreach ($drawDate as $dDate) {

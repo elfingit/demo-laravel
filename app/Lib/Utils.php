@@ -89,9 +89,19 @@ class Utils
 
 	}
 
+    /**
+     * @param Carbon $checkDate
+     * @param int $period
+     *
+     * @return Carbon
+     */
 	public static function getDrawDate($checkDate, $period)
     {
         $today = Carbon::now();
+
+        $today->setHour($checkDate->hour);
+        $today->setMinute($checkDate->minute);
+        $today->setSecond(0);
 
         if ($today->isAfter($checkDate)) {
             return Utils::getNextDate($checkDate, $today, $period);

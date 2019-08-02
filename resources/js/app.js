@@ -28,6 +28,7 @@ Vue.component('select-box', require('./components/SelectBox').default);
 Vue.component('user-available-balance', require('./components/UserAvailableBalance').default);
 Vue.component('brand-extra-games', require('./components/BrandExtraGames').default);
 Vue.component('order-status', require('./components/OrderStatus').default);
+Vue.component('count-down-timer', require('./components/CountDownTimer').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
