@@ -18,4 +18,9 @@ class BrandResult extends Model
 		            ->where('brand_id', $brand->id)
 		            ->first();
     }
+
+    public function brand()
+    {
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
 }

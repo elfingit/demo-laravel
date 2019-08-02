@@ -38,4 +38,10 @@ class Brand extends Model
 		return $this->hasMany(BrandCheckDate::class, 'brand_id', 'id')
             ->orderBy('check_date', 'ASC');
 	}
+
+	public function betsForPlay()
+    {
+        return $this->hasMany(Bet::class, 'brand_id', 'id')
+                ->where('bet.status', Bet::STATUS_PAID);
+    }
 }
