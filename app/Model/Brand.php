@@ -33,6 +33,13 @@ class Brand extends Model
 		return $this->hasMany(BrandExtraGame::class, 'brand_id', 'id');
 	}
 
+    public function extraGameByName($name)
+    {
+        return $this->hasMany(BrandExtraGame::class, 'brand_id', 'id')
+                ->where('brand_extra_games.system_name', $name)
+                ->get();
+    }
+
 	public function checkDates()
 	{
 		return $this->hasMany(BrandCheckDate::class, 'brand_id', 'id')
