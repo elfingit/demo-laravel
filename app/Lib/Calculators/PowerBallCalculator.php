@@ -48,15 +48,52 @@ class PowerBallCalculator extends AbstractCalculator
 
         //Line absolutely not match
         if (count($diff) == 5 && $this->checkPowerBall($result, $ticket) === false) {
-            \Ticket::markTicketAsPlayed($ticket);
+            \Ticket::markTicketAsPlayed( $ticket );
+
             return self::NOT_WIN;
-        //Power ball and one number wins
-        } elseif (count($diff) == 4 && $this->checkPowerBall($result, $ticket) === true){
-            \Ticket::markTicketAsWin( $ticket, 3.30 );
-            return self::WIN;
         //Power ball win
-        } elseif ($this->checkPowerBall($result, $ticket) === true) {
+        } elseif (count($diff) == 5 && $this->checkPowerBall($result, $ticket) === true) {
             \Ticket::markTicketAsWin( $ticket, 3.30 );
+
+            return self::WIN;
+        //Power ball and one number wins
+        } elseif (count($diff) == 4 && $this->checkPowerBall($result, $ticket) === true) {
+            \Ticket::markTicketAsWin( $ticket, 3.30 );
+
+            return self::WIN;
+        //Power ball and 2 numbers
+        } elseif (count($diff) == 3 && $this->checkPowerBall($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 6 );
+
+            return self::WIN;
+        //Power ball and 3 numbers
+        } elseif (count($diff) == 2 && $this->checkPowerBall($result, $ticket) === true) {
+            \Ticket::markTicketAsWin( $ticket, 84 );
+
+            return self::WIN;
+        //Only 3 numbers
+        } elseif (count($diff) == 2 && $this->checkPowerBall($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 6 );
+
+            return self::WIN;
+        //Only 4 numbers
+        } elseif (count($diff) == 1 && $this->checkPowerBall($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 84 );
+
+            return self::WIN;
+        //Power ball and 4 numbers
+        } elseif (count($diff) == 1 && $this->checkPowerBall($result, $ticket) === true) {
+            \Ticket::markTicketAsWin( $ticket, 40000 );
+
+            return self::WIN;
+        //Power ball and 5 numbers
+        } elseif (count($diff) == 0 && $this->checkPowerBall($result, $ticket) === true) {
+            \Ticket::markTicketAsWin( $ticket, 31000000 );
+
+            return self::WIN;
+        //Only 5 numbers
+        } elseif (count($diff) == 0 && $this->checkPowerBall($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 834000 );
 
             return self::WIN;
         }

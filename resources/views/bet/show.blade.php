@@ -95,6 +95,16 @@
                                 </span>
                             </span>
                         </div>
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Win amount') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">
+                                    &euro;{{ number_format($bet->win_amount, 2) }}
+                                </span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,6 +122,7 @@
                     <th>Number shield</th>
                     <th>Price</th>
                     <th>Status</th>
+                    <th>Win amount</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -125,6 +136,7 @@
                         <td>{{ $ticket->number_shield == true ? 'Yes' : 'No' }}</td>
                         <td>{{ $ticket->price }}</td>
                         <td>{{ $ticket->status }}</td>
+                        <td>{{ $ticket->win_amount }}</td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use \App\Model\BetTicket as BetTicketModel;
 
 class Bet extends Model
 {
@@ -24,6 +25,15 @@ class Bet extends Model
     protected $casts = [
         'draw_date' => 'datetime'
     ];
+
+    public function getWinAmountAttribute()
+    {
+        if ($this->status !== self::STATUS_WIN) {
+            return 0.0;
+        }
+
+        return BetTicketModel::winAmountByBrand($this->brand_id);
+    }
 
     public function brand()
     {

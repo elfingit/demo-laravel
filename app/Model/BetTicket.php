@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class BetTicket extends Model
@@ -17,4 +18,11 @@ class BetTicket extends Model
     ];
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function scopeWinAmountByBrand(Builder $query, $brand_id)
+    {
+        return $query->where('status', self::STATUS_WIN)
+            ->where('brand_id', $brand_id)
+            ->sum('win_amount');
+    }
 }
