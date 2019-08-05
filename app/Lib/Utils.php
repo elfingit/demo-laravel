@@ -122,7 +122,7 @@ class Utils
 
     public static function calculateExtraGame(BrandModel $brand, $extra_game_name)
     {
-        $game = $brand->extraGameByName($extra_game_name);
+        $game = $brand->extraGameByName($extra_game_name)->first();
 
         if (!$game) {
             return 0.0;
