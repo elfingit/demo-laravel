@@ -32,7 +32,7 @@ class Bet extends Model
             return 0.0;
         }
 
-        return BetTicketModel::winAmountByBrand($this->brand_id);
+        return BetTicketModel::winAmountByBrand($this->brand_id, $this->id);
     }
 
     public function brand()

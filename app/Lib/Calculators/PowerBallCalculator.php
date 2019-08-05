@@ -54,47 +54,55 @@ class PowerBallCalculator extends AbstractCalculator
         //Power ball win
         } elseif (count($diff) == 5 && $this->checkPowerBall($result, $ticket) === true) {
             $win_amount = $this->getWinAmount($ticket, $result, 3.30);
-            \Ticket::markTicketAsWin( $ticket, 3.30 );
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Power ball and one number wins
         } elseif (count($diff) == 4 && $this->checkPowerBall($result, $ticket) === true) {
-            \Ticket::markTicketAsWin( $ticket, 3.30 );
+            $win_amount = $this->getWinAmount($ticket, $result, 3.30);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Power ball and 2 numbers
         } elseif (count($diff) == 3 && $this->checkPowerBall($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 6 );
+            $win_amount = $this->getWinAmount($ticket, $result, 6);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Power ball and 3 numbers
         } elseif (count($diff) == 2 && $this->checkPowerBall($result, $ticket) === true) {
-            \Ticket::markTicketAsWin( $ticket, 84 );
+            $win_amount = $this->getWinAmount($ticket, $result, 84);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Only 3 numbers
         } elseif (count($diff) == 2 && $this->checkPowerBall($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 6 );
+            $win_amount = $this->getWinAmount($ticket, $result, 6);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Only 4 numbers
         } elseif (count($diff) == 1 && $this->checkPowerBall($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 84 );
+            $win_amount = $this->getWinAmount($ticket, $result, 84);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Power ball and 4 numbers
         } elseif (count($diff) == 1 && $this->checkPowerBall($result, $ticket) === true) {
-            \Ticket::markTicketAsWin( $ticket, 40000 );
+            $win_amount = $this->getWinAmount($ticket, $result, 40000);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Power ball and 5 numbers
         } elseif (count($diff) == 0 && $this->checkPowerBall($result, $ticket) === true) {
-            \Ticket::markTicketAsWin( $ticket, 31000000 );
+            $win_amount = $this->getWinAmount($ticket, $result, 31000000);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         //Only 5 numbers
         } elseif (count($diff) == 0 && $this->checkPowerBall($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 834000 );
+            $win_amount = $this->getWinAmount($ticket, $result, 834000);
+            \Ticket::markTicketAsWin( $ticket, $win_amount );
 
             return self::WIN;
         }
@@ -102,6 +110,13 @@ class PowerBallCalculator extends AbstractCalculator
 
     protected function getWinAmount($ticket, $result, $amount)
     {
+        if (!empty($ticket->extra_games) && $ticket->extra_games[0]['system_name'] == 'powerplay') {
+            if ($result->results->additional_games) {
+                $coof = intval($result->results->additional_games->megaplier);
+
+                $amount = $amount * $coof;
+            }
+        }
         return $amount;
     }
 

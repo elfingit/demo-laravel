@@ -19,10 +19,11 @@ class BetTicket extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function scopeWinAmountByBrand(Builder $query, $brand_id)
+    public function scopeWinAmountByBrand(Builder $query, $brand_id, $bet_id)
     {
         return $query->where('status', self::STATUS_WIN)
             ->where('brand_id', $brand_id)
+            ->where('bet_id', $bet_id)
             ->sum('win_amount');
     }
 
