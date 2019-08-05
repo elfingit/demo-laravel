@@ -53,6 +53,7 @@ class PowerBallCalculator extends AbstractCalculator
             return self::NOT_WIN;
         //Power ball win
         } elseif (count($diff) == 5 && $this->checkPowerBall($result, $ticket) === true) {
+            $win_amount = $this->getWinAmount($ticket, $result, 3.30);
             \Ticket::markTicketAsWin( $ticket, 3.30 );
 
             return self::WIN;
@@ -97,6 +98,11 @@ class PowerBallCalculator extends AbstractCalculator
 
             return self::WIN;
         }
+    }
+
+    protected function getWinAmount($ticket, $result, $amount)
+    {
+        return $amount;
     }
 
     protected function checkPowerBall(BrandResultModel $result, BetTicketModel $ticket )
