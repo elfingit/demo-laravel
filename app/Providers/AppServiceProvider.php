@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Lib\Calculators\EuroMillionsCalculator;
 use App\Lib\Calculators\PowerBallCalculator;
 use App\Services\BetService;
 use App\Services\BrandCheckDateService;
@@ -89,5 +90,6 @@ class AppServiceProvider extends ServiceProvider
 
         //Win calculators
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_powerball', PowerBallCalculator::class);
+        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'euromillions', EuroMillionsCalculator::class);
     }
 }
