@@ -25,4 +25,14 @@ class BetTicket extends Model
             ->where('brand_id', $brand_id)
             ->sum('win_amount');
     }
+
+    public function getExtraGamesHumanAttribute()
+    {
+
+        $games = array_map(function ($game) {
+            return $game['system_name'];
+        }, $this->extra_games);
+
+        return $games;
+    }
 }

@@ -131,7 +131,7 @@
                         <td>{{ $ticket->id }}</td>
                         <td>{{ implode(',', $ticket->line) }}</td>
                         <td>{{ implode(',', $ticket->extra_balls) }}</td>
-                        <td>{{ implode(',', $ticket->extra_games) }}</td>
+                        <td>{{ implode(',', $ticket->extra_games_human) }}</td>
                         <td>{{ $ticket->ticket_number }}</td>
                         <td>{{ $ticket->number_shield == true ? 'Yes' : 'No' }}</td>
                         <td>{{ $ticket->price }}</td>
