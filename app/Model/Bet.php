@@ -35,6 +35,12 @@ class Bet extends Model
         return $this->hasMany(BetTicket::class, 'bet_id', 'id');
     }
 
+    public function wait_tickets()
+    {
+        return $this->hasMany(BetTicket::class, 'bet_id', 'id')
+                ->where('bet_tickets.status', BetTicket::STATUS_WAIT);
+    }
+
     public function order()
     {
         return $this->hasOne(Order::class, 'id', 'order_id');

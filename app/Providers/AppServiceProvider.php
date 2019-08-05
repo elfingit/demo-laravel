@@ -21,12 +21,14 @@ use App\Services\Contracts\BrandResultContract;
 use App\Services\Contracts\BrandServiceContract;
 use App\Services\Contracts\LeadServiceContract;
 use App\Services\Contracts\OrderServiceContract;
+use App\Services\Contracts\TicketServiceContract;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
 use App\Services\Contracts\UserRoleServiceContract;
 use App\Services\Contracts\UserServiceContract;
 use App\Services\Contracts\WinningsServiceContract;
 use App\Services\LeadService;
 use App\Services\OrderService;
+use App\Services\TicketService;
 use App\Services\UserAvailableBalanceService;
 use App\Services\UserRoleService;
 use App\Services\UserService;
@@ -78,6 +80,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Bet
         $this->app->bind(BetServiceContract::class, BetService::class);
+
+        //Bet ticket
+        $this->app->bind(TicketServiceContract::class, TicketService::class);
 
         //Winnings
         $this->app->bind(WinningsServiceContract::class, WinningsService::class);

@@ -53,4 +53,16 @@ class BetService implements BetServiceContract
             BetModel::STATUS_CANCELLED => 'Cancelled'
         ];
     }
+
+    public function markAsWin( BetModel $bet )
+    {
+        $bet->status = BetModel::STATUS_WIN;
+        $bet->save();
+    }
+
+    public function markAsPlayed( BetModel $bet )
+    {
+        $bet->status = BetModel::STATUS_PLAYED;
+        $bet->save();
+    }
 }

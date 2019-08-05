@@ -241,6 +241,7 @@ return [
 	    'UserAvailableBalance'  => \App\Facades\UserAvailableBalanceFacade::class,
         'Order'             => \App\Facades\OrderServiceFacade::class,
         'Bet'             => \App\Facades\BetServiceFacade::class,
+        'Ticket'            => \App\Facades\TicketServiceFacade::class,
         'Winnings'          => \App\Facades\WinningsServiceFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
