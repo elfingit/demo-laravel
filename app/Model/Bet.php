@@ -23,7 +23,8 @@ class Bet extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'draw_date' => 'datetime'
+        'draw_date' => 'datetime',
+        'additional_data' => 'object'
     ];
 
     public function getWinAmountAttribute()
