@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Lib\Calculators\EuroJackpotCalculator;
 use App\Lib\Calculators\EuroMillionsCalculator;
+use App\Lib\Calculators\MegaMillionsCalculator;
 use App\Lib\Calculators\PowerBallCalculator;
 use App\Services\BetService;
 use App\Services\BrandCheckDateService;
@@ -93,5 +94,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_powerball', PowerBallCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'euromillions', EuroMillionsCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'eurojackpot', EuroJackpotCalculator::class);
+        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_mega_millions', MegaMillionsCalculator::class);
     }
 }
