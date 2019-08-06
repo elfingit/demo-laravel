@@ -32,13 +32,14 @@ class WinningsService implements WinningsServiceContract
 
         if ($brand) {
             $this->logger->info('Got brand:' . $brand->api_code, [__CLASS__]);
-            $this->logger->info($result->draw_date);
-            $this->logger->info($brand->betsForPlay($result->draw_date)->toSql());
+            //$this->logger->info($result->draw_date);
+            //$this->logger->info($brand->betsForPlay($result->draw_date)->toSql());
             $bets = $brand->betsForPlay($result->draw_date)->get();
 
             if ($bets->count() > 0) {
                 $this->logger->info('Got brand:' . $brand->api_code, [__CLASS__]);
                 $calculator = $this->getWinCalculator($brand->api_code);
+
                 if ($calculator) {
                     $calculator->check($bets, $result);
                 } else {

@@ -110,6 +110,10 @@ class EuroMillionsCalculator extends AbstractCalculator
             \Ticket::markTicketAsWin( $ticket, 50177266.94 );
 
             return self::WIN;
+        } else {
+            \Ticket::markTicketAsPlayed( $ticket );
+
+            return self::NOT_WIN;
         }
     }
 
