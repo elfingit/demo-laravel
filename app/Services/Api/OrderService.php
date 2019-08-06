@@ -77,6 +77,10 @@ class OrderService implements OrderServiceContract
                 'order_id'  => $order->id
             ];
 
+            if ($brand->api_code == 'de_lotto') {
+                $betData['additional_data'] = $item['ticketNumber'];
+            }
+
             if (is_array($drawDate)) {
 
                 foreach ($drawDate as $dDate) {
