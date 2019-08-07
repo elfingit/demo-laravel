@@ -24,9 +24,9 @@ class DeLottoCalculator extends AbstractCalculator
             $betWin = false;
 
             foreach ($tickets as $ticket) {
-                $result = $this->checkTicket($ticket, $result);
+                $ticketResult = $this->checkTicket($ticket, $result);
 
-                if ($result == self::WIN) {
+                if ($ticketResult == self::WIN) {
                     $betWin = true;
                 }
             }
@@ -39,6 +39,7 @@ class DeLottoCalculator extends AbstractCalculator
 
             $this->checkSpiel77($bet, $result);
             $this->checkSuper6($bet, $result);
+
         }
     }
 
@@ -131,8 +132,10 @@ class DeLottoCalculator extends AbstractCalculator
 
             $count = 0;
 
+            $numbersObject = $this->convertArrayToObject($bet->additional_data->ticket_number);
+
             for($i = 7; $i >= 1; $i--) {
-                $n1 = intval($bet->additional_data->ticket_number->{'n'. $i});
+                $n1 = intval($numbersObject->{'n'. $i});
                 $n2 = intval(mb_substr($spiel77, $i - 1, 1));
 
                 if ($n1 === $n2) {
@@ -142,8 +145,9 @@ class DeLottoCalculator extends AbstractCalculator
 
             if ($count > 0) {
                 $amount = $this->getSpiel77Amount($count);
-
-                $bet->additional_data->spiel77 = $amount;
+                $aData = $bet->additional_data;
+                $aData->spiel77 = $amount;
+                $bet->additional_data = $aData;
                 \Bet::markAsWin($bet);
             }
         }
@@ -167,12 +171,13 @@ class DeLottoCalculator extends AbstractCalculator
 
         if ($bet->additional_data && $bet->additional_data->ticket_number) {
             $super6 = (string) $result->results->additional_games->super6;
-
             $count = 0;
 
+            $numbersObject = $this->convertArrayToObject($bet->additional_data->ticket_number);
+
             for($i = 7; $i >= 2; $i--) {
-                $n1 = intval($bet->additional_data->ticket_number->{'n'. $i});
-                $n2 = intval(mb_substr($super6, $i - 1, 1));
+                $n1 = intval($numbersObject->{'n'. $i});
+                $n2 = intval(mb_substr($super6, $i - 2, 1));
 
                 if ($n1 === $n2) {
                     $count++;
@@ -181,11 +186,27 @@ class DeLottoCalculator extends AbstractCalculator
 
             if ($count > 0) {
                 $amount = $this->getSuper6Amount($count);
+                $adata = $bet->additional_data;
+                $adata->super6 = $amount;
+                $bet->additional_data = $adata;
 
-                $bet->additional_data->super6 = $amount;
                 \Bet::markAsWin($bet);
             }
         }
+    }
+
+    protected function convertArrayToObject(array $data)
+    {
+        $obj = new \stdClass();
+
+        foreach ($data as $value) {
+            $vars = get_object_vars($value);
+            foreach ($vars as $k => $v) {
+                $obj->{$k} = $v;
+            }
+        }
+
+        return $obj;
     }
 
     protected function getSpiel77Amount($numbers)
@@ -226,4 +247,5 @@ class DeLottoCalculator extends AbstractCalculator
 
         }
     }
+
 }

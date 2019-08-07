@@ -35,9 +35,9 @@ abstract  class AbstractCalculator implements CalculatorContract
             $betWin = false;
 
             foreach ($tickets as $ticket) {
-                $result = $this->checkTicket($ticket, $result);
+                $ticketResult = $this->checkTicket($ticket, $result);
 
-                if ($result == self::WIN) {
+                if ($ticketResult == self::WIN) {
                     $betWin = true;
                 }
             }
