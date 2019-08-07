@@ -33,7 +33,19 @@ class Bet extends Model
             return 0.0;
         }
 
-        return BetTicketModel::winAmountByBrand($this->brand_id, $this->id);
+        $amount = BetTicketModel::winAmountByBrand($this->brand_id, $this->id);
+
+        if ($this->brand->api_code == 'de_lotto') {
+            if (isset($this->additional_data->super6)) {
+                $amount += intval($this->additional_data->super6);
+            }
+
+            if (isset($this->additional_data->spiel77)) {
+                $amount += intval($this->additional_data->spiel77);
+            }
+        }
+
+        return $amount;
     }
 
     public function brand()
