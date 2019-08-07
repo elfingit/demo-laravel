@@ -29,6 +29,7 @@ Vue.component('user-available-balance', require('./components/UserAvailableBalan
 Vue.component('brand-extra-games', require('./components/BrandExtraGames').default);
 Vue.component('bet-status', require('./components/BetStatus').default);
 Vue.component('count-down-timer', require('./components/CountDownTimer').default);
+Vue.component('user-local-time', require('./components/UserLocalTime').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

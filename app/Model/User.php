@@ -52,4 +52,28 @@ class User extends Authenticatable
 	{
 		return $this->hasOne(UserAvailableBalance::class, 'user_id', 'id');
 	}
+
+	public function leads()
+    {
+        return $this->hasMany(Lead::class, 'user_id', 'id');
+    }
+
+    public function bets()
+    {
+        return $this->hasMany(Bet::class, 'user_id', 'id');
+    }
+
+    public function getPaidBetsAttribute()
+    {
+        return $this->bets()
+                    ->where('bets.status', Bet::STATUS_PAID)
+                    ->count(['bets.id']);
+    }
+
+    public function getPendingBetsAttribute()
+    {
+        return $this->leads()
+                ->where('leads.status', Lead::STATUS_NEW)
+                ->count(['leads.id']);
+    }
 }

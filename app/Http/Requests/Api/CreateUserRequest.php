@@ -27,7 +27,8 @@ class CreateUserRequest extends AbstractRequest
 	        'terms_and_conditions' => 'accepted',
 	        'privacy_policy'        => 'accepted',
 	        'host'          => 'required|regex:/(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)/',
-	        'favicon_url'   => 'required|url'
+	        'favicon_url'   => 'required|url',
+            'time_zone'     => 'required|numeric'
         ];
     }
 }

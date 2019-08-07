@@ -31,31 +31,42 @@
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
         <tr>
-            <th># ID</th>
-            <th>Favicon</th>
-            <th>Host</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Created At</th>
-            <th>Updated At</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Site</th>
+            <th>Country</th>
+            <th>Local Time</th>
+            <th>Paid bets</th>
+            <th>Pending bets</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($users as $user)
         <tr>
-            <td><a href="{{ route('dashboard.users.show', ['user' => $user->id]) }}">{{ $user->id }}</a></td>
+            <td>
+                <a href="{{ route('dashboard.users.show', ['user' => $user->id]) }}">
+                    @if($user->profile)
+                    {{ $user->profile->first_name }} {{ $user->profile->last_name }}
+                    @else
+                        {{ $user->id }}
+                    @endif
+                </a>
+            </td>
+            <td>{{ $user->status }}</td>
             @if($user->profile)
             <td><img src="{{ $user->profile->favicon }}" height="25px"></td>
-            <td>{{ $user->profile->host }}</td>
             @else
             <td>none</td>
-            <td>none</td>
             @endif
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->role->name }}</td>
-            <td>{{ $user->created_at }}</td>
-            <td>{{ $user->updated_at }}</td>
+            <td>@if($user->profile) {{ $user->profile->country }} @endif</td>
+            <td>
+                @if($user->profile)
+                    <user-local-time :time-zone="{{ $user->profile->time_zone }}" />
+                @endif
+            </td>
+            <td>{{ $user->paid_bets }}</td>
+            <td>{{ $user->pending_bets }}</td>
             <td>
                 <a href="{{ route('dashboard.users.show', ['user' => $user->id]) }}" id="show"><i class="material-icons" role="presentation">visibility</i></a>
                 <div class="mdl-tooltip" data-mdl-for="show">

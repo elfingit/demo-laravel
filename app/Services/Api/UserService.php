@@ -34,7 +34,8 @@ class UserService implements UserServiceContract
 			'first_name'     => $request->get('first_name'),
 			'last_name'     => $request->get('last_name'),
 			'date_of_birth' => $dateOfBirth,
-			'country'     => $request->get('country')
+			'country'     => $request->get('country'),
+            'time_zone'     => $request->get('time_zone')
 		]);
 
 		$user = UserModel::create([
