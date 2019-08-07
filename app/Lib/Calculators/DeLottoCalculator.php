@@ -9,14 +9,13 @@
 namespace App\Lib\Calculators;
 
 
+use App\Model\BetTicket as BetTicketModel;
 use App\Model\BrandResult as BrandResultModel;
-use Illuminate\Support\Collection;
 
 class DeLottoCalculator extends AbstractCalculator
 {
-    public function check( Collection $bets, BrandResultModel $result )
+    protected function checkTicket( BetTicketModel $ticket, BrandResultModel $result )
     {
-
+        // TODO: Implement checkTicket() method.
     }
-
 }

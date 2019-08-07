@@ -7,6 +7,7 @@
  */
 namespace App\Lib\Calculators;
 
+use App\Model\BetTicket as BetTicketModel;
 use App\Model\BrandResult as BrandResultModel;
 use Illuminate\Support\Collection;
 

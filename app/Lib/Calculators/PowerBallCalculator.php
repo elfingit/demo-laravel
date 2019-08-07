@@ -13,29 +13,6 @@ use Illuminate\Support\Collection;
 
 class PowerBallCalculator extends AbstractCalculator
 {
-    public function check( Collection $bets, BrandResultModel $result)
-    {
-        foreach ($bets as $bet) {
-            $tickets = $bet->wait_tickets;
-
-            $betWin = false;
-
-            foreach ($tickets as $ticket) {
-                $result = $this->checkTicket($ticket, $result);
-
-                if ($result == self::WIN) {
-                    $betWin = true;
-                }
-            }
-
-            if ($betWin === true) {
-                \Bet::markAsWin($bet);
-            } else {
-                \Bet::markAsPlayed($bet);
-            }
-        }
-    }
-
     protected function checkTicket(BetTicketModel $ticket, BrandResultModel $result)
     {
         $line = $ticket->line;
