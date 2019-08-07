@@ -45,59 +45,10 @@ class EuroMillionsCalculator extends AbstractCalculator
         sort( $line_result, SORT_NUMERIC );
 
         $diff = array_diff( $line_result, $line );
-        //Match 2
-        if (count($diff) == 3 && $this->checkLuckyStar($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 4.17 );
 
-            return self::WIN;
-        //Match 2 + 1 lucky star
-        } elseif (count($diff) == 3 && $this->checkLuckyStar($result, $ticket) === 1) {
-            \Ticket::markTicketAsWin( $ticket, 8.07 );
-
-            return self::WIN;
-        //Match 1 + 2 lucky stars
-        } elseif (count($diff) == 4 && $this->checkLuckyStar($result, $ticket) === 2) {
-            \Ticket::markTicketAsWin( $ticket, 10.69 );
-
-            return self::WIN;
-        //Match 3
-        } elseif (count($diff) == 2 && $this->checkLuckyStar($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 12.20 );
-
-            return self::WIN;
-        //Match 3 + 1 lucky star
-        } elseif (count($diff) == 2 && $this->checkLuckyStar($result, $ticket) === 1) {
-            \Ticket::markTicketAsWin( $ticket, 14.66 );
-
-            return self::WIN;
-        //Match 2 + 2 lucky stars
-        } elseif (count($diff) == 3 && $this->checkLuckyStar($result, $ticket) === 2) {
-            \Ticket::markTicketAsWin( $ticket, 19.98 );
-
-            return self::WIN;
-        //Match 4
-        } elseif (count($diff) == 1 && $this->checkLuckyStar($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 89.32 );
-
-            return self::WIN;
-        //Match 3 + 2 lucky star
-        } elseif (count($diff) == 2 && $this->checkLuckyStar($result, $ticket) === 2) {
-            \Ticket::markTicketAsWin( $ticket, 79.71 );
-
-            return self::WIN;
-        //Match 4 + 1 lucky star
-        } elseif (count($diff) == 1 && $this->checkLuckyStar($result, $ticket) === 1) {
-            \Ticket::markTicketAsWin( $ticket, 198.01 );
-
-            return self::WIN;
-        //Match 4 + 2 lucky stars
-        } elseif (count($diff) == 1 && $this->checkLuckyStar($result, $ticket) === 2) {
-            \Ticket::markTicketAsWin( $ticket, 4298.29 );
-
-            return self::WIN;
-        //Match 5
-        } elseif (count($diff) == 0 && $this->checkLuckyStar($result, $ticket) === false) {
-            \Ticket::markTicketAsWin( $ticket, 76198.92 );
+        //Match 5 + 2 lucky stars
+        if (count($diff) == 0 && $this->checkLuckyStar($result, $ticket) === 2) {
+            \Ticket::markTicketAsWin( $ticket, 50177266.94 );
 
             return self::WIN;
         //Match 5 + 1 lucky star
@@ -105,16 +56,66 @@ class EuroMillionsCalculator extends AbstractCalculator
             \Ticket::markTicketAsWin( $ticket, 440951.13 );
 
             return self::WIN;
-        //Match 5 + 2 lucky stars
-        } elseif (count($diff) == 0 && $this->checkLuckyStar($result, $ticket) === 2) {
-            \Ticket::markTicketAsWin( $ticket, 50177266.94 );
+        //Match 5
+        } elseif (count($diff) == 0 && $this->checkLuckyStar($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 76198.92 );
 
             return self::WIN;
-        } else {
-            \Ticket::markTicketAsPlayed( $ticket );
+        //Match 4 + 2 lucky stars
+        } elseif (count($diff) == 1 && $this->checkLuckyStar($result, $ticket) === 2) {
+            \Ticket::markTicketAsWin( $ticket, 4298.29 );
 
-            return self::NOT_WIN;
+            return self::WIN;
+        //Match 4 + 1 lucky star
+        } elseif (count($diff) == 1 && $this->checkLuckyStar($result, $ticket) === 1) {
+            \Ticket::markTicketAsWin( $ticket, 198.01 );
+
+            return self::WIN;
+        //Match 3 + 2 lucky star
+        } elseif (count($diff) == 2 && $this->checkLuckyStar($result, $ticket) === 2) {
+            \Ticket::markTicketAsWin( $ticket, 79.71 );
+
+            return self::WIN;
+        //Match 4
+        } elseif (count($diff) == 1 && $this->checkLuckyStar($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 89.32 );
+
+            return self::WIN;
+        //Match 2 + 2 lucky stars
+        } elseif (count($diff) == 3 && $this->checkLuckyStar($result, $ticket) === 2) {
+            \Ticket::markTicketAsWin( $ticket, 19.98 );
+
+            return self::WIN;
+        //Match 3 + 1 lucky star
+        } elseif (count($diff) == 2 && $this->checkLuckyStar($result, $ticket) === 1) {
+            \Ticket::markTicketAsWin( $ticket, 14.66 );
+
+            return self::WIN;
+        //Match 3
+        } elseif (count($diff) == 2 && $this->checkLuckyStar($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 12.20 );
+
+            return self::WIN;
+        //Match 1 + 2 lucky stars
+        } elseif (count($diff) == 4 && $this->checkLuckyStar($result, $ticket) === 2) {
+            \Ticket::markTicketAsWin( $ticket, 10.69 );
+
+            return self::WIN;
+        //Match 2 + 1 lucky star
+        } elseif (count($diff) == 3 && $this->checkLuckyStar($result, $ticket) === 1) {
+            \Ticket::markTicketAsWin( $ticket, 8.07 );
+
+            return self::WIN;
+        //Match 2
+        } elseif (count($diff) == 3 && $this->checkLuckyStar($result, $ticket) === false) {
+            \Ticket::markTicketAsWin( $ticket, 4.17 );
+
+            return self::WIN;
         }
+
+        \Ticket::markTicketAsPlayed( $ticket );
+
+        return self::NOT_WIN;
     }
 
     protected function checkLuckyStar(BrandResultModel $result, BetTicketModel $ticket)

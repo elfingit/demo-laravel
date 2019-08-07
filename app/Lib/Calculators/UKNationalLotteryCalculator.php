@@ -46,24 +46,8 @@ class UKNationalLotteryCalculator extends AbstractCalculator
 
         $diff = array_diff( $line_result, $line );
 
-        //2 numbers
-        if (count($diff) == 4) {
-            \Ticket::markTicketAsWin( $ticket, 2.18 );
-
-            return self::WIN;
-        //3 numbers
-        } elseif (count($diff) == 3) {
-            \Ticket::markTicketAsWin( $ticket, 27.30 );
-
-            return self::WIN;
-        //4 numbers
-        } elseif (count($diff) == 2) {
-            \Ticket::markTicketAsWin( $ticket, 152.87 );
-
-            return self::WIN;
-        //5 numbers
-        } elseif (count($diff) == 1) {
-            \Ticket::markTicketAsWin( $ticket, 1911.34 );
+        if (count($diff) == 0) {
+            \Ticket::markTicketAsWin( $ticket, 10919274.23 );
 
             return self::WIN;
         }
@@ -76,10 +60,24 @@ class UKNationalLotteryCalculator extends AbstractCalculator
             \Ticket::markTicketAsWin( $ticket, 1092191.92 );
 
             return self::WIN;
-        }
+            //5 numbers
+        } elseif (count($diff) == 1) {
+            \Ticket::markTicketAsWin( $ticket, 1911.34 );
 
-        if (count($diff) == 0) {
-            \Ticket::markTicketAsWin( $ticket, 10919274.23 );
+            return self::WIN;
+        //4 numbers
+        } elseif (count($diff) == 2) {
+            \Ticket::markTicketAsWin( $ticket, 152.87 );
+
+            return self::WIN;
+        //3 numbers
+        } elseif (count($diff) == 3) {
+            \Ticket::markTicketAsWin( $ticket, 27.30 );
+
+            return self::WIN;
+        //2 numbers
+        } elseif (count($diff) == 4) {
+            \Ticket::markTicketAsWin( $ticket, 2.18 );
 
             return self::WIN;
         }

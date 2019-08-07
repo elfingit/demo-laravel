@@ -97,7 +97,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'euromillions', EuroMillionsCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'eurojackpot', EuroJackpotCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_mega_millions', MegaMillionsCalculator::class);
-        //$this->app->bind(WinningsService::CALCULATOR_PREFIX.'uk_national', UKNationalLotteryCalculator::class);
+        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'uk_national', UKNationalLotteryCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'de_lotto', DeLottoCalculator::class);
     }
 }
