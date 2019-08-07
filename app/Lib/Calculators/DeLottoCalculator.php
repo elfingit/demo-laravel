@@ -37,9 +37,8 @@ class DeLottoCalculator extends AbstractCalculator
                 \Bet::markAsPlayed($bet);
             }
 
-            //TODO check spiel77 and super6
-
-            $this->checkSpiel77($bet);
+            $this->checkSpiel77($bet, $result);
+            $this->checkSuper6($bet, $result);
         }
     }
 
@@ -111,8 +110,120 @@ class DeLottoCalculator extends AbstractCalculator
         return $powerBallActual === $powerBallExpected;
     }
 
-    protected function checkSpiel77(BetModel $bet)
+    protected function checkSpiel77(BetModel $bet, BrandResultModel $result)
     {
+        $ticket = $bet->tickets[0];
 
+        $gameIsExists = false;
+
+        foreach ($ticket->extra_games as $game) {
+            if ($game['system_name'] == 'speil77') {
+                $gameIsExists = true;
+            }
+        }
+
+        if (!$gameIsExists) {
+            return;
+        }
+
+        if ($bet->additional_data && $bet->additional_data->ticket_number) {
+            $spiel77 = (string)$result->results->additional_games->spiel77;
+
+            $count = 0;
+
+            for($i = 7; $i >= 1; $i--) {
+                $n1 = intval($bet->additional_data->ticket_number->{'n'. $i});
+                $n2 = intval(mb_substr($spiel77, $i - 1, 1));
+
+                if ($n1 === $n2) {
+                    $count++;
+                }
+            }
+
+            if ($count > 0) {
+                $amount = $this->getSpiel77Amount($count);
+
+                $bet->additional_data->spiel77 = $amount;
+                \Bet::markAsWin($bet);
+            }
+        }
+    }
+
+    protected function checkSuper6(BetModel $bet, BrandResultModel $result)
+    {
+        $ticket = $bet->tickets[0];
+
+        $gameIsExists = false;
+
+        foreach ($ticket->extra_games as $game) {
+            if ($game['system_name'] == 'super6') {
+                $gameIsExists = true;
+            }
+        }
+
+        if (!$gameIsExists) {
+            return;
+        }
+
+        if ($bet->additional_data && $bet->additional_data->ticket_number) {
+            $super6 = (string) $result->results->additional_games->super6;
+
+            $count = 0;
+
+            for($i = 7; $i >= 2; $i--) {
+                $n1 = intval($bet->additional_data->ticket_number->{'n'. $i});
+                $n2 = intval(mb_substr($super6, $i - 1, 1));
+
+                if ($n1 === $n2) {
+                    $count++;
+                }
+            }
+
+            if ($count > 0) {
+                $amount = $this->getSuper6Amount($count);
+
+                $bet->additional_data->super6 = $amount;
+                \Bet::markAsWin($bet);
+            }
+        }
+    }
+
+    protected function getSpiel77Amount($numbers)
+    {
+        switch ($numbers) {
+            case 7:
+                return 877777;
+            case 6:
+                return 77777;
+            case 5:
+                return 7777;
+            case 4:
+                return 777;
+            case 3:
+                return 77;
+            case 2:
+                return 17;
+            case 1:
+                return 5;
+        }
+    }
+
+    protected function getSuper6Amount($numbers)
+    {
+        switch ($numbers) {
+            case 6:
+                return 100000;
+            case 5:
+                return 6666;
+            case 4:
+                return 666;
+            case 3:
+                return 66;
+            case 2:
+                return 6;
+            case 1:
+                return 2.5;
+
+        }
     }
 }
