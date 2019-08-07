@@ -55,6 +55,7 @@ class UKNationalLotteryCalculator extends AbstractCalculator
         $tmp_line = $this->makeBonusBallLine($result, $line);
 
         $tmp_diff = array_diff($line_result, $tmp_line);
+
         //5 numbers + bonus ball
         if (count($tmp_diff) == 0) {
             \Ticket::markTicketAsWin( $ticket, 1092191.92 );
@@ -89,9 +90,15 @@ class UKNationalLotteryCalculator extends AbstractCalculator
 
     protected function makeBonusBallLine(BrandResultModel $result, $line)
     {
+
+        $extra_ball = intval($result->results->extra_ball);
+
+        if (in_array($extra_ball, $line)) {
+            return $line;
+        }
+
         $line[count($line) - 1] = $result->results->extra_ball;
         sort($line, SORT_NUMERIC);
-
         return $line;
     }
 }
