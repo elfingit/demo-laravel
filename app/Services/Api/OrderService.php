@@ -78,7 +78,9 @@ class OrderService implements OrderServiceContract
             ];
 
             if ($brand->api_code == 'de_lotto') {
-                $betData['additional_data'] = $item['ticketNumber'];
+                $betData['additional_data'] = [
+                    'ticket_number' => $item['ticketNumber']
+                ];
             }
 
             if (is_array($drawDate)) {
