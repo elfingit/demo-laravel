@@ -3320,9 +3320,8 @@ __webpack_require__.r(__webpack_exports__);
       var date = new Date(new Date().toLocaleString("en-US", {
         timeZone: "UTC"
       }));
-      console.log(date);
       date.setTime(date.getTime() + _self.$props.timeZone * 60 * 1000);
-      _self.time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+      _self.time = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
     }, 1000);
   }
 });
