@@ -82,8 +82,4 @@
         height: 15px;
         float: right;
     }
-
-    div.loader svg g {
-        fill: red;
-    }
 </style>

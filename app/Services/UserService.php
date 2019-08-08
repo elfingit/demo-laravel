@@ -55,4 +55,12 @@ class UserService implements UserServiceContract
 
         return $user;
     }
+
+    public function changeAuthorizationStatus( FormRequest $request, UserModel $user )
+    {
+        $user->is_authorized = $request->get('auth');
+        $user->save();
+
+        return $user;
+    }
 }

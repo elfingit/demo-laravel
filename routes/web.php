@@ -56,6 +56,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 		    'uses'  => 'UserController@changeStatus',
             'as'    => 'users.status.update'
         ]);
+
+        Route::put('/users/{user}/authorized', [
+            'uses'  => 'UserController@changeAuthorized',
+            'as'    => 'users.authorized.update'
+        ]);
 	});
 
 	Route::get('/leads', [

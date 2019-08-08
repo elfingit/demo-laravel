@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserChangeAuthorizedRequest;
 use App\Http\Requests\UserChangeStatusRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Lib\Query\Criteria;
@@ -106,5 +107,10 @@ class UserController extends Controller
         \User::changeStatus($request, $user);
 
         return response()->json(null, 204);
+    }
+
+    public function changeAuthorized(UserChangeAuthorizedRequest $request, UserModel $user)
+    {
+        \User::changeAuthorizationStatus($request, $user);
     }
 }
