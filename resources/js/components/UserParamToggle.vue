@@ -1,6 +1,12 @@
 <template>
     <div>
-        <ToggleButton :value="isAuthorized" @change="onChange" :disabled="disabled" :labels="{checked: label.checked, unchecked: label.unchecked}" :width="100" />
+        <ToggleButton
+            :value="isAuthorized"
+            @change="onChange"
+            :disabled="disabled"
+            :labels="{checked: label.checked, unchecked: label.unchecked}"
+            :color="this.color"
+            :width="100" />
         <div class="loader" v-if="loading">
             <Loader />
         </div>
@@ -18,7 +24,7 @@
 
         components: {Loader, ToggleButton },
 
-        props: ['userId', 'status', 'paramName', 'label'],
+        props: ['userId', 'status', 'paramName', 'label', 'color'],
 
         data() {
             return {

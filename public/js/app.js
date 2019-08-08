@@ -3354,6 +3354,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3364,7 +3370,7 @@ __webpack_require__.r(__webpack_exports__);
     Loader: _Loader__WEBPACK_IMPORTED_MODULE_3__["default"],
     ToggleButton: vue_js_toggle_button__WEBPACK_IMPORTED_MODULE_0__["ToggleButton"]
   },
-  props: ['userId', 'status', 'paramName', 'label'],
+  props: ['userId', 'status', 'paramName', 'label', 'color'],
   data: function data() {
     return {
       disabled: false,
@@ -43661,6 +43667,7 @@ var render = function() {
             checked: _vm.label.checked,
             unchecked: _vm.label.unchecked
           },
+          color: this.color,
           width: 100
         },
         on: { change: _vm.onChange }

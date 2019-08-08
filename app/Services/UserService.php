@@ -67,6 +67,14 @@ class UserService implements UserServiceContract
                 $user->phone_confirmed = $request->get('value');
                 $user->save();
                 break;
+            case 'is_fraud_suspected':
+                $user->is_fraud_suspected = $request->get('value');
+                $user->save();
+                break;
+            case 'is_test_account':
+                $user->is_test_account = $request->get('value');
+                $user->save();
+                break;
         }
 
         return $user;

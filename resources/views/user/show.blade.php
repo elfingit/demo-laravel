@@ -118,7 +118,44 @@
                                     />
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <span><b>{{ __('Registration Date') }}:</b></span>
+                                </td>
+                                <td colspan="2">
+                                    <span class="item-text-body">{{ $user->created_at->format('d-m-Y H:i:s') }}</span>
+                                </td>
+                            </tr>
                             @endif
+                            <tr>
+                                <td>
+                                    <span><b>{{ __('Test') }}:</b></span>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <user-param-toggle
+                                        :param-name="'is_test_account'"
+                                        :status="{{ $user->is_test_account == true ? 1 : 0 }}"
+                                        :user-id="{{ $user->id }}"
+                                        :label="{checked: 'Yes', unchecked: 'No'}"
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span><b>{{ __('Fraud Suspected') }}:</b></span>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <user-param-toggle
+                                        :param-name="'is_fraud_suspected'"
+                                        :status="{{ $user->is_fraud_suspected == true ? 1 : 0 }}"
+                                        :user-id="{{ $user->id }}"
+                                        :color="{checked: '#FF0000'}"
+                                        :label="{checked: 'Yes', unchecked: 'No'}"
+                                    />
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

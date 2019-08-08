@@ -17,15 +17,7 @@ class User extends Authenticatable
 
     use HasApiTokens, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-    	'email', 'password', 'user_role_id',
-        'status',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -82,5 +74,10 @@ class User extends Authenticatable
         return $this->leads()
                 ->where('leads.status', Lead::STATUS_NEW)
                 ->count(['leads.id']);
+    }
+
+    public function address()
+    {
+        return $this->hasOne(UserAddress::class, 'user_id', 'id');
     }
 }

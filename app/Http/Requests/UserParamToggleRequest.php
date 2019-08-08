@@ -13,7 +13,7 @@ class UserParamToggleRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|in:phone_confirmed,authorized',
+            'name' => 'required|string|in:phone_confirmed,authorized,is_test_account,is_fraud_suspected',
             'value' => 'required|boolean'
         ];
     }
