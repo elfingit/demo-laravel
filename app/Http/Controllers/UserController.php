@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserChangeAuthorizedRequest;
 use App\Http\Requests\UserChangeStatusRequest;
+use App\Http\Requests\UserShowFieldRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
@@ -112,5 +113,14 @@ class UserController extends Controller
     public function changeAuthorized(UserChangeAuthorizedRequest $request, UserModel $user)
     {
         \User::changeAuthorizationStatus($request, $user);
+    }
+
+    public function showField(UserShowFieldRequest $request, UserModel $user)
+    {
+        $value = \User::getFieldValue($request->get('field'), $user);
+
+        return response()->json([
+            'result'    => $value
+        ]);
     }
 }

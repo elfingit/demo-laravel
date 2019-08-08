@@ -32,6 +32,7 @@ Vue.component('user-status', require('./components/UserStatus').default);
 Vue.component('count-down-timer', require('./components/CountDownTimer').default);
 Vue.component('user-local-time', require('./components/UserLocalTime').default);
 Vue.component('user-authorized-toggle', require('./components/UserAuthorizedToggle').default);
+Vue.component('show-button', require('./components/ShowButton').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

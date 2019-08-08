@@ -63,4 +63,12 @@ class UserService implements UserServiceContract
 
         return $user;
     }
+
+    public function getFieldValue( $field, UserModel $user )
+    {
+        switch ($field) {
+            case 'email':
+                return $user->email;
+        }
+    }
 }

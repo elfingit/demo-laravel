@@ -61,6 +61,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'uses'  => 'UserController@changeAuthorized',
             'as'    => 'users.authorized.update'
         ]);
+
+        Route::get('/users/{user}/show_field', [
+            'uses'  => 'UserController@showField',
+            'as'    => 'users.show.field'
+        ]);
 	});
 
 	Route::get('/leads', [

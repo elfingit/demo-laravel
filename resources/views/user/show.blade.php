@@ -78,6 +78,14 @@
                                 </td>
                             </tr>
                             @endif
+                            <tr>
+                                <td>
+                                    <span><b>{{ __('Email') }}:</b></span>
+                                </td>
+                                <td colspan="2">
+                                    <show-button :url="'{{ route('dashboard.crm_api.users.show.field', ['user' => $user->id]) }}'" :param="'email'" />
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
