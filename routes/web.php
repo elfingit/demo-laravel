@@ -66,6 +66,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'uses'  => 'UserController@showField',
             'as'    => 'users.show.field'
         ]);
+
+        Route::get('/users/{user}/bets', [
+            'uses'  => 'UserController@bets',
+            'as'    => 'users.bets.index'
+        ]);
 	});
 
 	Route::get('/leads', [

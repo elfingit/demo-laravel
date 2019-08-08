@@ -6,6 +6,7 @@ use App\Http\Requests\UserParamToggleRequest;
 use App\Http\Requests\UserChangeStatusRequest;
 use App\Http\Requests\UserShowFieldRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserBetsCollection;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
 use Illuminate\Http\Request;
@@ -128,5 +129,12 @@ class UserController extends Controller
         return response()->json([
             'result'    => $value
         ]);
+    }
+
+    public function bets(UserModel $user)
+    {
+        $bets = \Bet::getByUser($user);
+
+        return new UserBetsCollection($bets);
     }
 }

@@ -33,6 +33,8 @@ Vue.component('count-down-timer', require('./components/CountDownTimer').default
 Vue.component('user-local-time', require('./components/UserLocalTime').default);
 Vue.component('user-param-toggle', require('./components/UserParamToggle').default);
 Vue.component('show-button', require('./components/ShowButton').default);
+Vue.component('expandable-area', require('./components/ExpandableArea').default);
+Vue.component('user-bets', require('./components/UserBets').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

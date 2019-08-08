@@ -156,6 +156,14 @@
                                     />
                                 </td>
                             </tr>
+                            @if($user->available_balance)
+                                <tr>
+                                    <td>
+                                        <span><b>{{ __('Current Balance') }}:</b></span>
+                                    </td>
+                                    <td colspan="2">&euro; {{ $user->available_balance->amount }}</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -216,5 +224,12 @@
             </div>
         </div>
         @endif
+        <div class="mdl-cell mdl-cell--12-col">
+            <expandable-area title="Order history">
+                <template v-slot:content>
+                    <user-bets user-id="{{ $user->id }}" />
+                </template>
+            </expandable-area>
+        </div>
     </div>
 @endsection

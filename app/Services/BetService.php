@@ -10,6 +10,7 @@ namespace App\Services;
 use App\Events\BetChangeStatusEvent;
 use App\Lib\Query\Criteria;
 use App\Model\Bet as BetModel;
+use App\Model\User as UserModel;
 use App\Services\Contracts\BetServiceContract;
 use Illuminate\Http\Request;
 
@@ -64,5 +65,15 @@ class BetService implements BetServiceContract
     {
         $bet->status = BetModel::STATUS_PLAYED;
         $bet->save();
+    }
+
+    public function getByUser( UserModel $user )
+    {
+        $query = BetModel::query();
+
+        return $query->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(25);
+
     }
 }

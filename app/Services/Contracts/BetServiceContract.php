@@ -7,6 +7,7 @@
  */
 namespace App\Services\Contracts;
 use App\Model\Bet as BetModel;
+use App\Model\User as UserModel;
 use Illuminate\Http\Request;
 
 interface BetServiceContract
@@ -19,4 +20,6 @@ interface BetServiceContract
 
     public function markAsWin(BetModel $bet);
     public function markAsPlayed(BetModel $bet);
+
+    public function getByUser(UserModel $user);
 }

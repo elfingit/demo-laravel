@@ -11,6 +11,9 @@
         "api-doc": "./node_modules/.bin/apidoc -i app/Http/Controllers/Api -o apidoc/ && ./node_modules/.bin/apidoc-markdown -p apidoc/ -o apidoc/api.md"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.21",
+        "@fortawesome/free-solid-svg-icons": "^5.10.1",
+        "@fortawesome/vue-fontawesome": "^0.1.6",
         "@rigwild/apidoc-markdown": "^2.1.0",
         "apidoc": "^0.17.7",
         "axios": "^0.18",
