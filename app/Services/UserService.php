@@ -56,10 +56,18 @@ class UserService implements UserServiceContract
         return $user;
     }
 
-    public function changeAuthorizationStatus( FormRequest $request, UserModel $user )
+    public function paramToggle( FormRequest $request, UserModel $user )
     {
-        $user->is_authorized = $request->get('auth');
-        $user->save();
+        switch ($request->get('name')) {
+            case 'authorized':
+                $user->is_authorized = $request->get('value');
+                $user->save();
+                break;
+            case 'phone_confirmed':
+                $user->phone_confirmed = $request->get('value');
+                $user->save();
+                break;
+        }
 
         return $user;
     }

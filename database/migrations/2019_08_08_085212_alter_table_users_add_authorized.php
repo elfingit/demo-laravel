@@ -15,6 +15,7 @@ class AlterTableUsersAddAuthorized extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('is_authorized')->default(false);
+            $table->boolean('phone_confirmed')->default(false);
         });
     }
 
@@ -27,6 +28,7 @@ class AlterTableUsersAddAuthorized extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('is_authorized');
+            $table->dropColumn('phone_confirmed');
         });
     }
 }

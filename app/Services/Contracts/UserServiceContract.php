@@ -19,6 +19,6 @@ interface UserServiceContract
 	public function update(UserUpdateRequest $request, UserModel $user);
 	public function getStatuses();
 	public function changeStatus(FormRequest $request, UserModel $user);
-	public function changeAuthorizationStatus(FormRequest $request, UserModel $user);
+	public function paramToggle(FormRequest $request, UserModel $user);
 	public function getFieldValue($field, UserModel $user);
 }

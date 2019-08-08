@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class UserChangeAuthorizedRequest extends AbstractRequest
+class UserParamToggleRequest extends AbstractRequest
 {
 
     /**
@@ -13,7 +13,8 @@ class UserChangeAuthorizedRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'auth' => 'required|boolean'
+            'name' => 'required|string|in:phone_confirmed,authorized',
+            'value' => 'required|boolean'
         ];
     }
 }

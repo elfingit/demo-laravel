@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserChangeAuthorizedRequest;
+use App\Http\Requests\UserParamToggleRequest;
 use App\Http\Requests\UserChangeStatusRequest;
 use App\Http\Requests\UserShowFieldRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -110,14 +110,20 @@ class UserController extends Controller
         return response()->json(null, 204);
     }
 
-    public function changeAuthorized(UserChangeAuthorizedRequest $request, UserModel $user)
+    public function paramToggle(UserParamToggleRequest $request, UserModel $user)
     {
-        \User::changeAuthorizationStatus($request, $user);
+        \User::paramToggle($request, $user);
+
+        return response()->json(null, 204);
     }
 
     public function showField(UserShowFieldRequest $request, UserModel $user)
     {
         $value = \User::getFieldValue($request->get('field'), $user);
+
+        if (is_null($value)) {
+            $value = 'phone not provided';
+        }
 
         return response()->json([
             'result'    => $value

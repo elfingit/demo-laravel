@@ -31,7 +31,7 @@ Vue.component('bet-status', require('./components/BetStatus').default);
 Vue.component('user-status', require('./components/UserStatus').default);
 Vue.component('count-down-timer', require('./components/CountDownTimer').default);
 Vue.component('user-local-time', require('./components/UserLocalTime').default);
-Vue.component('user-authorized-toggle', require('./components/UserAuthorizedToggle').default);
+Vue.component('user-param-toggle', require('./components/UserParamToggle').default);
 Vue.component('show-button', require('./components/ShowButton').default);
 
 /**

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ToggleButton :value="isAuthorized" @change="onChange" :disabled="disabled" :labels="{checked: 'Authorized', unchecked: 'Not authorized'}" :width="100" />
+        <ToggleButton :value="isAuthorized" @change="onChange" :disabled="disabled" :labels="{checked: label.checked, unchecked: label.unchecked}" :width="100" />
         <div class="loader" v-if="loading">
             <Loader />
         </div>
@@ -14,11 +14,11 @@
     import Loader from "./Loader";
 
     export default {
-        name: "UserAuthorizedToggle",
+        name: "UserParamToggle",
 
         components: {Loader, ToggleButton },
 
-        props: ['userId', 'status'],
+        props: ['userId', 'status', 'paramName', 'label'],
 
         data() {
             return {
@@ -35,11 +35,14 @@
 
                 let _self = this;
 
-                const url = url_builder(USER_URL_PREFIX, '', this.$props.userId + '/authorized');
+                const url = url_builder(USER_URL_PREFIX, '', this.$props.userId + '/param_toggle');
 
-                axios.put(url, {
-                    'auth': v.value === true ? 1 : 0
-                }).then((response) => {
+                let params = {
+                    'name': this.$props.paramName,
+                    'value': v.value === true ? 1 : 0
+                };
+
+                axios.put(url, params).then((response) => {
 
                     _self.disabled = false;
                     _self.loading = false;

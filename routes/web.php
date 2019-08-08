@@ -57,9 +57,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'as'    => 'users.status.update'
         ]);
 
-        Route::put('/users/{user}/authorized', [
-            'uses'  => 'UserController@changeAuthorized',
-            'as'    => 'users.authorized.update'
+        Route::put('/users/{user}/param_toggle', [
+            'uses'  => 'UserController@paramToggle',
+            'as'    => 'users.authorized.param_toggle'
         ]);
 
         Route::get('/users/{user}/show_field', [
