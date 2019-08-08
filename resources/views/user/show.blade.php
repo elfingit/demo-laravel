@@ -1,7 +1,7 @@
 @extends('layouts.crm.dashboard')
 @section('crm_content')
     <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--5-col">
+        <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
                     @if ($user->profile)
@@ -161,5 +161,60 @@
                 </div>
             </div>
         </div>
+        @if($user->address)
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Address</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <table class="crm-table">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <span><b>{{ __('No') }}:</b></span>
+                            </td>
+                            <td colspan="2">
+                                <span class="item-text-body">{{ $user->address->house_number}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span><b>{{ __('Street') }}:</b></span>
+                            </td>
+                            <td colspan="2">
+                                <span class="item-text-body">{{ $user->address->street}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span><b>{{ __('Post Code') }}:</b></span>
+                            </td>
+                            <td colspan="2">
+                                <span class="item-text-body">{{ $user->address->zip}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span><b>{{ __('City') }}:</b></span>
+                            </td>
+                            <td colspan="2">
+                                <span class="item-text-body">{{ $user->address->city}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span><b>{{ __('County') }}:</b></span>
+                            </td>
+                            <td colspan="2">
+                                <span class="item-text-body">{{ $user->address->region}}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection
