@@ -9,7 +9,13 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-	use HasApiTokens, Notifiable;
+	const STATUS_ACTIVE = 'active';
+	const STATUS_SUSPENDED = 'suspended';
+	const STATUS_SELF_EXCLUDED = 'self-excluded';
+	const STATUS_SELF_CLOSED = 'self-closed';
+	const STATUS_CLOSED = 'closed';
+
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +24,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
     	'email', 'password', 'user_role_id',
+        'status',
     ];
 
     /**

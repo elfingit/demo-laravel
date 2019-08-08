@@ -28,6 +28,7 @@ Vue.component('select-box', require('./components/SelectBox').default);
 Vue.component('user-available-balance', require('./components/UserAvailableBalance').default);
 Vue.component('brand-extra-games', require('./components/BrandExtraGames').default);
 Vue.component('bet-status', require('./components/BetStatus').default);
+Vue.component('user-status', require('./components/UserStatus').default);
 Vue.component('count-down-timer', require('./components/CountDownTimer').default);
 Vue.component('user-local-time', require('./components/UserLocalTime').default);
 

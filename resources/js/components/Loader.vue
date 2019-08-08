@@ -2,7 +2,7 @@
     <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
     <!-- Todo: add easing -->
     <svg width="100%" height="100%" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg" stroke="#1d78c4">
-        <g fill="none" fill-rule="evenodd">
+        <g :fill="fillColor" fill-rule="evenodd">
             <g transform="translate(1 1)" stroke-width="2">
                 <circle cx="5" cy="50" r="5">
                     <animate attributeName="cy"
@@ -50,7 +50,21 @@
 
 <script>
     export default {
-        name: "Loader"
+        name: "Loader",
+
+        props: ["color"],
+
+        data() {
+            return {
+                fillColor: 'none'
+            }
+        },
+
+        mounted() {
+            if (this.$props.color) {
+                this.fillColor = this.$props.color;
+            }
+        }
     }
 </script>
 

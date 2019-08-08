@@ -4,7 +4,11 @@
         <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">{{ __('User data') }} : {{ $user->email }}</h2>
+                    @if ($user->profile)
+                    <h2 class="mdl-card__title-text">{{ $user->profile->first_name }} {{ $user->profile->last_name }}</h2>
+                        &nbsp;
+                    @endif
+                    <user-status user-id="{{ $user->id }}" status="{{ $user->status }}" :statuses="{{ json_encode(\User::getStatuses()) }}" />
                 </div>
                 <div class="mdl-card__supporting-text">
                     <div class="mdl-list">
@@ -46,7 +50,11 @@
                                 <span><b>{{ __('Birthday') }}:</b></span>
                             </span>
                                 <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $user->profile->date_of_birth->format('m-d-Y') }}</span>
+                                <span class="mdl-list__item-text-body">
+                                    @if ($user->profile->date_of_birth)
+                                    {{ $user->profile->date_of_birth->format('m-d-Y') }}
+                                    @endif
+                                </span>
                             </span>
                         </div>
                         <div class="mdl-list__item">

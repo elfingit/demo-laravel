@@ -51,6 +51,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 		    'uses'  => 'BetController@update',
 		    'as'  => 'bet.update',
         ]);
+
+		Route::put('/users/{user}/status', [
+		    'uses'  => 'UserController@changeStatus',
+            'as'    => 'users.status.update'
+        ]);
 	});
 
 	Route::get('/leads', [

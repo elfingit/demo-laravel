@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserChangeStatusRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
@@ -98,5 +99,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(UserChangeStatusRequest $request, UserModel $user)
+    {
+        \User::changeStatus($request, $user);
+
+        return response()->json(null, 204);
     }
 }

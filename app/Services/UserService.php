@@ -13,6 +13,7 @@ use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
 use App\Model\UserRole as UserRoleModel;
 use App\Services\Contracts\UserServiceContract;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UserService implements UserServiceContract
 {
@@ -35,4 +36,23 @@ class UserService implements UserServiceContract
 
 		$user->save();
 	}
+
+    public function getStatuses()
+    {
+        return [
+            UserModel::STATUS_ACTIVE => 'Active',
+            UserModel::STATUS_SUSPENDED => 'Suspended',
+            UserModel::STATUS_SELF_EXCLUDED => 'Self excluded',
+            UserModel::STATUS_SELF_CLOSED => 'Self closed',
+            UserModel::STATUS_CLOSED => 'Closed',
+        ];
+    }
+
+    public function changeStatus( FormRequest $request, UserModel $user )
+    {
+        $user->status = $request->get('status');
+        $user->save();
+
+        return $user;
+    }
 }

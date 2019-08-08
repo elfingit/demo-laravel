@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const BRAND_URL_PREFIX = '/dashboard/crm_api/brands/';
 const BET_URL_PREFIX = '/dashboard/crm_api/bets/';
+const USER_URL_PREFIX = '/dashboard/crm_api/users/';
 
 const url_builder = (prefix, path, params) => {
     return prefix + path + params
@@ -89,6 +90,7 @@ module.exports = {
     url_builder,
     BRAND_URL_PREFIX,
     BET_URL_PREFIX,
+    USER_URL_PREFIX,
     show_form_errors,
     clear_form_errors,
     difference_date_string

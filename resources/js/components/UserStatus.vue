@@ -2,26 +2,28 @@
     <div class="status-selector">
         <div class="dev-input">
             <div class="select">
-                <div class="loader" v-if="loading"><Loader /></div>
                 <select v-model="currentStatus" :disabled="disabled" v-on:change="onChange">
                     <option>Select status</option>
                     <option v-for="status in statuses_list" :selected="status.value==currentStatus" :value="status.value" :key="status.value">{{ status.name }}</option>
                 </select>
+                <div class="loader" v-if="loading"><Loader color="#ffffff" /></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+
     import Loader from "./Loader";
     import axios from "axios";
-    import { BET_URL_PREFIX, url_builder } from "../utils";
+    import { USER_URL_PREFIX, url_builder } from "../utils";
     import _ from "lodash";
 
     export default {
-        name: "BetStatus",
+        name: "UserStatus",
         components: {Loader},
-        props: ['status', 'betId', 'statuses'],
+
+        props: ['status', 'userId', 'statuses'],
 
         data() {
             return {
@@ -54,7 +56,7 @@
                 this.disabled = true;
                 this.loading = true;
 
-                const url = url_builder(BET_URL_PREFIX, '', this.$props.betId);
+                const url = url_builder(USER_URL_PREFIX, '', this.$props.userId + '/status');
 
                 let _self = this;
 
@@ -78,6 +80,10 @@
     div.loader {
         width: 15px;
         height: 15px;
-        float: left;
+        float: right;
+    }
+
+    div.loader svg g {
+        fill: red;
     }
 </style>
