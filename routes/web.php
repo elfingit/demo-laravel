@@ -90,6 +90,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 
 	Route::resource('users', 'UserController');
 
+	Route::get('/user/{user}/doc/{doc}', [
+	    'uses'  => 'UserAuthDocController@download',
+        'as'    => 'user.auth_docs.download'
+    ]);
+
 	Route::get('/users/{user}/available_balance/show', [
 		'uses'  => 'UserAvailableBalanceController@show',
 		'as'    => 'users.available_balance.show'

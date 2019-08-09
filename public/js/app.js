@@ -12886,8 +12886,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -12958,6 +12956,9 @@ __webpack_require__.r(__webpack_exports__);
       this.form.type = null;
       this.form.comments = null;
       this.$el.querySelector('form').querySelector('input[type=file]').value = '';
+    },
+    showFile: function showFile(doc) {
+      window.open('/dashboard/user/' + this.$props.userId + '/doc/' + doc.id, "width=400,height=300");
     }
   },
   updated: function updated() {
@@ -53509,7 +53510,20 @@ var render = function() {
             "tbody",
             _vm._l(_vm.docs, function(doc, index) {
               return _c("tr", { key: index }, [
-                _c("td", [_vm._v(_vm._s(doc.file_name))]),
+                _c("td", [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "link",
+                      on: {
+                        click: function($event) {
+                          return _vm.showFile(doc)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(doc.file_name))]
+                  )
+                ]),
                 _vm._v(" "),
                 _c(
                   "td",
@@ -53548,9 +53562,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(doc.comments))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(doc.created_at))]),
-                _vm._v(" "),
-                _c("td")
+                _c("td", [_vm._v(_vm._s(doc.created_at))])
               ])
             }),
             0
@@ -53718,9 +53730,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Comments")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Created At")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Actions")])
+      _c("th", [_vm._v("Created At")])
     ])
   },
   function() {

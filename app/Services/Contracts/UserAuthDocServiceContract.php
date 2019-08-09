@@ -8,6 +8,7 @@
 namespace App\Services\Contracts;
 
 use App\Model\User as UserModel;
+use App\Model\UserAuthDoc as UserAuthDocModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 interface UserAuthDocServiceContract
@@ -16,4 +17,5 @@ interface UserAuthDocServiceContract
     public function list(UserModel $user);
     public function rejectDoc(UserModel $user, FormRequest $request);
     public function approveDoc(UserModel $user, FormRequest $request);
+    public function getFile(UserModel $user, UserAuthDocModel $doc);
 }

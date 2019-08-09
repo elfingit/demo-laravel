@@ -17,7 +17,7 @@ class UserAuthDocService implements UserAuthDocServiceContract
     public function store( FormRequest $request )
     {
         $user_id = $request->get('user_id');
-        $path = storage_path('docs/' . $user_id);
+        $path = $this->getStoragePath($user_id);
 
         $file_name = $this->uploadDoc($path, $request);
 
@@ -80,6 +80,24 @@ class UserAuthDocService implements UserAuthDocServiceContract
                 $doc->save();
             }
         }
+    }
+
+    public function getFile( UserModel $user, UserAuthDocModel $doc )
+    {
+        $path = $this->getStoragePath($user->id);
+
+        $file = $path . '/' .$doc->file_name;
+
+        if (!file_exists($file)) {
+            return false;
+        }
+
+        return $file;
+    }
+
+    protected function getStoragePath($user_id)
+    {
+        return storage_path('docs/' . $user_id);
     }
 
     protected function uploadDoc($path, $request)

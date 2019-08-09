@@ -11,11 +11,10 @@
             <th>Type</th>
             <th>Comments</th>
             <th>Created At</th>
-            <th>Actions</th>
             </thead>
             <tbody>
             <tr v-for="(doc, index) in (docs)" :key="index">
-                <td>{{ doc.file_name }}</td>
+                <td><span class="link" @click="showFile(doc)">{{ doc.file_name }}</span></td>
                 <td>
                     <user-param-toggle
                         :param-name="'is_doc_approved'"
@@ -38,7 +37,6 @@
                 <td>{{ doc.type }}</td>
                 <td>{{ doc.comments }}</td>
                 <td>{{ doc.created_at }}</td>
-                <td></td>
             </tr>
             </tbody>
         </table>
@@ -161,6 +159,10 @@
                 this.form.comments = null;
 
                 this.$el.querySelector('form').querySelector('input[type=file]').value = '';
+            },
+
+            showFile(doc) {
+                window.open('/dashboard/user/' + this.$props.userId + '/doc/' + doc.id, "width=400,height=300");
             }
         },
 

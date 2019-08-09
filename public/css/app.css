@@ -271,3 +271,12 @@
   cursor: pointer;
 }
 
+.crm span.link {
+  cursor: pointer;
+  color: #1d78c4;
+}
+
+.crm span.link:hover {
+  text-decoration: underline;
+}
+
