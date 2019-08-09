@@ -27,6 +27,7 @@ use App\Services\Contracts\BrandServiceContract;
 use App\Services\Contracts\LeadServiceContract;
 use App\Services\Contracts\OrderServiceContract;
 use App\Services\Contracts\TicketServiceContract;
+use App\Services\Contracts\UserAuthDocServiceContract;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
 use App\Services\Contracts\UserRoleServiceContract;
 use App\Services\Contracts\UserServiceContract;
@@ -34,6 +35,7 @@ use App\Services\Contracts\WinningsServiceContract;
 use App\Services\LeadService;
 use App\Services\OrderService;
 use App\Services\TicketService;
+use App\Services\UserAuthDocService;
 use App\Services\UserAvailableBalanceService;
 use App\Services\UserRoleService;
 use App\Services\UserService;
@@ -79,6 +81,7 @@ class AppServiceProvider extends ServiceProvider
     	$this->app->bind(UserServiceContract::class, UserService::class);
     	$this->app->bind(UserRoleServiceContract::class, UserRoleService::class);
     	$this->app->bind(UserAvailableBalanceServiceContract::class, UserAvailableBalanceService::class);
+    	$this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
 
     	//Order
         $this->app->bind(OrderServiceContract::class, OrderService::class);
