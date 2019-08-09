@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserAddress::class, 'user_id', 'id');
     }
+
+    public function docs()
+    {
+        return $this->hasMany(UserAuthDoc::class, 'user_id', 'id');
+    }
 }

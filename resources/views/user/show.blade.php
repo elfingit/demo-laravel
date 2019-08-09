@@ -225,9 +225,16 @@
         </div>
         @endif
         <div class="mdl-cell mdl-cell--12-col">
-            <expandable-area title="Order history">
+            <expandable-area title="Bets history">
                 <template v-slot:content>
                     <user-bets user-id="{{ $user->id }}" />
+                </template>
+            </expandable-area>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <expandable-area title="User auth docs">
+                <template v-slot:content>
+                    <user-auth-docs user-id="{{ $user->id }}" />
                 </template>
             </expandable-area>
         </div>

@@ -35,6 +35,7 @@ Vue.component('user-param-toggle', require('./components/UserParamToggle').defau
 Vue.component('show-button', require('./components/ShowButton').default);
 Vue.component('expandable-area', require('./components/ExpandableArea').default);
 Vue.component('user-bets', require('./components/UserBets').default);
+Vue.component('user-auth-docs', require('./components/UserAuthDocs').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

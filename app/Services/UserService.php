@@ -75,6 +75,12 @@ class UserService implements UserServiceContract
                 $user->is_test_account = $request->get('value');
                 $user->save();
                 break;
+            case 'is_doc_rejected':
+                \UserAuthDoc::rejectDoc($user, $request);
+                break;
+            case 'is_doc_approved':
+                \UserAuthDoc::approveDoc($user, $request);
+                break;
         }
 
         return $user;

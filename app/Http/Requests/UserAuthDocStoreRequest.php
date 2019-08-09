@@ -14,10 +14,10 @@ class UserAuthDocStoreRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'doc'   => 'required|file',
+            'doc'   => 'required|file|mimes:jpeg,pdf',
             'type'  => 'required|string|min:2|max:255',
             'comments' => 'string|min:3|max:65535',
-            'user_id' => 'required|exists:users'
+            'user_id' => 'required|exists:users,id'
         ];
     }
 }

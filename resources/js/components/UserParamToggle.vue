@@ -24,7 +24,7 @@
 
         components: {Loader, ToggleButton },
 
-        props: ['userId', 'status', 'paramName', 'label', 'color'],
+        props: ['userId', 'status', 'paramName', 'label', 'color', 'entityId'],
 
         data() {
             return {
@@ -47,6 +47,10 @@
                     'name': this.$props.paramName,
                     'value': v.value === true ? 1 : 0
                 };
+
+                if (this.$props.entityId) {
+                    params.entityId = this.$props.entityId;
+                }
 
                 axios.put(url, params).then((response) => {
 
