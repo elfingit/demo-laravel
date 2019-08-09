@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Http\Requests\UserUpdateRequest;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
+use App\Model\UserProfile as UserProfileModel;
 use App\Model\UserRole as UserRoleModel;
 use App\Services\Contracts\UserServiceContract;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,7 +35,26 @@ class UserService implements UserServiceContract
 
 		$user->email = $request->get('email');
 
+		if ($request->has('email_subscription') && $request->get('email_subscription') == true) {
+		    $user->email_subscription = true;
+        }
+
 		$user->save();
+
+		$profile = $user->profile;
+
+		if (!$profile) {
+		    $profile = new UserProfileModel();
+		    $profile->user_id = $user->id;
+        }
+
+		$profile->honorific = $request->get('honorific');
+		$profile->first_name = $request->get('first_name');
+		$profile->last_name = $request->get('last_name');
+		$profile->phone = $request->get('phone');
+		$profile->country = $request->get('country');
+
+		$profile->save();
 	}
 
     public function getStatuses()

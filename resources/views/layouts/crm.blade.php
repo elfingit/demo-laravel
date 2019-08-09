@@ -13,6 +13,7 @@
     <!-- Scripts -->
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/getmdl-select.js') }}" defer></script>
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">

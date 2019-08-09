@@ -291,4 +291,15 @@
     span.link:hover {
         text-decoration: underline;
     }
+
+    .getmdl-select__fix-height {
+        .mdl-menu__container .mdl-menu {
+            overflow-y: scroll;
+            max-height: 288px !important;
+        }
+        .mdl-menu.mdl-menu--top-left {
+            bottom: auto;
+            top: 0;
+        }
+    }
 }

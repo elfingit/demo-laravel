@@ -11,6 +11,12 @@
                     <user-status user-id="{{ $user->id }}" status="{{ $user->status }}" :statuses="{{ json_encode(\User::getStatuses()) }}" />
                 </div>
                 <div class="mdl-card__supporting-text">
+                    <div>
+                        <a href="{{ route('dashboard.users.edit', ['user' => $user->id]) }}" id="edit"><i class="material-icons" role="presentation">edit</i></a>
+                        <div class="mdl-tooltip" data-mdl-for="edit">
+                            Edit user data
+                        </div>
+                    </div>
                     <table class="crm-table">
                         <tbody>
                             <tr>
