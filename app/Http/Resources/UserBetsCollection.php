@@ -6,6 +6,9 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserBetsCollection extends ResourceCollection
 {
+
+    public $collects = UserBetResource::class;
+
     /**
      * Transform the resource collection into an array.
      *

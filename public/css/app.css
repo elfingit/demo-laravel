@@ -238,3 +238,36 @@
   padding-left: 1rem;
 }
 
+.crm .crm-table {
+  width: 100%;
+}
+
+.crm .crm-table td {
+  line-height: 22px;
+}
+
+.crm .pagination ul {
+  list-style: none;
+}
+
+.crm .pagination ul li {
+  float: left;
+  display: inline;
+  margin: 0.5rem;
+}
+
+.crm .pagination ul li span {
+  background: #2196F3;
+  border-radius: 50%;
+  color: white;
+  width: 20px;
+  height: 20px;
+  display: block;
+  text-align: center;
+  line-height: 20px;
+}
+
+.crm .pagination a {
+  cursor: pointer;
+}
+

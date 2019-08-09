@@ -246,4 +246,40 @@
             }
         }
     }
+
+    .crm-table {
+        width: 100%;
+
+        td {
+            line-height: 22px;
+        }
+    }
+
+    .pagination {
+
+        ul {
+            list-style: none;
+
+            li {
+                float: left;
+                display: inline;
+                margin: 0.5rem;
+
+                span {
+                    background: #2196F3;
+                    border-radius: 50%;
+                    color: white;
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+                    text-align: center;
+                    line-height: 20px;
+                }
+            }
+        }
+
+        a {
+            cursor: pointer;
+        }
+    }
 }
