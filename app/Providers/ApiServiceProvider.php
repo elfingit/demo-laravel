@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Facades\Api\LoggerFacade;
+use App\Services\Api\BetService;
 use App\Services\Api\BrandService;
+use App\Services\Api\Contracts\BetServiceContract;
 use App\Services\Api\Contracts\BrandServiceContract;
 use App\Services\Api\Contracts\LeadServiceContract;
 use App\Services\Api\Contracts\OrderServiceContract;
@@ -51,5 +53,6 @@ class ApiServiceProvider extends ServiceProvider
 	    $this->app->bind(LeadServiceContract::class, LeadService::class);
 	    $this->app->bind(OrderServiceContract::class, OrderService::class);
 	    $this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
+	    $this->app->bind(BetServiceContract::class, BetService::class);
     }
 }
