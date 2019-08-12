@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'photo'         => 'sometimes|required|file|mimes:jpeg|max:'.(1024 * 1024 * 5),
             'honorific'     => 'sometimes|required|in:mr,mrs',
-            'old_password'  => ['required_with:password'],['string'], ['min:6'], new OldUserPassword(\Auth::user()),
+            'old_password'  => ['required_with:password','string','min:6', new OldUserPassword(\Auth::user())],
             'password'      => 'sometimes|required|string|min:6|confirmed',
             'day_of_birth'     => 'sometimes|required|numeric|min:1|max:31',
             'month_of_birth'     => 'sometimes|required|numeric|min:1|max:12',
