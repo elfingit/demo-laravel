@@ -38,7 +38,8 @@ class AuthServiceProvider extends ServiceProvider
 	        'lead_create'       => 'Create lead',
 	        'lead_update'       => 'Update lead',
             'create_order'      => 'Create order',
-            'get_user_balance'  => 'Get user balance'
+            'get_user_balance'  => 'Get user balance',
+            'update_self'       => 'User update self data'
         ]);
     }
 }

@@ -72,6 +72,12 @@ Route::namespace('Api')->group(function () {
             'uses'  => 'OrderController@store',
             'as'    => 'orders.create'
         ]);
+
+		Route::put('/me', [
+            'middleware'    => ['auth:api', 'client:update_self'],
+            'uses'  => 'UserController@update',
+            'as'    => 'user.update_self'
+        ]);
 	});
 });
 

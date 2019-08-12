@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateUserRequest;
+use App\Http\Requests\Api\UserUpdateRequest;
 use App\Http\Resources\Api\UserResource;
 use Illuminate\Http\Request;
 
@@ -29,5 +30,10 @@ class UserController extends Controller
         return response()->json([
             'balance' => $balance
         ]);
+    }
+
+    public function update(UserUpdateRequest $request)
+    {
+        \ApiUser::update($request);
     }
 }

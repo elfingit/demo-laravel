@@ -9,6 +9,7 @@
 namespace App\Services\Api;
 
 use App\Model\User as UserModel;
+use App\Model\UserAddress as UserAddressModel;
 use App\Model\UserProfile as UserProfileModel;
 use App\Model\UserRole as UserRoleModel;
 use App\Services\Api\Contracts\UserServiceContract;
@@ -56,5 +57,99 @@ class UserService implements UserServiceContract
         }
 
         return 0;
+    }
+
+    public function update( FormRequest $request )
+    {
+        $user = $request->user();
+
+        $profile = $user->profile;
+
+        //Profile data
+        if (!$profile) {
+            $profile = new UserProfileModel();
+            $profile->user_id = $user->id;
+        }
+
+        if ($request->has('photo')) {
+            $file_name = $this->uploadPhoto($request);
+            $profile->photo = $file_name;
+        }
+
+        if ($request->has('honorific')) {
+            $profile->honorific = $request->get('honorific');
+        }
+
+        if ($request->has('day_of_birth')
+            && $request->has('month_of_birth')
+            && $request->has('year_of_birth')) {
+
+            $dateOfBirth = Carbon::parse(
+                $request->get('day_of_birth').'-'
+                .$request->get('month_of_birth').'-'
+                .$request->get('year_of_birth')
+            );
+
+
+            $profile->date_of_birth = $dateOfBirth;
+        }
+
+        if ($request->has('time_zone')) {
+            $profile->time_zone = $request->get('time_zone');
+        }
+
+        //User data
+        if ($request->has('password')) {
+            $user->password = \Hash::make($request->get('password'));
+        }
+
+        //User address
+        $address = $user->address;
+
+        if (!$address) {
+            $address = new UserAddressModel();
+            $address->user_id = $user->id;
+        }
+
+        if ($request->has('house_number')) {
+            $address->house_number = $request->get('house_number');
+        }
+
+        if ($request->has('street')) {
+            $address->street = $request->get('street');
+        }
+
+        if ($request->has('zip')) {
+            $address->zip = $request->get('zip');
+        }
+
+        if ($request->has('region')) {
+            $address->region = $request->get('region');
+        }
+
+
+        $user->save();
+        $profile->save();
+        $address->save();
+
+        return $user;
+    }
+
+    protected function uploadPhoto(FormRequest $request) {
+
+	    $user = $request->user();
+
+	    $path = storage_path('app/public/user_photos/' . $user->id);
+
+	    if (!file_exists($path)) {
+	        mkdir($path, 0775, true);
+        }
+
+	    $file_name = 'photo.' . $request->photo->getClientOriginalExtension();
+
+	    $request->photo->move($path, $file_name);
+
+	    return $file_name;
+
     }
 }
