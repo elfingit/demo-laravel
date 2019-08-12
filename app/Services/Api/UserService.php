@@ -8,6 +8,7 @@
 
 namespace App\Services\Api;
 
+use App\Lib\Utils;
 use App\Model\User as UserModel;
 use App\Model\UserAddress as UserAddressModel;
 use App\Model\UserProfile as UserProfileModel;
@@ -131,6 +132,21 @@ class UserService implements UserServiceContract
         $user->save();
         $profile->save();
         $address->save();
+
+        return $user;
+    }
+
+    public function changeStatus( FormRequest $request )
+    {
+        $user = $request->user();
+
+        $user->status = $request->get('status');
+
+        if ($request->has('time')) {
+            $user->status_finished_at = Utils::getStatusFinishedTime($request->get('time'));
+        }
+
+        $user->save();
 
         return $user;
     }

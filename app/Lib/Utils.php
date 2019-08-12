@@ -130,4 +130,29 @@ class Utils
 
         return $game->game_price;
     }
+
+    public static function getStatusFinishedTime($time_string)
+    {
+        $date = Carbon::now();
+
+        switch ($time_string) {
+            case '6m':
+                $date->addMonths(6);
+                break;
+            case '9m':
+                $date->addMonths(9);
+                break;
+            case '1y':
+                $date->addYear();
+                break;
+            case '2y':
+                $date->addYears(2);
+                break;
+            case '5y':
+                $date->addYears(5);
+                break;
+        }
+
+        return $date;
+    }
 }

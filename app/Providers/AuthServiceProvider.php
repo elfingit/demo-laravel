@@ -40,7 +40,8 @@ class AuthServiceProvider extends ServiceProvider
             'create_order'      => 'Create order',
             'get_user_balance'  => 'Get user balance',
             'update_self'       => 'User update self data',
-            'upload_auth_doc'   => 'User upload authorization documents'
+            'upload_auth_doc'   => 'User upload authorization documents',
+            'self_change_status' => 'User change status'
         ]);
     }
 }

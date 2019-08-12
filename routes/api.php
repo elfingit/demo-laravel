@@ -79,6 +79,12 @@ Route::namespace('Api')->group(function () {
             'as'    => 'user.update_self'
         ]);
 
+        Route::put('/me/status', [
+            'middleware'    => ['auth:api', 'client:self_change_status'],
+            'uses'  => 'UserController@changeStatus',
+            'as'    => 'user.change_status_self'
+        ]);
+
 		Route::post('auth_doc', [
             'middleware'    => ['auth:api', 'client:upload_auth_doc'],
             'uses'  => 'UserAuthDocController@store',
