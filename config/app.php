@@ -253,6 +253,7 @@ return [
 	    'ApiBrand'      => \App\Facades\Api\BrandFacade::class,
 	    'ApiLead'       => \App\Facades\Api\LeadFacade::class,
 	    'ApiOrder'       => \App\Facades\Api\OrderFacade::class,
+        'ApiUserAuthDoc' => \App\Facades\Api\UserAuthDocFacade::class,
 
 
     ],

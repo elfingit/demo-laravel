@@ -7,9 +7,11 @@ use App\Services\Api\BrandService;
 use App\Services\Api\Contracts\BrandServiceContract;
 use App\Services\Api\Contracts\LeadServiceContract;
 use App\Services\Api\Contracts\OrderServiceContract;
+use App\Services\Api\Contracts\UserAuthDocServiceContract;
 use App\Services\Api\Contracts\UserServiceContract;
 use App\Services\Api\LeadService;
 use App\Services\Api\OrderService;
+use App\Services\Api\UserAuthDocService;
 use App\Services\Api\UserService;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Handler\RotatingFileHandler;
@@ -48,5 +50,6 @@ class ApiServiceProvider extends ServiceProvider
 	    $this->app->bind(BrandServiceContract::class, BrandService::class);
 	    $this->app->bind(LeadServiceContract::class, LeadService::class);
 	    $this->app->bind(OrderServiceContract::class, OrderService::class);
+	    $this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
     }
 }

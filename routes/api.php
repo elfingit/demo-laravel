@@ -78,6 +78,12 @@ Route::namespace('Api')->group(function () {
             'uses'  => 'UserController@update',
             'as'    => 'user.update_self'
         ]);
+
+		Route::post('auth_doc', [
+            'middleware'    => ['auth:api', 'client:upload_auth_doc'],
+            'uses'  => 'UserAuthDocController@store',
+            'as'    => 'auth_doc.store'
+        ]);
 	});
 });
 
