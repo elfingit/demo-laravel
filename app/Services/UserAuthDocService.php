@@ -21,7 +21,7 @@ class UserAuthDocService implements UserAuthDocServiceContract
 
         $file_name = $this->uploadDoc($path, $request);
 
-        $data = $request->only(['type', 'comments']);
+        $data = $request->only(['type', 'comments', 'valid_till']);
         $data['user_id'] = $user_id;
         $data['file_name'] = $file_name;
 

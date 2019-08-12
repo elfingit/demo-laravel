@@ -20,6 +20,7 @@ class UserAuthDocResource extends JsonResource
             'is_approved' => $this->is_approved,
             'is_rejected' => $this->is_rejected,
             'type' => $this->type,
+            'valid_till' => $this->valid_till,
             'comments' => $this->comments,
             'created_at' => $this->created_at,
             'user_id'   => $this->user_id

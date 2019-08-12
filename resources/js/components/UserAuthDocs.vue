@@ -9,6 +9,7 @@
             <th>Is approved</th>
             <th>Is Rejected</th>
             <th>Type</th>
+            <th>Valid till</th>
             <th>Comments</th>
             <th>Created At</th>
             </thead>
@@ -35,6 +36,7 @@
                     />
                 </td>
                 <td>{{ doc.type }}</td>
+                <td>{{ doc.valid_till }}</td>
                 <td>{{ doc.comments }}</td>
                 <td>{{ doc.created_at }}</td>
             </tr>
@@ -62,6 +64,11 @@
                         <label class="mdl-textfield__label" for="comments">Comments</label>
                         <span class="mdl-textfield__error"></span>
                     </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <Datetime v-model="form.valid_till" title="Valid till" input-id="valid_till" input-class="mdl-textfield__input" />
+                        <label class="mdl-textfield__label" for="valid_till">Valid till</label>
+                        <span class="mdl-textfield__error"></span>
+                    </div>
                     <div class="mdl-grid">
                         <div class="mdl-cell-3">
                             <button type="submit" :disabled="disabledSubmit" class="mdl-button mdl-js-button mdl-button--colored">Save</button>
@@ -81,9 +88,12 @@
     import Loader from "./Loader";
     import axios from "axios";
     import { show_form_errors } from "../utils";
+    import { Datetime } from "vue-datetime";
+
+
     export default {
         name: "UserAuthDocs",
-        components: {Loader},
+        components: {Loader, Datetime},
 
         props: ['userId'],
 
@@ -96,7 +106,8 @@
 
                 form: {
                     type: null,
-                    comments: null
+                    comments: null,
+                    valid_till: null
                 }
             }
         },
@@ -133,6 +144,7 @@
                 formData.append('type', this.form.type);
                 formData.append('comments', this.form.comments);
                 formData.append('user_id', this.$props.userId);
+                formData.append('valid_till', this.form.valid_till);
 
                 let _self = this;
 
@@ -218,14 +230,7 @@
         z-index: 99999997;
     }
 
-    /*.cover {
-        position: fixed;
-        top:0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(100, 100, 100, 0.5);
-    }*/
+    @import "~vue-datetime/dist/vue-datetime.css";
 
 </style>
 

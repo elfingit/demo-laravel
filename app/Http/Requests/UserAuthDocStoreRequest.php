@@ -17,7 +17,8 @@ class UserAuthDocStoreRequest extends AbstractRequest
             'doc'   => 'required|file|mimes:jpeg,pdf',
             'type'  => 'required|string|min:2|max:255',
             'comments' => 'string|min:3|max:65535',
-            'user_id' => 'required|exists:users,id'
+            'user_id' => 'required|exists:users,id',
+            'valid_till' => 'date'
         ];
     }
 }
