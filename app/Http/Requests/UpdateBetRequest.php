@@ -14,7 +14,9 @@ class UpdateBetRequest extends AbstractRequest
      */
     public function rules()
     {
-        $statuses = array_keys(\Bet::getStatuses());
+        $bet = $this->route('bet');
+
+        $statuses = array_keys(\Bet::getStatuses($bet));
 
         return [
             'status'    => 'required|in:'.implode(',', $statuses)

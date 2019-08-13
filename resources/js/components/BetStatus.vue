@@ -64,11 +64,119 @@
 
                     _self.disabled = false;
                     _self.loading = false;
+                    _self.filterStatuses();
 
                 }).catch((err) => {
                     console.log(err);
                     alert('Something went wrong. Please try again later');
                 });
+            },
+
+            filterStatuses() {
+
+                let _self = this;
+
+                let sList = _.filter(this.statuses_list, (status) => {
+
+                    if (_self.currentStatus == 'waiting_draw') {
+                        if( status.value == 'paid') {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'played') {
+                        if( status.value == 'paid'
+                            || status.value == 'win'
+                            || status.value == 'refund'
+                            || status.value == 'auth_pending'
+                            || status.value == 'not_auth'
+                            || status.value == 'payout_pending'
+                            || status.value == 'payout'
+                            || status.value == 'waiting_draw'
+                        ) {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'win') {
+
+                        if( status.value == 'paid'
+                            || status.value == 'refund'
+                            || status.value == 'waiting_draw'
+                            || status.value == 'played'
+                        ) {
+                            return false;
+                        }
+
+                    }
+
+                    if (_self.currentStatus == 'auth_pending') {
+
+                        if( status.value == 'paid'
+                            || status.value == 'refund'
+                            || status.value == 'waiting_draw'
+                            || status.value == 'played'
+                            || status.value == 'win'
+                        ) {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'not_auth') {
+
+                        if( status.value == 'paid'
+                            || status.value == 'refund'
+                            || status.value == 'waiting_draw'
+                            || status.value == 'played'
+                            || status.value == 'win'
+                            || status.value == 'auth_pending'
+                            || status.value == 'payout_pending'
+                            || status.value == 'payout'
+                        ) {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'payout_pending') {
+
+                        if( status.value == 'paid'
+                            || status.value == 'refund'
+                            || status.value == 'waiting_draw'
+                            || status.value == 'played'
+                            || status.value == 'win'
+                            || status.value == 'auth_pending'
+                            || status.value == 'not_auth'
+                        ) {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'payout') {
+
+                        if( status.value == 'paid'
+                            || status.value == 'refund'
+                            || status.value == 'waiting_draw'
+                            || status.value == 'played'
+                            || status.value == 'win'
+                            || status.value == 'auth_pending'
+                            || status.value == 'not_auth'
+                            || status.value == 'cancelled'
+                            || status.value == 'payout_pending'
+                        ) {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'closed' && status.value != 'closed') {
+                        return false;
+                    }
+
+                    return true;
+
+                });
+
+                this.statuses_list = sList;
+
             }
         }
     }
