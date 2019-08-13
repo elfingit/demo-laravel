@@ -12461,7 +12461,10 @@ function () {
         var checkDate = new Date(Date.parse(incomeDay.check_date));
         var today = new Date();
         existsDays.every(function (day) {
-          if (day.isEmpty) return false;
+          if (day.isEmpty) {
+            return true;
+          }
+
           today.setDate(day.day);
 
           if (today.getDay() == checkDate.getDay()) {

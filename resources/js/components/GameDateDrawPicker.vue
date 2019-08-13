@@ -206,11 +206,14 @@
                 _self.incomeDays.forEach((incomeDay) => {
 
                     let checkDate = new Date(Date.parse(incomeDay.check_date));
+
                     let today = new Date();
 
                     existsDays.every((day) => {
 
-                        if (day.isEmpty) return false;
+                        if (day.isEmpty) {
+                            return true;
+                        }
 
                         today.setDate(day.day);
 
