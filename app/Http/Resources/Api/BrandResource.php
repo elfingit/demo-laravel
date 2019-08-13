@@ -44,7 +44,8 @@ class BrandResource extends JsonResource
 	        'tickets_count' => $this->tickets_count,
 	        'check_dates'   => BrandCheckDateResource::collection($this->checkDates),
             'price'         => $price,
-	        'extra_games'   => BrandExtraGameResource::collection($this->extra_games)
+	        'extra_games'   => BrandExtraGameResource::collection($this->extra_games),
+            'jack_pot'      => ($this->results()->orderBy('draw_date', 'desc')->first())->jack_pot
         ];
     }
 }
