@@ -16,7 +16,7 @@ interface BetServiceContract
 
     public function list(Request $request);
 
-    public function getStatuses();
+    public function getStatuses(BetModel $bet = null);
 
     public function markAsWin(BetModel $bet);
     public function markAsPlayed(BetModel $bet);

@@ -38,9 +38,9 @@ class BetService implements BetServiceContract
         return $criteria->paginate(25);
     }
 
-    public function getStatuses()
+    public function getStatuses(BetModel $bet = null)
     {
-        return [
+        $statuses = [
             BetModel::STATUS_PAID => 'Paid',
             BetModel::STATUS_WAITING_DRAW => 'Waiting draw',
             BetModel::STATUS_PLAYED => 'Played',
@@ -53,6 +53,99 @@ class BetService implements BetServiceContract
             BetModel::STATUS_CLOSED => 'Closed',
             BetModel::STATUS_CANCELLED => 'Cancelled'
         ];
+
+        if (is_null($bet)) {
+            return $statuses;
+        }
+
+        $statuses = array_filter($statuses, function ($status, $key) use ($bet) {
+
+            if ($bet->status == BetModel::STATUS_WAITING_DRAW && $key == BetModel::STATUS_PAID ) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_REFUND && $key != BetModel::STATUS_CANCELLED && $key != BetModel::STATUS_REFUND) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_CANCELLED && $key != BetModel::STATUS_CANCELLED) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_PLAYED && (
+                    $key == BetModel::STATUS_PAID
+                    || $key == BetModel::STATUS_WAITING_DRAW
+                    || $key == BetModel::STATUS_WIN
+                    || $key == BetModel::STATUS_REFUND
+                    || $key == BetModel::STATUS_AUTH_PENDING
+                    || $key == BetModel::STATUS_NOT_AUTH
+                    || $key == BetModel::STATUS_PAYOUT_PENDING
+                    || $key == BetModel::STATUS_PAYOUT
+                    || $key == BetModel::STATUS_CANCELLED
+                )) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_WIN && (
+                    $key == BetModel::STATUS_PAID
+                    || $key == BetModel::STATUS_WAITING_DRAW
+                    || $key == BetModel::STATUS_PLAYED
+                    || $key == BetModel::STATUS_REFUND
+                )) {
+
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_AUTH_PENDING && (
+                    $key == BetModel::STATUS_PAID
+                    || $key == BetModel::STATUS_WAITING_DRAW
+                    || $key == BetModel::STATUS_PLAYED
+                    || $key == BetModel::STATUS_REFUND
+                    || $key == BetModel::STATUS_WIN
+                )) {
+
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_NOT_AUTH && (
+                    $key == BetModel::STATUS_PAID
+                    || $key == BetModel::STATUS_WAITING_DRAW
+                    || $key == BetModel::STATUS_PLAYED
+                    || $key == BetModel::STATUS_REFUND
+                    || $key == BetModel::STATUS_WIN
+                    || $key == BetModel::STATUS_AUTH_PENDING
+                    || $key == BetModel::STATUS_PAYOUT_PENDING
+                    || $key == BetModel::STATUS_PAYOUT
+                    || $key == BetModel::STATUS_CLOSED
+                )) {
+
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_PAYOUT_PENDING && (
+                    $key == BetModel::STATUS_PAID
+                    || $key == BetModel::STATUS_WAITING_DRAW
+                    || $key == BetModel::STATUS_PLAYED
+                    || $key == BetModel::STATUS_REFUND
+                    || $key == BetModel::STATUS_WIN
+                    || $key == BetModel::STATUS_AUTH_PENDING
+                    || $key == BetModel::STATUS_NOT_AUTH
+                    || $key == BetModel::STATUS_CANCELLED
+                )) {
+
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_PAYOUT && $key != BetModel::STATUS_PAYOUT && $key != BetModel::STATUS_CLOSED ){
+
+                return false;
+            }
+
+            return true;
+
+        }, ARRAY_FILTER_USE_BOTH);
+
+        return $statuses;
     }
 
     public function markAsWin( BetModel $bet )
