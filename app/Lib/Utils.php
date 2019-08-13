@@ -120,7 +120,7 @@ class Utils
         return $brand->prices[0]->number_shield_price;
     }
 
-    public static function calculateExtraGame(BrandModel $brand, $extra_game_name)
+    public static function calculateExtraGame(BrandModel $brand, $extra_game_name, $count)
     {
         $game = $brand->extraGameByName($extra_game_name)->first();
 
@@ -128,7 +128,11 @@ class Utils
             return 0.0;
         }
 
-        return $game->game_price;
+        if ($brand->api_code = 'de_lotto') {
+            return $game->game_price;
+        }
+
+        return $game->game_price * $count;
     }
 
     public static function getStatusFinishedTime($time_string)

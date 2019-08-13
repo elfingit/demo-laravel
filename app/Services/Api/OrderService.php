@@ -187,7 +187,7 @@ class OrderService implements OrderServiceContract
 
             if (isset($item['extra_games'])) {
                 foreach ($item['extra_games'] as $extra_game) {
-                    $price += Utils::calculateExtraGame($brand, $extra_game['system_name']);
+                    $price += Utils::calculateExtraGame($brand, $extra_game['system_name'], count($item['tickets']));
                 }
             }
 
