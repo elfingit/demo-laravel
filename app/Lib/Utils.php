@@ -128,7 +128,7 @@ class Utils
             return 0.0;
         }
 
-        if ($brand->api_code = 'de_lotto') {
+        if ($brand->api_code == 'de_lotto') {
             return $game->game_price;
         }
 
