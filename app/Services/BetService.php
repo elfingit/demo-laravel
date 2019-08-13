@@ -141,6 +141,11 @@ class BetService implements BetServiceContract
                 return false;
             }
 
+            if ($bet->status == BetModel::STATUS_CLOSED && $key != BetModel::STATUS_CLOSED ){
+
+                return false;
+            }
+
             return true;
 
         }, ARRAY_FILTER_USE_BOTH);
