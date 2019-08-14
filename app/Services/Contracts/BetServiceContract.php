@@ -22,4 +22,6 @@ interface BetServiceContract
     public function markAsPlayed(BetModel $bet);
 
     public function getByUser(UserModel $user);
+
+    public function moveAuthPendingBetsToNotAuth();
 }

@@ -179,6 +179,8 @@ return [
 
 	    \App\Lib\Remote\Api\ApiServiceProvider::class,
 
+        \App\Providers\ModelObserversProvider::class,
+
     ],
 
     /*

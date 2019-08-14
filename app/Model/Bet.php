@@ -24,7 +24,8 @@ class Bet extends Model
 
     protected $casts = [
         'draw_date' => 'datetime',
-        'additional_data' => 'object'
+        'additional_data' => 'object',
+        'countdown_status' => 'datetime'
     ];
 
     public function getWinAmountAttribute()

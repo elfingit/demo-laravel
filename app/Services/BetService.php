@@ -12,6 +12,7 @@ use App\Lib\Query\Criteria;
 use App\Model\Bet as BetModel;
 use App\Model\User as UserModel;
 use App\Services\Contracts\BetServiceContract;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BetService implements BetServiceContract
@@ -173,5 +174,14 @@ class BetService implements BetServiceContract
             ->orderBy('created_at', 'desc')
             ->paginate(25);
 
+    }
+
+    public function moveAuthPendingBetsToNotAuth()
+    {
+        $table = (new BetModel())->getTable();
+
+        \DB::table($table)->whereDate('countdown_status', '<=', Carbon::now())
+            ->where('status', BetModel::STATUS_AUTH_PENDING)
+            ->update(['status' => BetModel::STATUS_NOT_AUTH]);
     }
 }
