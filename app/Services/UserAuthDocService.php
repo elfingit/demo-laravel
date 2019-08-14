@@ -54,6 +54,11 @@ class UserAuthDocService implements UserAuthDocServiceContract
                 if ($value == true) {
                     $doc->is_approved = false;
                     $doc->is_rejected = true;
+
+                    if ($doc->bet) {
+                        \Bet::changeBetStatus($doc->bet, BetModel::STATUS_NOT_AUTH);
+                    }
+
                 } else {
                     $doc->is_rejected = false;
                 }
