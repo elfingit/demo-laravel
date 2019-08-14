@@ -12180,7 +12180,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CountDownTimer",
-  props: ['date'],
+  props: ['date', 'status'],
   data: function data() {
     return {
       timer: ''
@@ -12189,12 +12189,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _self = this;
 
-    setInterval(function () {
-      var date = new Date(_self.date);
-      var today = new Date();
-      var diff = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["difference_date_string"])(date, today);
-      _self.timer = diff.days + 'd ' + diff.hours + ':' + diff.minutes + ':' + diff.seconds;
-    }, 1000);
+    if (this.status == 'paid' || this.status == 'waiting_draw') {
+      setInterval(function () {
+        var date = new Date(_self.date);
+        var today = new Date();
+        var diff = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["difference_date_string"])(date, today);
+        _self.timer = diff.days + 'd ' + diff.hours + ':' + diff.minutes + ':' + diff.seconds;
+      }, 1000);
+    }
   }
 });
 

@@ -4,7 +4,7 @@
         <div class="mdl-cell mdl-cell--12-col show-header">
             <div class="item">Draw bet: {{ $bet->id }}</div>
             <div class="item status"><span>Status: </span><bet-status bet-id="{{ $bet->id }}" status="{{ $bet->status }}" :statuses="{{ json_encode(\Bet::getStatuses($bet)) }}" /></div>
-            <div class="item"><count-down-timer date="'{{ $bet->draw_date->toRfc850String() }}'" /> </div>
+            <div class="item"><count-down-timer date="'{{ $bet->draw_date->toRfc850String() }}'" status="'{{ $bet->status }}'" /> </div>
             <div class="item">Order
                 <a href="{{ route('dashboard.orders.show', ['order' => $bet->order_id]) }}">{{ $bet->order_id }}</a>
             </div>

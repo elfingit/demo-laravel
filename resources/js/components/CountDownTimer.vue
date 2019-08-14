@@ -9,7 +9,7 @@
     export default {
         name: "CountDownTimer",
 
-        props: ['date'],
+        props: ['date', 'status'],
 
         data() {
             return {
@@ -20,18 +20,20 @@
         mounted() {
             let _self = this;
 
-            setInterval(() => {
-                let date = new Date(_self.date);
-                let today = new Date();
+            if (this.status == 'paid' || this.status == 'waiting_draw') {
+                setInterval(() => {
+                    let date = new Date(_self.date);
+                    let today = new Date();
 
-                let diff = difference_date_string(date, today);
+                    let diff = difference_date_string(date, today);
 
-                _self.timer = diff.days + 'd '
-                    + diff.hours + ':'
-                    + diff.minutes + ':'
-                    + diff.seconds
+                    _self.timer = diff.days + 'd '
+                        + diff.hours + ':'
+                        + diff.minutes + ':'
+                        + diff.seconds
 
-            }, 1000);
+                }, 1000);
+            }
         }
     }
 </script>
