@@ -65,6 +65,11 @@
                         <span class="mdl-textfield__error"></span>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" name="bet_id" type="text" v-model="form.bet_id" id="bet_id">
+                        <label class="mdl-textfield__label" for="bet_id">Bet ID</label>
+                        <span class="mdl-textfield__error"></span>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                         <Datetime v-model="form.valid_till" title="Valid till" input-id="valid_till" input-class="mdl-textfield__input" />
                         <label class="mdl-textfield__label" for="valid_till">Valid till</label>
                         <span class="mdl-textfield__error"></span>
@@ -107,7 +112,8 @@
                 form: {
                     type: null,
                     comments: null,
-                    valid_till: null
+                    valid_till: null,
+                    bet_id: null
                 }
             }
         },
@@ -145,7 +151,14 @@
                 formData.append('type', this.form.type);
                 formData.append('comments', this.form.comments);
                 formData.append('user_id', this.$props.userId);
-                formData.append('valid_till', this.form.valid_till);
+
+                if (this.form.valid_till != null && this.form.valid_till.length > 0) {
+                    formData.append('valid_till', this.form.valid_till);
+                }
+
+                if (this.form.bet_id != null) {
+                    formData.append('bet_id', this.form.bet_id);
+                }
 
                 let _self = this;
 
@@ -154,7 +167,11 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then((response) => {
-                        console.log(response);
+                        _self.form.type = null;
+                        _self.form.comments = null;
+                        _self.form.valid_till = null;
+                        _self.form.bet_id = null;
+                        _self.docs.push(response.data.data);
                         _self.hideForm();
                     }).catch((err) => {
                     _self.disabledSubmit = false;

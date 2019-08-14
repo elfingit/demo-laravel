@@ -20,4 +20,8 @@ class UserAuthDoc extends Model
 
         return $status;
     }
+
+    public function bet() {
+        return $this->hasOne(Bet::class, 'id', 'bet_id');
+    }
 }

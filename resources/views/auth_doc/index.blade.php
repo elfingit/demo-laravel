@@ -17,8 +17,16 @@
             <tr>
                 <td>{{ $doc->file_name }} (<a href="{{ route('dashboard.user.auth_docs.download', ['user' => $doc->user_id, 'doc' => $doc->id]) }}">Download</a> )</td>
                 <td><a href="{{ route('dashboard.users.show', ['user' => $doc->user_id]) }}">{{ $doc->user_id }}</a></td>
-                <td></td>
-                <td></td>
+                <td>
+                    @if ($doc->bet)
+                        <a href="{{ route('dashboard.bets.show', ['bet' => $doc->bet->id]) }}">{{ $doc->bet->id }}</a>
+                    @endif
+                </td>
+                <td>
+                    @if ($doc->bet)
+                        {{ $doc->bet->win_amount }}
+                    @endif
+                </td>
                 <td>{{ $doc->download_count }}</td>
                 <td>{{ $doc->status }}</td>
                 <td>{{ $doc->created_at }}</td>

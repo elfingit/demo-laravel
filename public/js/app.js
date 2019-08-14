@@ -12955,6 +12955,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -12975,7 +12980,8 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         type: null,
         comments: null,
-        valid_till: null
+        valid_till: null,
+        bet_id: null
       }
     };
   },
@@ -13005,7 +13011,14 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('type', this.form.type);
       formData.append('comments', this.form.comments);
       formData.append('user_id', this.$props.userId);
-      formData.append('valid_till', this.form.valid_till);
+
+      if (this.form.valid_till != null && this.form.valid_till.length > 0) {
+        formData.append('valid_till', this.form.valid_till);
+      }
+
+      if (this.form.bet_id != null) {
+        formData.append('bet_id', this.form.bet_id);
+      }
 
       var _self = this;
 
@@ -13014,7 +13027,12 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        console.log(response);
+        _self.form.type = null;
+        _self.form.comments = null;
+        _self.form.valid_till = null;
+        _self.form.bet_id = null;
+
+        _self.docs.push(response.data.data);
 
         _self.hideForm();
       })["catch"](function (err) {
@@ -62779,6 +62797,48 @@ var render = function() {
                         attrs: { for: "comments" }
                       },
                       [_vm._v("Comments")]
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "mdl-textfield__error" })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.bet_id,
+                          expression: "form.bet_id"
+                        }
+                      ],
+                      staticClass: "mdl-textfield__input",
+                      attrs: { name: "bet_id", type: "text", id: "bet_id" },
+                      domProps: { value: _vm.form.bet_id },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "bet_id", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "mdl-textfield__label",
+                        attrs: { for: "bet_id" }
+                      },
+                      [_vm._v("Bet ID")]
                     ),
                     _vm._v(" "),
                     _c("span", { staticClass: "mdl-textfield__error" })

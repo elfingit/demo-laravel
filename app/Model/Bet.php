@@ -29,7 +29,13 @@ class Bet extends Model
 
     public function getWinAmountAttribute()
     {
-        if ($this->status !== self::STATUS_WIN) {
+        if (in_array($this->status, [
+            self::STATUS_PAID,
+            self::STATUS_WAITING_DRAW,
+            self::STATUS_PLAYED,
+            self::STATUS_REFUND,
+            self::STATUS_CANCELLED
+        ])) {
             return 0.0;
         }
 

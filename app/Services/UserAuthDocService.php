@@ -25,6 +25,10 @@ class UserAuthDocService implements UserAuthDocServiceContract
         $data['user_id'] = $user_id;
         $data['file_name'] = $file_name;
 
+        if ($request->has('bet_id')) {
+            $data['bet_id'] = $request->get('bet_id');
+        }
+
         return UserAuthDocModel::create($data);
 
     }
