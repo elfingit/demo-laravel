@@ -92,6 +92,10 @@ class UserAuthDocService implements UserAuthDocServiceContract
             return false;
         }
 
+        $doc->download_count = $doc->download_count + 1;
+        $doc->save();
+
+
         return $file;
     }
 
