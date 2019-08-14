@@ -9,6 +9,7 @@ namespace App\Services;
 
 use App\Model\User as UserModel;
 use App\Model\UserAuthDoc as UserAuthDocModel;
+use App\Model\Bet as BetModel;
 use App\Services\Contracts\UserAuthDocServiceContract;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -77,8 +78,13 @@ class UserAuthDocService implements UserAuthDocServiceContract
                 if ($value == true) {
                     $doc->is_approved = true;
                     $doc->is_rejected = false;
+
+                    if ($doc->bet) {
+                        \Bet::changeBetStatus($doc->bet, BetModel::STATUS_PAYOUT_PENDING);
+                    }
+
                 } else {
-                    $doc->is_rejected = false;
+                    $doc->is_approved = false;
                 }
 
                 $doc->save();
