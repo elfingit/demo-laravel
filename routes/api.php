@@ -93,7 +93,7 @@ Route::namespace('Api')->group(function () {
 
 		Route::get('me/bets', [
             'middleware'    => ['auth:api', 'client:my_bets'],
-            'uses'  => 'UserAuthDocController@store',
+            'uses'  => 'BetController@index',
             'as'    => 'auth_doc.store'
         ]);
 	});
