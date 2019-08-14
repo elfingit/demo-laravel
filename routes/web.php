@@ -103,5 +103,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
 	Route::resource('orders', 'OrderController')
                 ->except(['create', 'store']);
 
+	Route::get('/auth_docs', [
+        'uses'  => 'UserAuthDocController@section',
+        'as'    => 'auth_docs.index'
+    ]);
+
 });
 

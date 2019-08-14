@@ -95,6 +95,15 @@ class UserAuthDocService implements UserAuthDocServiceContract
         return $file;
     }
 
+    public function all()
+    {
+        $query = UserAuthDocModel::query();
+
+        $query->orderBy('created_at', 'desc');
+
+        return $query->paginate(25);
+    }
+
     protected function getStoragePath($user_id)
     {
         return storage_path('docs/' . $user_id);

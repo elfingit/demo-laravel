@@ -34,4 +34,11 @@ class UserAuthDocController extends Controller
 
         return response()->download($file);
     }
+
+    public function section()
+    {
+        $docs = \UserAuthDoc::all();
+
+        return view('auth_doc.index', compact('docs'));
+    }
 }

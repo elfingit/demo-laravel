@@ -7,8 +7,9 @@
                 <a class="mdl-navigation__link" href="{{ route('dashboard.brands.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">pages</i>{{ __('Brands') }}</a>
                 <a class="mdl-navigation__link" href="{{ route('dashboard.leads.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">contacts</i>{{ __('Leads') }}</a>
                 <a class="mdl-navigation__link" href="{{ route('dashboard.users.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">face</i>{{ __('Users') }}</a>
-                <a class="mdl-navigation__link" href="{{ route('dashboard.orders.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">folder</i>{{ __('Orders') }}</a>
-                <a class="mdl-navigation__link" href="{{ route('dashboard.bets.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">folder</i>{{ __('Bets') }}</a>
+                <a class="mdl-navigation__link" href="{{ route('dashboard.orders.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">picture_in_picture_alt</i>{{ __('Orders') }}</a>
+                <a class="mdl-navigation__link" href="{{ route('dashboard.bets.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">stars</i>{{ __('Bets') }}</a>
+                <a class="mdl-navigation__link" href="{{ route('dashboard.auth_docs.index') }}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_late</i>{{ __('Authorization Docs ') }}</a>
             </nav>
         </div>
         <main class="mdl-layout__content" id="app">

@@ -18,4 +18,5 @@ interface UserAuthDocServiceContract
     public function rejectDoc(UserModel $user, FormRequest $request);
     public function approveDoc(UserModel $user, FormRequest $request);
     public function getFile(UserModel $user, UserAuthDocModel $doc);
+    public function all();
 }
