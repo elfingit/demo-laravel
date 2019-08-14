@@ -12970,6 +12970,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       renderForm: false,
       disabledSubmit: false,
+      loading: true,
       docs: [],
       form: {
         type: null,
@@ -12983,6 +12984,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/dashboard/crm_api/auth_docs/' + this.$props.userId).then(function (response) {
       _self.docs = response.data.data;
+      _self.loading = false;
     })["catch"](function (err) {
       alert("Something went wrong.\nPlease try again later");
       console.log(err);
@@ -13318,7 +13320,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       bets: [],
-      meta: null
+      meta: null,
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -13328,6 +13331,7 @@ __webpack_require__.r(__webpack_exports__);
     changePage: function changePage(page) {
       this.bets = [];
       this.loadBets(page);
+      this.loading = true;
     },
     loadBets: function loadBets() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -13343,8 +13347,11 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
         _self.bets = response.data.data;
         _self.meta = response.data.meta;
+        console.log(response.data.meta);
+        _self.loading = false;
       })["catch"](function (err) {
         console.log(err);
+        _self.loading = false;
       });
     }
   }
@@ -62593,9 +62600,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.docs.length == 0
+    _vm.loading
       ? _c("div", { staticClass: "loader" }, [_c("Loader")], 1)
-      : _c("table", { staticClass: "crm-table" }, [
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.docs.length > 0
+      ? _c("table", { staticClass: "crm-table" }, [
           _vm._m(0),
           _vm._v(" "),
           _c(
@@ -62661,7 +62671,8 @@ var render = function() {
             }),
             0
           )
-        ]),
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "button",
@@ -63238,9 +63249,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.bets.length == 0
+    _vm.loading
       ? _c("div", { staticClass: "loader" }, [_c("Loader")], 1)
-      : _c("table", { staticClass: "crm-table" }, [
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.bets.length > 0
+      ? _c("table", { staticClass: "crm-table" }, [
           _vm._m(0),
           _vm._v(" "),
           _c(
@@ -63260,9 +63274,10 @@ var render = function() {
             }),
             0
           )
-        ]),
+        ])
+      : _vm._e(),
     _vm._v(" "),
-    _vm.meta
+    _vm.meta && _vm.meta.last_page > 1
       ? _c("div", { staticClass: "pagination" }, [
           _c(
             "ul",

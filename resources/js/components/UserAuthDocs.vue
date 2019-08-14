@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <div class="loader" v-if="docs.length == 0">
+        <div class="loader" v-if="loading">
             <Loader />
         </div>
-        <table v-else class="crm-table">
+        <table v-if="docs.length > 0" class="crm-table">
             <thead>
             <th>File</th>
             <th>Is approved</th>
@@ -101,7 +101,7 @@
             return {
                 renderForm: false,
                 disabledSubmit: false,
-
+                loading: true,
                 docs: [],
 
                 form: {
@@ -119,6 +119,7 @@
             axios.get('/dashboard/crm_api/auth_docs/' + this.$props.userId)
                 .then((response) => {
                     _self.docs = response.data.data;
+                    _self.loading = false;
                 }).catch((err) => {
                     alert("Something went wrong.\nPlease try again later");
                     console.log(err);
