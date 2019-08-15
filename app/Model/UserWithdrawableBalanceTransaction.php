@@ -11,4 +11,6 @@ class UserWithdrawableBalanceTransaction extends Model
     const STATUS_AUTH = 'auth';
     const STATUS_INTERNAL_PAYOUT = 'internal_payout';
     const STATUS_EXTERNAL_PAYOUT = 'external_payout';
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

@@ -29,6 +29,7 @@ class UserWithdrawableBalanceService implements UserWithdrawableBalanceServiceCo
         \DB::beginTransaction();
         $balance->lockForUpdate();
         $balance->pending_amount = $balance->pending_amount + $amount;
+        $balance->save();
 
         $wTransaction = new UserWithdrawableBalanceTransactionModel([
             'transaction_id'    => \Str::random(4).'-'.\Str::random(),
