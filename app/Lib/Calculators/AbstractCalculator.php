@@ -8,6 +8,7 @@
 namespace App\Lib\Calculators;
 
 use App\Lib\Loggers\WinCheckLogger;
+use App\Model\Bet as BetModel;
 use App\Model\BetTicket as BetTicketModel;
 use App\Model\BrandResult as BrandResultModel;
 use Illuminate\Support\Collection;
@@ -46,6 +47,10 @@ abstract  class AbstractCalculator implements CalculatorContract
                 \Bet::markAsWin($bet);
             } else {
                 \Bet::markAsPlayed($bet);
+            }
+
+            if ($bet->status == BetModel::STATUS_WIN) {
+                \UserWithdrawabalBalance::addPending($bet->win_amount, $bet, $bet->user, 'Bet win');
             }
         }
     }

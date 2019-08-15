@@ -31,6 +31,7 @@ use App\Services\Contracts\UserAuthDocServiceContract;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
 use App\Services\Contracts\UserRoleServiceContract;
 use App\Services\Contracts\UserServiceContract;
+use App\Services\Contracts\UserWithdrawableBalanceServiceContract;
 use App\Services\Contracts\WinningsServiceContract;
 use App\Services\LeadService;
 use App\Services\OrderService;
@@ -39,6 +40,7 @@ use App\Services\UserAuthDocService;
 use App\Services\UserAvailableBalanceService;
 use App\Services\UserRoleService;
 use App\Services\UserService;
+use App\Services\UserWithdrawableBalanceService;
 use App\Services\WinningsService;
 use Illuminate\Support\ServiceProvider;
 
@@ -82,6 +84,7 @@ class AppServiceProvider extends ServiceProvider
     	$this->app->bind(UserRoleServiceContract::class, UserRoleService::class);
     	$this->app->bind(UserAvailableBalanceServiceContract::class, UserAvailableBalanceService::class);
     	$this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
+    	$this->app->bind(UserWithdrawableBalanceServiceContract::class, UserWithdrawableBalanceService::class);
 
     	//Order
         $this->app->bind(OrderServiceContract::class, OrderService::class);
@@ -102,5 +105,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_mega_millions', MegaMillionsCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'uk_national', UKNationalLotteryCalculator::class);
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'de_lotto', DeLottoCalculator::class);
+
     }
 }

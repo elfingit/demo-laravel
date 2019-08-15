@@ -241,6 +241,7 @@ return [
 	    'User'              => \App\Facades\UserFacade::class,
 	    'UserRole'          => \App\Facades\UserRoleFacade::class,
 	    'UserAvailableBalance'  => \App\Facades\UserAvailableBalanceFacade::class,
+	    'UserWithdrawabalBalance'  => \App\Facades\UserWithdrawabaleBalanceFacade::class,
         'Order'             => \App\Facades\OrderServiceFacade::class,
         'Bet'             => \App\Facades\BetServiceFacade::class,
         'Ticket'            => \App\Facades\TicketServiceFacade::class,

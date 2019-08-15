@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Andrei Siarheyeu <andreylong@gmail.com>
+ * Date: 2019-08-15
+ * Time: 14:19
+ */
+
+namespace App\Services\Contracts;
+
+
+use App\Model\User as UserModel;
+use App\Model\Bet as BetModel;
+use App\Model\UserWithdrawableBalance as UserWithdrawableBalanceModel;
+
+interface UserWithdrawableBalanceServiceContract
+{
+    public function addPending($amount, BetModel $bet, UserModel $user, $reason = null);
+    public function moveFromPendingToAvailable(UserWithdrawableBalanceModel $balance, $amount);
+    public function charge(UserWithdrawableBalanceModel $balance, $amount, UserModel $user);
+}

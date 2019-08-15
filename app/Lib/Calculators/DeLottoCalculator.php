@@ -40,6 +40,10 @@ class DeLottoCalculator extends AbstractCalculator
             $this->checkSpiel77($bet, $result);
             $this->checkSuper6($bet, $result);
 
+            if ($bet->status == BetModel::STATUS_WIN) {
+                \UserWithdrawabalBalance::addPending($bet->win_amount, $bet, $bet->user, 'Bet win');
+            }
+
         }
     }
 

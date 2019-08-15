@@ -9,5 +9,6 @@ class UserWithdrawableBalanceTransaction extends Model
     const STATUS_PENDING = 'pending';
     const STATUS_BLOCKED_NO_AUTH = 'blocked_no_auth';
     const STATUS_AUTH = 'auth';
-    const STATUS_PAYOUT = 'payout';
+    const STATUS_INTERNAL_PAYOUT = 'internal_payout';
+    const STATUS_EXTERNAL_PAYOUT = 'external_payout';
 }

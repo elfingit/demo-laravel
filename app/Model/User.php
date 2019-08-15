@@ -53,6 +53,11 @@ class User extends Authenticatable
 		return $this->hasOne(UserAvailableBalance::class, 'user_id', 'id');
 	}
 
+    public function withdrawable_balance()
+    {
+        return $this->hasOne(UserWithdrawableBalance::class, 'user_id', 'id');
+    }
+
 	public function leads()
     {
         return $this->hasMany(Lead::class, 'user_id', 'id');

@@ -27,7 +27,8 @@ class CreateUserWithdrawableBalanceTransactionsTable extends Migration
                 \App\Model\UserWithdrawableBalanceTransaction::STATUS_PENDING,
                 \App\Model\UserWithdrawableBalanceTransaction::STATUS_BLOCKED_NO_AUTH,
                 \App\Model\UserWithdrawableBalanceTransaction::STATUS_AUTH,
-                \App\Model\UserWithdrawableBalanceTransaction::STATUS_PAYOUT,
+                \App\Model\UserWithdrawableBalanceTransaction::STATUS_INTERNAL_PAYOUT,
+                \App\Model\UserWithdrawableBalanceTransaction::STATUS_EXTERNAL_PAYOUT,
             ]);
 
             $table->timestamps();

@@ -17,7 +17,8 @@ class CreateUserWithdrawableBalancesTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('user_id')->unique();
-            $table->decimal('amount', 12, 2);
+            $table->decimal('available_amount', 12, 2);
+            $table->decimal('pending_amount', 12, 2);
             $table->timestamps();
 
             $table->foreign('user_id')
