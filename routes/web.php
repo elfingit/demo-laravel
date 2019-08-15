@@ -108,5 +108,10 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
         'as'    => 'auth_docs.index'
     ]);
 
+    Route::get('/withdrawable', [
+        'uses'  => 'WithdrawableController@index',
+        'as'    => 'withdrawable.index'
+    ]);
+
 });
 

@@ -13,4 +13,9 @@ class UserWithdrawableBalanceTransaction extends Model
     const STATUS_EXTERNAL_PAYOUT = 'external_payout';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function balance()
+    {
+        return $this->hasOne(UserWithdrawableBalance::class, 'id', 'balance_id');
+    }
 }

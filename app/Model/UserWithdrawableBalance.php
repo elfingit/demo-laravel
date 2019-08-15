@@ -10,7 +10,7 @@ class UserWithdrawableBalance extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function transactions()

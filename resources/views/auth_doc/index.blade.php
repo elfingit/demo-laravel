@@ -1,10 +1,11 @@
 @extends('layouts.crm.dashboard')
 @section('crm_content')
+    <h1>Authorization Docs</h1>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table100">
         <thead>
         <tr>
             <th>Doc</th>
-            <th>Cliet ID</th>
+            <th>Client ID</th>
             <th>Bet ID</th>
             <th>Possible Payout</th>
             <th>Doc downloads</th>

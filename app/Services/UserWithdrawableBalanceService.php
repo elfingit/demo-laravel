@@ -62,6 +62,15 @@ class UserWithdrawableBalanceService implements UserWithdrawableBalanceServiceCo
         // TODO: Implement charge() method.
     }
 
+    public function getTransactions()
+    {
+        $query = UserWithdrawableBalanceTransactionModel::query();
+
+        $query->orderBy('updated_at', 'desc');
+
+        return $query->paginate(25);
+    }
+
     protected function createBalance(UserModel $user)
     {
         $tableName = (new UserWithdrawableBalanceModel())->getTable();
