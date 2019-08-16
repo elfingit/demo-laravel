@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Model\User as UserModel;
 use App\Model\UserAvailableBalance as UserAvailableBalanceModel;
 use App\Model\UserAvailableBalanceTransaction as UserAvailableBalanceTransactionModel;
+use App\Model\UserTransaction as UserTransactionModel;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
 use App\Services\Exceptions\InsufficientAvailableBalanceException;
 
@@ -105,6 +106,14 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 		]);
 
 		$model->transactions()->save($transaction);
+
+		$uTransaction = new UserTransactionModel([
+		    'user_id'   => $user->id,
+            'transaction_id'    => $transaction->id,
+            'transaction_type'  => UserAvailableBalanceTransactionModel::class
+        ]);
+
+		$uTransaction->save();
 
 		\DB::commit();
 
