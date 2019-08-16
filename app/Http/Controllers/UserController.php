@@ -7,6 +7,7 @@ use App\Http\Requests\UserChangeStatusRequest;
 use App\Http\Requests\UserShowFieldRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserBetsCollection;
+use App\Http\Resources\UserTransactionsCollection;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
 use Illuminate\Http\Request;
@@ -136,5 +137,14 @@ class UserController extends Controller
         $bets = \Bet::getByUser($user);
 
         return new UserBetsCollection($bets);
+    }
+
+    public function transactions(UserModel $user)
+    {
+        $transactions = $user->transactions()
+                            ->orderBy('user_transactions.updated_at', 'desc')
+                             ->paginate(25);
+
+        return new UserTransactionsCollection($transactions);
     }
 }

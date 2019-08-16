@@ -72,6 +72,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'as'    => 'users.bets.index'
         ]);
 
+        Route::get('/users/{user}/transactions', [
+            'uses'  => 'UserController@transactions',
+            'as'    => 'users.transactions.index'
+        ]);
+
         Route::post('/auth_docs', [
             'uses'  => 'UserAuthDocController@store',
             'as'    => 'user.auth_docs'

@@ -3,7 +3,8 @@
         <h3>User balance [ID: {{ user.id }} &laquo;{{ user.email }}&raquo;]</h3>
         <div class="mdl-card">
             <div class="mdl-card__title">
-                <span>Current balance: {{ user.balance.amount }} </span>
+                <span>Available balance: {{ user.balance.available_amount }} </span> &nbsp;
+                <span>Withdrawable balance: {{ user.balance.withdrawable_amount }} </span>
                 <span class="btn-container">
                     <button type="button" v-on:click="showForm" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
                          <i class="material-icons">add</i>
@@ -11,27 +12,42 @@
                 </span>
             </div>
             <div class="mdl-card__supporting-text">
-                <template v-if="user.balance.transactions.length > 0">
+                <template v-if="loading == false">
                 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Amount</th>
-                        <th>Notes</th>
+                        <th>Balance</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="transaction in user.balance.transactions" v-bind:key="transaction.id">
-                        <td>{{ transaction.transaction_id }}</td>
-                        <td>{{ transaction.amount }}</td>
-                        <td>{{ transaction.notes }}</td>
-                        <td>{{ transaction.created_at }}</td>
-                        <td>{{ transaction.updated_at }}</td>
-                    </tr>
+                    <template v-for="transaction in transactions">
+                        <tr class="first">
+                            <td>{{ transaction.id }}</td>
+                            <td>{{ getTransactionName(transaction.transaction_type) }}</td>
+                            <td>{{ transaction.created_at }}</td>
+                            <td>{{ transaction.updated_at }}</td>
+                        </tr>
+                        <tr class="last">
+                            <td colspan="4">
+                                <AvailableBalanceTransaction :transaction="transaction.transaction" v-if="transaction.transaction_type == 'available_balance'" />
+                                <WithdrawableTransaction :transaction="transaction.transaction" v-if="transaction.transaction_type == 'withdrawable_balance'" />
+                            </td>
+                        </tr>
+                    </template>
+
                     </tbody>
                 </table>
+                    <div class="pagination" v-if="transactions_meta && transactions_meta.last_page > 1">
+                        <ul>
+                            <li v-for="p in parseInt(transactions_meta.last_page)" :key="p">
+                                <a v-if="transactions_meta.current_page != p" v-on:click="changePage(p)">{{ p }}</a>
+                                <span v-else>{{ p }}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </template>
                 <template v-else>
                     <div style="width: 40px; height: 40px"><Loader/></div>
@@ -46,13 +62,15 @@
     import axios from 'axios';
     import UserAvailableBalanceForm from './UserAvailableBalanceForm';
     import Loader from './Loader';
+    import AvailableBalanceTransaction from "./user_transactions/AvailableBalanceTransaction";
+    import WithdrawableTransaction from "./user_transactions/WithdrawableTransaction";
 
     export default {
         name: "UserAvailableBalance",
 
-        components: { UserAvailableBalanceForm, Loader },
+        components: {WithdrawableTransaction, AvailableBalanceTransaction, UserAvailableBalanceForm, Loader },
 
-        props: ['url-data', 'url-add-balance'],
+        props: ['url-data', 'url-add-balance', 'url-transactions'],
 
         data() {
             return {
@@ -60,11 +78,14 @@
                     id: null,
                     email: null,
                     balance: {
-                        amount: 0,
-                        transactions: []
+                        available_amount: 0,
+                        withdrawable_amount: 0
                     }
                 },
-                urlStoreBalance: ''
+                urlStoreBalance: '',
+                loading: true,
+                transactions: [],
+                transactions_meta: null
             }
         },
 
@@ -80,6 +101,7 @@
                         _self.user = response.data.user;
                     }
                 });
+            this.loadTransactions();
         },
 
         methods: {
@@ -90,6 +112,42 @@
             newBalance(data) {
                 this.user.balance.amount = data.amount;
                 this.user.balance.transactions.push(data.transaction);
+            },
+
+            getTransactionName(type) {
+                switch (type) {
+                    case 'available_balance':
+                        return 'Available balance';
+                    case 'withdrawable_balance':
+                        return 'Withdrawable balance';
+                }
+            },
+
+            loadTransactions(page = null) {
+
+                let url = this.urlTransactions;
+                let _self = this;
+
+                if (page) {
+                    url = url + '?page=' + page;
+                    this.transactions_meta.current_page = page;
+                }
+
+                axios.get(url)
+                    .then((response) => {
+                        _self.transactions = response.data.data;
+                        _self.transactions_meta = response.data.meta;
+                        _self.loading = false;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            },
+
+            changePage(page) {
+                this.transactions = [];
+                this.loadTransactions(page);
+                this.loading = true;
             }
         }
     }
@@ -108,5 +166,13 @@
 
     table {
         width: 100%;
+    }
+
+    tr.first td {
+        border-bottom: none;
+    }
+
+    tr.last td {
+        border-top: none;
     }
 </style>

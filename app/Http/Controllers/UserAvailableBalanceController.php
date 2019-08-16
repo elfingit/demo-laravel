@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserAvailableBalanceStoreRequest;
-use App\Http\Resources\AvailableBalanceResource;
+use App\Http\Resources\BalanceResource;
 use App\Http\Resources\UserResource;
 use App\Model\User as UserModel;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class UserAvailableBalanceController extends Controller
 			return new UserResource($user);
 		}
 
-		return new AvailableBalanceResource($user);
+		return new BalanceResource($user);
     }
 
     public function store(UserAvailableBalanceStoreRequest $request, UserModel $user)
@@ -37,7 +37,7 @@ class UserAvailableBalanceController extends Controller
 		return response()->json([
 			'data' => [
 				'amount'    => $user->available_balance->amount,
-				'transaction' => $transaction
+				'withdrawable_amount' => $transaction
 			]
 		]);
     }

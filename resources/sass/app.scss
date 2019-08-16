@@ -312,4 +312,30 @@
     .table100 {
         width: 98%;
     }
+
+    .transaction {
+        div.header, div.transaction-row {
+            text-align: left;
+            clear: both;
+            ul {
+                list-style: none;
+
+                li {
+                    display: block;
+                    float: left;
+                    width: 20%;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        div.transaction-row {
+            ul {
+                li {
+                    font-weight: normal;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
 }

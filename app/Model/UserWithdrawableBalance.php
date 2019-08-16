@@ -13,6 +13,11 @@ class UserWithdrawableBalance extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function getAmountAttribute()
+    {
+        return $this->pending_amount + $this->available_amount;
+    }
+
     public function transactions()
     {
         return $this->hasMany(UserWithdrawableBalanceTransaction::class, 'balance_id', 'id');

@@ -298,3 +298,27 @@
   width: 98%;
 }
 
+.crm .transaction div.header,
+.crm .transaction div.transaction-row {
+  text-align: left;
+  clear: both;
+}
+
+.crm .transaction div.header ul,
+.crm .transaction div.transaction-row ul {
+  list-style: none;
+}
+
+.crm .transaction div.header ul li,
+.crm .transaction div.transaction-row ul li {
+  display: block;
+  float: left;
+  width: 20%;
+  font-weight: bold;
+}
+
+.crm .transaction div.transaction-row ul li {
+  font-weight: normal;
+  font-size: 12px;
+}
+

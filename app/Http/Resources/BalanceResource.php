@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AvailableBalanceResource extends JsonResource
+class BalanceResource extends JsonResource
 {
 	public static $wrap = 'user';
 
@@ -20,8 +20,8 @@ class AvailableBalanceResource extends JsonResource
 	        'id'    => $this->id,
 	        'email' => $this->email,
 	        'balance' => [
-		        'amount' => $this->available_balance->amount,
-		        'transactions' => $this->available_balance->transactions
+		        'available_amount' => $this->available_balance->amount,
+		        'withdrawable_amount' => $this->withdrawable_balance->amount
 	        ]
         ];
     }
