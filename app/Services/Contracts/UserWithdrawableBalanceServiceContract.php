@@ -15,7 +15,9 @@ use App\Model\UserWithdrawableBalance as UserWithdrawableBalanceModel;
 
 interface UserWithdrawableBalanceServiceContract
 {
+    public function addWin($amount, BetModel $bet, UserModel $user, $reason = null);
     public function addPending($amount, BetModel $bet, UserModel $user, $reason = null);
+    public function addAvailable($amount, BetModel $bet, UserModel $user, $reason = null);
     public function moveFromPendingToAvailable(UserWithdrawableBalanceModel $balance, $amount);
     public function charge(UserWithdrawableBalanceModel $balance, $amount, UserModel $user);
     public function getTransactions();

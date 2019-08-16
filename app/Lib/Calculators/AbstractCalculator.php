@@ -50,7 +50,7 @@ abstract  class AbstractCalculator implements CalculatorContract
             }
 
             if ($bet->status == BetModel::STATUS_WIN) {
-                \UserWithdrawabalBalance::addPending($bet->win_amount, $bet, $bet->user, 'Bet win');
+                \UserWithdrawabalBalance::addWin($bet->win_amount, $bet, $bet->user, 'Bet win');
             }
         }
     }
