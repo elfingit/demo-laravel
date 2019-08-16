@@ -96,6 +96,12 @@ Route::namespace('Api')->group(function () {
             'uses'  => 'BetController@index',
             'as'    => 'auth_doc.store'
         ]);
+
+        Route::get('me/transactions', [
+            'middleware'    => ['auth:api', 'client:my_transactions'],
+            'uses'  => 'TransactionController@index',
+            'as'    => 'transactions.index'
+        ]);
 	});
 });
 

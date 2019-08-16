@@ -42,7 +42,8 @@ class AuthServiceProvider extends ServiceProvider
             'update_self'       => 'User update self data',
             'upload_auth_doc'   => 'User upload authorization documents',
             'self_change_status' => 'User change status',
-            'my_bets'           => 'User bets'
+            'my_bets'           => 'User bets',
+            'my_transactions'   => 'User transactions'
         ]);
     }
 }
