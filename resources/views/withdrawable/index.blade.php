@@ -17,8 +17,9 @@
         @foreach($transactions as $transaction)
             <tr>
                 <td>{{ $transaction->transaction_id }}</td>
-                <td>{{ $transaction->balance->user->id }}</td>
-                <td>{{ $transaction->bet_id }}</td>
+                <td><a href="{{ route('dashboard.users.show',
+                ['user' => $transaction->balance->user->id]) }}">{{ $transaction->balance->user->id }}</a></td>
+                <td><a href="{{ route('dashboard.bets.show', ['bet' => $transaction->bet_id]) }}">{{ $transaction->bet_id }}</a></td>
                 <td>{{ $transaction->amount }}</td>
                 <td>{{ $transaction->status }}</td>
                 <td>{{ $transaction->created_at }}</td>
@@ -27,4 +28,5 @@
         @endforeach
         </tbody>
     </table>
+    @include('pagination.default', ['paginator' => $transactions])
 @endsection

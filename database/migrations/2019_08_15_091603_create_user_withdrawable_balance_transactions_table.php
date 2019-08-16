@@ -26,9 +26,7 @@ class CreateUserWithdrawableBalanceTransactionsTable extends Migration
             $table->enum('status', [
                 \App\Model\UserWithdrawableBalanceTransaction::STATUS_PENDING,
                 \App\Model\UserWithdrawableBalanceTransaction::STATUS_BLOCKED_NO_AUTH,
-                \App\Model\UserWithdrawableBalanceTransaction::STATUS_AUTH,
-                \App\Model\UserWithdrawableBalanceTransaction::STATUS_INTERNAL_PAYOUT,
-                \App\Model\UserWithdrawableBalanceTransaction::STATUS_EXTERNAL_PAYOUT,
+                \App\Model\UserWithdrawableBalanceTransaction::STATUS_AUTH
             ]);
 
             $table->timestamps();
