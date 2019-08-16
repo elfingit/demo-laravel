@@ -80,6 +80,14 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 
 
 		$user->available_balance->transactions()->save($transaction);
+
+        $uTransaction = new UserTransactionModel([
+            'user_id'   => $user->id,
+            'transaction_id'    => $transaction->id,
+            'transaction_type'  => UserAvailableBalanceTransactionModel::class
+        ]);
+
+        $uTransaction->save();
 		\DB::commit();
 
 		return $transaction;
