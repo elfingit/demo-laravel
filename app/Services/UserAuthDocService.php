@@ -86,6 +86,10 @@ class UserAuthDocService implements UserAuthDocServiceContract
 
                     if ($doc->bet) {
                         \Bet::changeBetStatus($doc->bet, BetModel::STATUS_PAYOUT_PENDING);
+
+                        if ($doc->bet->transaction) {
+                            \UserWithdrawabalBalance::moveFromPendingToAvailable();
+                        }
                     }
 
                 } else {

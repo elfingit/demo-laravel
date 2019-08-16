@@ -47,10 +47,22 @@ class UserWithdrawableBalanceService implements UserWithdrawableBalanceServiceCo
             $reason);
     }
 
-    public function moveFromPendingToAvailable( UserWithdrawableBalanceModel $balance, $amount )
+    public function moveFromPendingToAvailable( UserWithdrawableBalanceTransactionModel $transaction )
     {
-        // TODO: Implement moveFromPendingToAvailable() method.
+        \DB::beginTransaction();
+        $balance = $transaction->balance;
+        $balance->lockForUpdate();
+
+        $balance->pending_amount = $balance->pending_amount - $transaction->amount;
+        $balance->available_amount = $balance->available_amount + $transaction->amount;
+        $balance->save();
+
+        $transaction->status = UserWithdrawableBalanceTransactionModel::STATUS_PAYOUT_PENDING;
+        $transaction->save();
+
+        \DB::commit();
     }
+
 
     public function charge( UserWithdrawableBalanceModel $balance, $amount, UserModel $user )
     {
