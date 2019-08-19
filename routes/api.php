@@ -105,8 +105,8 @@ Route::namespace('Api')->group(function () {
 
         Route::post('me/request_payout', [
             'middleware'    => ['auth:api', 'client:request_payout'],
-            'uses'  => 'TransactionController@index',
-            'as'    => 'transactions.index'
+            'uses'  => 'WithdrawableController@requestForPayout',
+            'as'    => 'payouts.store'
         ]);
 	});
 });
