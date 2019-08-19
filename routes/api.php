@@ -102,6 +102,12 @@ Route::namespace('Api')->group(function () {
             'uses'  => 'TransactionController@index',
             'as'    => 'transactions.index'
         ]);
+
+        Route::post('me/request_payout', [
+            'middleware'    => ['auth:api', 'client:request_payout'],
+            'uses'  => 'TransactionController@index',
+            'as'    => 'transactions.index'
+        ]);
 	});
 });
 

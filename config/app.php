@@ -258,6 +258,7 @@ return [
 	    'ApiOrder'       => \App\Facades\Api\OrderFacade::class,
         'ApiUserAuthDoc' => \App\Facades\Api\UserAuthDocFacade::class,
         'ApiBet'        => \App\Facades\Api\BetFacade::class,
+        'ApiWithdrawable' => \App\Facades\Api\WithdrawableServiceFacade::class,
 
 
     ],

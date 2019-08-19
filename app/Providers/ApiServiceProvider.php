@@ -11,10 +11,12 @@ use App\Services\Api\Contracts\LeadServiceContract;
 use App\Services\Api\Contracts\OrderServiceContract;
 use App\Services\Api\Contracts\UserAuthDocServiceContract;
 use App\Services\Api\Contracts\UserServiceContract;
+use App\Services\Api\Contracts\WithdrawableServiceContract;
 use App\Services\Api\LeadService;
 use App\Services\Api\OrderService;
 use App\Services\Api\UserAuthDocService;
 use App\Services\Api\UserService;
+use App\Services\Api\WithdrawableService;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
@@ -54,5 +56,6 @@ class ApiServiceProvider extends ServiceProvider
 	    $this->app->bind(OrderServiceContract::class, OrderService::class);
 	    $this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
 	    $this->app->bind(BetServiceContract::class, BetService::class);
+	    $this->app->bind(WithdrawableServiceContract::class, WithdrawableService::class);
     }
 }

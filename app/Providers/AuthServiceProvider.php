@@ -43,7 +43,8 @@ class AuthServiceProvider extends ServiceProvider
             'upload_auth_doc'   => 'User upload authorization documents',
             'self_change_status' => 'User change status',
             'my_bets'           => 'User bets',
-            'my_transactions'   => 'User transactions'
+            'my_transactions'   => 'User transactions',
+            'request_payout'    => 'User request payout'
         ]);
     }
 }
