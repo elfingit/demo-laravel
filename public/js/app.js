@@ -11372,13 +11372,21 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_utils__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -11400,7 +11408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BetStatus",
   components: {
-    Loader: _Loader__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Loader: _Loader__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['status', 'betId', 'statuses'],
   data: function data() {
@@ -11411,17 +11419,11 @@ __webpack_require__.r(__webpack_exports__);
       disabled: false
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.currentStatus = this.$props.status;
-
-    var _self = this;
-
-    lodash__WEBPACK_IMPORTED_MODULE_3___default.a.forIn(this.$props.statuses, function (key, value) {
-      _self.statuses_list.push({
-        name: key,
-        value: value
-      });
-    });
+  },
+  mounted: function mounted() {
+    this.filterStatuses();
   },
   methods: {
     onChange: function onChange() {
@@ -11431,11 +11433,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.disabled = true;
       this.loading = true;
-      var url = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_2__["BET_URL_PREFIX"], '', this.$props.betId);
+      var url = Object(_utils__WEBPACK_IMPORTED_MODULE_3__["url_builder"])(_utils__WEBPACK_IMPORTED_MODULE_3__["BET_URL_PREFIX"], '', this.$props.betId);
 
       var _self = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(url, {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(url, {
         'status': this.currentStatus
       }).then(function (response) {
         _self.disabled = false;
@@ -11447,61 +11449,159 @@ __webpack_require__.r(__webpack_exports__);
         alert('Something went wrong. Please try again later');
       });
     },
-    filterStatuses: function filterStatuses() {
-      var _self = this;
+    filterStatuses: function () {
+      var _filterStatuses = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
 
-      var sList = lodash__WEBPACK_IMPORTED_MODULE_3___default.a.filter(this.statuses_list, function (status) {
-        if (_self.currentStatus == 'waiting_draw') {
-          if (status.value == 'paid') {
-            return false;
+        var _self, sList;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.statuses_list = [];
+                _context.next = 3;
+                return lodash__WEBPACK_IMPORTED_MODULE_4___default.a.forIn(this.$props.statuses, function (key, value) {
+                  _this.statuses_list.push({
+                    name: key,
+                    value: value
+                  });
+                });
+
+              case 3:
+                _self = this;
+                sList = lodash__WEBPACK_IMPORTED_MODULE_4___default.a.filter(_self.statuses_list, function (status) {
+                  if (_self.currentStatus == 'paid') {
+                    if (status.value != 'paid' && status.value != 'waiting_draw' && status.value != 'refund') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'waiting_draw') {
+                    if (status.value != 'waiting_draw' && status.value != 'win' && status.value != 'played' && status.value != 'refund') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'played') {
+                    if (status.value != 'played' && status.value != 'closed') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'win') {
+                    if (status.value != 'win' && status.value != 'auth_pending') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'auth_pending') {
+                    if (status.value != 'auth_pending' && status.value != 'payout_pending' && status.value != 'not_auth') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'not_auth') {
+                    if (status.value != 'not_auth' && status.value != 'cancelled') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'payout_pending') {
+                    if (status.value != 'payout_pending' && status.value != 'payout') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'payout') {
+                    if (status.value != 'payout' && status.value != 'closed') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'refund') {
+                    if (status.value != 'refund' && status.value != 'cancelled') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'cancelled') {
+                    if (status.value != 'cancelled') {
+                      return false;
+                    }
+                  }
+
+                  if (_self.currentStatus == 'closed') {
+                    if (status.value != 'closed') {
+                      return false;
+                    }
+                  }
+                  /*
+                   if (_self.currentStatus == 'not_auth') {
+                       if( status.value == 'paid'
+                          || status.value == 'refund'
+                          || status.value == 'waiting_draw'
+                          || status.value == 'played'
+                          || status.value == 'win'
+                          || status.value == 'auth_pending'
+                          || status.value == 'payout_pending'
+                          || status.value == 'payout'
+                      ) {
+                          return false;
+                      }
+                  }
+                   if (_self.currentStatus == 'payout_pending') {
+                       if( status.value == 'paid'
+                          || status.value == 'refund'
+                          || status.value == 'waiting_draw'
+                          || status.value == 'played'
+                          || status.value == 'win'
+                          || status.value == 'auth_pending'
+                          || status.value == 'not_auth'
+                      ) {
+                          return false;
+                      }
+                  }
+                   if (_self.currentStatus == 'payout') {
+                       if( status.value == 'paid'
+                          || status.value == 'refund'
+                          || status.value == 'waiting_draw'
+                          || status.value == 'played'
+                          || status.value == 'win'
+                          || status.value == 'auth_pending'
+                          || status.value == 'not_auth'
+                          || status.value == 'cancelled'
+                          || status.value == 'payout_pending'
+                      ) {
+                          return false;
+                      }
+                  }
+                   if (_self.currentStatus == 'closed' && status.value != 'closed') {
+                      return false;
+                  }*/
+
+
+                  return true;
+                });
+                console.log(sList);
+                this.statuses_list = sList;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
           }
-        }
+        }, _callee, this);
+      }));
 
-        if (_self.currentStatus == 'played') {
-          if (status.value == 'paid' || status.value == 'win' || status.value == 'refund' || status.value == 'auth_pending' || status.value == 'not_auth' || status.value == 'payout_pending' || status.value == 'payout' || status.value == 'waiting_draw') {
-            return false;
-          }
-        }
+      function filterStatuses() {
+        return _filterStatuses.apply(this, arguments);
+      }
 
-        if (_self.currentStatus == 'win') {
-          if (status.value == 'paid' || status.value == 'refund' || status.value == 'waiting_draw' || status.value == 'played') {
-            return false;
-          }
-        }
-
-        if (_self.currentStatus == 'auth_pending') {
-          if (status.value == 'paid' || status.value == 'refund' || status.value == 'waiting_draw' || status.value == 'played' || status.value == 'win') {
-            return false;
-          }
-        }
-
-        if (_self.currentStatus == 'not_auth') {
-          if (status.value == 'paid' || status.value == 'refund' || status.value == 'waiting_draw' || status.value == 'played' || status.value == 'win' || status.value == 'auth_pending' || status.value == 'payout_pending' || status.value == 'payout') {
-            return false;
-          }
-        }
-
-        if (_self.currentStatus == 'payout_pending') {
-          if (status.value == 'paid' || status.value == 'refund' || status.value == 'waiting_draw' || status.value == 'played' || status.value == 'win' || status.value == 'auth_pending' || status.value == 'not_auth') {
-            return false;
-          }
-        }
-
-        if (_self.currentStatus == 'payout') {
-          if (status.value == 'paid' || status.value == 'refund' || status.value == 'waiting_draw' || status.value == 'played' || status.value == 'win' || status.value == 'auth_pending' || status.value == 'not_auth' || status.value == 'cancelled' || status.value == 'payout_pending') {
-            return false;
-          }
-        }
-
-        if (_self.currentStatus == 'closed' && status.value != 'closed') {
-          return false;
-        }
-
-        return true;
-      });
-
-      this.statuses_list = sList;
-    }
+      return filterStatuses;
+    }()
   }
 });
 

@@ -61,89 +61,79 @@ class BetService implements BetServiceContract
 
         $statuses = array_filter($statuses, function ($status, $key) use ($bet) {
 
-            if ($bet->status == BetModel::STATUS_WAITING_DRAW && $key == BetModel::STATUS_PAID ) {
-                return false;
-            }
-
-            if ($bet->status == BetModel::STATUS_REFUND && $key != BetModel::STATUS_CANCELLED && $key != BetModel::STATUS_REFUND) {
-                return false;
-            }
-
-            if ($bet->status == BetModel::STATUS_CANCELLED && $key != BetModel::STATUS_CANCELLED) {
-                return false;
-            }
-
-            if ($bet->status == BetModel::STATUS_PLAYED && (
-                    $key == BetModel::STATUS_PAID
-                    || $key == BetModel::STATUS_WAITING_DRAW
-                    || $key == BetModel::STATUS_WIN
-                    || $key == BetModel::STATUS_REFUND
-                    || $key == BetModel::STATUS_AUTH_PENDING
-                    || $key == BetModel::STATUS_NOT_AUTH
-                    || $key == BetModel::STATUS_PAYOUT_PENDING
-                    || $key == BetModel::STATUS_PAYOUT
-                    || $key == BetModel::STATUS_CANCELLED
-                )) {
-                return false;
-            }
-
-            if ($bet->status == BetModel::STATUS_WIN && (
-                    $key == BetModel::STATUS_PAID
-                    || $key == BetModel::STATUS_WAITING_DRAW
-                    || $key == BetModel::STATUS_PLAYED
-                    || $key == BetModel::STATUS_REFUND
-                )) {
+            if ($bet->status == BetModel::STATUS_PAID &&
+                    $key !=BetModel::STATUS_WAITING_DRAW
+                    && $key !=BetModel::STATUS_REFUND
+                    && $key !=BetModel::STATUS_PAID
+                ) {
 
                 return false;
             }
 
-            if ($bet->status == BetModel::STATUS_AUTH_PENDING && (
-                    $key == BetModel::STATUS_PAID
-                    || $key == BetModel::STATUS_WAITING_DRAW
-                    || $key == BetModel::STATUS_PLAYED
-                    || $key == BetModel::STATUS_REFUND
-                    || $key == BetModel::STATUS_WIN
-                )) {
-
+            if ($bet->status == BetModel::STATUS_WAITING_DRAW &&
+                        $key != BetModel::STATUS_PLAYED
+                        && $key != BetModel::STATUS_WIN
+                        && $key != BetModel::STATUS_REFUND
+                        && $key != BetModel::STATUS_WAITING_DRAW ) {
                 return false;
             }
 
-            if ($bet->status == BetModel::STATUS_NOT_AUTH && (
-                    $key == BetModel::STATUS_PAID
-                    || $key == BetModel::STATUS_WAITING_DRAW
-                    || $key == BetModel::STATUS_PLAYED
-                    || $key == BetModel::STATUS_REFUND
-                    || $key == BetModel::STATUS_WIN
-                    || $key == BetModel::STATUS_AUTH_PENDING
-                    || $key == BetModel::STATUS_PAYOUT_PENDING
-                    || $key == BetModel::STATUS_PAYOUT
-                    || $key == BetModel::STATUS_CLOSED
-                )) {
-
+            if ($bet->status == BetModel::STATUS_PLAYED &&
+                $key != BetModel::STATUS_PLAYED
+                && $key != BetModel::STATUS_CLOSED) {
                 return false;
             }
 
-            if ($bet->status == BetModel::STATUS_PAYOUT_PENDING && (
-                    $key == BetModel::STATUS_PAID
-                    || $key == BetModel::STATUS_WAITING_DRAW
-                    || $key == BetModel::STATUS_PLAYED
-                    || $key == BetModel::STATUS_REFUND
-                    || $key == BetModel::STATUS_WIN
-                    || $key == BetModel::STATUS_AUTH_PENDING
-                    || $key == BetModel::STATUS_NOT_AUTH
-                    || $key == BetModel::STATUS_CANCELLED
-                )) {
-
+            if ($bet->status == BetModel::STATUS_WIN &&
+                $key != BetModel::STATUS_WIN
+                && $key != BetModel::STATUS_AUTH_PENDING) {
                 return false;
             }
 
-            if ($bet->status == BetModel::STATUS_PAYOUT && $key != BetModel::STATUS_PAYOUT && $key != BetModel::STATUS_CLOSED ){
-
+            if ($bet->status == BetModel::STATUS_AUTH_PENDING &&
+                $key != BetModel::STATUS_PAYOUT_PENDING
+                && $key != BetModel::STATUS_AUTH_PENDING
+                && $key != BetModel::STATUS_NOT_AUTH) {
                 return false;
             }
 
-            if ($bet->status == BetModel::STATUS_CLOSED && $key != BetModel::STATUS_CLOSED ){
+            if ($bet->status == BetModel::STATUS_NOT_AUTH &&
+                $key != BetModel::STATUS_NOT_AUTH
+                && $key != BetModel::STATUS_CANCELLED) {
+                return false;
+            }
 
+            if ($bet->status == BetModel::STATUS_NOT_AUTH &&
+                $key != BetModel::STATUS_NOT_AUTH
+                && $key != BetModel::STATUS_CANCELLED) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_PAYOUT_PENDING &&
+                $key != BetModel::STATUS_PAYOUT_PENDING
+                && $key != BetModel::STATUS_PAYOUT) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_PAYOUT &&
+                $key != BetModel::STATUS_PAYOUT
+                && $key != BetModel::STATUS_CLOSED) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_REFUND &&
+                $key != BetModel::STATUS_REFUND
+                && $key != BetModel::STATUS_CANCELLED) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_CANCELLED &&
+                $key != BetModel::STATUS_CANCELLED) {
+                return false;
+            }
+
+            if ($bet->status == BetModel::STATUS_CLOSED &&
+                $key != BetModel::STATUS_CLOSED) {
                 return false;
             }
 

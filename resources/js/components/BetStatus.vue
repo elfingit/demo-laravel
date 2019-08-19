@@ -32,16 +32,12 @@
             }
         },
 
-        mounted() {
+        created() {
             this.currentStatus = this.$props.status;
-            let _self = this;
+        },
 
-            _.forIn(this.$props.statuses, (key, value) => {
-                _self.statuses_list.push({
-                    name: key,
-                    value: value
-                })
-            });
+        mounted() {
+            this.filterStatuses();
         },
 
         methods: {
@@ -72,55 +68,102 @@
                 });
             },
 
-            filterStatuses() {
+            async filterStatuses() {
+
+                this.statuses_list = [];
+                await _.forIn(this.$props.statuses, (key, value) => {
+                    this.statuses_list.push({
+                        name: key,
+                        value: value
+                    })
+                });
 
                 let _self = this;
 
-                let sList = _.filter(this.statuses_list, (status) => {
+                let sList = _.filter(_self.statuses_list, (status) => {
+                    if (_self.currentStatus == 'paid') {
+                        if( status.value != 'paid'
+                            && status.value != 'waiting_draw'
+                            && status.value != 'refund') {
+                            return false;
+
+                        }
+                    }
 
                     if (_self.currentStatus == 'waiting_draw') {
-                        if( status.value == 'paid') {
+                        if( status.value != 'waiting_draw'
+                            && status.value != 'win'
+                            && status.value != 'played'
+                            && status.value != 'refund'
+                        ) {
                             return false;
                         }
                     }
 
                     if (_self.currentStatus == 'played') {
-                        if( status.value == 'paid'
-                            || status.value == 'win'
-                            || status.value == 'refund'
-                            || status.value == 'auth_pending'
-                            || status.value == 'not_auth'
-                            || status.value == 'payout_pending'
-                            || status.value == 'payout'
-                            || status.value == 'waiting_draw'
-                        ) {
+                        if( status.value != 'played'
+                            && status.value != 'closed') {
                             return false;
                         }
                     }
 
                     if (_self.currentStatus == 'win') {
-
-                        if( status.value == 'paid'
-                            || status.value == 'refund'
-                            || status.value == 'waiting_draw'
-                            || status.value == 'played'
-                        ) {
+                        if( status.value != 'win'
+                            && status.value != 'auth_pending') {
                             return false;
                         }
-
                     }
 
                     if (_self.currentStatus == 'auth_pending') {
-
-                        if( status.value == 'paid'
-                            || status.value == 'refund'
-                            || status.value == 'waiting_draw'
-                            || status.value == 'played'
-                            || status.value == 'win'
-                        ) {
+                        if( status.value != 'auth_pending'
+                            && status.value != 'payout_pending'
+                            && status.value != 'not_auth') {
                             return false;
                         }
                     }
+
+                    if (_self.currentStatus == 'not_auth') {
+                        if( status.value != 'not_auth'
+                            && status.value != 'cancelled') {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'payout_pending') {
+                        if( status.value != 'payout_pending'
+                            && status.value != 'payout') {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'payout') {
+                        if( status.value != 'payout'
+                            && status.value != 'closed') {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'refund') {
+                        if( status.value != 'refund'
+                            && status.value != 'cancelled') {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'cancelled') {
+                        if( status.value != 'cancelled') {
+                            return false;
+                        }
+                    }
+
+                    if (_self.currentStatus == 'closed') {
+                        if( status.value != 'closed') {
+                            return false;
+                        }
+                    }
+
+
+                    /*
 
                     if (_self.currentStatus == 'not_auth') {
 
@@ -169,12 +212,12 @@
 
                     if (_self.currentStatus == 'closed' && status.value != 'closed') {
                         return false;
-                    }
+                    }*/
 
                     return true;
 
                 });
-
+                console.log(sList);
                 this.statuses_list = sList;
 
             }
