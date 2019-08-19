@@ -65,7 +65,7 @@ class MegaMillionsCalculator extends AbstractCalculator
             return self::WIN;
         //5 numbers + megaball
         } elseif (count($diff) == 0 && $this->checkMegaBall($result, $ticket) === true) {
-            \Ticket::markTicketAsWin( $ticket, $this->getWinAmount( $ticket, $result, 44503200,30 ) );
+            \Ticket::markTicketAsWin( $ticket, $this->getWinAmount( $ticket, $result, 44503200.30 ) );
 
             return self::WIN;
         } else {
