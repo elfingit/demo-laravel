@@ -36,7 +36,9 @@ class BetService implements BetServiceContract
         $criteria->where('status', 'status');
         $criteria->where('brand', 'brand_id');
 
-        return $criteria->paginate(25);
+        return $criteria
+            ->orderBy('id', 'desc')
+            ->paginate(25);
     }
 
     public function getStatuses(BetModel $bet = null)

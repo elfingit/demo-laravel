@@ -53,6 +53,13 @@ class Criteria
 		}
 	}
 
+	public function orderBy($field, $order)
+    {
+        $this->builder->orderBy($field, $order);
+
+        return $this;
+    }
+
 	public function paginate($perPage = 25)
 	{
 		return $this->builder->paginate($perPage);

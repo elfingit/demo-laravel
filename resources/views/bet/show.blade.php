@@ -19,7 +19,8 @@
                                 <span><b>{{ __('ID') }}:</b></span>
                             </span>
                             <span class="mdl-list__item-secondary-content">
-                                <span class="mdl-list__item-text-body">{{ $bet->user_id }}</span>
+                                <span class="mdl-list__item-text-body">
+                                    <a href="{{ route('dashboard.users.show', ['user_id' => $bet->user_id]) }}">{{ $bet->user_id }}</a></span>
                             </span>
                         </div>
                         <div class="mdl-list__item">
