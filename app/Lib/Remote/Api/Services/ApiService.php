@@ -10,6 +10,7 @@ namespace App\Lib\Remote\Api\Services;
 
 use App\Lib\Remote\Api\Contracts\ApiServiceContract;
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 
 class ApiService implements ApiServiceContract
 {
@@ -30,7 +31,9 @@ class ApiService implements ApiServiceContract
 	{
 		$url = $this->getGameUrl($game_code);
 
-		return $this->httpClient->get($url);
+		return $this->httpClient->get($url, [
+            RequestOptions::TIMEOUT => 5
+        ]);
 	}
 
 	protected function getGameUrl($game_code)
