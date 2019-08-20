@@ -19,6 +19,12 @@ Route::namespace('Api')->group(function () {
 
 	Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
 
+	    Route::get('user', [
+            'middleware'    => 'auth:api',
+	        'uses'  => 'UserController@show',
+            'as'    => 'user.show'
+        ]);
+
 		Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
 		     ->middleware('client:reset_password_link');
 

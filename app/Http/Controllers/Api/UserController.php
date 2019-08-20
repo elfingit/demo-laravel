@@ -46,4 +46,9 @@ class UserController extends Controller
 
         return response()->json([], 204);
     }
+
+    public function show()
+    {
+        return new UserResource(\Auth::user());
+    }
 }
