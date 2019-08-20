@@ -53,8 +53,8 @@ class UserWithdrawableBalanceService implements UserWithdrawableBalanceServiceCo
         $balance = $transaction->balance;
         $balance->lockForUpdate();
 
-        $balance->pending_amount = $balance->pending_amount - $transaction->amount;
-        $balance->available_amount = $balance->available_amount + $transaction->amount;
+        $balance->pending_amount = floatval($balance->pending_amount) - floatval($transaction->amount);
+        $balance->available_amount = floatval($balance->available_amount) + floatval($transaction->amount);
         $balance->save();
 
         $transaction->status = UserWithdrawableBalanceTransactionModel::STATUS_PAYOUT_PENDING;
