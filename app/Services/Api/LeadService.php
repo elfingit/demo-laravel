@@ -22,12 +22,21 @@ class LeadService implements LeadServiceContract
 
 		$data['status'] = LeadModel::STATUS_NEW;
 
+		if ($request->has('user_id')) {
+		    $data['user_id'] = $request->get('user_id');
+        }
+
 		return LeadModel::create($data);
 	}
 
 	public function update( FormRequest $request, LeadModel $lead )
 	{
 		$lead->cart_items = $request->get('cart_items');
+
+        if ($request->has('user_id')) {
+            $lead->user_id = $request->get('user_id');
+        }
+
 		$lead->save();
 
 		return $lead;

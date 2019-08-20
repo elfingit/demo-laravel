@@ -17,7 +17,8 @@ class UpdateLeadRequest extends FormRequest
 
     	return [
             'cart_items' => 'required|array',
-	        'host'  => 'required|exists:leads,host,id,'.$lead->id
+	        'host'  => 'required|exists:leads,host,id,'.$lead->id,
+            'user_id' => 'sometimes|required|exists:users,id'
         ];
     }
 }
