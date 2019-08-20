@@ -9,6 +9,7 @@ namespace App\Services\Api;
 
 use App\Lib\Utils;
 use App\Model\BetTicket as BetTicketModel;
+use App\Model\Lead as LeadModel;
 use App\Model\Order as OrderModel;
 use App\Model\OrderTransaction;
 use App\Model\User as UserModel;
@@ -47,6 +48,14 @@ class OrderService implements OrderServiceContract
 
 
             $this->makeBets($order, $request->get('cart_items'), $user);
+
+            if ($request->has('lead_id')) {
+                $lead = LeadModel::find($request->get('lead_id'));
+                if ($lead) {
+                    $lead->order_id = $order->id;
+                    $lead->save();
+                }
+            }
 
             \DB::commit();
         } catch (\Exception $e) {
