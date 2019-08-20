@@ -173,6 +173,7 @@
                         _self.form.bet_id = null;
                         _self.docs.push(response.data.data);
                         _self.hideForm();
+                        _self.disabledSubmit = false;
                     }).catch((err) => {
                     _self.disabledSubmit = false;
 

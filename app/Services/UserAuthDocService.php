@@ -56,7 +56,11 @@ class UserAuthDocService implements UserAuthDocServiceContract
                     $doc->is_rejected = true;
 
                     if ($doc->bet) {
-                        \Bet::changeBetStatus($doc->bet, BetModel::STATUS_NOT_AUTH);
+                        $doc->bet->reject_docs_count = $doc->bet->reject_docs_count + 1;
+                        $doc->bet->save();
+                        if ($doc->bet->reject_docs_count == 3) {
+                            \Bet::changeBetStatus($doc->bet, BetModel::STATUS_NOT_AUTH);
+                        }
                     }
 
                 } else {

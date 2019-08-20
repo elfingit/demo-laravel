@@ -13137,6 +13137,8 @@ __webpack_require__.r(__webpack_exports__);
         _self.docs.push(response.data.data);
 
         _self.hideForm();
+
+        _self.disabledSubmit = false;
       })["catch"](function (err) {
         _self.disabledSubmit = false;
 
