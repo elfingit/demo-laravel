@@ -19,12 +19,6 @@ Route::namespace('Api')->group(function () {
 
 	Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
 
-	    Route::get('user', [
-            'middleware'    => 'auth:api',
-	        'uses'  => 'UserController@show',
-            'as'    => 'user.show'
-        ]);
-
 		Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
 		     ->middleware('client:reset_password_link');
 
@@ -96,6 +90,12 @@ Route::namespace('Api')->group(function () {
             'uses'  => 'UserAuthDocController@store',
             'as'    => 'auth_doc.store'
         ]);
+
+		Route::get('me', [
+					'middleware'    => 'auth:api',
+				'uses'  => 'UserController@show',
+					'as'    => 'user.show'
+			]);
 
 		Route::get('me/bets', [
             'middleware'    => ['auth:api', 'client:my_bets'],
