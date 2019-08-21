@@ -147,4 +147,10 @@ class UserController extends Controller
 
         return new UserTransactionsCollection($transactions);
     }
+
+    public function betsPending(UserModel $user)
+    {
+        $leads = \Lead::getListByUser($user);
+
+    }
 }

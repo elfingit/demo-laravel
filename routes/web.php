@@ -72,6 +72,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'as'    => 'users.bets.index'
         ]);
 
+        Route::get('/users/{user}/bets_pending', [
+            'uses'  => 'UserController@betsPending',
+            'as'    => 'users.bets.pending'
+        ]);
+
         Route::get('/users/{user}/transactions', [
             'uses'  => 'UserController@transactions',
             'as'    => 'users.transactions.index'
@@ -117,6 +122,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
         'uses'  => 'WithdrawableController@index',
         'as'    => 'withdrawable.index'
     ]);
-
 });
 
