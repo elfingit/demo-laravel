@@ -13474,6 +13474,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserBetPendingCartItems",
   props: ['items'],
@@ -13602,6 +13618,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _UserBetPendingCartItems__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserBetPendingCartItems */ "./resources/js/components/UserBetPendingCartItems.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -14221,7 +14241,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.loader[data-v-924f2862] {\n    width: 40px;\n    height: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.loader[data-v-924f2862] {\n    width: 40px;\n    height: 40px;\n}\n.crm-table tr[data-v-924f2862] {\n    border-bottom: 1px solid #8c8c8c;\n}\n", ""]);
 
 // exports
 
@@ -63857,6 +63877,44 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
+            item.extra_games
+              ? _c("span", { staticClass: "title" }, [_vm._v("Extra games")])
+              : _vm._e(),
+            _vm._v(" "),
+            item.extra_games
+              ? _c("span", { staticClass: "title" }, [
+                  _c(
+                    "ul",
+                    _vm._l(item.extra_games, function(e_game) {
+                      return _c("li", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(e_game.system_name) +
+                            "\n                        "
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          item.brand_id == "de_lotto"
+            ? _c("div", [
+                _c("span", { staticClass: "title" }, [_vm._v("Ticket number")]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  _vm._l(item.ticketNumber, function(tn) {
+                    return _c("li", [_vm._v(_vm._s(tn))])
+                  }),
+                  0
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", [
             _c("span", { staticClass: "title" }, [_vm._v("Tickets:")]),
             _vm._v(" "),
             _c("span", [
@@ -64048,7 +64106,9 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(lead.created_at))])
+                _c("td", [_vm._v(_vm._s(lead.created_at))]),
+                _vm._v(" "),
+                _vm._m(1, true)
               ])
             }),
             0
@@ -64093,7 +64153,24 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Cart")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Created At")])
+      _c("th", [_vm._v("Created At")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        {
+          staticClass:
+            "mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+        },
+        [_vm._v("Convert to order")]
+      )
     ])
   }
 ]

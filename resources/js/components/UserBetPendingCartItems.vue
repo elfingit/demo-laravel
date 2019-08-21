@@ -6,6 +6,22 @@
                     <span class="title">Brand:</span><span>{{ item.brand_id }}</span>
                 </div>
                 <div>
+                    <span class="title" v-if="item.extra_games">Extra games</span>
+                    <span class="title" v-if="item.extra_games">
+                        <ul>
+                            <li v-for="e_game in item.extra_games">
+                                {{ e_game.system_name }}
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+                <div v-if="item.brand_id == 'de_lotto'">
+                    <span class="title">Ticket number</span>
+                    <ul>
+                        <li v-for="tn in item.ticketNumber">{{ tn }}</li>
+                    </ul>
+                </div>
+                <div>
                     <span class="title">Tickets:</span>
                     <span>
                         <ul>

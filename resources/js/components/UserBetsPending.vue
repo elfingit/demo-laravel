@@ -8,6 +8,7 @@
             <th>ID</th>
             <th>Cart</th>
             <th>Created At</th>
+            <th>Actions</th>
             </thead>
             <tbody>
             <tr v-for="(lead, index) in (items)" :key="index">
@@ -16,6 +17,9 @@
                     <UserBetPendingCartItems :items="lead.cart_items" />
                 </td>
                 <td>{{ lead.created_at }}</td>
+                <td>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Convert to order</button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -71,5 +75,9 @@
     .loader {
         width: 40px;
         height: 40px;
+    }
+
+    .crm-table tr {
+        border-bottom: 1px solid #8c8c8c;
     }
 </style>
