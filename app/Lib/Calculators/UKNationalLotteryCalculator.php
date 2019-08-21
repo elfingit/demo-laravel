@@ -41,7 +41,7 @@ class UKNationalLotteryCalculator extends AbstractCalculator
         $tmp_diff = array_diff($line_result, $tmp_line);
 
         //5 numbers + bonus ball
-        if (count($tmp_diff) == 1) {
+        if (count($tmp_diff) == 0) {
             \Ticket::markTicketAsWin( $ticket, 1092191.92 );
 
             return self::WIN;
