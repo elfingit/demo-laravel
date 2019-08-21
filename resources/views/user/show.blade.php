@@ -244,5 +244,13 @@
                 </template>
             </expandable-area>
         </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <expandable-area title="Bets pending">
+                <template v-slot:content>
+                    <user-bet-pending
+                        url="{{ route('dashboard.crm_api.users.bets.pending', ['user' => $user->id]) }}" />
+                </template>
+            </expandable-area>
+        </div>
     </div>
 @endsection

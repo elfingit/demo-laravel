@@ -7,6 +7,8 @@ use App\Http\Requests\UserChangeStatusRequest;
 use App\Http\Requests\UserShowFieldRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserBetsCollection;
+use App\Http\Resources\UserLeadCollection;
+use App\Http\Resources\UserLeadResource;
 use App\Http\Resources\UserTransactionsCollection;
 use App\Lib\Query\Criteria;
 use App\Model\User as UserModel;
@@ -152,5 +154,6 @@ class UserController extends Controller
     {
         $leads = \Lead::getListByUser($user);
 
+        return new UserLeadCollection($leads);
     }
 }
