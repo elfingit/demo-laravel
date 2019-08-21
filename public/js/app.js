@@ -13682,6 +13682,18 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (err) {
       console.log(err);
     });
+  },
+  methods: {
+    converToOrder: function converToOrder(id) {
+      var url = '/dashboard/crm_api/lead_to_order/' + id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, {}).then(function (response) {
+        if (response.data.url) {
+          window.location.href = response.data.url;
+        }
+      })["catch"](function (err) {
+        alert(err.response.data.message);
+      });
+    }
   }
 });
 
@@ -64108,7 +64120,21 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(lead.created_at))]),
                 _vm._v(" "),
-                _vm._m(1, true)
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "mdl-button mdl-js-button mdl-button--raised mdl-button--accent",
+                      on: {
+                        click: function($event) {
+                          return _vm.converToOrder(lead.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Convert to order")]
+                  )
+                ])
               ])
             }),
             0
@@ -64156,21 +64182,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Created At")]),
       _vm._v(" "),
       _c("th", [_vm._v("Actions")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass:
-            "mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
-        },
-        [_vm._v("Convert to order")]
-      )
     ])
   }
 ]

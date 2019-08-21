@@ -60,7 +60,7 @@ class OrderService implements OrderServiceContract
             \DB::commit();
         } catch (\Exception $e) {
             \DB::rollBack();
-            \ApiLogger::error($e->getMessage(), ['ApiOrderService']);
+            \ApiLogger::error($e->getMessage(), [__CLASS__]);
 
             throw $e;
         }

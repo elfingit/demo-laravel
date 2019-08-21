@@ -7,6 +7,7 @@
  */
 namespace App\Services\Contracts;
 
+use App\Model\Lead as LeadModel;
 use App\Model\Order as OrderModel;
 
 interface OrderServiceContract
@@ -14,4 +15,5 @@ interface OrderServiceContract
     public function list();
     public function changeStatus($status, OrderModel $order);
     public function betStatusChanged(OrderModel $order, $status);
+    public function leadToOrder(LeadModel $lead);
 }

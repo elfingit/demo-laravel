@@ -14,4 +14,9 @@ class Lead extends Model
     protected $casts = [
     	'cart_items' => 'array'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

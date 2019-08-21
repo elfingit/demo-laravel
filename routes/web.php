@@ -91,6 +91,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'uses'  => 'UserAuthDocController@index',
             'as'    => 'user.auth_docs.index'
         ]);
+
+        Route::post('/lead_to_order/{lead}', [
+            'uses'  => 'LeadController@toOrder',
+            'as'    => 'lead.to_order'
+        ]);
 	});
 
 	Route::get('/leads', [

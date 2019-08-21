@@ -18,7 +18,7 @@
                 </td>
                 <td>{{ lead.created_at }}</td>
                 <td>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Convert to order</button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="converToOrder(lead.id)">Convert to order</button>
                 </td>
             </tr>
             </tbody>
@@ -67,6 +67,22 @@
                 .catch((err) => {
                     console.log(err);
                 })
+        },
+
+        methods: {
+            converToOrder(id) {
+                let url = '/dashboard/crm_api/lead_to_order/' + id;
+
+                axios.post(url, {})
+                    .then((response) => {
+                        if (response.data.url) {
+                            window.location.href = response.data.url;
+                        }
+                    })
+                    .catch((err) => {
+                        alert(err.response.data.message);
+                    })
+            }
         }
     }
 </script>
