@@ -159,4 +159,9 @@ class Utils
 
         return $date;
     }
+
+    public static function toInt($val)
+    {
+        return intval($val);
+    }
 }

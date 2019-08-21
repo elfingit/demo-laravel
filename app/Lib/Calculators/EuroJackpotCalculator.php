@@ -7,6 +7,7 @@
  */
 namespace App\Lib\Calculators;
 
+use App\Lib\Utils;
 use App\Model\BetTicket as BetTicketModel;
 use App\Model\BrandResult as BrandResultModel;
 use Illuminate\Support\Collection;
@@ -16,9 +17,11 @@ class EuroJackpotCalculator extends AbstractCalculator
     protected function checkTicket(BetTicketModel $ticket, BrandResultModel $result)
     {
         $line = $ticket->line;
+        $line = array_map([Utils::class, 'toInt'], $line);
         sort( $line, SORT_NUMERIC );
 
         $line_result = $result->results->main_result;
+        $line_result = array_map([Utils::class, 'toInt'], $line_result);
         sort( $line_result, SORT_NUMERIC );
 
         $diff = array_diff( $line_result, $line );

@@ -32,7 +32,7 @@ class ApiService implements ApiServiceContract
 		$url = $this->getGameUrl($game_code);
 
 		return $this->httpClient->get($url, [
-            RequestOptions::TIMEOUT => 5
+            RequestOptions::TIMEOUT => 10
         ]);
 	}
 
