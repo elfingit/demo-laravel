@@ -92,6 +92,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'as'    => 'user.auth_docs.index'
         ]);
 
+        Route::put('/user/{user}/doc/{doc}/status', [
+            'uses'  => 'UserAuthDocController@update',
+            'as'    => 'user.auth_docs.update'
+        ]);
+
         Route::post('/lead_to_order/{lead}', [
             'uses'  => 'LeadController@toOrder',
             'as'    => 'lead.to_order'

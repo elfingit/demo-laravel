@@ -13049,19 +13049,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -13156,6 +13143,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     showFile: function showFile(doc) {
       window.open('/dashboard/user/' + this.$props.userId + '/doc/' + doc.id, "width=400,height=300");
+    },
+    onChange: function onChange(doc, event) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.put('/dashboard/crm_api/user/' + this.$props.userId + '/doc/' + doc.id + '/status', {
+        status: event.target.value
+      }).then(function (response) {
+        if (response.data.last_approved == true) {
+          var ev = new Event('user_authorized', {
+            bubbles: true
+          });
+          document.dispatchEvent(ev);
+        }
+      })["catch"](function (err) {
+        alert("Something went wrong.\nPlease try again later");
+        console.log(err);
+      });
     }
   },
   updated: function updated() {
@@ -13766,6 +13768,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -13777,6 +13780,19 @@ __webpack_require__.r(__webpack_exports__);
     ToggleButton: vue_js_toggle_button__WEBPACK_IMPORTED_MODULE_0__["ToggleButton"]
   },
   props: ['userId', 'status', 'paramName', 'label', 'color', 'entityId'],
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.$props.paramName == 'authorized') {
+      var _self = this;
+
+      document.addEventListener('user_authorized', function (ev) {
+        console.log(ev);
+        _this.$props.status = 1;
+        _self.isAuthorized = true;
+      });
+    }
+  },
   data: function data() {
     return {
       disabled: false,
@@ -63139,38 +63155,39 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c("user-param-toggle", {
-                      attrs: {
-                        "param-name": "is_doc_approved",
-                        status: doc.is_approved == true ? 1 : 0,
-                        "user-id": doc.user_id,
-                        "entity-id": doc.id,
-                        label: { checked: "Yes", unchecked: "No" }
+                _c("td", [
+                  _c(
+                    "select",
+                    {
+                      on: {
+                        change: function($event) {
+                          return _vm.onChange(doc, $event)
+                        }
                       }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c("user-param-toggle", {
-                      attrs: {
-                        "param-name": "is_doc_rejected",
-                        status: doc.is_rejected == true ? 1 : 0,
-                        "user-id": doc.user_id,
-                        "entity-id": doc.id,
-                        color: { checked: "#FF0000" },
-                        label: { checked: "Yes", unchecked: "No" }
-                      }
-                    })
-                  ],
-                  1
-                ),
+                    },
+                    [
+                      _c("option", [_vm._v("Select status")]),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: { value: "0" },
+                          domProps: { selected: doc.is_rejected == true }
+                        },
+                        [_vm._v("Rejected")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: { value: "1" },
+                          domProps: { selected: doc.is_approved == true }
+                        },
+                        [_vm._v("Approved")]
+                      )
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(doc.type))]),
                 _vm._v(" "),
@@ -63418,8 +63435,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("File")]),
       _vm._v(" "),
       _c("th", [_vm._v("Is approved")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Is Rejected")]),
       _vm._v(" "),
       _c("th", [_vm._v("Type")]),
       _vm._v(" "),
@@ -64242,6 +64257,7 @@ var render = function() {
             unchecked: _vm.label.unchecked
           },
           color: this.color,
+          sync: true,
           width: 100
         },
         on: { change: _vm.onChange }

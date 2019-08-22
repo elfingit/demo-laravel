@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserAuthDocStatusRequest;
 use App\Http\Requests\UserAuthDocStoreRequest;
 use App\Http\Resources\UserAuthDocResource;
 use App\Model\User as UserModel;
@@ -40,5 +41,22 @@ class UserAuthDocController extends Controller
         $docs = \UserAuthDoc::all();
 
         return view('auth_doc.index', compact('docs'));
+    }
+
+    public function update(UserAuthDocStatusRequest $request, UserModel $user, UserAuthDocModel $doc)
+    {
+        $last_approved = false;
+
+        if ($request->get('status') === "0") {
+            \UserAuthDoc::rejectDoc($user, $doc);
+        } elseif ($request->get('status') === "1") {
+            \UserAuthDoc::approveDoc($user, $doc);
+            $last_approved = \UserAuthDoc::isLastApproved($user);
+        }
+
+        return response()->json([
+            'status'            => 'success',
+            'last_approved'     => $last_approved
+        ]);
     }
 }

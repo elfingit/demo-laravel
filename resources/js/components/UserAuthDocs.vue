@@ -7,7 +7,6 @@
             <thead>
             <th>File</th>
             <th>Is approved</th>
-            <th>Is Rejected</th>
             <th>Type</th>
             <th>Valid till</th>
             <th>Comments</th>
@@ -17,23 +16,11 @@
             <tr v-for="(doc, index) in (docs)" :key="index">
                 <td><span class="link" @click="showFile(doc)">{{ doc.file_name }}</span></td>
                 <td>
-                    <user-param-toggle
-                        :param-name="'is_doc_approved'"
-                        :status="doc.is_approved == true ? 1 : 0"
-                        :user-id="doc.user_id"
-                        :entity-id="doc.id"
-                        :label="{checked: 'Yes', unchecked: 'No'}"
-                    />
-                </td>
-                <td>
-                    <user-param-toggle
-                        :param-name="'is_doc_rejected'"
-                        :status="doc.is_rejected == true ? 1 : 0"
-                        :user-id="doc.user_id"
-                        :entity-id="doc.id"
-                        :color="{checked: '#FF0000'}"
-                        :label="{checked: 'Yes', unchecked: 'No'}"
-                    />
+                    <select v-on:change="onChange(doc, $event)">
+                        <option>Select status</option>
+                        <option :selected="doc.is_rejected == true" value="0">Rejected</option>
+                        <option :selected="doc.is_approved == true" value="1">Approved</option>
+                    </select>
                 </td>
                 <td>{{ doc.type }}</td>
                 <td>{{ doc.valid_till }}</td>
@@ -194,6 +181,22 @@
 
             showFile(doc) {
                 window.open('/dashboard/user/' + this.$props.userId + '/doc/' + doc.id, "width=400,height=300");
+            },
+
+            onChange(doc, event) {
+                axios.put('/dashboard/crm_api/user/' + this.$props.userId + '/doc/' + doc.id + '/status', {
+                    status: event.target.value
+                })
+                    .then((response) => {
+                        if (response.data.last_approved == true) {
+                            let ev = new Event('user_authorized', { bubbles: true });
+                            document.dispatchEvent(ev);
+                        }
+                    })
+                    .catch((err) => {
+                        alert("Something went wrong.\nPlease try again later");
+                        console.log(err);
+                    });
             }
         },
 

@@ -6,6 +6,7 @@
             :disabled="disabled"
             :labels="{checked: label.checked, unchecked: label.unchecked}"
             :color="this.color"
+            :sync="true"
             :width="100" />
         <div class="loader" v-if="loading">
             <Loader />
@@ -25,6 +26,17 @@
         components: {Loader, ToggleButton },
 
         props: ['userId', 'status', 'paramName', 'label', 'color', 'entityId'],
+
+        mounted() {
+            if (this.$props.paramName == 'authorized') {
+                let _self = this;
+                document.addEventListener('user_authorized', (ev) => {
+                    console.log(ev);
+                    this.$props.status = 1;
+                    _self.isAuthorized = true;
+                });
+            }
+        },
 
         data() {
             return {

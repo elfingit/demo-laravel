@@ -14,8 +14,7 @@ class UserParamToggleRequest extends AbstractRequest
     {
         return [
             'name' => 'required|string|in:'.implode(',', [
-                    'phone_confirmed','authorized','is_test_account','is_fraud_suspected',
-                    'is_doc_rejected', 'is_doc_approved'
+                    'phone_confirmed','authorized','is_test_account','is_fraud_suspected'
                 ]),
             'value' => 'required|boolean'
         ];

@@ -39,70 +39,36 @@ class UserAuthDocService implements UserAuthDocServiceContract
         return $user->docs;
     }
 
-    public function rejectDoc( UserModel $user, FormRequest $request )
+    public function rejectDoc( UserModel $user, UserAuthDocModel $doc )
     {
-        if ($request->has('entityId')) {
-            $docId = $request->get('entityId');
+        $doc->is_approved = false;
+        $doc->is_rejected = true;
 
-            $doc = $user->docs()
-                    ->where('user_auth_docs.id', $docId)
-                    ->first();
-
-            if ($doc) {
-                $value = $request->get('value');
-
-                if ($value == true) {
-                    $doc->is_approved = false;
-                    $doc->is_rejected = true;
-
-                    if ($doc->bet) {
-                        $doc->bet->reject_docs_count = $doc->bet->reject_docs_count + 1;
-                        $doc->bet->save();
-                        if ($doc->bet->reject_docs_count == 3) {
-                            \Bet::changeBetStatus($doc->bet, BetModel::STATUS_NOT_AUTH);
-                        }
-                    }
-
-                } else {
-                    $doc->is_rejected = false;
-                }
-
-                $doc->save();
+        if ($doc->bet) {
+            $doc->bet->reject_docs_count = $doc->bet->reject_docs_count + 1;
+            $doc->bet->save();
+            if ($doc->bet->reject_docs_count == 3) {
+                \Bet::changeBetStatus($doc->bet, BetModel::STATUS_NOT_AUTH);
             }
         }
+
+        $doc->save();
     }
 
-    public function approveDoc( UserModel $user, FormRequest $request )
+    public function approveDoc( UserModel $user, UserAuthDocModel $doc )
     {
-        if ($request->has('entityId')) {
-            $docId = $request->get('entityId');
+        $doc->is_approved = true;
+        $doc->is_rejected = false;
 
-            $doc = $user->docs()
-                        ->where('user_auth_docs.id', $docId)
-                        ->first();
+        if ($doc->bet) {
+            \Bet::changeBetStatus($doc->bet, BetModel::STATUS_PAYOUT_PENDING);
 
-            if ($doc) {
-                $value = $request->get('value');
-
-                if ($value == true) {
-                    $doc->is_approved = true;
-                    $doc->is_rejected = false;
-
-                    if ($doc->bet) {
-                        \Bet::changeBetStatus($doc->bet, BetModel::STATUS_PAYOUT_PENDING);
-
-                        if ($doc->bet->transaction) {
-                            \UserWithdrawabalBalance::moveFromPendingToAvailable($doc->bet->transaction);
-                        }
-                    }
-
-                } else {
-                    $doc->is_approved = false;
-                }
-
-                $doc->save();
+            if ($doc->bet->transaction) {
+                \UserWithdrawabalBalance::moveFromPendingToAvailable($doc->bet->transaction);
             }
         }
+
+        $doc->save();
     }
 
     public function getFile( UserModel $user, UserAuthDocModel $doc )
@@ -129,6 +95,18 @@ class UserAuthDocService implements UserAuthDocServiceContract
         $query->orderBy('created_at', 'desc');
 
         return $query->paginate(25);
+    }
+
+    public function isLastApproved( UserModel $user )
+    {
+        $doc = $user->docs()->orderBy('id', 'desc')->first();
+
+        if ($doc->is_approved === true) {
+            $user->is_authorized = true;
+            $user->save();
+        }
+
+        return $doc->is_approved;
     }
 
     protected function getStoragePath($user_id)
