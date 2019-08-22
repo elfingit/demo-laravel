@@ -14,10 +14,16 @@ class BrandShortResource extends JsonResource
      */
     public function toArray($request)
     {
-    	return [
-        	'id'    => $this->api_code,
-	        'name'  => $this->name,
-	        'logo'  => asset('images/logos/' . $this->logo)
+    	$branResult = $this->results()
+                           ->orderBy('draw_date', 'desc')
+                           ->first();
+
+        return [
+        	'id'        => $this->api_code,
+	        'name'      => $this->name,
+	        'logo'      => asset('images/logos/' . $this->logo),
+            'jack_pot'  => $branResult->jack_pot,
+            'next_draw' => $this->checkDates[0]
         ];
     }
 }
