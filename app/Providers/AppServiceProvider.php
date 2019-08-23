@@ -26,6 +26,7 @@ use App\Services\Contracts\BrandResultContract;
 use App\Services\Contracts\BrandServiceContract;
 use App\Services\Contracts\LeadServiceContract;
 use App\Services\Contracts\OrderServiceContract;
+use App\Services\Contracts\PayoutServiceContract;
 use App\Services\Contracts\TicketServiceContract;
 use App\Services\Contracts\UserAuthDocServiceContract;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
@@ -35,6 +36,7 @@ use App\Services\Contracts\UserWithdrawableBalanceServiceContract;
 use App\Services\Contracts\WinningsServiceContract;
 use App\Services\LeadService;
 use App\Services\OrderService;
+use App\Services\PayoutService;
 use App\Services\TicketService;
 use App\Services\UserAuthDocService;
 use App\Services\UserAvailableBalanceService;
@@ -97,6 +99,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Winnings
         $this->app->bind(WinningsServiceContract::class, WinningsService::class);
+
+        //Payouts
+        $this->app->bind(PayoutServiceContract::class, PayoutService::class);
 
         //Win calculators
         $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_powerball', PowerBallCalculator::class);
