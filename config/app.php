@@ -247,6 +247,7 @@ return [
         'Ticket'            => \App\Facades\TicketServiceFacade::class,
         'Winnings'          => \App\Facades\WinningsServiceFacade::class,
         'UserAuthDoc'       => \App\Facades\UserAuthDocServiceFacade::class,
+        'Payout'            => \App\Facades\PayoutServiceFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 
