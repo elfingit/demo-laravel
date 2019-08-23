@@ -110,8 +110,10 @@
             },
 
             newBalance(data) {
-                this.user.balance.amount = data.amount;
-                this.user.balance.transactions.push(data.transaction);
+                this.user.balance.available_amount =
+                    parseFloat(this.user.balance.available_amount) + parseFloat(data.transaction.amount);
+                this.transactions.unshift(data);
+                this.transactions = this.transactions.slice(0, 24);
             },
 
             getTransactionName(type) {

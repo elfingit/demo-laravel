@@ -28,9 +28,9 @@ class UserAvailableBalance implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user_balance_amount = $this->user->available_balance->amount;
+        $user_balance_amount = isset($this->user->available_balance) ? $this->user->available_balance->amount : 0;
 
-        if ($value < 0 && $value < -$user_balance_amount) {
+        if ($value < 0 && $user_balance_amount + $value < 0) {
             return false;
         }
 

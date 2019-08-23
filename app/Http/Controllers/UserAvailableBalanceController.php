@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserAvailableBalanceStoreRequest;
 use App\Http\Resources\BalanceResource;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserTransactionResource;
 use App\Model\User as UserModel;
 use Illuminate\Http\Request;
 
@@ -32,13 +33,6 @@ class UserAvailableBalanceController extends Controller
 			$user
 			);
 
-	    $user->refresh();
-
-		return response()->json([
-			'data' => [
-				'amount'    => $user->available_balance->amount,
-				'withdrawable_amount' => $transaction
-			]
-		]);
+		return new UserTransactionResource($transaction);
     }
 }

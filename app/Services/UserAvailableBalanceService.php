@@ -90,7 +90,7 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
         $uTransaction->save();
 		\DB::commit();
 
-		return $transaction;
+		return $uTransaction;
 
 	}
 
@@ -125,6 +125,6 @@ class UserAvailableBalanceService implements UserAvailableBalanceServiceContract
 
 		\DB::commit();
 
-		return $transaction;
+		return $uTransaction;
 	}
 }

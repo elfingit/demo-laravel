@@ -20,8 +20,8 @@ class UserResource extends JsonResource
 			'id'    => $this->id,
 			'email' => $this->email,
 			'balance' => [
-				'amount' => 0,
-				'transactions' => []
+				'available_amount' => 0,
+				'withdrawable_amount' => 0,
 			]
 		];
 	}
