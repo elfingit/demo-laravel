@@ -8,6 +8,7 @@
 
 namespace App\Lib;
 
+use App\Model\Bet as BetModel;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandCheckDate as BrandCheckDateModel;
 use Carbon\Carbon;
@@ -163,5 +164,22 @@ class Utils
     public static function toInt($val)
     {
         return intval($val);
+    }
+
+    public static function showDeLottoTicketNumber(BetModel $bet)
+    {
+
+        if ($bet->additional_data && $bet->additional_data->ticket_number) {
+
+            $number = '';
+
+            foreach ($bet->additional_data->ticket_number as $num) {
+                $number .= $num;
+            }
+
+            return $number;
+        }
+
+        return 'Unknown';
     }
 }

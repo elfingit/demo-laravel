@@ -112,10 +112,16 @@ class DeLottoCalculator extends AbstractCalculator
 
     protected function checkSuperBall(BrandResultModel $result, BetTicketModel $ticket )
     {
-        $powerBallExpected = intval($ticket->extra_balls[0]);
-        $powerBallActual = intval($result->results->extra_ball);
+        if ($ticket->bet->additional_data
+            && $ticket->bet->additional_data->ticket_number
+            && $ticket->bet->additional_data->ticket_number->n7) {
 
-        return $powerBallActual === $powerBallExpected;
+            $last_number = intval($ticket->bet->additional_data->ticket_number->n7);
+
+            $ball = intval($result->results->extra_ball);
+        }
+
+        return $last_number == $ball;
     }
 
     protected function checkSpiel77(BetModel $bet, BrandResultModel $result)
@@ -125,7 +131,7 @@ class DeLottoCalculator extends AbstractCalculator
         $gameIsExists = false;
 
         foreach ($ticket->extra_games as $game) {
-            if ($game['system_name'] == 'speil77') {
+            if ($game['system_name'] == 'spiel77') {
                 $gameIsExists = true;
             }
         }
@@ -140,6 +146,7 @@ class DeLottoCalculator extends AbstractCalculator
             $count = 0;
 
             $numbersObject = $this->convertArrayToObject($bet->additional_data->ticket_number);
+
 
             for($i = 7; $i >= 1; $i--) {
                 $n1 = intval($numbersObject->{'n'. $i});
@@ -202,15 +209,12 @@ class DeLottoCalculator extends AbstractCalculator
         }
     }
 
-    protected function convertArrayToObject(array $data)
+    protected function convertArrayToObject($data)
     {
         $obj = new \stdClass();
 
-        foreach ($data as $value) {
-            $vars = get_object_vars($value);
-            foreach ($vars as $k => $v) {
-                $obj->{$k} = $v;
-            }
+        foreach ($data as $key => $value) {
+            $obj->{$key} = $value;
         }
 
         return $obj;

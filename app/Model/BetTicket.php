@@ -36,4 +36,9 @@ class BetTicket extends Model
 
         return $games;
     }
+
+    public function bet()
+    {
+        return $this->belongsTo(Bet::class, 'bet_id', 'id');
+    }
 }

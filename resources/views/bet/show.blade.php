@@ -106,6 +106,42 @@
                                 </span>
                             </span>
                         </div>
+                        @if($bet->brand->api_code == 'de_lotto')
+                        <div class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span><b>{{ __('Ticket number') }}:</b></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-content">
+                                <span class="mdl-list__item-text-body">
+                                    {{ \App\Lib\Utils::showDeLottoTicketNumber($bet) }}
+                                </span>
+                            </span>
+                        </div>
+                            @if ($bet->additional_data && $bet->additional_data->spiel77)
+                             <div class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <span><b>{{ __('Spiel77 win') }}:</b></span>
+                                </span>
+                                 <span class="mdl-list__item-secondary-content">
+                                    <span class="mdl-list__item-text-body">
+                                        &euro;{{ number_format($bet->additional_data->spiel77, 2) }}
+                                    </span>
+                                </span>
+                             </div>
+                             @endif
+                            @if ($bet->additional_data && $bet->additional_data->super6)
+                                <div class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <span><b>{{ __('Super6 win') }}:</b></span>
+                                </span>
+                                    <span class="mdl-list__item-secondary-content">
+                                    <span class="mdl-list__item-text-body">
+                                        &euro;{{ number_format($bet->additional_data->super6, 2) }}
+                                    </span>
+                                </span>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                 </div>
             </div>
