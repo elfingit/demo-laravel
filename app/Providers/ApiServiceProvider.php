@@ -9,11 +9,13 @@ use App\Services\Api\Contracts\BetServiceContract;
 use App\Services\Api\Contracts\BrandServiceContract;
 use App\Services\Api\Contracts\LeadServiceContract;
 use App\Services\Api\Contracts\OrderServiceContract;
+use App\Services\Api\Contracts\PayoutServiceContract;
 use App\Services\Api\Contracts\UserAuthDocServiceContract;
 use App\Services\Api\Contracts\UserServiceContract;
 use App\Services\Api\Contracts\WithdrawableServiceContract;
 use App\Services\Api\LeadService;
 use App\Services\Api\OrderService;
+use App\Services\Api\PayoutService;
 use App\Services\Api\UserAuthDocService;
 use App\Services\Api\UserService;
 use App\Services\Api\WithdrawableService;
@@ -57,5 +59,6 @@ class ApiServiceProvider extends ServiceProvider
 	    $this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
 	    $this->app->bind(BetServiceContract::class, BetService::class);
 	    $this->app->bind(WithdrawableServiceContract::class, WithdrawableService::class);
+	    $this->app->bind(PayoutServiceContract::class, PayoutService::class);
     }
 }

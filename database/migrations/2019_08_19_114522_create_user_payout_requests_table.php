@@ -13,11 +13,12 @@ class CreateUserPayoutRequestsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('payouts');
+
         Schema::create('user_payout_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('transaction_id');
 
             $table->enum('status', [
                 \App\Model\UserPayoutRequest::STATUS_PENDING,
@@ -25,15 +26,12 @@ class CreateUserPayoutRequestsTable extends Migration
                 \App\Model\UserPayoutRequest::STATUS_APPROVED
             ]);
 
+            $table->decimal('amount', 12, 2);
+
             $table->timestamps();
 
             $table->foreign('user_id')
                     ->on('users')
-                    ->references('id')
-                    ->onDelete('cascade');
-
-            $table->foreign('transaction_id')
-                    ->on('user_withdrawable_balance_transactions')
                     ->references('id')
                     ->onDelete('cascade');
         });

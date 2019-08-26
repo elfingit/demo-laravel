@@ -20,9 +20,4 @@ class WithdrawableController extends Controller
 
         return new WithdrawableResource($user->withdrawable_balance);
     }
-
-    public function requestForPayout(WithdrawableRequest $request)
-    {
-        \ApiWithdrawable::store($request, \Auth::user());
-    }
 }

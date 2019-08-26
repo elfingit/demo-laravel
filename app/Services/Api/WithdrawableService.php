@@ -17,21 +17,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class WithdrawableService implements WithdrawableServiceContract
 {
-    public function store( FormRequest $request, UserModel $user )
-    {
-        $transId = $request->get('transaction_id');
-
-        $transaction = UserWithdrawableBalanceTransactionModel::where('transaction_id', $transId)
-            ->first();
-
-        $payoutRequest = UserPayoutRequestModel::create([
-            'user_id'   => $user->id,
-            'transaction_id' => $transaction->id,
-            'status'    => UserPayoutRequestModel::STATUS_PENDING
-        ]);
-
-        return $payoutRequest;
-    }
 
     public function approve( UserPayoutRequestModel $payout_request )
     {
