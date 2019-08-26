@@ -4,7 +4,7 @@
             <ul>
                 <li>ID</li>
                 <li>Amount</li>
-                <li>Bet</li>
+                <li v-if="this.transaction.bet_id">Bet</li>
                 <li>Status</li>
                 <li>Notes</li>
             </ul>
@@ -13,7 +13,7 @@
             <ul>
                 <li>{{ this.transaction.id }}</li>
                 <li>{{ this.transaction.amount }}</li>
-                <li>{{ this.transaction.bet_id }}</li>
+                <li v-if="this.transaction.bet_id">{{ this.transaction.bet_id }}</li>
                 <li>{{ this.transaction.status }}</li>
                 <li>{{ this.transaction.notes }}</li>
             </ul>

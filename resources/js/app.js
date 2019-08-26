@@ -37,6 +37,7 @@ Vue.component('expandable-area', require('./components/ExpandableArea').default)
 Vue.component('user-bets', require('./components/UserBets').default);
 Vue.component('user-auth-docs', require('./components/UserAuthDocs').default);
 Vue.component('user-bet-pending', require('./components/UserBetsPending').default);
+Vue.component('payout-status', require('./components/statuses/PayoutStatus').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

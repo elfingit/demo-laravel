@@ -9,7 +9,13 @@
 namespace App\Services\Contracts;
 
 
+use App\Model\UserPayoutRequest as UserPayoutRequestModel;
+use Illuminate\Foundation\Http\FormRequest;
+
 interface PayoutServiceContract
 {
     public function list();
+    public function getStatuses();
+
+    public function changeStatus(FormRequest $request, UserPayoutRequestModel $payout);
 }

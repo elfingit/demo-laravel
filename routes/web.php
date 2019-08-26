@@ -101,6 +101,11 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
             'uses'  => 'LeadController@toOrder',
             'as'    => 'lead.to_order'
         ]);
+
+        Route::put('/payout/{payout}', [
+            'uses'  => 'PayoutsController@changeStatus',
+            'as'    => 'payouts.update'
+        ]);
 	});
 
 	Route::get('/leads', [
