@@ -34,7 +34,8 @@ class PayoutService implements PayoutServiceContract
             $requestModel = new UserPayoutRequestModel([
                 'user_id'   => $user->id,
                 'status'    => UserPayoutRequestModel::STATUS_PENDING,
-                'amount'    => $amount
+                'amount'    => $amount,
+                'type'      => $request->get('type')
             ]);
 
             $requestModel->save();

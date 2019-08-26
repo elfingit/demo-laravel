@@ -10,5 +10,8 @@ class UserPayoutRequest extends Model
     const STATUS_APPROVED = 'approved';
     const STATUS_DECLINED = 'declined';
 
+    const TYPE_EXTERNAL = 'external';
+    const TYPE_INTERNAL = 'internal';
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 }

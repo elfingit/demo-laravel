@@ -28,6 +28,11 @@ class CreateUserPayoutRequestsTable extends Migration
 
             $table->decimal('amount', 12, 2);
 
+            $table->enum('type', [
+                \App\Model\UserPayoutRequest::TYPE_EXTERNAL,
+                \App\Model\UserPayoutRequest::TYPE_INTERNAL
+            ]);
+
             $table->timestamps();
 
             $table->foreign('user_id')
