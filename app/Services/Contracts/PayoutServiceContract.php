@@ -11,5 +11,5 @@ namespace App\Services\Contracts;
 
 interface PayoutServiceContract
 {
-
+    public function list();
 }

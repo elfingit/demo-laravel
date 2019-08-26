@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Model\UserAvailableBalanceTransaction as UserAvailableBalanceTransactionModel;
+use App\Model\UserPayoutTransaction as UserPayoutTransactionModel;
 use App\Model\UserWithdrawableBalanceTransaction as UserWithdrawableBalanceTransactionModel;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -30,6 +31,11 @@ class UserTransactionResource extends JsonResource
         if ($this->transaction instanceof UserWithdrawableBalanceTransactionModel) {
             $data['transaction'] = new UserWithdrawableBalanceTransactionResource($this->transaction);
             $data['transaction_type'] = 'withdrawable_balance';
+        }
+
+        if ($this->transaction instanceof UserPayoutTransactionModel) {
+            $data['transaction'] = new UserPayoutTransaction($this->transaction);
+            $data['transaction_type'] = 'payout_transaction';
         }
 
         return $data;

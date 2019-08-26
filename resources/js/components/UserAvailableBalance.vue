@@ -34,6 +34,7 @@
                             <td colspan="4">
                                 <AvailableBalanceTransaction :transaction="transaction.transaction" v-if="transaction.transaction_type == 'available_balance'" />
                                 <WithdrawableTransaction :transaction="transaction.transaction" v-if="transaction.transaction_type == 'withdrawable_balance'" />
+                                <PayoutTransaction :transaction="transaction.transaction" v-if="transaction.transaction_type == 'payout_transaction'" />
                             </td>
                         </tr>
                     </template>
@@ -64,11 +65,14 @@
     import Loader from './Loader';
     import AvailableBalanceTransaction from "./user_transactions/AvailableBalanceTransaction";
     import WithdrawableTransaction from "./user_transactions/WithdrawableTransaction";
+    import PayoutTransaction from "./user_transactions/PayoutTransaction";
 
     export default {
         name: "UserAvailableBalance",
 
-        components: {WithdrawableTransaction, AvailableBalanceTransaction, UserAvailableBalanceForm, Loader },
+        components: {
+            PayoutTransaction,
+            WithdrawableTransaction, AvailableBalanceTransaction, UserAvailableBalanceForm, Loader },
 
         props: ['url-data', 'url-add-balance', 'url-transactions'],
 

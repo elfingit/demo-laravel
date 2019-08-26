@@ -132,5 +132,15 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ro
         'uses'  => 'WithdrawableController@index',
         'as'    => 'withdrawable.index'
     ]);
+
+    Route::get('/payouts', [
+        'uses'  => 'PayoutsController@index',
+        'as'    => 'payouts.index'
+    ]);
+
+    Route::get('/payouts/{payout}', [
+        'uses'  => 'PayoutsController@show',
+        'as'    => 'payouts.show'
+    ]);
 });
 
