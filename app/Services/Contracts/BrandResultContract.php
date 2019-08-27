@@ -9,8 +9,11 @@
 namespace App\Services\Contracts;
 
 use App\Model\Brand as BrandModel;
+use App\Model\BrandResult as BrandResultModel;
 
 interface BrandResultContract
 {
 	public function store($data, BrandModel $brand);
+
+	public function recheckJackPot(BrandResultModel $result);
 }

@@ -22,6 +22,6 @@ class BrandCheckDate extends Model
 
 	public function scopeReadyForCheck($query, $date)
 	{
-		return $query->where('next_check_date', '<=', $date);
+		return $query->whereDate('next_check_date', '<=', $date);
 	}
 }

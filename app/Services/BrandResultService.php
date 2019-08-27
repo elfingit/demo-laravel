@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Jobs\CalculateWinsJob;
+use App\Jobs\RecheckJackPotJob;
 use App\Model\Brand as BrandModel;
 use App\Model\BrandResult as BrandResultModel;
 use App\Services\Contracts\BrandResultContract;
@@ -46,7 +47,25 @@ class BrandResultService implements BrandResultContract
 
         CalculateWinsJob::dispatch($brandResult);
 
+        if ($brand->api_code == 'de_lotto' && $brandResult->jack_pot == 0) {
+            RecheckJackPotJob::dispatch($brandResult)
+                ->delay(now()->addHour());
+        }
+
 		return $brandResult;
 	}
 
+    public function recheckJackPot( BrandResultModel $result )
+    {
+        $result = \RemoteApi::fetchResult($result->brand->api_code);
+        $data = json_decode( $result->getBody() );
+
+        if ($data->jack_pot == 0) {
+            RecheckJackPotJob::dispatch($result)
+                             ->delay(now()->addHour());
+        } else {
+            $result->jack_pot = $data->jack_pot;
+            $result->save();
+        }
+    }
 }
