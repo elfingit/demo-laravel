@@ -27,6 +27,7 @@ use App\Services\Contracts\BrandServiceContract;
 use App\Services\Contracts\LeadServiceContract;
 use App\Services\Contracts\OrderServiceContract;
 use App\Services\Contracts\PayoutServiceContract;
+use App\Services\Contracts\RemoteSystemCommandContract;
 use App\Services\Contracts\TicketServiceContract;
 use App\Services\Contracts\UserAuthDocServiceContract;
 use App\Services\Contracts\UserAvailableBalanceServiceContract;
@@ -37,6 +38,7 @@ use App\Services\Contracts\WinningsServiceContract;
 use App\Services\LeadService;
 use App\Services\OrderService;
 use App\Services\PayoutService;
+use App\Services\RemoteSystemCommandService;
 use App\Services\TicketService;
 use App\Services\UserAuthDocService;
 use App\Services\UserAvailableBalanceService;
@@ -87,6 +89,9 @@ class AppServiceProvider extends ServiceProvider
     	$this->app->bind(UserAvailableBalanceServiceContract::class, UserAvailableBalanceService::class);
     	$this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
     	$this->app->bind(UserWithdrawableBalanceServiceContract::class, UserWithdrawableBalanceService::class);
+
+    	//SystemCommand
+        $this->app->bind(RemoteSystemCommandContract::class, RemoteSystemCommandService::class);
 
     	//Order
         $this->app->bind(OrderServiceContract::class, OrderService::class);

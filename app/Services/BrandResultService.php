@@ -52,6 +52,8 @@ class BrandResultService implements BrandResultContract
                 ->delay(now()->addHour());
         }
 
+
+
 		return $brandResult;
 	}
 

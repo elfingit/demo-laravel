@@ -248,6 +248,7 @@ return [
         'Winnings'          => \App\Facades\WinningsServiceFacade::class,
         'UserAuthDoc'       => \App\Facades\UserAuthDocServiceFacade::class,
         'Payout'            => \App\Facades\PayoutServiceFacade::class,
+        'RemoteSystemCommand'   => \App\Facades\RemoteSystemCommandFacade::class,
 
 	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
 

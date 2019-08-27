@@ -114,6 +114,12 @@ Route::namespace('Api')->group(function () {
             'uses'  => 'PayoutsController@store',
             'as'    => 'payouts.store'
         ]);
+
+        Route::post('', [
+            'middleware'    => ['client:check_command'],
+            'uses'  => 'CommandController@check',
+            'as'    => 'command.check'
+        ]);
 	});
 });
 
