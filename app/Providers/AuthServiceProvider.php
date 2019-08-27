@@ -37,6 +37,7 @@ class AuthServiceProvider extends ServiceProvider
 	        'brand_results'     => 'Get brand results',
 	        'lead_create'       => 'Create lead',
 	        'lead_update'       => 'Update lead',
+            'check_command'     => 'Check command',
             'create_order'      => 'Create order',
             'get_user_balance'  => 'Get user balance',
             'update_self'       => 'User update self data',
