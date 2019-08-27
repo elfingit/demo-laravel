@@ -7,6 +7,7 @@
             <th>ID</th>
             <th>Client ID</th>
             <th>Amount</th>
+            <th>Type</th>
             <th>Status</th>
             <th>Created At</th>
             <th>Updated At</th>
@@ -18,6 +19,7 @@
                 <td><a href="{{ route('dashboard.payouts.show', ['payout' => $payout->id]) }}">{{ $payout->id }}</a></td>
                 <td><a href="{{ route('dashboard.users.show', ['user' => $payout->user_id]) }}">{{ $payout->user_id }}</a></td>
                 <td>{{ number_format($payout->amount, 2) }}</td>
+                <td>{{ $payout->type }}</td>
                 <td>{{ $payout->status }}</td>
                 <td>{{ $payout->created_at }}</td>
                 <td>{{ $payout->updated_at }}</td>

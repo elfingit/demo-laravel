@@ -42,6 +42,16 @@
                                     </span>
                                 </span>
                         </div>
+                        <div class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <span><b>{{ __('Type') }}:</b></span>
+                                </span>
+                            <span class="mdl-list__item-secondary-content">
+                                    <span class="mdl-list__item-text-body">
+                                        {{ $payout->type }}
+                                    </span>
+                                </span>
+                        </div>
                     </div>
                 </div>
             </div>
