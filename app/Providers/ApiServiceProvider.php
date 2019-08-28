@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Facades\Api\LoggerFacade;
 use App\Services\Api\BetService;
 use App\Services\Api\BrandService;
+use App\Services\Api\CheckCommandService;
 use App\Services\Api\Contracts\BetServiceContract;
 use App\Services\Api\Contracts\BrandServiceContract;
+use App\Services\Api\Contracts\CheckCommandServiceContract;
 use App\Services\Api\Contracts\LeadServiceContract;
 use App\Services\Api\Contracts\OrderServiceContract;
 use App\Services\Api\Contracts\PayoutServiceContract;
@@ -60,5 +62,6 @@ class ApiServiceProvider extends ServiceProvider
 	    $this->app->bind(BetServiceContract::class, BetService::class);
 	    $this->app->bind(WithdrawableServiceContract::class, WithdrawableService::class);
 	    $this->app->bind(PayoutServiceContract::class, PayoutService::class);
+	    $this->app->bind(CheckCommandServiceContract::class, CheckCommandService::class);
     }
 }

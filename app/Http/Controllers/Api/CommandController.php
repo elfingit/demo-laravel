@@ -16,6 +16,14 @@ class CommandController extends Controller
 {
     public function check(CheckCommandRequest $request)
     {
+        $result = \ApiCommand::check($request->get('host'), $request->get('key'));
 
+        if ($result !== true) {
+            logger()->error('Check command fail. Host: ' . $result->get('host'));
+        }
+
+        return response()->json([
+            'success'   => $result
+        ]);
     }
 }

@@ -262,6 +262,7 @@ return [
         'ApiBet'        => \App\Facades\Api\BetFacade::class,
         'ApiWithdrawable' => \App\Facades\Api\WithdrawableServiceFacade::class,
         'ApiPayout' => \App\Facades\Api\PayoutFacade::class,
+        'ApiCommand'    => \App\Facades\Api\CheckCommandFacade::class,
 
 
     ],
