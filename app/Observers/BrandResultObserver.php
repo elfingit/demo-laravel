@@ -17,6 +17,7 @@ class BrandResultObserver
     public function created(BrandResultModel $result)
     {
         SetSystemCommandJob::dispatch('clear_cache:brand:' . $result->brand->api_code);
+        SetSystemCommandJob::dispatch('clear_number_shield:brand:' . $result->brand->api_code);
     }
 
     public function updated(BrandResultModel $result)
