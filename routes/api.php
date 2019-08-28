@@ -115,7 +115,7 @@ Route::namespace('Api')->group(function () {
             'as'    => 'payouts.store'
         ]);
 
-        Route::post('', [
+        Route::post('system_command', [
             'middleware'    => ['client:check_command'],
             'uses'  => 'CommandController@check',
             'as'    => 'command.check'
