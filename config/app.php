@@ -232,37 +232,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Brand' => \App\Facades\BrandFacade::class,
-	    'BrandPrice'        => \App\Facades\BrandPriceFacade::class,
-	    'BrandExtraGame'    => \App\Facades\BrandExtraGameFacade::class,
-	    'BrandCheckDate'    => \App\Facades\BrandCheckDateFacade::class,
-		'BrandResult'       => \App\Facades\BrandResultFacade::class,
-	    'Lead'              => \App\Facades\LeadFacade::class,
-	    'User'              => \App\Facades\UserFacade::class,
-	    'UserRole'          => \App\Facades\UserRoleFacade::class,
-	    'UserAvailableBalance'  => \App\Facades\UserAvailableBalanceFacade::class,
-	    'UserWithdrawabalBalance'  => \App\Facades\UserWithdrawabaleBalanceFacade::class,
-        'Order'             => \App\Facades\OrderServiceFacade::class,
-        'Bet'             => \App\Facades\BetServiceFacade::class,
-        'Ticket'            => \App\Facades\TicketServiceFacade::class,
-        'Winnings'          => \App\Facades\WinningsServiceFacade::class,
-        'UserAuthDoc'       => \App\Facades\UserAuthDocServiceFacade::class,
-        'Payout'            => \App\Facades\PayoutServiceFacade::class,
-        'RemoteSystemCommand'   => \App\Facades\RemoteSystemCommandFacade::class,
-
-	    'RemoteApi'         => \App\Lib\Remote\Api\Facades\RemoteApiFacade::class,
-
-        'ApiLogger'     => \App\Facades\Api\LoggerFacade::class,
-
 	    'ApiUser'       => \App\Facades\Api\UserFacade::class,
-	    'ApiBrand'      => \App\Facades\Api\BrandFacade::class,
-	    'ApiLead'       => \App\Facades\Api\LeadFacade::class,
-	    'ApiOrder'       => \App\Facades\Api\OrderFacade::class,
-        'ApiUserAuthDoc' => \App\Facades\Api\UserAuthDocFacade::class,
-        'ApiBet'        => \App\Facades\Api\BetFacade::class,
-        'ApiWithdrawable' => \App\Facades\Api\WithdrawableServiceFacade::class,
-        'ApiPayout' => \App\Facades\Api\PayoutFacade::class,
-        'ApiCommand'    => \App\Facades\Api\CheckCommandFacade::class,
+
 
 
     ],

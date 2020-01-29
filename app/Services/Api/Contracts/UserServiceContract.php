@@ -14,7 +14,4 @@ use Illuminate\Foundation\Http\FormRequest;
 interface UserServiceContract
 {
 	public function create(FormRequest $request);
-	public function getUserBalance(UserModel $user);
-	public function update(FormRequest $request);
-	public function changeStatus(FormRequest $request);
 }

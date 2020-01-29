@@ -69,52 +69,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-    	//Blade extensions
-	    \Blade::directive('brand_status', function ($status) {
-	    	return '<?php echo \App\Lib\ViewHelpers::brandStatusHuman('.$status.') ?>';
-	    });
-
-		//Contracts mapping
-    	//Brand
-	    $this->app->bind(BrandServiceContract::class, BrandService::class);
-    	$this->app->bind(BrandPriceServiceContract::class, BrandPriceService::class);
-		$this->app->bind(BrandResultContract::class, BrandResultService::class);
-    	$this->app->bind(BrandCheckDateContract::class, BrandCheckDateService::class);
-    	$this->app->bind(BrandExtraGameServiceContract::class, BrandExtraGameService::class);
-    	//Lead
-    	$this->app->bind(LeadServiceContract::class, LeadService::class);
-    	//User
-    	$this->app->bind(UserServiceContract::class, UserService::class);
-    	$this->app->bind(UserRoleServiceContract::class, UserRoleService::class);
-    	$this->app->bind(UserAvailableBalanceServiceContract::class, UserAvailableBalanceService::class);
-    	$this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
-    	$this->app->bind(UserWithdrawableBalanceServiceContract::class, UserWithdrawableBalanceService::class);
-
-    	//SystemCommand
-        $this->app->bind(RemoteSystemCommandContract::class, RemoteSystemCommandService::class);
-
-    	//Order
-        $this->app->bind(OrderServiceContract::class, OrderService::class);
-
-        //Bet
-        $this->app->bind(BetServiceContract::class, BetService::class);
-
-        //Bet ticket
-        $this->app->bind(TicketServiceContract::class, TicketService::class);
-
-        //Winnings
-        $this->app->bind(WinningsServiceContract::class, WinningsService::class);
-
-        //Payouts
-        $this->app->bind(PayoutServiceContract::class, PayoutService::class);
-
-        //Win calculators
-        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_powerball', PowerBallCalculator::class);
-        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'euromillions', EuroMillionsCalculator::class);
-        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'eurojackpot', EuroJackpotCalculator::class);
-        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'us_mega_millions', MegaMillionsCalculator::class);
-        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'uk_national', UKNationalLotteryCalculator::class);
-        $this->app->bind(WinningsService::CALCULATOR_PREFIX.'de_lotto', DeLottoCalculator::class);
 
     }
 }

@@ -55,13 +55,5 @@ class ApiServiceProvider extends ServiceProvider
 
         //Contracts mapping
 	    $this->app->bind(UserServiceContract::class, UserService::class);
-	    $this->app->bind(BrandServiceContract::class, BrandService::class);
-	    $this->app->bind(LeadServiceContract::class, LeadService::class);
-	    $this->app->bind(OrderServiceContract::class, OrderService::class);
-	    $this->app->bind(UserAuthDocServiceContract::class, UserAuthDocService::class);
-	    $this->app->bind(BetServiceContract::class, BetService::class);
-	    $this->app->bind(WithdrawableServiceContract::class, WithdrawableService::class);
-	    $this->app->bind(PayoutServiceContract::class, PayoutService::class);
-	    $this->app->bind(CheckCommandServiceContract::class, CheckCommandService::class);
     }
 }
