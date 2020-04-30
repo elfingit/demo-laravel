@@ -20,7 +20,7 @@
         "bootstrap": "^4.1.0",
         "cross-env": "^5.1",
         "dateformat": "^3.0.3",
-        "jquery": "^3.2",
+        "jquery": "^3.5",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.15",
         "luxon": "^1.17.2",
