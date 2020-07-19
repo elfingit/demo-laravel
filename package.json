@@ -22,7 +22,7 @@
         "dateformat": "^3.0.3",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "luxon": "^1.17.2",
         "moment": "^2.24.0",
         "popper.js": "^1.12",
